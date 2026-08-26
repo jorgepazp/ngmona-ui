@@ -1,0 +1,15 @@
+<div
+  [class]="trackClass()"
+  role="progressbar"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-valuemin]="0"
+  [attr.aria-valuemax]="max()"
+  [attr.aria-valuenow]="indeterminate() ? null : value()"
+  [attr.aria-valuetext]="valueText()"
+>
+  @if (indeterminate()) {
+    <div [class]="fillClass()"></div>
+  } @else {
+    <div [class]="fillClass()" [style.width.%]="percent()"></div>
+  }
+</div>

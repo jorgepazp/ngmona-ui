@@ -1,0 +1,37 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Resizable</h1>
+
+  <app-api-table [doc]="api" />
+
+  <p class="text-paragraph-sm text-text-subdued">
+    Drag a handle, or focus one and use the arrow keys (Home/End to jump to an edge). The group
+    needs an explicit height from its container — set it via <code>classNames</code>.
+  </p>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Horizontal, 2 panes</h2>
+    <ui-resizable direction="horizontal" classNames="h-64">
+      <div uiResizablePane [defaultSize]="30" [minSize]="15" class="flex items-center justify-center bg-neutral-100 text-text-subdued text-label-md">
+        Sidebar
+      </div>
+      <div uiResizablePane [defaultSize]="70" [minSize]="30" class="flex items-center justify-center bg-surface-white text-text-subdued text-label-md">
+        Main content
+      </div>
+    </ui-resizable>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Vertical, 3 panes</h2>
+    <ui-resizable direction="vertical" classNames="h-96">
+      <div uiResizablePane [minSize]="10" class="flex items-center justify-center bg-neutral-100 text-text-subdued text-label-md">
+        Header
+      </div>
+      <div uiResizablePane [minSize]="20" class="flex items-center justify-center bg-surface-white text-text-subdued text-label-md">
+        Body
+      </div>
+      <div uiResizablePane [minSize]="10" class="flex items-center justify-center bg-neutral-100 text-text-subdued text-label-md">
+        Footer
+      </div>
+    </ui-resizable>
+  </section>
+</div>

@@ -1,0 +1,39 @@
+<span class="isolate relative z-10 block w-min">
+  <button
+    #trigger
+    type="button"
+    (click)="toggle()"
+    [disabled]="disabled()"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="open()"
+    [class]="
+      '!appearance-none whitespace-nowrap w-min h-6 border-solid active:border-neutral-600 text-label-md flex gap-1 items-end border-neutral-600 py-3 pl-3 !pr-2 !border text-neutral-500 bg-white rounded shadow-card' +
+      (disabled() ? ' !cursor-default opacity-50' : '')
+    "
+  >
+    @if (buttonTemplate(); as b) {
+      <ng-container [ngTemplateOutlet]="b"></ng-container>
+    } @else {
+      Open menu
+    }
+  </button>
+  @if (open()) {
+    <section
+      #panel
+      role="menu"
+      [attr.aria-label]="ariaLabel()"
+      tabindex="-1"
+      (animate.enter)="collapseEnter($event)"
+      (animate.leave)="collapseLeave($event)"
+      (click)="$event.stopPropagation()"
+      (keydown)="onPanelKeydown($event)"
+      [class]="'left-1/2 -translate-x-1/2 absolute w-full md:w-auto shadow-notification rounded-lg bg-white ' + classNames()"
+    >
+      @if (menuTemplate(); as m) {
+        <ng-container [ngTemplateOutlet]="m"></ng-container>
+      } @else {
+        Dropdown menu
+      }
+    </section>
+  }
+</span>

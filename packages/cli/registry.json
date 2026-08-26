@@ -1,0 +1,3930 @@
+{
+  "name": "ngmona-ui",
+  "version": "0.1.0",
+  "components": [
+    {
+      "name": "accordion",
+      "type": "component",
+      "category": "layout",
+      "description": "Wraps `ui-accordion-item` children (like `Timeline`/`TimelineItem`). Coordination between the parent and its items — which value(s) are expanded, single-vs-multiple-open, and Up/Down/Home/ End navigation between headers — is done by each `AccordionItem` injecting this component directly (`inject(Accordion)`), the same way `Checkbox`/`Radio` inject `NG_VALUE_ACCESSOR` machinery, just without the forms indirection since there's no `ControlValueAccessor` need here. `expandedValues` is a `model<string[]>` so the whole open/closed set can be bound with `[(expandedValues)]` for a fully controlled accordion, or left uncontrolled (defaults to `[]`).",
+      "files": [
+        {
+          "path": "accordion-item/accordion-item.html",
+          "type": "template"
+        },
+        {
+          "path": "accordion-item/accordion-item.ts",
+          "type": "component"
+        },
+        {
+          "path": "accordion.html",
+          "type": "template"
+        },
+        {
+          "path": "accordion.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Accordion",
+        "description": "Wraps `ui-accordion-item` children (like `Timeline`/`TimelineItem`). Coordination between the parent and its items — which value(s) are expanded, single-vs-multiple-open, and Up/Down/Home/ End navigation between headers — is done by each `AccordionItem` injecting this component directly (`inject(Accordion)`), the same way `Checkbox`/`Radio` inject `NG_VALUE_ACCESSOR` machinery, just without the forms indirection since there's no `ControlValueAccessor` need here. `expandedValues` is a `model<string[]>` so the whole open/closed set can be bound with `[(expandedValues)]` for a fully controlled accordion, or left uncontrolled (defaults to `[]`).",
+        "props": [
+          {
+            "name": "expandedValues",
+            "kind": "model",
+            "required": false,
+            "type": "string[]",
+            "defaultValue": "[]",
+            "description": "Value(s) of the currently expanded item(s). Two-way bindable via `[(expandedValues)]`; defaults to none open."
+          },
+          {
+            "name": "multiple",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Allow more than one item open at a time."
+          },
+          {
+            "name": "collapsible",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "In single-open mode, whether clicking the open item's header closes it again."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "alert",
+      "type": "component",
+      "category": "feedback",
+      "description": "Inline, static banner — unlike `Notification`, this isn't fixed-position/toast-like, it's meant to sit directly in page content (e.g. above a form). Uncontrolled: dismissing hides it via an internal signal (no `open`/`show` input to wire up for the common case), but a `dismissed` output is still emitted so a caller can react (e.g. remove it from a list). `type` drives both the icon and the color, same pattern as `Notification`, and the same `alert`/`status` role split: `error` interrupts (`role=\"alert\"`), everything else is announced politely (`role=\"status\"`) since it doesn't need to steal focus to be noticed.",
+      "files": [
+        {
+          "path": "alert.html",
+          "type": "template"
+        },
+        {
+          "path": "alert.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Alert",
+        "description": "Inline, static banner — unlike `Notification`, this isn't fixed-position/toast-like, it's meant to sit directly in page content (e.g. above a form). Uncontrolled: dismissing hides it via an internal signal (no `open`/`show` input to wire up for the common case), but a `dismissed` output is still emitted so a caller can react (e.g. remove it from a list). `type` drives both the icon and the color, same pattern as `Notification`, and the same `alert`/`status` role split: `error` interrupts (`role=\"alert\"`), everything else is announced politely (`role=\"status\"`) since it doesn't need to steal focus to be noticed.",
+        "props": [
+          {
+            "name": "type",
+            "kind": "input",
+            "required": false,
+            "type": "AlertType",
+            "defaultValue": "'info'",
+            "description": "Semantic type — drives the default icon, color, and the `alert`/`status` ARIA role split (see class doc)."
+          },
+          {
+            "name": "heading",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Optional bold heading rendered above the body content."
+          },
+          {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Overrides the default icon derived from `type`."
+          },
+          {
+            "name": "showIcon",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Hides the leading icon entirely when `false`."
+          },
+          {
+            "name": "dismissible",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Shows a close button that hides the alert when clicked (see the `dismissed` output)."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root element."
+          },
+          {
+            "name": "dismissed",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires when the built-in dismiss button is clicked."
+          }
+        ]
+      }
+    },
+    {
+      "name": "alert-dialog",
+      "type": "component",
+      "category": "overlay",
+      "description": "Confirmation dialog built on top of `Modal` rather than duplicating its focus-trap/backdrop/ animation logic. Two ARIA-driven differences from a plain `Modal`: - renders with `role=\"alertdialog\"` (via the `role` input added to `Modal` for this purpose) instead of `role=\"dialog\"`, and - the `message` is wired to the panel's `aria-describedby` (via `Modal`'s new `describedBy` input) so assistive tech reads the consequence of the action along with the heading. Unlike `Modal`, content isn't arbitrary — `message` plus explicit confirm/cancel actions only. `closeOnBackdrop` defaults to `false` (unlike `Modal`'s default of `true`): a destructive confirmation shouldn't be dismissible by an accidental click outside it. Escape still cancels, matching the standard alertdialog pattern where Escape is equivalent to the Cancel action.",
+      "files": [
+        {
+          "path": "alert-dialog.html",
+          "type": "template"
+        },
+        {
+          "path": "alert-dialog.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "button",
+        "modal"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "AlertDialog",
+        "description": "Confirmation dialog built on top of `Modal` rather than duplicating its focus-trap/backdrop/ animation logic. Two ARIA-driven differences from a plain `Modal`: - renders with `role=\"alertdialog\"` (via the `role` input added to `Modal` for this purpose) instead of `role=\"dialog\"`, and - the `message` is wired to the panel's `aria-describedby` (via `Modal`'s new `describedBy` input) so assistive tech reads the consequence of the action along with the heading. Unlike `Modal`, content isn't arbitrary — `message` plus explicit confirm/cancel actions only. `closeOnBackdrop` defaults to `false` (unlike `Modal`'s default of `true`): a destructive confirmation shouldn't be dismissible by an accidental click outside it. Escape still cancels, matching the standard alertdialog pattern where Escape is equivalent to the Cancel action.",
+        "props": [
+          {
+            "name": "open",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Controls dialog visibility, same as `Modal`'s `open` — the caller owns this and reacts to `confirmed`/`cancelled`."
+          },
+          {
+            "name": "heading",
+            "kind": "input",
+            "required": true,
+            "type": "string",
+            "defaultValue": "",
+            "description": "Dialog title, rendered in the header and read first by assistive tech."
+          },
+          {
+            "name": "message",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Body text describing the consequence of the action; wired to the panel's `aria-describedby`."
+          },
+          {
+            "name": "confirmLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Confirm'",
+            "description": "Label for the confirm button."
+          },
+          {
+            "name": "cancelLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Cancel'",
+            "description": "Label for the cancel button."
+          },
+          {
+            "name": "variant",
+            "kind": "input",
+            "required": false,
+            "type": "AlertDialogVariant",
+            "defaultValue": "'default'",
+            "description": "`'danger'` styles the confirm button destructively, for irreversible actions like deletion."
+          },
+          {
+            "name": "closeOnBackdrop",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether clicking the backdrop cancels the dialog. Defaults to `false`, unlike `Modal`."
+          },
+          {
+            "name": "showCloseButton",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Shows an `X` close button in the header; clicking it cancels, same as Escape."
+          },
+          {
+            "name": "loading",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the cancel button and shows a loading state on the confirm button while an async confirm is in flight."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the underlying `Modal` panel."
+          },
+          {
+            "name": "confirmed",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires when the confirm button is clicked."
+          },
+          {
+            "name": "cancelled",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires when the cancel button is clicked, the backdrop is clicked (if `closeOnBackdrop`), the close button is clicked, or Escape is pressed."
+          }
+        ]
+      }
+    },
+    {
+      "name": "autocomplete",
+      "type": "component",
+      "category": "form",
+      "description": "Free-text input with a filterable, keyboard-navigable suggestions dropdown. Unlike `Combobox`, whatever the user types IS the committed `value` — suggestions are only an assist, never a constraint, so submitting text that matches nothing in `suggestions()` is fully supported. This is the `FloatingPanel`-based, keyboard-navigable evolution of `Input`'s `searchIn` feature (which was click-only). Built directly on `FloatingPanel` rather than `Combobox` because the \"value is always whatever's typed\" semantics don't fit `Combobox`'s \"value is always one of the options\" contract.",
+      "files": [
+        {
+          "path": "autocomplete.html",
+          "type": "template"
+        },
+        {
+          "path": "autocomplete.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "Autocomplete",
+        "description": "Free-text input with a filterable, keyboard-navigable suggestions dropdown. Unlike `Combobox`, whatever the user types IS the committed `value` — suggestions are only an assist, never a constraint, so submitting text that matches nothing in `suggestions()` is fully supported. This is the `FloatingPanel`-based, keyboard-navigable evolution of `Input`'s `searchIn` feature (which was click-only). Built directly on `FloatingPanel` rather than `Combobox` because the \"value is always whatever's typed\" semantics don't fit `Combobox`'s \"value is always one of the options\" contract.",
+        "props": [
+          {
+            "name": "suggestions",
+            "kind": "input",
+            "required": false,
+            "type": "string[]",
+            "defaultValue": "[]",
+            "description": "Full suggestion list; filtered client-side against the current `value` (case-insensitive substring match)."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Placeholder text shown in the input when empty."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Field label rendered above the input."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Helper text rendered below the input."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the input and closes the suggestions panel."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `id` for the input; auto-generated when omitted."
+          },
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Current text value. Two-way bindable via `[(value)]`; always reflects whatever's typed, whether or not it matches a suggestion."
+          },
+          {
+            "name": "selected",
+            "kind": "output",
+            "required": false,
+            "type": "string",
+            "defaultValue": "",
+            "description": "Fires when the user picks a suggestion from the dropdown (not fired when free-typed text is simply committed)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "avatar",
+      "type": "component",
+      "category": "data-display",
+      "description": "User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried first when `src` is set and swaps to the initials/icon fallback automatically on load error (broken URL, 404, etc) via `(error)` on the `<img>`. Accessibility: `alt` is the single accessible-name input regardless of which tier renders — it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the `role=\"img\"` container otherwise. The initials text and fallback icon are both `aria-hidden` so screen readers read the one `alt`/`aria-label` name instead of duplicating it.",
+      "files": [
+        {
+          "path": "avatar.html",
+          "type": "template"
+        },
+        {
+          "path": "avatar.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Avatar",
+        "description": "User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried first when `src` is set and swaps to the initials/icon fallback automatically on load error (broken URL, 404, etc) via `(error)` on the `<img>`. Accessibility: `alt` is the single accessible-name input regardless of which tier renders — it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the `role=\"img\"` container otherwise. The initials text and fallback icon are both `aria-hidden` so screen readers read the one `alt`/`aria-label` name instead of duplicating it.",
+        "props": [
+          {
+            "name": "src",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Image URL, tried first. Falls back to `initials` (then `icon`) if unset or the image fails to load."
+          },
+          {
+            "name": "alt",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Accessible name, used as `<img alt>` or `aria-label` depending on which tier renders (see class doc)."
+          },
+          {
+            "name": "initials",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Fallback text (e.g. initials) shown when there's no image; takes priority over `icon`."
+          },
+          {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Fallback icon shown when there's no image and no `initials`. Defaults to a generic user icon."
+          },
+          {
+            "name": "size",
+            "kind": "input",
+            "required": false,
+            "type": "AvatarSize",
+            "defaultValue": "'md'",
+            "description": "Overall size of the avatar and its fallback icon."
+          },
+          {
+            "name": "shape",
+            "kind": "input",
+            "required": false,
+            "type": "AvatarShape",
+            "defaultValue": "'circle'",
+            "description": "Container shape."
+          },
+          {
+            "name": "variant",
+            "kind": "input",
+            "required": false,
+            "type": "AvatarVariant",
+            "defaultValue": "'neutral'",
+            "description": "Background/text color used for the initials or icon fallback; ignored while an image is showing."
+          },
+          {
+            "name": "status",
+            "kind": "input",
+            "required": false,
+            "type": "AvatarStatus",
+            "defaultValue": "'none'",
+            "description": "Presence indicator dot rendered in the bottom-right corner; `'none'` hides it."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "badge",
+      "type": "component",
+      "category": "feedback",
+      "description": "Small status/label pill. `primary` and `neutral` render solid (they have no near-white tint in the palette to pair with dark text); the status variants (`success`/`warning`/`danger`/`info`) use the dedicated `--color-surface-*-light` / `--color-text-*` token pairs, which is exactly what that semantic pair exists for — a legible light-bg/dark-text combination without hand -computing opacity tricks. Badges are text-first by convention (never color alone) so no extra ARIA is needed for the common case. When a badge stands in for a count/status on another element with no visible text of its own, pass `ariaLabel` to give it an accessible name.",
+      "files": [
+        {
+          "path": "badge.html",
+          "type": "template"
+        },
+        {
+          "path": "badge.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Badge",
+        "description": "Small status/label pill. `primary` and `neutral` render solid (they have no near-white tint in the palette to pair with dark text); the status variants (`success`/`warning`/`danger`/`info`) use the dedicated `--color-surface-*-light` / `--color-text-*` token pairs, which is exactly what that semantic pair exists for — a legible light-bg/dark-text combination without hand -computing opacity tricks. Badges are text-first by convention (never color alone) so no extra ARIA is needed for the common case. When a badge stands in for a count/status on another element with no visible text of its own, pass `ariaLabel` to give it an accessible name.",
+        "props": [
+          {
+            "name": "variant",
+            "kind": "input",
+            "required": false,
+            "type": "BadgeVariant",
+            "defaultValue": "'neutral'",
+            "description": "Color variant."
+          },
+          {
+            "name": "size",
+            "kind": "input",
+            "required": false,
+            "type": "BadgeSize",
+            "defaultValue": "'md'",
+            "description": "Overall size."
+          },
+          {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Optional leading icon."
+          },
+          {
+            "name": "pill",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Fully rounded pill shape when `true` (default); a smaller corner radius when `false`."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name for badges that convey meaning without their own visible text (e.g. a bare status dot)."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "type": "component",
+      "category": "navigation",
+      "description": "Breadcrumb trail. Data-driven via `items` rather than content-projected, so the last-item \"current page\" treatment and the separators between items can be derived structurally instead of asking every consumer to remember to mark them by hand. Every item except the last renders through `ui-link` (this library's existing Link component) so it inherits its focus/hover/disabled treatment for free. The last item is current-page: it renders as plain text with `aria-current=\"page\"` (not a link — you're already there) per the WAI-ARIA breadcrumb pattern. Separator icons between items are `aria-hidden` since the `<ol>` list structure already conveys the hierarchy to assistive tech; the trailing `nav[aria-label]` is what identifies the whole region as a breadcrumb landmark.",
+      "files": [
+        {
+          "path": "breadcrumb.html",
+          "type": "template"
+        },
+        {
+          "path": "breadcrumb.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "link"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Breadcrumb",
+        "description": "Breadcrumb trail. Data-driven via `items` rather than content-projected, so the last-item \"current page\" treatment and the separators between items can be derived structurally instead of asking every consumer to remember to mark them by hand. Every item except the last renders through `ui-link` (this library's existing Link component) so it inherits its focus/hover/disabled treatment for free. The last item is current-page: it renders as plain text with `aria-current=\"page\"` (not a link — you're already there) per the WAI-ARIA breadcrumb pattern. Separator icons between items are `aria-hidden` since the `<ol>` list structure already conveys the hierarchy to assistive tech; the trailing `nav[aria-label]` is what identifies the whole region as a breadcrumb landmark.",
+        "props": [
+          {
+            "name": "items",
+            "kind": "input",
+            "required": true,
+            "type": "BreadcrumbItem[]",
+            "defaultValue": "",
+            "description": "Ordered breadcrumb trail; the last item renders as the current page (plain text, not a link)."
+          },
+          {
+            "name": "separatorIcon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput",
+            "defaultValue": "LucideChevronRight",
+            "description": "Icon rendered between items. Defaults to a chevron pointing right."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Breadcrumb'",
+            "description": "Accessible name for the `<nav>` landmark."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the `<nav>` element."
+          },
+          {
+            "name": "itemClick",
+            "kind": "output",
+            "required": false,
+            "type": "{ item: BreadcrumbItem; index: number; event: MouseEvent }",
+            "defaultValue": "",
+            "description": "Fires when a non-current (linked) item is clicked, alongside `ui-link`'s native click."
+          }
+        ]
+      }
+    },
+    {
+      "name": "button",
+      "type": "component",
+      "category": "action",
+      "description": "Button with primary/secondary/tertiary/icon-only variants, loading and inverse states. Colors resolve through the `--color-primary-*` theme tokens (see styles.css) — override those CSS variables to reskin every button at once.",
+      "files": [
+        {
+          "path": "button.html",
+          "type": "template"
+        },
+        {
+          "path": "button.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Button",
+        "description": "Button with primary/secondary/tertiary/icon-only variants, loading and inverse states. Colors resolve through the `--color-primary-*` theme tokens (see styles.css) — override those CSS variables to reskin every button at once.",
+        "props": [
+          {
+            "name": "variant",
+            "kind": "input",
+            "required": false,
+            "type": "ButtonVariant",
+            "defaultValue": "'primary'",
+            "description": "Visual style. `'icon'` renders a round icon-only button — pair it with `icon` and `ariaLabel`."
+          },
+          {
+            "name": "attrType",
+            "kind": "input",
+            "required": false,
+            "type": "'button' | 'submit' | 'reset'",
+            "defaultValue": "'button'",
+            "description": "Native `type` attribute of the underlying `<button>`."
+          },
+          {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Icon shown next to the label (or alone, for `variant=\"icon\"`). Accepts a Lucide icon component or icon data."
+          },
+          {
+            "name": "iconPos",
+            "kind": "input",
+            "required": false,
+            "type": "'left' | 'right'",
+            "defaultValue": "'right'",
+            "description": "Side the `icon` renders on, relative to the projected label content. Ignored for `variant=\"icon\"`."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the button and applies the disabled visual style."
+          },
+          {
+            "name": "loading",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Shows a spinning loader in place of `icon` and disables the button while `true`."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended after the computed variant/size classes, for one-off overrides."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Required for `variant=\"icon\"` buttons, since they have no visible text label."
+          },
+          {
+            "name": "size",
+            "kind": "input",
+            "required": false,
+            "type": "ButtonSize",
+            "defaultValue": "'default'",
+            "description": "Controls height/padding/text size; `'icon'`-variant buttons ignore this and stay a fixed round size."
+          },
+          {
+            "name": "inverse",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Renders the button for use on a dark/colored background (white text/border instead of the tinted default)."
+          },
+          {
+            "name": "clicked",
+            "kind": "output",
+            "required": false,
+            "type": "MouseEvent",
+            "defaultValue": "",
+            "description": "Fires on a native click (not emitted while `disabled` or `loading`, since the `<button>` itself is disabled then)."
+          },
+          {
+            "name": "focused",
+            "kind": "output",
+            "required": false,
+            "type": "FocusEvent",
+            "defaultValue": "",
+            "description": "Fires when the button gains focus."
+          },
+          {
+            "name": "blurred",
+            "kind": "output",
+            "required": false,
+            "type": "FocusEvent",
+            "defaultValue": "",
+            "description": "Fires when the button loses focus."
+          }
+        ]
+      }
+    },
+    {
+      "name": "calendar",
+      "type": "component",
+      "category": "form",
+      "description": "Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based `[(selected)]` two-way binding for standalone usage — same bridging pattern as `Checkbox`. Fixes carried over from the original: `canSelectCurrentDay` was inverted (it disabled today instead of enabling it) and was redundant with a second, always-on \"no past dates\" check inside `selectDay` that ran regardless of `canSelectPreviousDates` — between the two, today's date could never actually be selected no matter which inputs were set. Both are fixed here: a single `isDayDisabled` check handles today/past/future consistently. The next/previous-month buttons also used to render inconsistently when disabled — the \"prev\" button vanished (`*ngIf`) while \"next\" tried (and failed, via a nonexistent `text-color-icon-disabled` class) to dim; both are now real `disabled` buttons with matching, working styles. The offset math for the first week of the month has been rewritten as a single modulo expression — the original had an unmodded subtraction that went negative for some `startDayOffset` values, worked around with a second special-cased branch elsewhere in the matrix-building loop. The prev/next-month buttons also carried a `fade` trigger binding that was pure dead weight: both buttons are always mounted (never inserted/removed), so the enter/leave transitions it declared could never fire — removed rather than migrated.",
+      "files": [
+        {
+          "path": "calendar.html",
+          "type": "template"
+        },
+        {
+          "path": "calendar.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Calendar",
+        "description": "Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based `[(selected)]` two-way binding for standalone usage — same bridging pattern as `Checkbox`. Fixes carried over from the original: `canSelectCurrentDay` was inverted (it disabled today instead of enabling it) and was redundant with a second, always-on \"no past dates\" check inside `selectDay` that ran regardless of `canSelectPreviousDates` — between the two, today's date could never actually be selected no matter which inputs were set. Both are fixed here: a single `isDayDisabled` check handles today/past/future consistently. The next/previous-month buttons also used to render inconsistently when disabled — the \"prev\" button vanished (`*ngIf`) while \"next\" tried (and failed, via a nonexistent `text-color-icon-disabled` class) to dim; both are now real `disabled` buttons with matching, working styles. The offset math for the first week of the month has been rewritten as a single modulo expression — the original had an unmodded subtraction that went negative for some `startDayOffset` values, worked around with a second special-cased branch elsewhere in the matrix-building loop. The prev/next-month buttons also carried a `fade` trigger binding that was pure dead weight: both buttons are always mounted (never inserted/removed), so the enter/leave transitions it declared could never fire — removed rather than migrated.",
+        "props": [
+          {
+            "name": "selected",
+            "kind": "model",
+            "required": false,
+            "type": "Date | null",
+            "defaultValue": "null",
+            "description": "Currently selected date. Two-way bindable via `[(selected)]`."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the whole calendar — no day, or the prev/next-month buttons, can be interacted with."
+          },
+          {
+            "name": "weekdayNames",
+            "kind": "input",
+            "required": false,
+            "type": "WeekdayNames",
+            "defaultValue": "DEFAULT_WEEKDAY_NAMES",
+            "description": "Weekday names, starting from Sunday, rotated for display according to `startDayOffset`."
+          },
+          {
+            "name": "monthNames",
+            "kind": "input",
+            "required": false,
+            "type": "MonthNames",
+            "defaultValue": "DEFAULT_MONTH_NAMES",
+            "description": "Month names, January first, used for the header label (e.g. \"March 2026\")."
+          },
+          {
+            "name": "startDayOffset",
+            "kind": "input",
+            "required": false,
+            "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+            "defaultValue": "1",
+            "description": "First day of the week shown in the grid: 0 = Sunday, 1 = Monday, ... 6 = Saturday."
+          },
+          {
+            "name": "disabledDates",
+            "kind": "input",
+            "required": false,
+            "type": "Date[]",
+            "defaultValue": "[]",
+            "description": "Specific dates disabled in addition to any weekday/past/future rules."
+          },
+          {
+            "name": "disabledWeekdays",
+            "kind": "input",
+            "required": false,
+            "type": "number[]",
+            "defaultValue": "[]",
+            "description": "Weekday indices (0 = Sunday ... 6 = Saturday) disabled on every month, e.g. `[0, 6]`."
+          },
+          {
+            "name": "enabledDates",
+            "kind": "input",
+            "required": false,
+            "type": "Date[] | null",
+            "defaultValue": "null",
+            "description": "When set, only dates present in this array are selectable — overrides every other rule."
+          },
+          {
+            "name": "canSelectPreviousDates",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether dates before today can be selected."
+          },
+          {
+            "name": "canSelectCurrentDay",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether today's date can be selected."
+          },
+          {
+            "name": "canDeselectDate",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether clicking the already-selected day clears the selection."
+          },
+          {
+            "name": "minEnabledDate",
+            "kind": "input",
+            "required": false,
+            "type": "Date | null",
+            "defaultValue": "null",
+            "description": "Earliest month the caller can navigate to; disables the \"previous month\" button once reached."
+          },
+          {
+            "name": "maxEnabledDate",
+            "kind": "input",
+            "required": false,
+            "type": "Date | null",
+            "defaultValue": "null",
+            "description": "Latest month the caller can navigate to; disables the \"next month\" button once reached."
+          }
+        ]
+      }
+    },
+    {
+      "name": "card",
+      "type": "component",
+      "category": "layout",
+      "description": "Plain bordered container with an optional card shadow. Identical across all three source forks, so this is a straight port. Fixed the surface/border classes: the original referenced `bg-color-surface-white` / `border-color-border-neutral`, which aren't real utilities under the new token names (`--color-surface-white`, `--color-border-neutral`) — Tailwind generates `bg-surface-white` / `border-border-neutral` from those, so the intended background/border were silently never applied.",
+      "files": [
+        {
+          "path": "card.html",
+          "type": "template"
+        },
+        {
+          "path": "card.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Card",
+        "description": "Plain bordered container with an optional card shadow. Identical across all three source forks, so this is a straight port. Fixed the surface/border classes: the original referenced `bg-color-surface-white` / `border-color-border-neutral`, which aren't real utilities under the new token names (`--color-surface-white`, `--color-border-neutral`) — Tailwind generates `bg-surface-white` / `border-border-neutral` from those, so the intended background/border were silently never applied.",
+        "props": [
+          {
+            "name": "shadow",
+            "kind": "input",
+            "required": false,
+            "type": "CardShadow",
+            "defaultValue": "'hover'",
+            "description": "Controls when the card's drop shadow appears: `'hover'` only on hover, `'always'` on, or `'none'` never."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the card's root element, for one-off layout/spacing overrides."
+          }
+        ]
+      }
+    },
+    {
+      "name": "checkbox",
+      "type": "component",
+      "category": "form",
+      "description": "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Fixes carried over from the original: the visible label is now inside the `<label>` element (previously a sibling `<span>`, so clicking the text or reading it via a screen reader never worked), and the change output now fires on every user interaction (previously it only fired from `writeValue`, i.e. programmatic sets — a bug the original left a TODO comment about).",
+      "files": [
+        {
+          "path": "checkbox.html",
+          "type": "template"
+        },
+        {
+          "path": "checkbox.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Checkbox",
+        "description": "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Fixes carried over from the original: the visible label is now inside the `<label>` element (previously a sibling `<span>`, so clicking the text or reading it via a screen reader never worked), and the change output now fires on every user interaction (previously it only fired from `writeValue`, i.e. programmatic sets — a bug the original left a TODO comment about).",
+        "props": [
+          {
+            "name": "checked",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Checked state. Two-way bindable via `[(checked)]`."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static label text rendered next to the box; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the checkbox and applies the disabled visual style."
+          },
+          {
+            "name": "indeterminate",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Presentation-only \"mixed\" visual state (e.g. a \"select all\" checkbox with a partial selection). Doesn't affect `checked`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "combobox",
+      "type": "component",
+      "category": "form",
+      "description": "Single-select combobox: a text-input trigger (instead of `Select`'s button trigger) that filters its option list as you type, but still only lets you land on one of the supplied options — free text you don't select from the list is never committed as `value`. For unconstrained free text with suggestions, use `Autocomplete` instead. Positioned with `FloatingPanel` (CDK Overlay) rather than `Select`'s manual absolute positioning. Follows the same `optionLabel`/`optionValue` accessor-function shape as `Select` so option data (plain objects, or primitives) works identically between the two. The displayed input text (\"query\") is a separate signal from the committed `value`: while the panel is open it reflects whatever the user is typing/filtering with; once the panel closes it resyncs to the label of the committed value (or empties out if nothing is selected).",
+      "files": [
+        {
+          "path": "combobox.html",
+          "type": "template"
+        },
+        {
+          "path": "combobox.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Combobox",
+        "description": "Single-select combobox: a text-input trigger (instead of `Select`'s button trigger) that filters its option list as you type, but still only lets you land on one of the supplied options — free text you don't select from the list is never committed as `value`. For unconstrained free text with suggestions, use `Autocomplete` instead. Positioned with `FloatingPanel` (CDK Overlay) rather than `Select`'s manual absolute positioning. Follows the same `optionLabel`/`optionValue` accessor-function shape as `Select` so option data (plain objects, or primitives) works identically between the two. The displayed input text (\"query\") is a separate signal from the committed `value`: while the panel is open it reflects whatever the user is typing/filtering with; once the panel closes it resyncs to the label of the committed value (or empties out if nothing is selected).",
+        "props": [
+          {
+            "name": "options",
+            "kind": "input",
+            "required": false,
+            "type": "readonly unknown[]",
+            "defaultValue": "[]",
+            "description": "The full list of selectable options, filtered client-side against the typed query while the panel is open."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Placeholder text shown in the trigger input when nothing has been typed or selected."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Label rendered above the trigger input."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Helper text rendered below the trigger input."
+          },
+          {
+            "name": "optionLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'label'",
+            "description": "Property name read off each option object for its display label, when options are objects rather than primitives."
+          },
+          {
+            "name": "optionValue",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'value'",
+            "description": "Property name read off each option object for its committed value, when options are objects rather than primitives."
+          },
+          {
+            "name": "optionDisabledKey",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'disabled'",
+            "description": "Property name read off each option object to determine whether that option is disabled."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the trigger input entirely — it can't be focused or opened."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "DOM id for the trigger input; auto-generated when omitted."
+          },
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "unknown",
+            "defaultValue": "undefined",
+            "description": "The committed selection — one entry from `options()`, or `undefined`/`null` when empty."
+          },
+          {
+            "name": "selected",
+            "kind": "output",
+            "required": false,
+            "type": "unknown",
+            "defaultValue": "",
+            "description": "Fires with the selected option whenever a user picks one from the list."
+          }
+        ]
+      }
+    },
+    {
+      "name": "command",
+      "type": "component",
+      "category": "overlay",
+      "description": "⌘K-style command palette: a centered, viewport-anchored dialog with a search input that filters a grouped list of actions, full keyboard navigation across the filtered flat list, and an `selected` output emitting the chosen item's `value`. Deliberately NOT built on `FloatingPanel` — that primitive anchors a panel to a trigger element (flip/shift positioning), which isn't the right model for a viewport-centered dialog with no trigger element of its own. Instead this reuses `Modal`'s backdrop + centered-panel + focus-trap structure directly, since a command palette is conventionally dialog-like. The component itself is a controlled, focused piece: it owns filtering/navigation/selection, but opening it globally (e.g. a `(keydown.meta.k)` listener) is left to the consuming page — see the docs page for an example.",
+      "files": [
+        {
+          "path": "command.html",
+          "type": "template"
+        },
+        {
+          "path": "command.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Command",
+        "description": "⌘K-style command palette: a centered, viewport-anchored dialog with a search input that filters a grouped list of actions, full keyboard navigation across the filtered flat list, and an `selected` output emitting the chosen item's `value`. Deliberately NOT built on `FloatingPanel` — that primitive anchors a panel to a trigger element (flip/shift positioning), which isn't the right model for a viewport-centered dialog with no trigger element of its own. Instead this reuses `Modal`'s backdrop + centered-panel + focus-trap structure directly, since a command palette is conventionally dialog-like. The component itself is a controlled, focused piece: it owns filtering/navigation/selection, but opening it globally (e.g. a `(keydown.meta.k)` listener) is left to the consuming page — see the docs page for an example.",
+        "props": [
+          {
+            "name": "open",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether the palette dialog is visible. Two-way bindable via `[(open)]`."
+          },
+          {
+            "name": "groups",
+            "kind": "input",
+            "required": false,
+            "type": "CommandGroupDef[]",
+            "defaultValue": "[]",
+            "description": "Grouped list of actions shown in the palette, each rendered under its group's label."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Type a command or search...'",
+            "description": "Placeholder text for the search input."
+          },
+          {
+            "name": "emptyText",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'No results found.'",
+            "description": "Message shown when no item matches the current query."
+          },
+          {
+            "name": "closeOnBackdrop",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether clicking the backdrop closes the palette."
+          },
+          {
+            "name": "selected",
+            "kind": "output",
+            "required": false,
+            "type": "unknown",
+            "defaultValue": "",
+            "description": "Fires with the chosen item's `value` when the user picks (click or Enter) an item; also closes the palette."
+          }
+        ]
+      }
+    },
+    {
+      "name": "data-table",
+      "type": "component",
+      "category": "data-display",
+      "description": "Sortable, paginated, selectable table driven by a column config, with per-column custom cell and header templates (`<ng-template uiTemplate=\"cell-<key>\" let-row let-column=\"column\">`, `uiTemplate=\"header-<key>\"`, `uiTemplate=\"empty\"`) via the existing `UiTemplateDirective`. Two modes, switched by whether `totalCount` is provided: - **Client-side** (default): pass the full dataset via `data`; sorting/filtering/paging all happen in-memory against it. - **Controlled**: pass `totalCount` (the full row count on the server) and `data` containing only the *current page's* rows. The table stops slicing/sorting/filtering internally and instead just reflects `page`/`sortState`/`globalFilter` changes — read them (they're all `model()`s, so `(pageChange)`/`(sortStateChange)`/`(globalFilterChange)` or `[(page)]` etc. work) and refetch from the backend. Row selection identity is decided by `rowKey` (defaults to the row object itself via reference equality) — pass e.g. `(row) => row.id` for rows that get recreated across page fetches.",
+      "files": [
+        {
+          "path": "data-table.html",
+          "type": "template"
+        },
+        {
+          "path": "data-table.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "checkbox",
+        "paginator",
+        "radio",
+        "shared",
+        "skeleton",
+        "table"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "DataTable",
+        "description": "Sortable, paginated, selectable table driven by a column config, with per-column custom cell and header templates (`<ng-template uiTemplate=\"cell-<key>\" let-row let-column=\"column\">`, `uiTemplate=\"header-<key>\"`, `uiTemplate=\"empty\"`) via the existing `UiTemplateDirective`. Two modes, switched by whether `totalCount` is provided: - **Client-side** (default): pass the full dataset via `data`; sorting/filtering/paging all happen in-memory against it. - **Controlled**: pass `totalCount` (the full row count on the server) and `data` containing only the *current page's* rows. The table stops slicing/sorting/filtering internally and instead just reflects `page`/`sortState`/`globalFilter` changes — read them (they're all `model()`s, so `(pageChange)`/`(sortStateChange)`/`(globalFilterChange)` or `[(page)]` etc. work) and refetch from the backend. Row selection identity is decided by `rowKey` (defaults to the row object itself via reference equality) — pass e.g. `(row) => row.id` for rows that get recreated across page fetches.",
+        "props": [
+          {
+            "name": "data",
+            "kind": "input",
+            "required": false,
+            "type": "readonly T[]",
+            "defaultValue": "[]",
+            "description": "Row data. In client-side mode, the full dataset; in controlled mode (`totalCount` set), only the current page's rows."
+          },
+          {
+            "name": "columns",
+            "kind": "input",
+            "required": true,
+            "type": "DataTableColumn<T>[]",
+            "defaultValue": "",
+            "description": "Column definitions — header text, sortability, alignment, width, and an optional value accessor."
+          },
+          {
+            "name": "rowKey",
+            "kind": "input",
+            "required": false,
+            "type": "(row: T) => unknown",
+            "defaultValue": "(row: T) => row",
+            "description": "Extracts a stable identity per row, used for selection and `@for` tracking. Defaults to the row object itself (reference equality)."
+          },
+          {
+            "name": "selectable",
+            "kind": "input",
+            "required": false,
+            "type": "'none' | 'single' | 'multi'",
+            "defaultValue": "'none'",
+            "description": "Row selection mode — adds a checkbox column (`multi`) or radio column (`single`) when not `'none'`."
+          },
+          {
+            "name": "selected",
+            "kind": "model",
+            "required": false,
+            "type": "T[]",
+            "defaultValue": "[]",
+            "description": "Currently selected rows. Two-way bindable via `[(selected)]`."
+          },
+          {
+            "name": "sortState",
+            "kind": "model",
+            "required": false,
+            "type": "DataTableSort | null",
+            "defaultValue": "null",
+            "description": "Active sort column/direction, or `null` when unsorted. Two-way bindable; toggled by clicking a sortable header."
+          },
+          {
+            "name": "page",
+            "kind": "model",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Zero-based current page index. Two-way bindable via `[(page)]`."
+          },
+          {
+            "name": "pageSize",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "10",
+            "description": "Rows per page (client-side mode) — or the row count `data` is expected to contain per page (controlled mode)."
+          },
+          {
+            "name": "totalCount",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Switches to controlled mode when provided — see class doc."
+          },
+          {
+            "name": "loading",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Shows skeleton placeholder rows instead of `data` while a fetch is in flight."
+          },
+          {
+            "name": "emptyMessage",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'No data'",
+            "description": "Fallback text shown when there are no rows to display; overridden by a `uiTemplate=\"empty\"`."
+          },
+          {
+            "name": "globalFilter",
+            "kind": "model",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Client-side-only free-text filter, matched against every column's rendered value. Two-way bindable."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name for the underlying `<table>`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "drawer",
+      "type": "component",
+      "category": "overlay",
+      "description": "Slide-in drawer/panel overlay with an optional backdrop, opened from the left or right edge. Supports named `header`/`content`/`footer` templates (via `uiTemplate`) with `<ng-content>` as the default body when no `content` template is supplied. Behaves as a modal dialog: `role=\"dialog\"`, `aria-modal`, closes on Escape, traps Tab focus within the panel while open, and moves focus into the panel on open. Renamed from `Sidebar`: this is an overlay panel (backdrop, opens on top of the page), not the persistent responsive navigation layout — that's the separate `Sidebar` component (`../sidebar/sidebar`), which composes this one internally for its mobile off-canvas nav. The original component faked its slide-in/out with manual `timer(0)`/`timer(200)` RxJS calls that toggled CSS classes: opening relied on a `timer(0)` macrotask landing before the next paint (fragile — intermittently skips the transition), and closing unmounted the panel via `*ngIf` after a hardcoded 200ms timeout while the panel's own CSS class declared a 500ms transition, so a close would visibly jump/cut the animation short. `animate.enter`/`animate.leave` replace both hacks: they trigger off real DOM insertion/removal and the `@if` block won't unmount the view until the leave animation actually finishes. `disableAnimations` is implemented by binding `undefined` in place of an animation class (the native API's `animate.enter`/`animate.leave` classes accept a dynamic value), since there's no per-subtree animation-disable binding like the old engine's `[@.disabled]`.",
+      "files": [
+        {
+          "path": "drawer.html",
+          "type": "template"
+        },
+        {
+          "path": "drawer.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Drawer",
+        "description": "Slide-in drawer/panel overlay with an optional backdrop, opened from the left or right edge. Supports named `header`/`content`/`footer` templates (via `uiTemplate`) with `<ng-content>` as the default body when no `content` template is supplied. Behaves as a modal dialog: `role=\"dialog\"`, `aria-modal`, closes on Escape, traps Tab focus within the panel while open, and moves focus into the panel on open. Renamed from `Sidebar`: this is an overlay panel (backdrop, opens on top of the page), not the persistent responsive navigation layout — that's the separate `Sidebar` component (`../sidebar/sidebar`), which composes this one internally for its mobile off-canvas nav. The original component faked its slide-in/out with manual `timer(0)`/`timer(200)` RxJS calls that toggled CSS classes: opening relied on a `timer(0)` macrotask landing before the next paint (fragile — intermittently skips the transition), and closing unmounted the panel via `*ngIf` after a hardcoded 200ms timeout while the panel's own CSS class declared a 500ms transition, so a close would visibly jump/cut the animation short. `animate.enter`/`animate.leave` replace both hacks: they trigger off real DOM insertion/removal and the `@if` block won't unmount the view until the leave animation actually finishes. `disableAnimations` is implemented by binding `undefined` in place of an animation class (the native API's `animate.enter`/`animate.leave` classes accept a dynamic value), since there's no per-subtree animation-disable binding like the old engine's `[@.disabled]`.",
+        "props": [
+          {
+            "name": "open",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Open/closed state. Two-way bindable via `[(open)]`."
+          },
+          {
+            "name": "side",
+            "kind": "input",
+            "required": false,
+            "type": "DrawerSide",
+            "defaultValue": "'right'",
+            "description": "Edge the panel slides in from."
+          },
+          {
+            "name": "backdrop",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether a dimming backdrop renders behind the panel while open."
+          },
+          {
+            "name": "closeOnBackdrop",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether clicking the backdrop closes the panel. Ignored when `backdrop` is `false`."
+          },
+          {
+            "name": "showCloseButton",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether the built-in close (X) button renders in the panel header."
+          },
+          {
+            "name": "disableAnimations",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Skips the slide/fade transitions — useful for tests or reduced-motion setups."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the panel element."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Drawer'",
+            "description": "Accessible name for the panel's `role=\"dialog\"`."
+          },
+          {
+            "name": "closed",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires once the panel has fully closed (after any close animation completes)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "component",
+      "category": "overlay",
+      "description": "Trigger button + floating panel, with named `button`/`menu` templates (via `uiTemplate`) for custom trigger content and menu items — falls back to plain text if omitted. Menu semantics: trigger has `aria-haspopup=\"menu\"` + `aria-expanded`, the panel has `role=\"menu\"`, closes on outside click and Escape (returning focus to the trigger), and Up/Down/Home/End arrow keys move focus between elements marked `role=\"menuitem\"` inside the panel content the caller provides.",
+      "files": [
+        {
+          "path": "dropdown-menu.html",
+          "type": "template"
+        },
+        {
+          "path": "dropdown-menu.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "DropdownMenu",
+        "description": "Trigger button + floating panel, with named `button`/`menu` templates (via `uiTemplate`) for custom trigger content and menu items — falls back to plain text if omitted. Menu semantics: trigger has `aria-haspopup=\"menu\"` + `aria-expanded`, the panel has `role=\"menu\"`, closes on outside click and Escape (returning focus to the trigger), and Up/Down/Home/End arrow keys move focus between elements marked `role=\"menuitem\"` inside the panel content the caller provides.",
+        "props": [
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the trigger entirely — it no longer responds to clicks and `buttonClicked` never fires."
+          },
+          {
+            "name": "disableMenu",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Keeps the trigger clickable (still emits `buttonClicked`) but prevents the panel itself from opening."
+          },
+          {
+            "name": "open",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether the panel is visible. Two-way bindable via `[(open)]`."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the trigger button, for one-off overrides."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Menu'",
+            "description": "Accessible label applied to the trigger button."
+          },
+          {
+            "name": "opened",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires whenever the panel finishes opening."
+          },
+          {
+            "name": "closed",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires whenever the panel finishes closing, however it was closed (toggle, outside click, Escape, Tab)."
+          },
+          {
+            "name": "buttonClicked",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Fires on every trigger click, even when `disableMenu` is `true` and no panel opens."
+          }
+        ]
+      }
+    },
+    {
+      "name": "file-upload",
+      "type": "component",
+      "category": "form",
+      "description": "Single-file drop zone with a real `<input type=\"file\">` underneath — clicking, dragging a file onto it, or tabbing to it and pressing Enter/Space all work. The original hid the input with `class=\"hidden\"` (`display: none`, which also makes it unfocusable) behind a plain `<div (click)>` with no `tabindex`/`role`, so keyboard-only users had no way to open the file picker at all. Here the input is visually hidden with `sr-only` (stays focusable) and nested inside a `<label>`, so native label-activates-control behavior provides full keyboard support for free, with no custom key handling needed. Other fixes made while porting (the component was identical across both forks that had it): - `maxFileSizeInMB` returned only the first character of the string `maxFileSize / 1024` — correct by coincidence for the 8 MB default, wrong for almost any other value (e.g. 12 MB rendered as \"1 MB\"). Replaced with `Math.round(maxFileSizeBytes / 1024 / 1024)`. - The file picker's `accept` attribute was a hardcoded string, completely ignoring the `extensions` input — configuring `extensions` never changed what the OS file dialog offered. It's now derived from `extensions()`. - Extension validation compared the browser-reported MIME subtype against the `extensions` list, so a configured `'jpg'` entry could never match (browsers always report `.jpg` files as MIME type `image/jpeg`, never `image/jpg`) — dead, unreachable config. Validation now checks the actual filename extension first, with MIME type as a secondary signal. - Rejected files (wrong type, too large) silently did nothing — no feedback at all. Now surfaces a `role=\"alert\"` message. - Dropped the fake `rxjs` `delay(500)` \"upload\" — the component never actually uploaded anything over the network, so the spinner was simulating work that didn't exist. Selection is now synchronous; a `loading` input lets the caller show a spinner while *their* upload request is in flight. The default `jpg`/`jpeg`/`png`/`pdf` whitelist is kept as the default `extensions` value, not hardcoded as the only option — pass a different array to accept other file types.",
+      "files": [
+        {
+          "path": "file-upload.html",
+          "type": "template"
+        },
+        {
+          "path": "file-upload.ts",
+          "type": "component"
+        },
+        {
+          "path": "file-upload.type.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "FileUpload",
+        "description": "Single-file drop zone with a real `<input type=\"file\">` underneath — clicking, dragging a file onto it, or tabbing to it and pressing Enter/Space all work. The original hid the input with `class=\"hidden\"` (`display: none`, which also makes it unfocusable) behind a plain `<div (click)>` with no `tabindex`/`role`, so keyboard-only users had no way to open the file picker at all. Here the input is visually hidden with `sr-only` (stays focusable) and nested inside a `<label>`, so native label-activates-control behavior provides full keyboard support for free, with no custom key handling needed. Other fixes made while porting (the component was identical across both forks that had it): - `maxFileSizeInMB` returned only the first character of the string `maxFileSize / 1024` — correct by coincidence for the 8 MB default, wrong for almost any other value (e.g. 12 MB rendered as \"1 MB\"). Replaced with `Math.round(maxFileSizeBytes / 1024 / 1024)`. - The file picker's `accept` attribute was a hardcoded string, completely ignoring the `extensions` input — configuring `extensions` never changed what the OS file dialog offered. It's now derived from `extensions()`. - Extension validation compared the browser-reported MIME subtype against the `extensions` list, so a configured `'jpg'` entry could never match (browsers always report `.jpg` files as MIME type `image/jpeg`, never `image/jpg`) — dead, unreachable config. Validation now checks the actual filename extension first, with MIME type as a secondary signal. - Rejected files (wrong type, too large) silently did nothing — no feedback at all. Now surfaces a `role=\"alert\"` message. - Dropped the fake `rxjs` `delay(500)` \"upload\" — the component never actually uploaded anything over the network, so the spinner was simulating work that didn't exist. Selection is now synchronous; a `loading` input lets the caller show a spinner while *their* upload request is in flight. The default `jpg`/`jpeg`/`png`/`pdf` whitelist is kept as the default `extensions` value, not hardcoded as the only option — pass a different array to accept other file types.",
+        "props": [
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "DOM id for the underlying `<input type=\"file\">`; auto-generated when omitted."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the drop zone entirely — no click, drag/drop, or keyboard activation opens the file picker."
+          },
+          {
+            "name": "loading",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Set by the caller while their own upload request is in flight."
+          },
+          {
+            "name": "extensions",
+            "kind": "input",
+            "required": false,
+            "type": "FileUploadExtension[]",
+            "defaultValue": "DEFAULT_FILE_UPLOAD_EXTENSIONS",
+            "description": "Allowed file extensions (no leading dot), used both to build the file picker's `accept` filter and to validate the chosen/dropped file."
+          },
+          {
+            "name": "maxFileSizeBytes",
+            "kind": "input",
+            "required": false,
+            "type": "unknown",
+            "defaultValue": "8 * 1024 * 1024",
+            "description": "Largest file size accepted, in bytes; larger files are rejected with an inline error message."
+          },
+          {
+            "name": "file",
+            "kind": "model",
+            "required": false,
+            "type": "File | null",
+            "defaultValue": "null",
+            "description": "Selected file. Two-way bindable via `[(file)]`; `null` when nothing is selected."
+          }
+        ]
+      }
+    },
+    {
+      "name": "input",
+      "type": "component",
+      "category": "form",
+      "description": "Text input with label/caption slots, left/right icon, password visibility toggle, validation states, and an optional inline \"search in list\" suggestion dropdown. A11y fixes over the original: the clear button and the password-visibility toggle were plain `<em>` icon elements with a `(click)` handler — not focusable, not operable from a keyboard. Both are real `<button type=\"button\">`s now. The error/caption text is linked to the input via `aria-describedby`, and `state=\"error\"` sets `aria-invalid`. The suggestion list now has `role=\"listbox\"`/`role=\"option\"` and Up/Down/Enter/Escape keyboard support instead of being mouse-only. A `fade` animation trigger was also registered but never bound to the suggestion list's `@if` block — now wired up so it actually fades in/out.",
+      "files": [
+        {
+          "path": "input.html",
+          "type": "template"
+        },
+        {
+          "path": "input.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Input",
+        "description": "Text input with label/caption slots, left/right icon, password visibility toggle, validation states, and an optional inline \"search in list\" suggestion dropdown. A11y fixes over the original: the clear button and the password-visibility toggle were plain `<em>` icon elements with a `(click)` handler — not focusable, not operable from a keyboard. Both are real `<button type=\"button\">`s now. The error/caption text is linked to the input via `aria-describedby`, and `state=\"error\"` sets `aria-invalid`. The suggestion list now has `role=\"listbox\"`/`role=\"option\"` and Up/Down/Enter/Escape keyboard support instead of being mouse-only. A `fade` animation trigger was also registered but never bound to the suggestion list's `@if` block — now wired up so it actually fades in/out.",
+        "props": [
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "string | number | null",
+            "defaultValue": "null",
+            "description": "Current field value. Two-way bindable via `[(value)]`; also wired up for `formControlName`/`ngModel`."
+          },
+          {
+            "name": "type",
+            "kind": "input",
+            "required": false,
+            "type": "InputType",
+            "defaultValue": "'text'",
+            "description": "Native `type` — `'password'` adds the show/hide toggle button, `'number'` restricts typed characters to digits."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the field and its clear/password-toggle buttons."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Native placeholder text shown when the field is empty."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Label rendered above the field; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "state",
+            "kind": "input",
+            "required": false,
+            "type": "InputState",
+            "defaultValue": "null",
+            "description": "Validation state — colors the border/icon and, for `'error'`, sets `aria-invalid`; `null` for the neutral default."
+          },
+          {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Icon shown inside the field, positioned per `iconPos`."
+          },
+          {
+            "name": "iconPos",
+            "kind": "input",
+            "required": false,
+            "type": "'left' | 'right'",
+            "defaultValue": "'right'",
+            "description": "Side the `icon` renders on."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "DOM id for the `<input>`; auto-generated when omitted."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the field's root element, for one-off overrides."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Helper/error text rendered below the field and linked via `aria-describedby`; ignored when a `uiTemplate=\"caption\"` is projected."
+          },
+          {
+            "name": "searchIn",
+            "kind": "input",
+            "required": false,
+            "type": "string[] | null",
+            "defaultValue": "null",
+            "description": "Candidate strings for the inline suggestion dropdown, filtered against the current `value` as the user types. `null` disables suggestions entirely."
+          },
+          {
+            "name": "max",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `max` attribute, for `type=\"number\"`."
+          },
+          {
+            "name": "min",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `min` attribute, for `type=\"number\"`."
+          },
+          {
+            "name": "maxLength",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `maxlength` attribute."
+          },
+          {
+            "name": "minLength",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `minlength` attribute."
+          },
+          {
+            "name": "pattern",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `pattern` attribute used for HTML5 form validation."
+          },
+          {
+            "name": "required",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Marks the field as required for HTML5 form validation."
+          },
+          {
+            "name": "charRegex",
+            "kind": "input",
+            "required": false,
+            "type": "RegExp | undefined",
+            "defaultValue": "undefined",
+            "description": "Characters allowed while typing (tested against `KeyboardEvent.key`), not a format validator."
+          },
+          {
+            "name": "focused",
+            "kind": "output",
+            "required": false,
+            "type": "FocusEvent",
+            "defaultValue": "",
+            "description": "Fires when the field gains focus."
+          },
+          {
+            "name": "blurred",
+            "kind": "output",
+            "required": false,
+            "type": "FocusEvent",
+            "defaultValue": "",
+            "description": "Fires when the field loses focus."
+          }
+        ]
+      }
+    },
+    {
+      "name": "input-group",
+      "type": "component",
+      "category": "form",
+      "description": "Layout primitive that visually joins prefix/suffix addons (icons, text, buttons) with a projected input into one bordered unit — e.g. `$` + amount + `.00`, or a search box + \"Go\" button. It is *not* a form control: it carries no value, implements no `ControlValueAccessor`, and needs no special ARIA beyond whatever the projected children already provide. Border/focus styling reacts to the focus state of anything inside the group via `:focus-within`, so the projected control doesn't need its own border/outline — strip those off (see the docs page for the exact classes) so only the group's border shows. Addons are plain content projection rather than named `UiTemplateDirective` slots: `[prefix]`/ `[suffix]` attribute selectors are simpler for \"arbitrary markup on either side of an input\" and don't need the indirection of a named `<ng-template>`.",
+      "files": [
+        {
+          "path": "input-group.html",
+          "type": "template"
+        },
+        {
+          "path": "input-group.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "InputGroup",
+        "description": "Layout primitive that visually joins prefix/suffix addons (icons, text, buttons) with a projected input into one bordered unit — e.g. `$` + amount + `.00`, or a search box + \"Go\" button. It is *not* a form control: it carries no value, implements no `ControlValueAccessor`, and needs no special ARIA beyond whatever the projected children already provide. Border/focus styling reacts to the focus state of anything inside the group via `:focus-within`, so the projected control doesn't need its own border/outline — strip those off (see the docs page for the exact classes) so only the group's border shows. Addons are plain content projection rather than named `UiTemplateDirective` slots: `[prefix]`/ `[suffix]` attribute selectors are simpler for \"arbitrary markup on either side of an input\" and don't need the indirection of a named `<ng-template>`.",
+        "props": [
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Dims the group and disables pointer interaction with everything projected inside it."
+          },
+          {
+            "name": "state",
+            "kind": "input",
+            "required": false,
+            "type": "InputGroupState",
+            "defaultValue": "null",
+            "description": "Validation state — tints the border success/warning/error; `null` for the neutral default."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the wrapper."
+          }
+        ]
+      }
+    },
+    {
+      "name": "label",
+      "type": "component",
+      "category": "form",
+      "description": "Small pill-shaped tag/badge. Identical logic across all three forks. The original shipped a sibling `label.component.css` with `@apply`-based classes (`.info-label`, `.success-label`, `.warning-label`, `.danger-label`, `.tbk-label`, `.tbk-label-generic`) that were never referenced by the template (`getColorClass()` only ever returned `bg-warning-300` or `bg-neutral-500`) — dead code, dropped entirely. `.tbk-label` also referenced `bg-transbank-300`, a class that doesn't exist in any Tailwind config in any of the three forks. `mb-0` (added by FTD/uiSDP, missing from base) is kept to stop the label from picking up a stray bottom margin.",
+      "files": [
+        {
+          "path": "label.html",
+          "type": "template"
+        },
+        {
+          "path": "label.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Label",
+        "description": "Small pill-shaped tag/badge. Identical logic across all three forks. The original shipped a sibling `label.component.css` with `@apply`-based classes (`.info-label`, `.success-label`, `.warning-label`, `.danger-label`, `.tbk-label`, `.tbk-label-generic`) that were never referenced by the template (`getColorClass()` only ever returned `bg-warning-300` or `bg-neutral-500`) — dead code, dropped entirely. `.tbk-label` also referenced `bg-transbank-300`, a class that doesn't exist in any Tailwind config in any of the three forks. `mb-0` (added by FTD/uiSDP, missing from base) is kept to stop the label from picking up a stray bottom margin.",
+        "props": [
+          {
+            "name": "color",
+            "kind": "input",
+            "required": false,
+            "type": "LabelColor",
+            "defaultValue": "'normal'",
+            "description": "Visual color scheme — `'highlight'` renders on a warning-tinted background, `'normal'` on neutral gray."
+          }
+        ]
+      }
+    },
+    {
+      "name": "link",
+      "type": "component",
+      "category": "navigation",
+      "description": "Text link with optional leading/trailing icon and underline behavior. Fixes carried over from the original: `target` no longer defaults to `_blank` — the base fork forced every link (including internal/in-app ones) to open a new tab unconditionally, which is rarely what you want; callers now opt in explicitly. `rel=\"noopener noreferrer\"` is applied automatically whenever `target=\"_blank\"` is set (FTD/uiSDP added this by hand but only on the base string, not derived from `target`, so it stayed correct only by coincidence). The disabled state (added by FTD/uiSDP, missing from base) is merged in. Color now uses the dedicated `--color-link-*` token family instead of `text-info-500` — same value, but the correct semantic token instead of borrowing the info color.",
+      "files": [
+        {
+          "path": "link.html",
+          "type": "template"
+        },
+        {
+          "path": "link.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Link",
+        "description": "Text link with optional leading/trailing icon and underline behavior. Fixes carried over from the original: `target` no longer defaults to `_blank` — the base fork forced every link (including internal/in-app ones) to open a new tab unconditionally, which is rarely what you want; callers now opt in explicitly. `rel=\"noopener noreferrer\"` is applied automatically whenever `target=\"_blank\"` is set (FTD/uiSDP added this by hand but only on the base string, not derived from `target`, so it stayed correct only by coincidence). The disabled state (added by FTD/uiSDP, missing from base) is merged in. Color now uses the dedicated `--color-link-*` token family instead of `text-info-500` — same value, but the correct semantic token instead of borrowing the info color.",
+        "props": [
+          {
+            "name": "href",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Destination URL, applied as the native `href`. Omitted (or `disabled`) renders a non-navigating anchor."
+          },
+          {
+            "name": "target",
+            "kind": "input",
+            "required": false,
+            "type": "LinkTarget | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `target` attribute. `'_blank'` automatically adds `rel=\"noopener noreferrer\"` and an sr-only \"opens in a new tab\" hint."
+          },
+          {
+            "name": "underline",
+            "kind": "input",
+            "required": false,
+            "type": "LinkUnderline",
+            "defaultValue": "'hover'",
+            "description": "Underline behavior for the link text."
+          },
+          {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Icon shown alongside the link text. Accepts a Lucide icon component or icon data."
+          },
+          {
+            "name": "iconPos",
+            "kind": "input",
+            "required": false,
+            "type": "'left' | 'right'",
+            "defaultValue": "'left'",
+            "description": "Side the `icon` renders on, relative to the projected link text."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Strips the `href`, applies the disabled visual style, and prevents the click handler from firing."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the link's computed classes."
+          },
+          {
+            "name": "clicked",
+            "kind": "output",
+            "required": false,
+            "type": "MouseEvent",
+            "defaultValue": "",
+            "description": "Emits the native click event; suppressed (and navigation prevented) while `disabled`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "modal",
+      "type": "component",
+      "category": "overlay",
+      "description": "Controlled dialog: the caller owns `open` (typically a signal bound with `[open]`) and reacts to `closed` to flip it back to `false` — the component never mutates its own visibility, so there's no timer choreography like the original's `translate-y` transition dance. The fade animation fires automatically on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. The original (FTD/uiSDP forks) repositioned itself on resize via a hand-rolled `ResizeObserver`/`MutationObserver` pair that queried `document.querySelector('.modal-content')` — a global lookup that would grab the wrong element as soon as two modals existed on the page. That machinery existed to patch a layout that mixed `absolute` positioning with flex centering; this version centers the panel with plain in-flow flexbox + `max-height`/`overflow-y-auto` instead, so oversized content already fits the viewport with pure CSS and no observers. Focus is trapped inside the panel while open (Tab/Shift+Tab wrap at the panel edges) and restored to whatever triggered the modal once it closes.",
+      "files": [
+        {
+          "path": "modal.html",
+          "type": "template"
+        },
+        {
+          "path": "modal.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Modal",
+        "description": "Controlled dialog: the caller owns `open` (typically a signal bound with `[open]`) and reacts to `closed` to flip it back to `false` — the component never mutates its own visibility, so there's no timer choreography like the original's `translate-y` transition dance. The fade animation fires automatically on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. The original (FTD/uiSDP forks) repositioned itself on resize via a hand-rolled `ResizeObserver`/`MutationObserver` pair that queried `document.querySelector('.modal-content')` — a global lookup that would grab the wrong element as soon as two modals existed on the page. That machinery existed to patch a layout that mixed `absolute` positioning with flex centering; this version centers the panel with plain in-flow flexbox + `max-height`/`overflow-y-auto` instead, so oversized content already fits the viewport with pure CSS and no observers. Focus is trapped inside the panel while open (Tab/Shift+Tab wrap at the panel edges) and restored to whatever triggered the modal once it closes.",
+        "props": [
+          {
+            "name": "open",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Controls visibility. Owned by the caller — the modal never mutates it itself; flip it back to `false` on `(closed)`."
+          },
+          {
+            "name": "heading",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Text rendered in the panel's header and linked via `aria-labelledby`; ignored when a `uiTemplate=\"header\"` is projected."
+          },
+          {
+            "name": "closeOnBackdrop",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether clicking the backdrop overlay closes the modal."
+          },
+          {
+            "name": "showCloseButton",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Shows the built-in `X` close button in the top-right corner."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the panel."
+          },
+          {
+            "name": "role",
+            "kind": "input",
+            "required": false,
+            "type": "'dialog' | 'alertdialog'",
+            "defaultValue": "'dialog'",
+            "description": "ARIA role of the panel. `AlertDialog` overrides this to `'alertdialog'`."
+          },
+          {
+            "name": "describedBy",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Id of an element (typically a description/message paragraph) to expose via `aria-describedby`."
+          },
+          {
+            "name": "closed",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Emitted when the modal requests to close (backdrop click, close button, or Escape) — the caller should set `open` to `false`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "notification",
+      "type": "component",
+      "category": "feedback",
+      "description": "Toast-style notification, positioned fixed to a screen corner/edge. Controlled via `show`, like `Modal` — the caller flips it back to `false` on `closed` instead of the component managing its own visibility. The original drove its slide-in/out with a position-aware `translate-x`/`translate-y` switch timed by an `rxjs` `timer(200)`, mirroring the same choreography bug pattern as the original Modal. That's replaced with a fade animation on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. Multi-brand `type` values (`accent-tbk`/`accent-onepay`/`accent-webpay`/`custom`) are dropped — see `styles.css` for why the brand palette collapsed to a single `primary`/`accent` pair. `hideCloseButton` (default `true`, i.e. no close button unless explicitly turned off) is renamed to `showCloseButton` (default `true`, i.e. shown unless explicitly turned off) to match `Modal`'s naming and drop the double-negative default. `stacked` (default `false`) drops the built-in `fixed`+corner-position classes so a parent can lay several of these out itself — used by `Toaster` (`../toast.ts`) to stack multiple queued toasts in the same corner instead of having them all render on top of each other.",
+      "files": [
+        {
+          "path": "notification.html",
+          "type": "template"
+        },
+        {
+          "path": "notification.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Notification",
+        "description": "Toast-style notification, positioned fixed to a screen corner/edge. Controlled via `show`, like `Modal` — the caller flips it back to `false` on `closed` instead of the component managing its own visibility. The original drove its slide-in/out with a position-aware `translate-x`/`translate-y` switch timed by an `rxjs` `timer(200)`, mirroring the same choreography bug pattern as the original Modal. That's replaced with a fade animation on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. Multi-brand `type` values (`accent-tbk`/`accent-onepay`/`accent-webpay`/`custom`) are dropped — see `styles.css` for why the brand palette collapsed to a single `primary`/`accent` pair. `hideCloseButton` (default `true`, i.e. no close button unless explicitly turned off) is renamed to `showCloseButton` (default `true`, i.e. shown unless explicitly turned off) to match `Modal`'s naming and drop the double-negative default. `stacked` (default `false`) drops the built-in `fixed`+corner-position classes so a parent can lay several of these out itself — used by `Toaster` (`../toast.ts`) to stack multiple queued toasts in the same corner instead of having them all render on top of each other.",
+        "props": [
+          {
+            "name": "show",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Controls visibility, like `Modal`'s `open` — the caller flips it back to `false` on `(closed)`."
+          },
+          {
+            "name": "type",
+            "kind": "input",
+            "required": false,
+            "type": "NotificationType",
+            "defaultValue": "'info'",
+            "description": "Semantic/visual style; also drives whether it announces as `alert`/`assertive` (`'error'`) or `status`/`polite` (everything else)."
+          },
+          {
+            "name": "position",
+            "kind": "input",
+            "required": false,
+            "type": "NotificationPosition",
+            "defaultValue": "'top-center'",
+            "description": "Screen corner/edge the notification is anchored to. Ignored when `stacked` is `true`."
+          },
+          {
+            "name": "showCloseButton",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Shows the built-in `X` close button."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the notification."
+          },
+          {
+            "name": "stacked",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Drops the built-in fixed positioning/corner classes so a parent (e.g. `Toaster`) can lay out several instances itself."
+          },
+          {
+            "name": "closed",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Emitted when the close button is clicked — the caller should set `show` to `false`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "number-input",
+      "type": "component",
+      "category": "form",
+      "description": "Real `<input type=\"number\">` (native numeric keyboard on mobile, mouse-wheel and arrow-key increment for free) flanked by visible +/- stepper buttons that call the same clamp/step logic, composed inside `InputGroup` so the three pieces read as one bordered control. Reuses `Input`'s *conventions* (id-generation counter + `id` override, label/caption `UiTemplateDirective` slots, the same input text/border/disabled classes) rather than nesting `Input` itself: `Input`'s border/focus styling lives directly on its own inner `<input>` with no seam exposed to strip it for nesting inside a group without reaching into its internals. Own template + `InputGroup` composition avoids that. Buttons are real `<button type=\"button\">`s with `aria-label`s (they're icon-only), disabled individually once the value is clamped against `min`/`max`.",
+      "files": [
+        {
+          "path": "number-input.html",
+          "type": "template"
+        },
+        {
+          "path": "number-input.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "input-group",
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "NumberInput",
+        "description": "Real `<input type=\"number\">` (native numeric keyboard on mobile, mouse-wheel and arrow-key increment for free) flanked by visible +/- stepper buttons that call the same clamp/step logic, composed inside `InputGroup` so the three pieces read as one bordered control. Reuses `Input`'s *conventions* (id-generation counter + `id` override, label/caption `UiTemplateDirective` slots, the same input text/border/disabled classes) rather than nesting `Input` itself: `Input`'s border/focus styling lives directly on its own inner `<input>` with no seam exposed to strip it for nesting inside a group without reaching into its internals. Own template + `InputGroup` composition avoids that. Buttons are real `<button type=\"button\">`s with `aria-label`s (they're icon-only), disabled individually once the value is clamped against `min`/`max`.",
+        "props": [
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "number | null",
+            "defaultValue": "null",
+            "description": "Current numeric value, or `null` when empty. Two-way bindable via `[(value)]`; also works with `formControlName`/`ngModel`."
+          },
+          {
+            "name": "min",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Minimum allowed value — the decrement button disables and blur clamps the value once reached."
+          },
+          {
+            "name": "max",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Maximum allowed value — the increment button disables and blur clamps the value once reached."
+          },
+          {
+            "name": "step",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "1",
+            "description": "Amount added or subtracted per +/- button press."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the input and both stepper buttons."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Native placeholder text shown when the value is empty."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static label text; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static helper/caption text below the input; ignored when a `uiTemplate=\"caption\"` is projected."
+          },
+          {
+            "name": "state",
+            "kind": "input",
+            "required": false,
+            "type": "NumberInputState",
+            "defaultValue": "null",
+            "description": "Validation state, passed through to the underlying `InputGroup` border color."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Overrides the auto-generated element id (used to associate the label and caption)."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the input group."
+          }
+        ]
+      }
+    },
+    {
+      "name": "paginator",
+      "type": "component",
+      "category": "navigation",
+      "description": "Page-number navigation bar: previous/next buttons plus a condensed page-number range with ellipses (first, last, current ± `siblingCount`). Purely presentational — it controls a `page` index, the caller slices its own dataset based on that. The original bundled this together with dataset slicing and three named content-projection slots (item template / info template / empty-state template), conflating two unrelated responsibilities — rendering a list vs. picking a page — into one component. Split apart here: `Paginator` now only owns the page-range control, matching how mainstream libraries model this (MUI Pagination, Ant Design Pagination, PrimeNG Paginator all separate the two). The page-range algorithm is also a full rewrite: the original `doPaging()` had accumulated special-cased magic numbers (`i != 4`, `pageCount - 5`, `currentPage != 4`) that read like unfixed edge-case patches rather than a designed algorithm; this uses the standard sibling+ellipsis range algorithm.",
+      "files": [
+        {
+          "path": "paginator.html",
+          "type": "template"
+        },
+        {
+          "path": "paginator.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Paginator",
+        "description": "Page-number navigation bar: previous/next buttons plus a condensed page-number range with ellipses (first, last, current ± `siblingCount`). Purely presentational — it controls a `page` index, the caller slices its own dataset based on that. The original bundled this together with dataset slicing and three named content-projection slots (item template / info template / empty-state template), conflating two unrelated responsibilities — rendering a list vs. picking a page — into one component. Split apart here: `Paginator` now only owns the page-range control, matching how mainstream libraries model this (MUI Pagination, Ant Design Pagination, PrimeNG Paginator all separate the two). The page-range algorithm is also a full rewrite: the original `doPaging()` had accumulated special-cased magic numbers (`i != 4`, `pageCount - 5`, `currentPage != 4`) that read like unfixed edge-case patches rather than a designed algorithm; this uses the standard sibling+ellipsis range algorithm.",
+        "props": [
+          {
+            "name": "page",
+            "kind": "model",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Zero-based current page index. Two-way bindable via `[(page)]`."
+          },
+          {
+            "name": "pageCount",
+            "kind": "input",
+            "required": true,
+            "type": "number",
+            "defaultValue": "",
+            "description": "Total number of pages."
+          },
+          {
+            "name": "siblingCount",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "1",
+            "description": "How many page numbers to show on each side of the current page."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the previous/next buttons and every page-number button."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the nav element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "popover",
+      "type": "component",
+      "category": "overlay",
+      "description": "Generic trigger + floating panel. Mark the trigger element with the `trigger` attribute (projected via `[trigger]`); everything else passed as content becomes the panel body, only rendered once the popover opens: ```html <ui-popover [(open)]=\"isOpen\"> <button trigger>Open</button> <div class=\"p-2\">Panel content</div> </ui-popover> ``` Built on `FloatingPanel` (CDK Overlay) — the same primitive `Combobox`/`Autocomplete`/`Command` use directly when they need tighter control over their own markup instead of content projection.",
+      "files": [
+        {
+          "path": "popover.html",
+          "type": "template"
+        },
+        {
+          "path": "popover.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "Popover",
+        "description": "Generic trigger + floating panel. Mark the trigger element with the `trigger` attribute (projected via `[trigger]`); everything else passed as content becomes the panel body, only rendered once the popover opens: ```html <ui-popover [(open)]=\"isOpen\"> <button trigger>Open</button> <div class=\"p-2\">Panel content</div> </ui-popover> ``` Built on `FloatingPanel` (CDK Overlay) — the same primitive `Combobox`/`Autocomplete`/`Command` use directly when they need tighter control over their own markup instead of content projection.",
+        "props": [
+          {
+            "name": "open",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether the panel is open. Two-way bindable via `[(open)]`; also flips back to `false` when the panel closes itself (outside click, escape)."
+          },
+          {
+            "name": "matchTriggerWidth",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Stretches the panel to match the trigger's width instead of sizing to its own content."
+          },
+          {
+            "name": "panelClass",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes applied to the floating panel element."
+          },
+          {
+            "name": "placement",
+            "kind": "input",
+            "required": false,
+            "type": "'bottom' | 'top'",
+            "defaultValue": "'bottom'",
+            "description": "Preferred side of the trigger to open on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "progress",
+      "type": "component",
+      "category": "feedback",
+      "description": "Horizontal progress bar. Omit `value` (or pass `undefined`) for an indeterminate state — a looping bar animation and no `aria-valuenow` (per the ARIA `progressbar` pattern, omitting `aria-valuenow` is how you signal \"progress can't currently be measured\").",
+      "files": [
+        {
+          "path": "progress.html",
+          "type": "template"
+        },
+        {
+          "path": "progress.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Progress",
+        "description": "Horizontal progress bar. Omit `value` (or pass `undefined`) for an indeterminate state — a looping bar animation and no `aria-valuenow` (per the ARIA `progressbar` pattern, omitting `aria-valuenow` is how you signal \"progress can't currently be measured\").",
+        "props": [
+          {
+            "name": "value",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Current progress amount, out of `max`. Omit (or pass `undefined`) for an indeterminate bar — see class doc."
+          },
+          {
+            "name": "max",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "100",
+            "description": "Value that represents 100% completion."
+          },
+          {
+            "name": "size",
+            "kind": "input",
+            "required": false,
+            "type": "ProgressSize",
+            "defaultValue": "'md'",
+            "description": "Track/fill thickness."
+          },
+          {
+            "name": "variant",
+            "kind": "input",
+            "required": false,
+            "type": "ProgressVariant",
+            "defaultValue": "'primary'",
+            "description": "Color of the fill, e.g. to signal a success/warning/danger state."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name for the `progressbar` element."
+          },
+          {
+            "name": "valueText",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Overrides the announced value text, e.g. `\"3 of 5 steps\"`, instead of the raw percentage."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the track element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "questionnaire",
+      "type": "component",
+      "category": "form",
+      "description": "One-question-at-a-time survey flow: a \"Question X of Y\" progress header, a lettered single-select option list (WAI-ARIA radiogroup — roving tabindex, arrow-key navigation), an optional free-text fallback field, and Next/Back navigation. Each step's answer is either a picked option or the free-text value, never both. Fully controlled: `stepIndex` and `answers` are both `model()`s the caller can read/seed/bind, and `completed` fires with the full answer set when Next is pressed on the last step.",
+      "files": [
+        {
+          "path": "questionnaire.html",
+          "type": "template"
+        },
+        {
+          "path": "questionnaire.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "Questionnaire",
+        "description": "One-question-at-a-time survey flow: a \"Question X of Y\" progress header, a lettered single-select option list (WAI-ARIA radiogroup — roving tabindex, arrow-key navigation), an optional free-text fallback field, and Next/Back navigation. Each step's answer is either a picked option or the free-text value, never both. Fully controlled: `stepIndex` and `answers` are both `model()`s the caller can read/seed/bind, and `completed` fires with the full answer set when Next is pressed on the last step.",
+        "props": [
+          {
+            "name": "steps",
+            "kind": "input",
+            "required": true,
+            "type": "readonly QuestionnaireStep[]",
+            "defaultValue": "",
+            "description": "Ordered list of questions to step through."
+          },
+          {
+            "name": "stepIndex",
+            "kind": "model",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Zero-based index of the currently shown step. Two-way bindable via `[(stepIndex)]`."
+          },
+          {
+            "name": "answers",
+            "kind": "model",
+            "required": false,
+            "type": "QuestionnaireAnswer[]",
+            "defaultValue": "[]",
+            "description": "Collected answers, one per visited step. Two-way bindable; seed it to resume a flow in progress."
+          },
+          {
+            "name": "nextLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Next'",
+            "description": "Label for the Next button on every step except the last."
+          },
+          {
+            "name": "finishLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Finish'",
+            "description": "Label for the Next button on the last step."
+          },
+          {
+            "name": "backLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Back'",
+            "description": "Label for the Back button, hidden entirely on the first step."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root element."
+          },
+          {
+            "name": "completed",
+            "kind": "output",
+            "required": false,
+            "type": "QuestionnaireAnswer[]",
+            "defaultValue": "",
+            "description": "Fires with the full answer set when Next is pressed on the last step."
+          },
+          {
+            "name": "stepChange",
+            "kind": "output",
+            "required": false,
+            "type": "number",
+            "defaultValue": "",
+            "description": "Fires with the new index whenever the step changes via Next/Back."
+          }
+        ]
+      }
+    },
+    {
+      "name": "radio",
+      "type": "component",
+      "category": "form",
+      "description": "A single native radio input with forms interop (`ControlValueAccessor`) plus a signal-based `[(checked)]` binding. Group several by giving them the same `name`.",
+      "files": [
+        {
+          "path": "radio.html",
+          "type": "template"
+        },
+        {
+          "path": "radio.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Radio",
+        "description": "A single native radio input with forms interop (`ControlValueAccessor`) plus a signal-based `[(checked)]` binding. Group several by giving them the same `name`.",
+        "props": [
+          {
+            "name": "checked",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Checked state. Two-way bindable via `[(checked)]`."
+          },
+          {
+            "name": "value",
+            "kind": "input",
+            "required": false,
+            "type": "T | undefined",
+            "defaultValue": "undefined",
+            "description": "Value emitted via `selected` when this radio becomes checked."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static label text rendered next to the radio input."
+          },
+          {
+            "name": "name",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Native `name` attribute — radios sharing a `name` form a mutually-exclusive group."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables user interaction."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name to use when there's no visible `label` (e.g. a radio used on its own in a compact row)."
+          },
+          {
+            "name": "selected",
+            "kind": "output",
+            "required": false,
+            "type": "T | undefined",
+            "defaultValue": "",
+            "description": "Emits this radio's `value` when it becomes checked via user interaction."
+          }
+        ]
+      }
+    },
+    {
+      "name": "radio-group",
+      "type": "component",
+      "category": "form",
+      "description": "Single-select list/chip picker over an arbitrary array of options (not a wrapper around individual `<ui-radio>` elements — this renders its own buttons). The original was a stack of `<div (click)=\"...\">`s with no radio semantics at all — not reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the WAI-ARIA \"radio group\" pattern: `role=\"radiogroup\"` + `role=\"radio\"` buttons, roving `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in the original but was declared and never actually used (selection always fell back to `==`) — wired up for real here.",
+      "files": [
+        {
+          "path": "radio-group.html",
+          "type": "template"
+        },
+        {
+          "path": "radio-group.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "RadioGroup",
+        "description": "Single-select list/chip picker over an arbitrary array of options (not a wrapper around individual `<ui-radio>` elements — this renders its own buttons). The original was a stack of `<div (click)=\"...\">`s with no radio semantics at all — not reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the WAI-ARIA \"radio group\" pattern: `role=\"radiogroup\"` + `role=\"radio\"` buttons, roving `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in the original but was declared and never actually used (selection always fell back to `==`) — wired up for real here.",
+        "props": [
+          {
+            "name": "options",
+            "kind": "input",
+            "required": false,
+            "type": "readonly T[]",
+            "defaultValue": "[]",
+            "description": "Options rendered as radios/chips, in the given order."
+          },
+          {
+            "name": "type",
+            "kind": "input",
+            "required": false,
+            "type": "'list' | 'chips'",
+            "defaultValue": "'list'",
+            "description": "Visual layout — a vertical list of rows, or a wrapping row of pill-shaped chips."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name for the `radiogroup` element."
+          },
+          {
+            "name": "optionClassNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Overrides the default classes applied to an unselected option."
+          },
+          {
+            "name": "selectedClassNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Overrides the default classes applied to the selected option."
+          },
+          {
+            "name": "containerClassNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Overrides the default layout classes on the options container."
+          },
+          {
+            "name": "disabledPredicate",
+            "kind": "input",
+            "required": false,
+            "type": "(option: T) => boolean",
+            "defaultValue": "() => false",
+            "description": "Called with each option to decide whether it's disabled; return `true` to disable it. Defaults to enabling every option."
+          },
+          {
+            "name": "compareWith",
+            "kind": "input",
+            "required": false,
+            "type": "(a: T, b: T) => boolean",
+            "defaultValue": "(a, b) => a === b",
+            "description": "Called with `(optionA, optionB)` to decide whether two options are the same selection — override for option objects that aren't reference-equal to the bound value (e.g. reloaded from an API). Defaults to `===`."
+          },
+          {
+            "name": "selectedItem",
+            "kind": "output",
+            "required": false,
+            "type": "T",
+            "defaultValue": "",
+            "description": "Emits the chosen option when the user selects it, via click or arrow-key navigation."
+          }
+        ]
+      }
+    },
+    {
+      "name": "resizable",
+      "type": "component",
+      "category": "layout",
+      "description": "Resizable panel group: N panes (each marked with the `uiResizablePane` directive, projected as plain content) separated by drag handles. Dragging is plain `pointerdown`/`pointermove`/`pointerup` listeners rather than `@angular/cdk/drag-drop`'s `CdkDrag`. `CdkDrag` is built around free transform-based dragging of a single element; it doesn't map cleanly onto \"redistribute a percentage split between two adjacent flex-basis panes while clamping both to their own min/max\" — plain pointer events end up simpler and more direct for this shape of problem. Each handle follows the WAI-ARIA \"separator\" pattern: `role=\"separator\"`, `aria-orientation`, and `aria-valuenow`/`aria-valuemin`/`aria-valuemax` tracking the boundary's position as a percentage of the group. It's a real focusable, keyboard-operable element — Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`, Home/End send it to the group's start/end (as far as the neighboring panes' `minSize`/`maxSize` allow).",
+      "files": [
+        {
+          "path": "resizable-pane.directive.ts",
+          "type": "component"
+        },
+        {
+          "path": "resizable.html",
+          "type": "template"
+        },
+        {
+          "path": "resizable.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Resizable",
+        "description": "Resizable panel group: N panes (each marked with the `uiResizablePane` directive, projected as plain content) separated by drag handles. Dragging is plain `pointerdown`/`pointermove`/`pointerup` listeners rather than `@angular/cdk/drag-drop`'s `CdkDrag`. `CdkDrag` is built around free transform-based dragging of a single element; it doesn't map cleanly onto \"redistribute a percentage split between two adjacent flex-basis panes while clamping both to their own min/max\" — plain pointer events end up simpler and more direct for this shape of problem. Each handle follows the WAI-ARIA \"separator\" pattern: `role=\"separator\"`, `aria-orientation`, and `aria-valuenow`/`aria-valuemin`/`aria-valuemax` tracking the boundary's position as a percentage of the group. It's a real focusable, keyboard-operable element — Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`, Home/End send it to the group's start/end (as far as the neighboring panes' `minSize`/`maxSize` allow).",
+        "props": [
+          {
+            "name": "direction",
+            "kind": "input",
+            "required": false,
+            "type": "ResizableDirection",
+            "defaultValue": "'horizontal'",
+            "description": "Axis panes are laid out and resized along."
+          },
+          {
+            "name": "step",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "5",
+            "description": "Percentage nudge per arrow-key press on a handle."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes on the group container — set an explicit height/width here, since the group doesn't size itself."
+          },
+          {
+            "name": "handleClassNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes applied to each drag handle."
+          },
+          {
+            "name": "layoutChange",
+            "kind": "output",
+            "required": false,
+            "type": "number[]",
+            "defaultValue": "",
+            "description": "Fires with every pane's current size (%) whenever a handle finishes moving."
+          }
+        ]
+      }
+    },
+    {
+      "name": "search-input",
+      "type": "component",
+      "category": "form",
+      "description": "Search box built from `Input`'s own conventions (id-generation counter, label/caption `UiTemplateDirective` slots, the exact same `<input>` border/focus/disabled classes) rather than nesting `Input` as a child component. Nesting would need to reach into `Input`'s internal DOM to place a trailing clear button next to its already-hardcoded left search icon — Angular's view encapsulation doesn't allow that without `::ng-deep`, so this owns its template instead. `role=\"search\"` on the wrapper, a real `<button>` clear (\"x\") that only renders once there's text, and a `search` output debounced (default 300ms, `debounceMs` overridable) via a plain `setTimeout`/`effect()` pair — no rxjs, matching how this batch of components avoids pulling rxjs into anything that doesn't already depend on it. Clearing emits immediately, bypassing the debounce, since it's an explicit user action rather than mid-typing input.",
+      "files": [
+        {
+          "path": "search-input.html",
+          "type": "template"
+        },
+        {
+          "path": "search-input.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "SearchInput",
+        "description": "Search box built from `Input`'s own conventions (id-generation counter, label/caption `UiTemplateDirective` slots, the exact same `<input>` border/focus/disabled classes) rather than nesting `Input` as a child component. Nesting would need to reach into `Input`'s internal DOM to place a trailing clear button next to its already-hardcoded left search icon — Angular's view encapsulation doesn't allow that without `::ng-deep`, so this owns its template instead. `role=\"search\"` on the wrapper, a real `<button>` clear (\"x\") that only renders once there's text, and a `search` output debounced (default 300ms, `debounceMs` overridable) via a plain `setTimeout`/`effect()` pair — no rxjs, matching how this batch of components avoids pulling rxjs into anything that doesn't already depend on it. Clearing emits immediately, bypassing the debounce, since it's an explicit user action rather than mid-typing input.",
+        "props": [
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Current text value. Two-way bindable via `[(value)]`; also works with `formControlName`/`ngModel`."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Search…'",
+            "description": "Placeholder text shown when empty."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static label text; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static helper text below the input; ignored when a `uiTemplate=\"caption\"` is projected."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables user interaction."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `id` for the `<input>`; auto-generated when omitted."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the input wrapper."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Search'",
+            "description": "Accessible name for the input, used when there's no visible `label`."
+          },
+          {
+            "name": "debounceMs",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "300",
+            "description": "Debounce delay (ms) before `search` fires after the value settles."
+          },
+          {
+            "name": "search",
+            "kind": "output",
+            "required": false,
+            "type": "string",
+            "defaultValue": "",
+            "description": "Debounced value, `debounceMs` after the user stops typing (fires immediately on clear)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "select",
+      "type": "component",
+      "category": "form",
+      "description": "Single or multi select with a custom (non-native) dropdown listbox. Two real bugs fixed from the original: (1) the option data passed in was mutated in place to track a `selected` flag on each object — including objects owned by the caller, not copies. Selection is now derived by comparing against `value()`/`value()[]` instead, so option data is never touched. (2) the multi-select option row nested a full interactive checkbox inside a `(click)` row — clicking the checkbox fired both its own `(change)` and the row's `(click)`, toggling the option twice (back to its original state). The checkbox is now a purely visual indicator; only the row's own click/keyboard handler drives selection. The original had no ARIA at all (no listbox/option roles, no keyboard navigation). Added `aria-haspopup`/`aria-expanded` on the trigger, `role=\"listbox\"`/`role=\"option\"` with `aria-selected`, and Up/Down/Home/End/Enter/Escape keyboard support via `aria-activedescendant`. The original also registered a `fade` animation trigger that was never actually bound anywhere in the template — the listbox popped open/closed with no transition at all despite the trigger existing. Now wired onto the listbox's `@if` block.",
+      "files": [
+        {
+          "path": "select.html",
+          "type": "template"
+        },
+        {
+          "path": "select.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Select",
+        "description": "Single or multi select with a custom (non-native) dropdown listbox. Two real bugs fixed from the original: (1) the option data passed in was mutated in place to track a `selected` flag on each object — including objects owned by the caller, not copies. Selection is now derived by comparing against `value()`/`value()[]` instead, so option data is never touched. (2) the multi-select option row nested a full interactive checkbox inside a `(click)` row — clicking the checkbox fired both its own `(change)` and the row's `(click)`, toggling the option twice (back to its original state). The checkbox is now a purely visual indicator; only the row's own click/keyboard handler drives selection. The original had no ARIA at all (no listbox/option roles, no keyboard navigation). Added `aria-haspopup`/`aria-expanded` on the trigger, `role=\"listbox\"`/`role=\"option\"` with `aria-selected`, and Up/Down/Home/End/Enter/Escape keyboard support via `aria-activedescendant`. The original also registered a `fade` animation trigger that was never actually bound anywhere in the template — the listbox popped open/closed with no transition at all despite the trigger existing. Now wired onto the listbox's `@if` block.",
+        "props": [
+          {
+            "name": "options",
+            "kind": "input",
+            "required": false,
+            "type": "readonly unknown[]",
+            "defaultValue": "[]",
+            "description": "Options rendered in the listbox — plain values, or objects keyed by `optionLabel`/`optionValue`/`optionDisabledKey`."
+          },
+          {
+            "name": "multi",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Enables multi-select: `value` becomes an array of extracted `optionValue`s instead of a single option — see the `value` doc."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Text shown in the trigger when nothing is selected."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static label text; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static helper text below the trigger; ignored when a `uiTemplate=\"caption\"` is projected."
+          },
+          {
+            "name": "optionLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'label'",
+            "description": "Property key read off each option object for its display text."
+          },
+          {
+            "name": "optionValue",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'value'",
+            "description": "Property key read off each option object for its underlying value (used for `multi` selection and equality checks)."
+          },
+          {
+            "name": "optionDisabledKey",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'disabled'",
+            "description": "Property key read off each option object to determine whether that option is disabled."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the trigger and prevents opening the listbox."
+          },
+          {
+            "name": "maxSelectableLimit",
+            "kind": "input",
+            "required": false,
+            "type": "number | null",
+            "defaultValue": "null",
+            "description": "In `multi` mode, caps how many options can be selected at once; further selections are ignored once the limit is reached."
+          },
+          {
+            "name": "showOnTop",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Opens the listbox above the trigger instead of below."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Native `id` for the trigger; auto-generated when omitted."
+          },
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "unknown",
+            "defaultValue": "undefined",
+            "description": "For `multi()`, the value is an array of extracted `optionValue`s. For single-select, it's the whole selected option (matching the original library's contract)."
+          },
+          {
+            "name": "selected",
+            "kind": "output",
+            "required": false,
+            "type": "unknown",
+            "defaultValue": "",
+            "description": "Emits the newly selected option (single-select) or the updated value array (multi-select) on every selection change."
+          }
+        ]
+      }
+    },
+    {
+      "name": "separator",
+      "type": "component",
+      "category": "layout",
+      "description": "Thin dividing line. Most separators in a layout are purely presentational (spacing between unrelated blocks), so `decorative` defaults to `true` and the line is `aria-hidden` — assistive tech skips straight over it, same as it would a plain visual rule. Set `decorative` to `false` only when the separator genuinely marks a semantic break between two sections of content; that flips it to `role=\"separator\"` with `aria-orientation` so it's announced.",
+      "files": [
+        {
+          "path": "separator.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Separator",
+        "description": "Thin dividing line. Most separators in a layout are purely presentational (spacing between unrelated blocks), so `decorative` defaults to `true` and the line is `aria-hidden` — assistive tech skips straight over it, same as it would a plain visual rule. Set `decorative` to `false` only when the separator genuinely marks a semantic break between two sections of content; that flips it to `role=\"separator\"` with `aria-orientation` so it's announced.",
+        "props": [
+          {
+            "name": "orientation",
+            "kind": "input",
+            "required": false,
+            "type": "SeparatorOrientation",
+            "defaultValue": "'horizontal'",
+            "description": "Line direction. `'vertical'` requires the parent to give it an explicit height (e.g. `flex items-stretch`)."
+          },
+          {
+            "name": "decorative",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Whether the separator is purely visual (`aria-hidden`) vs. a semantic `role=\"separator\"` — see class doc."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended after the base line styles."
+          }
+        ]
+      }
+    },
+    {
+      "name": "shared",
+      "type": "lib",
+      "category": "internal",
+      "description": "",
+      "files": [
+        {
+          "path": "animations.ts",
+          "type": "component"
+        },
+        {
+          "path": "floating-panel.ts",
+          "type": "component"
+        },
+        {
+          "path": "smooth-height.directive.ts",
+          "type": "component"
+        },
+        {
+          "path": "ui-template.directive.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@angular/cdk"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "component",
+      "category": "navigation",
+      "description": "Responsive app-shell layout: a persistent nav column on desktop that collapses to a hamburger button + top bar on mobile, opening the same nav as an off-canvas panel. Wraps the page body (passed as default content) next to the nav, so it's meant to sit once at the root of a routed app (e.g. replacing a hand-rolled header+nav+main layout), not nested per-page. The nav itself is a single `uiTemplate=\"content\"` template, instantiated twice (desktop aside + mobile drawer) via `ngTemplateOutlet` — not `<ng-content>`, which can only render its projected nodes in one place. `header`/`footer` templates are optional chrome (e.g. a logo, a user menu) shown above/below the nav in both layouts. The mobile off-canvas panel reuses `Drawer` (`side=\"left\"`) rather than reimplementing backdrop/focus-trap/Escape-to-close/slide-in behavior — on mobile this component's nav really is just a left `Drawer` with a hamburger trigger.",
+      "files": [
+        {
+          "path": "sidebar.html",
+          "type": "template"
+        },
+        {
+          "path": "sidebar.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "drawer",
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Sidebar",
+        "description": "Responsive app-shell layout: a persistent nav column on desktop that collapses to a hamburger button + top bar on mobile, opening the same nav as an off-canvas panel. Wraps the page body (passed as default content) next to the nav, so it's meant to sit once at the root of a routed app (e.g. replacing a hand-rolled header+nav+main layout), not nested per-page. The nav itself is a single `uiTemplate=\"content\"` template, instantiated twice (desktop aside + mobile drawer) via `ngTemplateOutlet` — not `<ng-content>`, which can only render its projected nodes in one place. `header`/`footer` templates are optional chrome (e.g. a logo, a user menu) shown above/below the nav in both layouts. The mobile off-canvas panel reuses `Drawer` (`side=\"left\"`) rather than reimplementing backdrop/focus-trap/Escape-to-close/slide-in behavior — on mobile this component's nav really is just a left `Drawer` with a hamburger trigger.",
+        "props": [
+          {
+            "name": "mobileOpen",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Whether the mobile off-canvas nav is open. Two-way bindable via `[(mobileOpen)]`."
+          },
+          {
+            "name": "breakpoint",
+            "kind": "input",
+            "required": false,
+            "type": "SidebarBreakpoint",
+            "defaultValue": "'md'",
+            "description": "Tailwind breakpoint at/above which the nav becomes a persistent column instead of an off-canvas panel."
+          },
+          {
+            "name": "width",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'16rem'",
+            "description": "Width of the persistent desktop nav column (any CSS width value)."
+          },
+          {
+            "name": "title",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Shown in the mobile top bar next to the hamburger button, and as the mobile nav panel's accessible name."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root layout element."
+          },
+          {
+            "name": "navClassNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the `<nav>` element in both layouts."
+          },
+          {
+            "name": "closeOnMobileNavigate",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Closes the mobile off-canvas nav automatically when a click bubbles up from inside it (e.g. a nav link)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "skeleton",
+      "type": "component",
+      "category": "feedback",
+      "description": "Pulsing placeholder for content that hasn't loaded yet. Purely decorative — `aria-hidden`.",
+      "files": [
+        {
+          "path": "skeleton.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Skeleton",
+        "description": "Pulsing placeholder for content that hasn't loaded yet. Purely decorative — `aria-hidden`.",
+        "props": [
+          {
+            "name": "width",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'100%'",
+            "description": "CSS width of the placeholder block (any valid CSS length, e.g. `'40px'`, `'60%'`)."
+          },
+          {
+            "name": "height",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'1rem'",
+            "description": "CSS height of the placeholder block."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes, e.g. `'rounded-full'` for an avatar-shaped placeholder."
+          }
+        ]
+      }
+    },
+    {
+      "name": "slider",
+      "type": "component",
+      "category": "form",
+      "description": "Single-thumb range slider built on the native `<input type=\"range\">` rather than a hand-built div thumb/track pair, so keyboard support (arrow keys, Home/End, Page Up/Down) and touch dragging come for free from the browser. The filled portion of the track is a decorative absolutely-positioned overlay sitting *behind* the (transparent-track) range input — the input itself stays the actual hit target and focusable element throughout. `formatValue` drives both the visible value badge and `aria-valuetext`, for sliders where the raw number alone isn't self-explanatory (e.g. `(v) => `$${v}`` for a currency slider, or a duration formatter). Follows `Input`'s id-generation (`nextId` counter + `id` override) and label/caption `UiTemplateDirective` slot conventions.",
+      "files": [
+        {
+          "path": "slider.html",
+          "type": "template"
+        },
+        {
+          "path": "slider.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "Slider",
+        "description": "Single-thumb range slider built on the native `<input type=\"range\">` rather than a hand-built div thumb/track pair, so keyboard support (arrow keys, Home/End, Page Up/Down) and touch dragging come for free from the browser. The filled portion of the track is a decorative absolutely-positioned overlay sitting *behind* the (transparent-track) range input — the input itself stays the actual hit target and focusable element throughout. `formatValue` drives both the visible value badge and `aria-valuetext`, for sliders where the raw number alone isn't self-explanatory (e.g. `(v) => `$${v}`` for a currency slider, or a duration formatter). Follows `Input`'s id-generation (`nextId` counter + `id` override) and label/caption `UiTemplateDirective` slot conventions.",
+        "props": [
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Current numeric value. Two-way bindable via `[(value)]`."
+          },
+          {
+            "name": "min",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Minimum allowed value."
+          },
+          {
+            "name": "max",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "100",
+            "description": "Maximum allowed value."
+          },
+          {
+            "name": "step",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "1",
+            "description": "Increment size for keyboard/drag interactions."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables dragging/keyboard input and dims the track."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Text label rendered above the track; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Helper text rendered below the track; ignored when a `uiTemplate=\"caption\"` is projected."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Overrides the auto-generated `id` used to associate the label and caption with the input."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the root element."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name for the range input, used only when no visible `label` is set (defaults to `'Slider'`)."
+          },
+          {
+            "name": "showValue",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "true",
+            "description": "Shows the current (formatted) value next to the label."
+          },
+          {
+            "name": "formatValue",
+            "kind": "input",
+            "required": false,
+            "type": "((value: number) => string) | undefined",
+            "defaultValue": "undefined",
+            "description": "Formats the value for the visible badge and `aria-valuetext`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "spinner",
+      "type": "component",
+      "category": "feedback",
+      "description": "Indeterminate loading spinner (animated arc), for cases that need a standalone spinner rather than `ui-button`'s built-in `[loading]` state. Both source copies (FTD/uiSDP; this component didn't exist in base) were identical, down to a `TODO: quitar HEX del stroke a clases tailwind` comment — i.e. the original authors already flagged that hardcoding the stroke color as a hex string (`#D5006C`, which is just `--color-primary-300`) instead of a Tailwind class was wrong. Fixed here: the SVG now strokes with `currentColor` and color is set via a `text-*` class (`classNames`, defaults to `text-primary-500`), so it reskins the same way every other component in this library does. Accessibility: the original had none. Added `role=\"status\"` plus an `ariaLabel` (defaults to \"Loading\") so screen readers announce the loading state instead of silently seeing nothing.",
+      "files": [
+        {
+          "path": "spinner.html",
+          "type": "template"
+        },
+        {
+          "path": "spinner.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Spinner",
+        "description": "Indeterminate loading spinner (animated arc), for cases that need a standalone spinner rather than `ui-button`'s built-in `[loading]` state. Both source copies (FTD/uiSDP; this component didn't exist in base) were identical, down to a `TODO: quitar HEX del stroke a clases tailwind` comment — i.e. the original authors already flagged that hardcoding the stroke color as a hex string (`#D5006C`, which is just `--color-primary-300`) instead of a Tailwind class was wrong. Fixed here: the SVG now strokes with `currentColor` and color is set via a `text-*` class (`classNames`, defaults to `text-primary-500`), so it reskins the same way every other component in this library does. Accessibility: the original had none. Added `role=\"status\"` plus an `ariaLabel` (defaults to \"Loading\") so screen readers announce the loading state instead of silently seeing nothing.",
+        "props": [
+          {
+            "name": "size",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "52",
+            "description": "Width/height of the SVG in pixels."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'text-primary-500'",
+            "description": "Text color class controlling the stroke via `currentColor` — swap to reskin the spinner."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Loading'",
+            "description": "Accessible name announced by screen readers via `role=\"status\"`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "stepper",
+      "type": "component",
+      "category": "layout",
+      "description": "Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a checkmark on completed steps and the active step called out via `aria-current=\"step\"`. The original `tbk-stepper` across all three forks (all three were byte-identical, and one had an empty, unused `.css` file) wasn't really a stepper at all — it was a single `X de Y` progress bar with no per-step markers, so there was nothing resembling a \"completed step\" to mark. This rebuilds it as a proper discrete step indicator, which is what every mainstream \"Stepper\" component (Ant Design Steps, MUI Stepper, etc.) actually renders.",
+      "files": [
+        {
+          "path": "stepper.html",
+          "type": "template"
+        },
+        {
+          "path": "stepper.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Stepper",
+        "description": "Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a checkmark on completed steps and the active step called out via `aria-current=\"step\"`. The original `tbk-stepper` across all three forks (all three were byte-identical, and one had an empty, unused `.css` file) wasn't really a stepper at all — it was a single `X de Y` progress bar with no per-step markers, so there was nothing resembling a \"completed step\" to mark. This rebuilds it as a proper discrete step indicator, which is what every mainstream \"Stepper\" component (Ant Design Steps, MUI Stepper, etc.) actually renders.",
+        "props": [
+          {
+            "name": "steps",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "3",
+            "description": "Total number of steps. Ignored when `labels` is provided — its length wins instead."
+          },
+          {
+            "name": "labels",
+            "kind": "input",
+            "required": false,
+            "type": "string[] | null",
+            "defaultValue": "null",
+            "description": "Optional label shown under each step's circle."
+          },
+          {
+            "name": "currentStep",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Zero-based index of the active step."
+          }
+        ]
+      }
+    },
+    {
+      "name": "table",
+      "type": "component",
+      "category": "data-display",
+      "description": "Styled `<table>` wrapper with a horizontal-scroll container for narrow viewports. Compose it with plain `<thead>`/`<tbody>`/`<tr>` and the `uiTableRow`/`uiTableHeadCell`/`uiTableCell` directives below for a fully custom table, or use `DataTable` (`../data-table/data-table`) for a ready-made sortable/paginated/selectable table driven by a column config.",
+      "files": [
+        {
+          "path": "table.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Table",
+        "description": "Styled `<table>` wrapper with a horizontal-scroll container for narrow viewports. Compose it with plain `<thead>`/`<tbody>`/`<tr>` and the `uiTableRow`/`uiTableHeadCell`/`uiTableCell` directives below for a fully custom table, or use `DataTable` (`../data-table/data-table`) for a ready-made sortable/paginated/selectable table driven by a column config.",
+        "props": []
+      }
+    },
+    {
+      "name": "tabs",
+      "type": "component",
+      "category": "layout",
+      "description": "Full WAI-ARIA tabs pattern: `ui-tabs` draws the `role=\"tablist\"` strip itself, reading label/icon/disabled metadata off each projected `ui-tab-panel` child (via `contentChildren`, same injected-parent coordination as `Accordion`/`AccordionItem`); each `TabPanel` renders its own `role=\"tabpanel\"` region only while active, so the panel content stays physically anchored where the caller wrote it in the template instead of being re-parented. Roving `tabindex` (selected tab is `0`, the rest `-1`) plus Left/Right (or Up/Down when `orientation=\"vertical\"`) and Home/End keyboard navigation between tabs — a hard requirement for a real tabs widget, not optional polish. `active` is a `model<string>`, so it can be left uncontrolled (the first non-disabled panel is auto-selected) or bound with `[(active)]` for a fully controlled tab set.",
+      "files": [
+        {
+          "path": "tab-panel/tab-panel.html",
+          "type": "template"
+        },
+        {
+          "path": "tab-panel/tab-panel.ts",
+          "type": "component"
+        },
+        {
+          "path": "tabs.html",
+          "type": "template"
+        },
+        {
+          "path": "tabs.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Tabs",
+        "description": "Full WAI-ARIA tabs pattern: `ui-tabs` draws the `role=\"tablist\"` strip itself, reading label/icon/disabled metadata off each projected `ui-tab-panel` child (via `contentChildren`, same injected-parent coordination as `Accordion`/`AccordionItem`); each `TabPanel` renders its own `role=\"tabpanel\"` region only while active, so the panel content stays physically anchored where the caller wrote it in the template instead of being re-parented. Roving `tabindex` (selected tab is `0`, the rest `-1`) plus Left/Right (or Up/Down when `orientation=\"vertical\"`) and Home/End keyboard navigation between tabs — a hard requirement for a real tabs widget, not optional polish. `active` is a `model<string>`, so it can be left uncontrolled (the first non-disabled panel is auto-selected) or bound with `[(active)]` for a fully controlled tab set.",
+        "props": [
+          {
+            "name": "active",
+            "kind": "model",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Value of the currently selected tab. Two-way bindable via `[(active)]`; leave unset for auto-selection."
+          },
+          {
+            "name": "orientation",
+            "kind": "input",
+            "required": false,
+            "type": "TabsOrientation",
+            "defaultValue": "'horizontal'",
+            "description": "Layout direction of the tab strip and its keyboard navigation axis (Left/Right vs Up/Down)."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the host element."
+          },
+          {
+            "name": "tabListClassNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the `role=\"tablist\"` strip element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "textarea",
+      "type": "component",
+      "category": "form",
+      "description": "Multi-line text input with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(value)]` two-way binding for standalone usage. Shows a live character counter under the field whenever `maxLength` is set and no `caption`/caption template is provided.",
+      "files": [
+        {
+          "path": "textarea.html",
+          "type": "template"
+        },
+        {
+          "path": "textarea.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "Textarea",
+        "description": "Multi-line text input with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(value)]` two-way binding for standalone usage. Shows a live character counter under the field whenever `maxLength` is set and no `caption`/caption template is provided.",
+        "props": [
+          {
+            "name": "value",
+            "kind": "model",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Current text. Two-way bindable via `[(value)]`."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the field and marks it as disabled for `ControlValueAccessor` consumers."
+          },
+          {
+            "name": "placeholder",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Placeholder text shown in the field when empty."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static label text shown above the field; ignored when a `uiTemplate=\"label\"` is projected."
+          },
+          {
+            "name": "caption",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Static caption text shown below the field; ignored when a `uiTemplate=\"caption\"` is projected."
+          },
+          {
+            "name": "id",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Overrides the auto-generated id used to link the `<label for>` and `aria-describedby`."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the `<textarea>` element, for one-off overrides."
+          },
+          {
+            "name": "maxLength",
+            "kind": "input",
+            "required": false,
+            "type": "number | undefined",
+            "defaultValue": "undefined",
+            "description": "Enforces the native `maxlength` attribute and, when set, shows a \"current / max\" character counter."
+          }
+        ]
+      }
+    },
+    {
+      "name": "timeline",
+      "type": "component",
+      "category": "data-display",
+      "description": "Vertical timeline list. Wraps `ui-timeline-item` children in an `<ol>` with a connecting left border; each item draws its own segment of the vertical line and its marker.",
+      "files": [
+        {
+          "path": "timeline-item/timeline-item.html",
+          "type": "template"
+        },
+        {
+          "path": "timeline-item/timeline-item.ts",
+          "type": "component"
+        },
+        {
+          "path": "timeline.html",
+          "type": "template"
+        },
+        {
+          "path": "timeline.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "shared"
+      ],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "Timeline",
+        "description": "Vertical timeline list. Wraps `ui-timeline-item` children in an `<ol>` with a connecting left border; each item draws its own segment of the vertical line and its marker.",
+        "props": [
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the host `<ol>` element."
+          }
+        ]
+      }
+    },
+    {
+      "name": "toast",
+      "type": "component",
+      "category": "feedback",
+      "description": "Mount once (e.g. in the app shell). Renders whatever `ToastService` queues, stacked per corner. Inject `ToastService` anywhere to push toasts: `toastService.success('Saved!')`.",
+      "files": [
+        {
+          "path": "toast.service.ts",
+          "type": "component"
+        },
+        {
+          "path": "toaster.html",
+          "type": "template"
+        },
+        {
+          "path": "toaster.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [
+        "notification"
+      ],
+      "npmDependencies": [],
+      "api": {
+        "name": "Toaster",
+        "description": "Mount once (e.g. in the app shell). Renders whatever `ToastService` queues, stacked per corner. Inject `ToastService` anywhere to push toasts: `toastService.success('Saved!')`.",
+        "props": []
+      }
+    },
+    {
+      "name": "toggle",
+      "type": "component",
+      "category": "form",
+      "description": "Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Same interactive-emit bug fixed here as in Checkbox: the original only notified listeners from `writeValue` (a programmatic set), never from the actual user click — `effect()` on the `checked` model signal now covers both paths uniformly.",
+      "files": [
+        {
+          "path": "toggle.html",
+          "type": "template"
+        },
+        {
+          "path": "toggle.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Toggle",
+        "description": "Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Same interactive-emit bug fixed here as in Checkbox: the original only notified listeners from `writeValue` (a programmatic set), never from the actual user click — `effect()` on the `checked` model signal now covers both paths uniformly.",
+        "props": [
+          {
+            "name": "checked",
+            "kind": "model",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "On/off state. Two-way bindable via `[(checked)]`."
+          },
+          {
+            "name": "color",
+            "kind": "input",
+            "required": false,
+            "type": "ToggleColor",
+            "defaultValue": "'default'",
+            "description": "Track color shown while checked."
+          },
+          {
+            "name": "size",
+            "kind": "input",
+            "required": false,
+            "type": "'default' | 'lg'",
+            "defaultValue": "'default'",
+            "description": "Size of the track/thumb."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables interaction and marks the control as disabled for `ControlValueAccessor` consumers."
+          },
+          {
+            "name": "ariaLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible label for screen readers, since the control has no visible text."
+          }
+        ]
+      }
+    },
+    {
+      "name": "tooltip",
+      "type": "component",
+      "category": "overlay",
+      "description": "Floating tooltip panel. Not meant to be dropped into a template directly — `TooltipDirective` creates and positions instances of this on demand. Kept as its own component (rather than inlined into the directive) so it can also be shown/positioned manually if ever needed. The original panel carried a set of `before:border-*`/`before:w-0`/`before:h-0` classes meant to draw a CSS border-triangle caret, but the caret is actually rendered by the separate rotated `<span>` square below — those `before:*` utilities were dead weight (a 0×0, invisible pseudo element) left over from an earlier implementation, so they're dropped here. The position class also carried static `left-*`/`top-*`/`bottom-*` utilities that did nothing: this element's position comes from the `[style.left]`/`[style.top]` bindings the directive sets, and an inline style always wins over a class for the same CSS property, so those utilities never had any effect either. Both are removed for a much shorter, honest class list.",
+      "files": [
+        {
+          "path": "tooltip.directive.ts",
+          "type": "component"
+        },
+        {
+          "path": "tooltip.html",
+          "type": "template"
+        },
+        {
+          "path": "tooltip.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [],
+      "api": {
+        "name": "Tooltip",
+        "description": "Floating tooltip panel. Not meant to be dropped into a template directly — `TooltipDirective` creates and positions instances of this on demand. Kept as its own component (rather than inlined into the directive) so it can also be shown/positioned manually if ever needed. The original panel carried a set of `before:border-*`/`before:w-0`/`before:h-0` classes meant to draw a CSS border-triangle caret, but the caret is actually rendered by the separate rotated `<span>` square below — those `before:*` utilities were dead weight (a 0×0, invisible pseudo element) left over from an earlier implementation, so they're dropped here. The position class also carried static `left-*`/`top-*`/`bottom-*` utilities that did nothing: this element's position comes from the `[style.left]`/`[style.top]` bindings the directive sets, and an inline style always wins over a class for the same CSS property, so those utilities never had any effect either. Both are removed for a much shorter, honest class list.",
+        "props": [
+          {
+            "name": "text",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Plain-text body content; ignored when `template` is provided."
+          },
+          {
+            "name": "heading",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Optional bold heading shown above the body content."
+          },
+          {
+            "name": "template",
+            "kind": "input",
+            "required": false,
+            "type": "TemplateRef<unknown> | undefined",
+            "defaultValue": "undefined",
+            "description": "Custom body content, rendered instead of `text` when set."
+          },
+          {
+            "name": "position",
+            "kind": "input",
+            "required": false,
+            "type": "TooltipPosition",
+            "defaultValue": "'right'",
+            "description": "Side of the anchor element the panel is placed on."
+          },
+          {
+            "name": "left",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Absolute `left` pixel coordinate the panel is positioned at, set by `TooltipDirective`."
+          },
+          {
+            "name": "top",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "0",
+            "description": "Absolute `top` pixel coordinate the panel is positioned at, set by `TooltipDirective`."
+          },
+          {
+            "name": "width",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "231",
+            "description": "Max width of the panel in pixels."
+          },
+          {
+            "name": "visible",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Shows or hides the panel."
+          },
+          {
+            "name": "tooltipId",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Id applied to the panel element so a trigger can reference it via `aria-describedby`."
+          }
+        ]
+      }
+    },
+    {
+      "name": "url-copy",
+      "type": "component",
+      "category": "data-display",
+      "description": "Click-to-copy URL chip. All three source copies were identical. Changes from the original: - `url` was a plain `@Input()` defaulting to a hardcoded `www.transbank.cl/firmacontrato/ejemplo` URL. It's now `input.required<string>()` — there is no sensible generic default for a URL. - The original rendered a `<div (click)=\"copyUrl()\">`, which is not keyboard-operable and has no accessible role — a real a11y bug. It's now a real `<button type=\"button\">`. - The \"copied\" feedback was a `tbk-notification` toast in the top-right corner of the *page*, entirely disconnected from the control that triggered it. That component isn't part of this migration batch (and pulling in a whole toast/notification system for one chip is overkill for a copy-paste primitive), so feedback is now inline: the icon and trailing label swap to a checkmark + `copiedLabel` for `duration` ms, then revert. This also fixes a dead `showNotification` input that was declared but never actually read anywhere in the original template — the notification always showed regardless of its value. - `notificationText` (Spanish default \"Enlace copiado\") is renamed `copiedLabel` (default \"Copied!\"); `label` default is now \"Copy URL\" instead of \"Copiar URL\" — component defaults are English now, same as Button/Checkbox. - Adds a `copied` output so consumers can react (e.g. analytics) without polling clipboard state.",
+      "files": [
+        {
+          "path": "url-copy.html",
+          "type": "template"
+        },
+        {
+          "path": "url-copy.ts",
+          "type": "component"
+        }
+      ],
+      "registryDependencies": [],
+      "npmDependencies": [
+        "@lucide/angular"
+      ],
+      "api": {
+        "name": "UrlCopy",
+        "description": "Click-to-copy URL chip. All three source copies were identical. Changes from the original: - `url` was a plain `@Input()` defaulting to a hardcoded `www.transbank.cl/firmacontrato/ejemplo` URL. It's now `input.required<string>()` — there is no sensible generic default for a URL. - The original rendered a `<div (click)=\"copyUrl()\">`, which is not keyboard-operable and has no accessible role — a real a11y bug. It's now a real `<button type=\"button\">`. - The \"copied\" feedback was a `tbk-notification` toast in the top-right corner of the *page*, entirely disconnected from the control that triggered it. That component isn't part of this migration batch (and pulling in a whole toast/notification system for one chip is overkill for a copy-paste primitive), so feedback is now inline: the icon and trailing label swap to a checkmark + `copiedLabel` for `duration` ms, then revert. This also fixes a dead `showNotification` input that was declared but never actually read anywhere in the original template — the notification always showed regardless of its value. - `notificationText` (Spanish default \"Enlace copiado\") is renamed `copiedLabel` (default \"Copied!\"); `label` default is now \"Copy URL\" instead of \"Copiar URL\" — component defaults are English now, same as Button/Checkbox. - Adds a `copied` output so consumers can react (e.g. analytics) without polling clipboard state.",
+        "props": [
+          {
+            "name": "url",
+            "kind": "input",
+            "required": true,
+            "type": "string",
+            "defaultValue": "",
+            "description": "URL copied to the clipboard when the chip is clicked."
+          },
+          {
+            "name": "label",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Copy URL'",
+            "description": "Label shown before copying."
+          },
+          {
+            "name": "copiedLabel",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "'Copied!'",
+            "description": "Label shown in place of `label` for `duration` ms after a successful copy."
+          },
+          {
+            "name": "duration",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "2000",
+            "description": "How long, in ms, the \"copied\" feedback state is shown before reverting to `label`."
+          },
+          {
+            "name": "classNames",
+            "kind": "input",
+            "required": false,
+            "type": "string",
+            "defaultValue": "''",
+            "description": "Extra utility classes appended to the host button."
+          },
+          {
+            "name": "copied",
+            "kind": "output",
+            "required": false,
+            "type": "void",
+            "defaultValue": "",
+            "description": "Emits once the URL has been successfully written to the clipboard."
+          }
+        ]
+      }
+    }
+  ]
+}

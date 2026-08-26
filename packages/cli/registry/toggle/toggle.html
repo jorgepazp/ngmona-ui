@@ -1,0 +1,15 @@
+<label class="relative inline-flex items-center" [class]="isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer'">
+  <input
+    type="checkbox"
+    [disabled]="isDisabled()"
+    [checked]="checked()"
+    [attr.aria-label]="ariaLabel() ?? null"
+    (change)="onInput($event)"
+    (blur)="markTouched()"
+    class="sr-only peer"
+  />
+  <div
+    class="transition-all bg-neutral-500 outline-none rounded-full peer peer-checked:after:translate-x-full peer-disabled:bg-text-disabled peer-checked:after:border-white after:content-[''] after:absolute after:bg-surface-white peer-disabled:after:bg-surface-disabled after:border-none after:rounded-full after:transition-all after:shadow"
+    [class]="trackClass()"
+  ></div>
+</label>

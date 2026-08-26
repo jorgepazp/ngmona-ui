@@ -1,0 +1,34 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Timeline</h1>
+
+  <app-api-table [doc]="api" />
+
+  <h2 class="text-heading-md text-text-primary">Timeline item</h2>
+  <app-api-table [doc]="timelineItemApi" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Basic</h2>
+    <ui-timeline>
+      <ui-timeline-item title="Order placed" content="Aug 10, 2026 — 09:14"></ui-timeline-item>
+      <ui-timeline-item title="Payment confirmed" content="Aug 10, 2026 — 09:15" [activeMarker]="true"></ui-timeline-item>
+      <ui-timeline-item title="Shipped" content="Awaiting carrier pickup"></ui-timeline-item>
+      <ui-timeline-item title="Delivered" content="Estimated Aug 14, 2026"></ui-timeline-item>
+    </ui-timeline>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Custom marker &amp; content templates</h2>
+    <ui-timeline>
+      <ui-timeline-item>
+        <ng-template uiTemplate="marker">
+          <span class="w-2 h-2 rounded-full bg-success-500"></span>
+        </ng-template>
+        <ng-template uiTemplate="title">Refund approved</ng-template>
+        <ng-template uiTemplate="content">
+          <span class="text-success-600 font-medium">$14.990</span> credited back to the original method.
+        </ng-template>
+      </ui-timeline-item>
+      <ui-timeline-item title="Case closed" content="No further action needed."></ui-timeline-item>
+    </ui-timeline>
+  </section>
+</div>

@@ -1,0 +1,17 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Autocomplete</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3 max-w-xs">
+    <h2 class="text-label-lg text-text-subdued">Free-text with suggestions</h2>
+    <ui-autocomplete
+      [suggestions]="countries"
+      [(value)]="city"
+      placeholder="Type a country…"
+      label="Country"
+      caption="You can type anything — suggestions are just an assist."
+    ></ui-autocomplete>
+    <p class="text-paragraph-sm text-text-subdued">value = "{{ city() }}"</p>
+  </section>
+</div>

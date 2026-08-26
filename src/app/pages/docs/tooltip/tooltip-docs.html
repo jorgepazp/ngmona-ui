@@ -1,0 +1,65 @@
+<div class="p-8 flex flex-col gap-10 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Tooltip</h1>
+
+  <app-api-table [doc]="api" />
+
+  <h2 class="text-heading-md text-text-primary">Tooltip directive</h2>
+  <p class="text-paragraph-sm text-text-subdued">
+    The <code>[uiTooltip]</code> directive is what you apply to a trigger element in practice — it
+    creates and positions a <code>Tooltip</code> panel on hover, focus, or touch-and-hold.
+  </p>
+  <app-api-table [doc]="directiveApi" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Positions (hover or focus the buttons)</h2>
+    <div class="flex items-center gap-8 py-12">
+      <button
+        type="button"
+        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        uiTooltip="Tooltip above"
+        position="above"
+      >
+        Above
+      </button>
+      <button
+        type="button"
+        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        uiTooltip="Tooltip below"
+        position="below"
+      >
+        Below
+      </button>
+      <button
+        type="button"
+        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        uiTooltip="Tooltip to the left"
+        position="left"
+      >
+        Left
+      </button>
+      <button
+        type="button"
+        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        uiTooltip="Tooltip to the right"
+        position="right"
+      >
+        Right
+      </button>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">With a heading</h2>
+    <div class="py-6">
+      <button
+        type="button"
+        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        uiTooltip="Titles help scan longer tooltip content."
+        heading="Did you know?"
+        position="below"
+      >
+        Hover me
+      </button>
+    </div>
+  </section>
+</div>

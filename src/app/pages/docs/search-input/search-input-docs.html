@@ -1,0 +1,24 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Search Input</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Debounced search (300ms default)</h2>
+    <ui-search-input label="Search" [(value)]="query" (search)="onSearch($event)"></ui-search-input>
+    <p class="text-paragraph-sm text-text-subdued">live value = {{ query() }}</p>
+    <p class="text-paragraph-sm text-text-subdued">debounced (search) = {{ lastSearch() }}</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Custom debounce (100ms)</h2>
+    <ui-search-input label="Fast search" [debounceMs]="100" (search)="onFastSearch($event)"></ui-search-input>
+    <p class="text-paragraph-sm text-text-subdued">debounced (search) = {{ fastLastSearch() }}</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">States</h2>
+    <ui-search-input label="With caption" caption="Try searching for a product"></ui-search-input>
+    <ui-search-input label="Disabled" [disabled]="true" value="Can't type here"></ui-search-input>
+  </section>
+</div>

@@ -1,0 +1,15 @@
+@for (group of groups(); track group[0]) {
+  <div [class]="containerClass(group[0])">
+    @for (toast of group[1]; track toast.id) {
+      <ui-notification
+        [show]="true"
+        [stacked]="true"
+        [type]="toast.type"
+        [showCloseButton]="toast.showCloseButton"
+        (closed)="dismiss(toast.id)"
+      >
+        {{ toast.message }}
+      </ui-notification>
+    }
+  </div>
+}

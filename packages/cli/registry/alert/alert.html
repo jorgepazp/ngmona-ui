@@ -1,0 +1,36 @@
+@if (!isDismissed()) {
+  <div
+    [class]="alertClass()"
+    [attr.role]="role()"
+    [attr.aria-live]="ariaLive()"
+    animate.enter="ui-anim-fade-enter"
+    animate.leave="ui-anim-fade-leave"
+  >
+    @if (showIcon()) {
+      <svg [lucideIcon]="typeIcon()" [size]="18" class="mt-px shrink-0" aria-hidden="true"></svg>
+    }
+    <div class="min-w-0 flex-1">
+      @if (heading()) {
+        <h3 class="text-label-md !mb-0.5 font-medium">{{ heading() }}</h3>
+      }
+      <div class="text-paragraph-sm">
+        <ng-content></ng-content>
+      </div>
+      @if (actionsTemplate(); as tpl) {
+        <div class="!mt-2 flex gap-2">
+          <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+        </div>
+      }
+    </div>
+    @if (dismissible()) {
+      <button
+        type="button"
+        aria-label="Dismiss"
+        (click)="dismiss()"
+        class="shrink-0 cursor-pointer border-none bg-transparent transition-opacity hover:opacity-60"
+      >
+        <svg [lucideIcon]="closeIcon" [size]="14"></svg>
+      </button>
+    }
+  </div>
+}

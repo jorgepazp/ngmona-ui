@@ -1,0 +1,25 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Command</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Command palette</h2>
+    <button
+      type="button"
+      (click)="open.set(true)"
+      class="w-fit flex items-center gap-2 !px-3 !py-1.5 text-label-sm text-neutral-300 bg-surface-white border border-neutral-600 rounded shadow-card hover:border-neutral-300"
+    >
+      Open command palette
+      <kbd class="rounded border border-neutral-600 !px-1 text-label-xs">⌘K</kbd>
+    </button>
+    <p class="text-paragraph-sm text-text-subdued">
+      Also bound globally on this page — press Cmd+K (or Ctrl+K) anywhere to toggle it. That global
+      shortcut lives in <code>CommandDocs</code> (a plain <code>@HostListener('document:keydown', ...)</code>),
+      not inside the <code>Command</code> component itself.
+    </p>
+    <p class="text-paragraph-sm text-text-subdued">Last selected: {{ lastSelected() }}</p>
+
+    <ui-command [(open)]="open" [groups]="groups" (selected)="onSelected($event)"></ui-command>
+  </section>
+</div>

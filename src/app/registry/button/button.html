@@ -1,0 +1,28 @@
+<button
+  #buttonEl
+  [attr.type]="attrType()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-busy]="loading() || null"
+  [class]="buttonClass() + ' ' + classNames()"
+  [disabled]="disabled() || loading()"
+  (click)="clicked.emit($event)"
+  (focus)="focused.emit($event)"
+  (blur)="blurred.emit($event)"
+>
+  @if (loading()) {
+    <svg [lucideIcon]="loaderIcon" class="animate-spin block absolute" [size]="16"></svg>
+  }
+  <div [class]="loading() ? 'invisible' : 'flex justify-center items-center gap-1'">
+    @if (icon(); as ic) {
+      @if (iconPos() === 'left') {
+        <svg [lucideIcon]="ic" [size]="16"></svg>
+      }
+    }
+    <ng-content></ng-content>
+    @if (icon(); as ic) {
+      @if (iconPos() === 'right') {
+        <svg [lucideIcon]="ic" [size]="16"></svg>
+      }
+    }
+  </div>
+</button>

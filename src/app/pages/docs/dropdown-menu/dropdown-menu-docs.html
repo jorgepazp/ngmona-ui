@@ -1,0 +1,48 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Dropdown Menu</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Basic</h2>
+    <ui-dropdown-menu>
+      <ng-template uiTemplate="button">Options</ng-template>
+      <ng-template uiTemplate="menu">
+        <ul class="flex flex-col p-1 min-w-[160px]">
+          <li
+            role="menuitem"
+            tabindex="-1"
+            class="px-3 py-2 rounded text-label-md text-neutral-500 cursor-pointer outline-none hover:bg-neutral-300 focus:bg-neutral-300"
+          >
+            Profile
+          </li>
+          <li
+            role="menuitem"
+            tabindex="-1"
+            class="px-3 py-2 rounded text-label-md text-neutral-500 cursor-pointer outline-none hover:bg-neutral-300 focus:bg-neutral-300"
+          >
+            Settings
+          </li>
+          <li
+            role="menuitem"
+            tabindex="-1"
+            class="px-3 py-2 rounded text-label-md text-neutral-500 cursor-pointer outline-none hover:bg-neutral-300 focus:bg-neutral-300"
+          >
+            Log out
+          </li>
+        </ul>
+      </ng-template>
+    </ui-dropdown-menu>
+    <p class="text-paragraph-sm text-text-subdued">
+      Arrow Up/Down move focus between items, Home/End jump to the ends, Escape closes and returns
+      focus to the trigger.
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Disabled</h2>
+    <ui-dropdown-menu [disabled]="true">
+      <ng-template uiTemplate="button">Disabled</ng-template>
+    </ui-dropdown-menu>
+  </section>
+</div>

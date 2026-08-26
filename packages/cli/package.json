@@ -1,0 +1,30 @@
+{
+  "name": "ngmona-ui",
+  "version": "0.1.0",
+  "description": "CLI for ngmona UI — initialize a theme and add components from the registry into your Angular project.",
+  "type": "module",
+  "bin": {
+    "ngmona": "./dist/bin.cjs"
+  },
+  "files": [
+    "dist",
+    "registry.json",
+    "registry",
+    "templates"
+  ],
+  "scripts": {
+    "build:registry": "node scripts/build-registry.mjs",
+    "build:tokens": "node scripts/build-base-tokens.mjs",
+    "build": "node scripts/build-registry.mjs && node scripts/build-base-tokens.mjs && node scripts/bundle.mjs",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@ngmona-ui/color": "*",
+    "@clack/prompts": "^0.11.0",
+    "commander": "^13.1.0",
+    "culori": "^4.0.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

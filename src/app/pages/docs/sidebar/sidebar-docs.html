@@ -1,0 +1,52 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Sidebar</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Responsive app shell</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Persistent nav column from <code>md</code> up; a hamburger + top bar below that opens the
+      same nav as an off-canvas panel. Resize the window (or view on a phone) to see it switch.
+      The nav content, and the optional header/footer chrome, are each provided once as a
+      <code>uiTemplate</code> and rendered in whichever layout is active.
+    </p>
+
+    <div class="border border-divider rounded-lg overflow-hidden h-[420px]">
+      <ui-sidebar title="Acme Inc" breakpoint="md">
+        <ng-template uiTemplate="header">
+          <div class="flex items-center gap-2">
+            <ui-avatar initials="AC" size="sm" alt="Acme Inc"></ui-avatar>
+            <span class="text-label-md font-medium text-text-primary">Acme Inc</span>
+          </div>
+        </ng-template>
+
+        <ng-template uiTemplate="content">
+          <ul class="list-none m-0 p-0 flex flex-col gap-0.5">
+            @for (link of links; track link) {
+              <li>
+                <a href="#" class="block px-2 py-1 rounded text-label-md text-text-primary hover:bg-surface-light transition-colors">
+                  {{ link }}
+                </a>
+              </li>
+            }
+          </ul>
+        </ng-template>
+
+        <ng-template uiTemplate="footer">
+          <div class="flex items-center gap-2">
+            <ui-avatar initials="JD" size="sm" alt="Jamie Doe"></ui-avatar>
+            <span class="text-label-sm text-text-subdued">Jamie Doe</span>
+          </div>
+        </ng-template>
+
+        <div class="p-4">
+          <p class="text-paragraph-sm text-text-subdued">
+            This is the page body, passed as <code>Sidebar</code>'s default content — it renders
+            next to the nav on desktop, and full-width below the top bar on mobile.
+          </p>
+        </div>
+      </ui-sidebar>
+    </div>
+  </section>
+</div>

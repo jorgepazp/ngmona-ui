@@ -1,0 +1,49 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Modal</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Basic (heading + content projection)</h2>
+    <div>
+      <ui-button (clicked)="basicOpen.set(true)">Open modal</ui-button>
+    </div>
+    <ui-modal [open]="basicOpen()" heading="Delete item" (closed)="basicOpen.set(false)">
+      <p class="text-paragraph-sm text-text-subdued">
+        This action can't be undone. Are you sure you want to delete this item?
+      </p>
+      <div class="!mt-4 flex justify-end gap-2">
+        <ui-button variant="secondary" (clicked)="basicOpen.set(false)">Cancel</ui-button>
+        <ui-button (clicked)="basicOpen.set(false)">Delete</ui-button>
+      </div>
+    </ui-modal>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Header / footer templates, no close button</h2>
+    <div>
+      <ui-button variant="secondary" (clicked)="templatedOpen.set(true)"
+        >Open templated modal</ui-button
+      >
+    </div>
+    <ui-modal
+      [open]="templatedOpen()"
+      [showCloseButton]="false"
+      (closed)="templatedOpen.set(false)"
+    >
+      <ng-template uiTemplate="header">
+        <h2 class="text-heading-sm text-text-primary !mb-2">Custom header</h2>
+      </ng-template>
+      <ng-template uiTemplate="content">
+        <p class="text-paragraph-sm text-text-subdued">
+          Content, header and footer are all separate named templates.
+        </p>
+      </ng-template>
+      <ng-template uiTemplate="footer">
+        <div class="!mt-4 flex justify-end">
+          <ui-button (clicked)="templatedOpen.set(false)">Got it</ui-button>
+        </div>
+      </ng-template>
+    </ui-modal>
+  </section>
+</div>

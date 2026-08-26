@@ -1,0 +1,57 @@
+<div [class]="'flex flex-col ' + classNames()">
+  @if (labelTemplate(); as tpl) {
+    <div class="mb-0.5 text-neutral-500 text-xs font-medium flex justify-between">
+      <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+    </div>
+  } @else if (label()) {
+    <label [attr.for]="resolvedId()" class="mb-0.5 text-neutral-500 text-xs font-medium block">{{ label() }}</label>
+  }
+
+  <ui-input-group [disabled]="isDisabled()" [state]="state()">
+    <button
+      prefix
+      type="button"
+      aria-label="Decrease"
+      class="flex items-center justify-center w-6 h-6 shrink-0 text-neutral-900 disabled:text-neutral-800 disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-300 transition-colors"
+      [disabled]="!canDecrement()"
+      (click)="decrement()"
+    >
+      <svg [lucideIcon]="minusIcon" [size]="14"></svg>
+    </button>
+
+    <input
+      [id]="resolvedId()"
+      [name]="resolvedId()"
+      type="number"
+      class="w-16 min-w-0 text-center !px-1 !py-1 text-label-md text-neutral-500 h-6 border-none outline-none bg-transparent placeholder:text-neutral-300 placeholder:font-regular font-medium disabled:text-neutral-100 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      [value]="value()"
+      [disabled]="isDisabled()"
+      [placeholder]="placeholder()"
+      [attr.min]="min() ?? null"
+      [attr.max]="max() ?? null"
+      [attr.step]="step()"
+      [attr.aria-describedby]="caption() || captionTemplate() ? captionId() : null"
+      (input)="onInputEvent($event)"
+      (blur)="onBlurEvent()"
+    />
+
+    <button
+      suffix
+      type="button"
+      aria-label="Increase"
+      class="flex items-center justify-center w-6 h-6 shrink-0 text-neutral-900 disabled:text-neutral-800 disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-300 transition-colors"
+      [disabled]="!canIncrement()"
+      (click)="increment()"
+    >
+      <svg [lucideIcon]="plusIcon" [size]="14"></svg>
+    </button>
+  </ui-input-group>
+
+  @if (captionTemplate(); as tpl) {
+    <div [id]="captionId()" class="mt-0.5 text-xs text-neutral-300">
+      <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+    </div>
+  } @else if (caption()) {
+    <small [id]="captionId()" class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+  }
+</div>

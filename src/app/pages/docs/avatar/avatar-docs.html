@@ -1,0 +1,55 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Avatar</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Image, initials, icon fallback</h2>
+    <div class="flex items-center gap-3">
+      <ui-avatar src="https://i.pravatar.cc/100?img=12" alt="Jane Cooper"></ui-avatar>
+      <ui-avatar initials="JC" alt="Jane Cooper" variant="primary"></ui-avatar>
+      <ui-avatar alt="Unknown user"></ui-avatar>
+      <ui-avatar src="https://broken-url.example/missing.jpg" initials="FB" alt="Broken image falls back to initials"></ui-avatar>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Sizes</h2>
+    <div class="flex items-center gap-3">
+      <ui-avatar size="sm" initials="SM" alt="Small"></ui-avatar>
+      <ui-avatar size="md" initials="MD" alt="Medium"></ui-avatar>
+      <ui-avatar size="lg" initials="LG" alt="Large"></ui-avatar>
+      <ui-avatar size="xl" initials="XL" alt="Extra large"></ui-avatar>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Shape</h2>
+    <div class="flex items-center gap-3">
+      <ui-avatar shape="circle" initials="CI" alt="Circle"></ui-avatar>
+      <ui-avatar shape="square" initials="SQ" alt="Square"></ui-avatar>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Variants</h2>
+    <div class="flex items-center gap-3">
+      <ui-avatar variant="primary" initials="PR" alt="Primary"></ui-avatar>
+      <ui-avatar variant="neutral" initials="NE" alt="Neutral"></ui-avatar>
+      <ui-avatar variant="success" initials="SU" alt="Success"></ui-avatar>
+      <ui-avatar variant="warning" initials="WA" alt="Warning"></ui-avatar>
+      <ui-avatar variant="danger" initials="DA" alt="Danger"></ui-avatar>
+      <ui-avatar variant="info" initials="IN" alt="Info"></ui-avatar>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Status</h2>
+    <div class="flex items-center gap-3">
+      <ui-avatar initials="ON" alt="Online user" status="online"></ui-avatar>
+      <ui-avatar initials="OF" alt="Offline user" status="offline"></ui-avatar>
+      <ui-avatar initials="BU" alt="Busy user" status="busy"></ui-avatar>
+      <ui-avatar initials="AW" alt="Away user" status="away"></ui-avatar>
+    </div>
+  </section>
+</div>

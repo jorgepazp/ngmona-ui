@@ -1,0 +1,23 @@
+<ui-modal
+  [open]="open()"
+  [heading]="heading()"
+  role="alertdialog"
+  [closeOnBackdrop]="closeOnBackdrop()"
+  [showCloseButton]="showCloseButton()"
+  [describedBy]="descriptionId"
+  [classNames]="classNames()"
+  (closed)="cancel()"
+>
+  @if (message()) {
+    <p [id]="descriptionId" class="text-paragraph-sm text-text-subdued">{{ message() }}</p>
+  }
+  <ng-content></ng-content>
+  <div class="!mt-4 flex justify-end gap-2">
+    <ui-button variant="secondary" [disabled]="loading()" (clicked)="cancel()">{{
+      cancelLabel()
+    }}</ui-button>
+    <ui-button [classNames]="confirmClass()" [loading]="loading()" (clicked)="confirm()">{{
+      confirmLabel()
+    }}</ui-button>
+  </div>
+</ui-modal>

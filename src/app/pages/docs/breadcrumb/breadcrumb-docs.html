@@ -1,0 +1,20 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Breadcrumb</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Basic</h2>
+    <ui-breadcrumb [items]="basicItems" (itemClick)="onItemClick($event)"></ui-breadcrumb>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">With leading icon</h2>
+    <ui-breadcrumb [items]="iconItems"></ui-breadcrumb>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Deep trail</h2>
+    <ui-breadcrumb [items]="deepItems"></ui-breadcrumb>
+  </section>
+</div>

@@ -1,0 +1,34 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Questionnaire</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Multi-step flow</h2>
+
+    <div class="border border-divider rounded-lg p-6 max-w-lg">
+      @if (result(); as answers) {
+        <div class="flex flex-col gap-4">
+          <p class="text-label-md font-medium text-text-primary">All done — here's what was collected:</p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-1">
+            @for (answer of answers; track answer.stepId) {
+              <li class="text-paragraph-sm text-text-subdued">
+                <code class="text-label-xs">{{ answer.stepId }}</code>: {{ answer.optionId ?? answer.otherText }}
+              </li>
+            }
+          </ul>
+          <div>
+            <ui-button variant="secondary" size="sm" (clicked)="restart()">Restart</ui-button>
+          </div>
+        </div>
+      } @else {
+        <ui-questionnaire
+          [steps]="steps"
+          [(stepIndex)]="stepIndex"
+          [(answers)]="answers"
+          (completed)="onCompleted($event)"
+        ></ui-questionnaire>
+      }
+    </div>
+  </section>
+</div>

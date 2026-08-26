@@ -1,0 +1,18 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Toast</h1>
+
+  <app-api-table [doc]="api" />
+
+  <p class="text-paragraph-sm text-text-subdued">
+    Inject <code>ToastService</code> anywhere and call <code>toast.show(...)</code> — a single
+    <code>&lt;ui-toaster /&gt;</code> mounted once in the app shell renders and stacks them.
+  </p>
+
+  <section class="flex flex-wrap gap-3">
+    <ui-button (clicked)="toast.show('Here is a message')">Default</ui-button>
+    <ui-button (clicked)="toast.success('Saved successfully')">Success</ui-button>
+    <ui-button (clicked)="toast.error('Something went wrong')">Error</ui-button>
+    <ui-button (clicked)="toast.warning('Careful with that')">Warning</ui-button>
+    <ui-button (clicked)="toast.show('Bottom left', { position: 'bottom-left' })">Bottom left</ui-button>
+  </section>
+</div>

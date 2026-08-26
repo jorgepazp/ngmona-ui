@@ -1,0 +1,49 @@
+<div [class]="'flex flex-col ' + classNames()" role="search">
+  @if (labelTemplate(); as tpl) {
+    <div class="mb-0.5 text-neutral-500 text-xs font-medium flex justify-between">
+      <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+    </div>
+  } @else if (label()) {
+    <label [attr.for]="resolvedId()" class="mb-0.5 text-neutral-500 text-xs font-medium block">{{ label() }}</label>
+  }
+
+  <div class="relative w-full group">
+    <span class="pointer-events-none absolute left-2 top-1 bottom-1 flex items-center text-neutral-900">
+      <svg [lucideIcon]="searchIcon" [size]="16"></svg>
+    </span>
+
+    <input
+      [id]="resolvedId()"
+      [name]="resolvedId()"
+      type="text"
+      [disabled]="isDisabled()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [attr.aria-label]="!label() ? ariaLabel() : null"
+      [attr.aria-describedby]="caption() || captionTemplate() ? captionId() : null"
+      class="custom-input transition-all !pl-5 !py-1 text-label-md text-neutral-500 h-6 rounded ring-0 border-neutral-100 !border placeholder:text-neutral-300 placeholder:font-regular w-full disabled:placeholder:text-neutral-100 !border-solid group-hover:border-neutral-300 outline-[1.5px] font-medium outline outline-transparent focus:!border-transparent focus:outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100"
+      [class]="value() ? '!pr-6' : '!pr-2'"
+      (input)="onInputEvent($event)"
+      (blur)="markTouched()"
+    />
+
+    @if (value()) {
+      <button
+        type="button"
+        aria-label="Clear search"
+        class="cursor-pointer transition-all absolute right-2 top-1 bottom-1 flex justify-center items-center text-neutral-900 hover:text-neutral-500"
+        (click)="clear()"
+      >
+        <svg [lucideIcon]="clearIcon" [size]="14"></svg>
+      </button>
+    }
+  </div>
+
+  @if (captionTemplate(); as tpl) {
+    <div [id]="captionId()" class="mt-0.5 text-xs text-neutral-300">
+      <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+    </div>
+  } @else if (caption()) {
+    <small [id]="captionId()" class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+  }
+</div>

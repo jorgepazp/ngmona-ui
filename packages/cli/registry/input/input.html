@@ -1,0 +1,100 @@
+<div [class]="classNames()">
+  @if (labelTemplate(); as tpl) {
+    <div class="mb-0.5 text-neutral-500 text-xs font-medium flex justify-between">
+      <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+    </div>
+  } @else if (label()) {
+    <label [attr.for]="resolvedId()" class="mb-0.5 text-neutral-500 text-xs font-medium block">{{ label() }}</label>
+  }
+
+  <div class="relative w-full group">
+    <input
+      [id]="resolvedId()"
+      [name]="resolvedId()"
+      [disabled]="isDisabled()"
+      [attr.max]="max() ?? null"
+      [attr.min]="min() ?? null"
+      [attr.maxlength]="maxLength() ?? null"
+      [attr.minlength]="minLength() ?? null"
+      [attr.pattern]="pattern() ?? null"
+      [attr.required]="required() || null"
+      [attr.aria-invalid]="state() === 'error' || null"
+      [attr.aria-describedby]="caption() || captionTemplate() ? captionId() : null"
+      [attr.role]="searchIn() ? 'combobox' : null"
+      [attr.aria-expanded]="searchIn() ? showSuggestions() : null"
+      [attr.aria-controls]="searchIn() ? resolvedId() + '-listbox' : null"
+      [type]="resolvedType()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      class="custom-input transition-all !px-2 !py-1 text-label-md text-neutral-500 h-6 rounded ring-0 border-neutral-100 !border placeholder:text-neutral-300 placeholder:font-regular w-full disabled:placeholder:text-neutral-100 disabled:group-hover:!border-border-neutral-medium !border-solid group-hover:border-neutral-300 outline-[1.5px] font-medium outline outline-transparent focus:!border-transparent focus:outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100"
+      [class]="(state() === 'success' ? '!border-success-500 ' : state() === 'warning' ? '!border-warning-500 ' : state() === 'error' ? '!border-danger-500 ' : '') + (type() === 'password' && !showPassword() && value() ? 'text-xl tracking-widest ' : '') + (iconPos() === 'left' ? '!pl-5' : '')"
+      (input)="onInputEvent($event)"
+      (keypress)="avoidUnwantedChars($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+    />
+
+    @if (hasFocus() && searchIn()) {
+      <button
+        type="button"
+        class="text-xl text-neutral cursor-pointer absolute right-2 top-1 bottom-1 flex justify-center items-center"
+        aria-label="Clear"
+        (click)="clearInput()"
+      >
+        <svg [lucideIcon]="clearIcon" [size]="16"></svg>
+      </button>
+    } @else if (icon(); as ic) {
+      <span
+        class="pointer-events-none transition-all absolute top-1 bottom-1 flex justify-center items-center text-neutral-900"
+        [class]="(state() === 'success' ? '!text-success ' : state() === 'warning' ? '!text-warning ' : state() === 'error' ? '!text-danger ' : '') + (iconPos() === 'left' && type() !== 'password' ? 'left-2' : 'right-2')"
+      >
+        <svg [lucideIcon]="ic" [size]="16"></svg>
+      </span>
+    }
+
+    @if (type() === 'password') {
+      <button
+        type="button"
+        class="cursor-pointer transition-all absolute right-2 top-1 bottom-1 flex justify-center items-center text-neutral-900"
+        [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+        [attr.aria-pressed]="showPassword()"
+        (click)="showPassword.set(!showPassword())"
+      >
+        <svg [lucideIcon]="showPassword() ? eyeIcon : eyeOffIcon" [size]="18"></svg>
+      </button>
+    }
+
+    @if (showSuggestions()) {
+      <div
+        [id]="resolvedId() + '-listbox'"
+        role="listbox"
+        animate.enter="ui-anim-fade-enter"
+        animate.leave="ui-anim-fade-leave"
+        (mouseenter)="hoveringSuggestions = true"
+        (mouseleave)="hoveringSuggestions = false"
+        class="absolute !p-0.5 flex flex-col bg-surface-white w-full top-full z-20 mt-0.5 max-h-32 rounded border-neutral-600 border"
+      >
+        <ul class="overflow-y-auto list-none px-0 mb-0">
+          @for (item of suggestions(); track item) {
+            <li
+              role="option"
+              [attr.aria-selected]="item === value()"
+              class="w-full !p-1 cursor-pointer select-none transition-colors hover:bg-neutral-300 text-neutral-500 text-label-md"
+              (click)="selectSuggestion(item)"
+            >
+              {{ item }}
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+
+  @if (captionTemplate(); as tpl) {
+    <div [id]="captionId()" class="mt-0.5 text-xs text-neutral-300">
+      <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+    </div>
+  } @else if (caption()) {
+    <small [id]="captionId()" class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+  }
+</div>

@@ -1,0 +1,92 @@
+/*
+ * Hand-maintained (NOT generated) — unlike theme-colors.css, this file survives
+ * `npm run theme:generate`. It only remaps the semantic layer (surface, text, icon, border,
+ * divider, link tokens) to different steps of the same brand ramps theme-colors.css already
+ * defines; it never introduces new literal colors.
+ *
+ * `data-theme="dark"` is always set explicitly before first paint by the inline script in
+ * index.html (from localStorage, falling back to prefers-color-scheme), so there's no need for
+ * a separate `prefers-color-scheme` media block here — the attribute is authoritative.
+ */
+:root[data-theme='dark'] {
+  --color-surface-white: var(--color-neutral-900);
+  --color-surface-lighter: var(--color-neutral-800);
+  --color-surface-light: var(--color-neutral-800);
+  --color-surface-medium: var(--color-neutral-700);
+  --color-surface-dark: var(--color-neutral-600);
+  --color-surface-enabled: var(--color-neutral-800);
+  --color-surface-enabled-light: var(--color-neutral-900);
+  --color-surface-disabled: var(--color-neutral-700);
+  --color-surface-hover: var(--color-neutral-700);
+  --color-surface-active: var(--color-primary-500);
+  --color-surface-active-inverse: var(--color-neutral-900);
+  --color-surface-backdrop: rgba(0, 0, 0, 0.6);
+  --color-surface-success: var(--color-success-300);
+  --color-surface-success-light: var(--color-success-900);
+  --color-surface-info: var(--color-info-300);
+  --color-surface-info-light: var(--color-info-900);
+  --color-surface-danger: var(--color-danger-300);
+  --color-surface-danger-light: var(--color-danger-900);
+  --color-surface-warning: var(--color-warning-300);
+  --color-surface-warning-light: var(--color-warning-900);
+
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: #ffffff;
+  --color-text-subdued: var(--color-neutral-300);
+  --color-text-disabled: var(--color-neutral-600);
+  --color-text-primary-inverse: var(--color-neutral-900);
+  --color-text-active: var(--color-primary-400);
+  --color-text-active-light: var(--color-primary-300);
+  --color-text-active-inverse: var(--color-neutral-900);
+  --color-text-success: var(--color-success-300);
+  --color-text-info: var(--color-info-300);
+  --color-text-danger: var(--color-danger-300);
+  --color-text-warning: var(--color-warning-300);
+
+  --color-icon-default: var(--color-neutral-100);
+  --color-icon-subdued: var(--color-neutral-400);
+  --color-icon-disabled: var(--color-neutral-600);
+  --color-icon-default-inverse: var(--color-neutral-900);
+  --color-icon-success: var(--color-success-300);
+  --color-icon-success-light: var(--color-success-500);
+  --color-icon-info: var(--color-info-300);
+  --color-icon-info-light: var(--color-info-500);
+  --color-icon-danger: var(--color-danger-300);
+  --color-icon-danger-light: var(--color-danger-500);
+  --color-icon-warning: var(--color-warning-300);
+  --color-icon-warning-light: var(--color-warning-500);
+  --color-icon-active: var(--color-primary-400);
+  --color-icon-active-light: var(--color-primary-300);
+
+  --color-link: var(--color-info-300);
+  --color-link-hover: var(--color-info-200);
+  --color-link-pressed: var(--color-info-400);
+  --color-link-visited: var(--color-accent-300);
+  --color-link-disabled: var(--color-neutral-600);
+  --color-link-inverse: var(--color-neutral-900);
+  --color-link-hover-inverse: rgba(0, 0, 0, 0.6);
+  --color-link-pressed-inverse: var(--color-neutral-900);
+  --color-link-disabled-inverse: rgba(0, 0, 0, 0.3);
+  --color-link-visited-inverse: var(--color-accent-800);
+
+  --color-border-neutral-light: var(--color-neutral-700);
+  --color-border-neutral: var(--color-neutral-700);
+  --color-border-neutral-medium: var(--color-neutral-600);
+  --color-border-neutral-dark: var(--color-neutral-500);
+  --color-border-state: var(--color-neutral-500);
+  --color-border-hover: var(--color-neutral-400);
+  --color-border-focused: var(--color-neutral-100);
+  --color-border-disabled: var(--color-neutral-700);
+  --color-border-active: var(--color-primary-400);
+
+  --color-divider-light: var(--color-neutral-800);
+  --color-divider: var(--color-neutral-700);
+  --color-divider-medium: var(--color-neutral-600);
+  --color-divider-dark: var(--color-neutral-500);
+}
+
+/* `body`'s background is a literal `bg-primary-100` Tailwind utility (a light brand tint), not a
+   semantic token, so it needs its own override rather than following from the remap above. */
+:root[data-theme='dark'] body {
+  background-color: var(--color-neutral-900);
+}

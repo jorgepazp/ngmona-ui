@@ -1,0 +1,26 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">File upload</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Two-way binding (default jpg/jpeg/png/pdf, 8 MB)</h2>
+    <ui-file-upload [(file)]="file"></ui-file-upload>
+    <p class="text-paragraph-sm text-text-subdued">file = {{ file()?.name ?? 'none' }}</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Custom extensions &amp; size limit</h2>
+    <ui-file-upload [extensions]="['csv', 'xlsx']" [maxFileSizeBytes]="2 * 1024 * 1024"></ui-file-upload>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Loading (caller-controlled)</h2>
+    <ui-file-upload [loading]="true"></ui-file-upload>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Disabled</h2>
+    <ui-file-upload [disabled]="true"></ui-file-upload>
+  </section>
+</div>

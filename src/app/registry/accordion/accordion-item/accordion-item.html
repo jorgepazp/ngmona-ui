@@ -1,0 +1,42 @@
+<div class="border-b border-solid !border-divider" [class]="classNames()">
+  <h3 class="m-0">
+    <button
+      #headerBtn
+      type="button"
+      [id]="headerId"
+      [attr.aria-expanded]="expanded()"
+      [attr.aria-controls]="panelId"
+      [disabled]="disabled()"
+      class="text-label-md text-text-primary flex w-full py-3 cursor-pointer items-center justify-between gap-2 border-none bg-transparent  text-left disabled:cursor-not-allowed disabled:text-text-disabled"
+      (click)="toggle()"
+      (keydown)="onKeydown($event)"
+    >
+      @if (headerTemplate(); as tpl) {
+        <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+      } @else {
+        <span>{{ heading() }}</span>
+      }
+      <svg
+        [lucideIcon]="chevronIcon"
+        [size]="16"
+        class="shrink-0 transition-transform"
+        [class.rotate-180]="expanded()"
+        aria-hidden="true"
+      ></svg>
+    </button>
+  </h3>
+  <div
+    [id]="panelId"
+    role="region"
+    [attr.aria-labelledby]="headerId"
+    class="ui-accordion-panel"
+    [class.expanded]="expanded()"
+    [inert]="!expanded()"
+  >
+    <div class="overflow-hidden">
+      <div class="text-paragraph-sm text-text-subdued !pb-3">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

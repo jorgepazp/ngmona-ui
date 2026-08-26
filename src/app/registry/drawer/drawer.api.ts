@@ -1,0 +1,81 @@
+// GENERATED FILE — do not edit by hand. Run `npm run api-docs` to regenerate.
+import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
+
+export const drawerApi: ComponentApiDoc = {
+  name: "Drawer",
+  description: "Slide-in drawer/panel overlay with an optional backdrop, opened from the left or right edge. Supports named `header`/`content`/`footer` templates (via `uiTemplate`) with `<ng-content>` as the default body when no `content` template is supplied. Behaves as a modal dialog: `role=\"dialog\"`, `aria-modal`, closes on Escape, traps Tab focus within the panel while open, and moves focus into the panel on open. Renamed from `Sidebar`: this is an overlay panel (backdrop, opens on top of the page), not the persistent responsive navigation layout — that's the separate `Sidebar` component (`../sidebar/sidebar`), which composes this one internally for its mobile off-canvas nav. The original component faked its slide-in/out with manual `timer(0)`/`timer(200)` RxJS calls that toggled CSS classes: opening relied on a `timer(0)` macrotask landing before the next paint (fragile — intermittently skips the transition), and closing unmounted the panel via `*ngIf` after a hardcoded 200ms timeout while the panel's own CSS class declared a 500ms transition, so a close would visibly jump/cut the animation short. `animate.enter`/`animate.leave` replace both hacks: they trigger off real DOM insertion/removal and the `@if` block won't unmount the view until the leave animation actually finishes. `disableAnimations` is implemented by binding `undefined` in place of an animation class (the native API's `animate.enter`/`animate.leave` classes accept a dynamic value), since there's no per-subtree animation-disable binding like the old engine's `[@.disabled]`.",
+  props: [
+    {
+      name: "open",
+      kind: "model",
+      required: false,
+      type: "boolean",
+      defaultValue: "false",
+      description: "Open/closed state. Two-way bindable via `[(open)]`.",
+    },
+    {
+      name: "side",
+      kind: "input",
+      required: false,
+      type: "DrawerSide",
+      defaultValue: "'right'",
+      description: "Edge the panel slides in from.",
+    },
+    {
+      name: "backdrop",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "true",
+      description: "Whether a dimming backdrop renders behind the panel while open.",
+    },
+    {
+      name: "closeOnBackdrop",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "true",
+      description: "Whether clicking the backdrop closes the panel. Ignored when `backdrop` is `false`.",
+    },
+    {
+      name: "showCloseButton",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "true",
+      description: "Whether the built-in close (X) button renders in the panel header.",
+    },
+    {
+      name: "disableAnimations",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "false",
+      description: "Skips the slide/fade transitions — useful for tests or reduced-motion setups.",
+    },
+    {
+      name: "classNames",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Extra utility classes appended to the panel element.",
+    },
+    {
+      name: "ariaLabel",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "'Drawer'",
+      description: "Accessible name for the panel's `role=\"dialog\"`.",
+    },
+    {
+      name: "closed",
+      kind: "output",
+      required: false,
+      type: "void",
+      defaultValue: "",
+      description: "Fires once the panel has fully closed (after any close animation completes).",
+    },
+  ],
+};

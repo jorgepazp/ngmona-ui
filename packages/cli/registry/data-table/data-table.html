@@ -1,0 +1,85 @@
+<div class="flex flex-col gap-2">
+  <ui-table [attr.aria-label]="ariaLabel() ?? null">
+    <thead>
+      <tr uiTableRow>
+        @if (selectable() === 'multi') {
+          <th uiTableHeadCell class="w-8">
+            <ui-checkbox
+              [checked]="allOnPageSelected()"
+              [indeterminate]="someOnPageSelected()"
+              (checkedChange)="toggleAllOnPage()"
+              ariaLabel="Select all rows on this page"
+            ></ui-checkbox>
+          </th>
+        } @else if (selectable() === 'single') {
+          <th uiTableHeadCell class="w-8"></th>
+        }
+        @for (column of columns(); track column.key) {
+          <th uiTableHeadCell [style.width]="column.width" [class]="alignClass(column.align)">
+            @if (headerTemplate(column.key); as tpl) {
+              <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: column }"></ng-container>
+            } @else if (column.sortable) {
+              <button type="button" class="inline-flex items-center gap-1 cursor-pointer hover:text-text-primary" (click)="toggleSort(column)">
+                {{ column.header }}
+                @if (sortState()?.key === column.key) {
+                  <svg [lucideIcon]="sortState()!.direction === 'asc' ? chevronUpIcon : chevronDownIcon" [size]="14"></svg>
+                } @else {
+                  <svg [lucideIcon]="chevronsUpDownIcon" [size]="14" class="text-text-disabled"></svg>
+                }
+              </button>
+            } @else {
+              {{ column.header }}
+            }
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @if (loading()) {
+        @for (r of skeletonRows(); track $index) {
+          <tr uiTableRow>
+            @if (selectable() !== 'none') {
+              <td uiTableCell><ui-skeleton width="16px" height="16px"></ui-skeleton></td>
+            }
+            @for (column of columns(); track column.key) {
+              <td uiTableCell><ui-skeleton height="14px"></ui-skeleton></td>
+            }
+          </tr>
+        }
+      } @else if (pagedData().length === 0) {
+        <tr>
+          <td [attr.colspan]="columns().length + (selectable() !== 'none' ? 1 : 0)" class="text-center py-4 text-text-subdued text-paragraph-sm">
+            @if (emptyTemplate(); as tpl) {
+              <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+            } @else {
+              {{ emptyMessage() }}
+            }
+          </td>
+        </tr>
+      } @else {
+        @for (row of pagedData(); track trackRow(row)) {
+          <tr uiTableRow [class]="isSelected(row) ? 'bg-surface-medium' : ''">
+            @if (selectable() === 'multi') {
+              <td uiTableCell><ui-checkbox [checked]="isSelected(row)" (checkedChange)="toggleRow(row)" ariaLabel="Select row"></ui-checkbox></td>
+            } @else if (selectable() === 'single') {
+              <td uiTableCell><ui-radio name="ui-data-table-row" [checked]="isSelected(row)" (selected)="toggleRow(row)" ariaLabel="Select row"></ui-radio></td>
+            }
+            @for (column of columns(); track column.key) {
+              <td uiTableCell [class]="alignClass(column.align)">
+                @if (cellTemplate(column.key); as tpl) {
+                  <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: row, column: column }"></ng-container>
+                } @else {
+                  {{ cellValue(row, column) }}
+                }
+              </td>
+            }
+          </tr>
+        }
+      }
+    </tbody>
+  </ui-table>
+
+  @if (pageCount() > 1) {
+    <ui-paginator [(page)]="page" [pageCount]="pageCount()"></ui-paginator>
+  }
+</div>

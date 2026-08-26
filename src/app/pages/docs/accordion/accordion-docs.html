@@ -1,0 +1,37 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Accordion</h1>
+
+  <app-api-table [doc]="api" />
+  <app-api-table [doc]="itemApi" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Single open (default)</h2>
+    <ui-accordion>
+      <ui-accordion-item value="shipping" heading="What are the shipping options?">
+        We offer standard (3-5 business days) and express (1-2 business days) shipping on all
+        orders.
+      </ui-accordion-item>
+      <ui-accordion-item value="returns" heading="What's your return policy?">
+        Items can be returned within 30 days of delivery for a full refund.
+      </ui-accordion-item>
+      <ui-accordion-item value="support" heading="How do I contact support?" [disabled]="true">
+        This item is disabled and can't be expanded.
+      </ui-accordion-item>
+    </ui-accordion>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Multiple open, custom header template</h2>
+    <ui-accordion [multiple]="true">
+      <ui-accordion-item value="a">
+        <ng-template uiTemplate="header">
+          <span class="font-bold">Custom header markup</span>
+        </ng-template>
+        Any content can go inside a header template, not just plain text.
+      </ui-accordion-item>
+      <ui-accordion-item value="b" heading="Second item">
+        Both items can be open at once here.
+      </ui-accordion-item>
+    </ui-accordion>
+  </section>
+</div>

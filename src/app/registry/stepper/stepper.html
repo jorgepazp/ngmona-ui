@@ -1,0 +1,37 @@
+<div>
+  <ol role="list" class="flex items-start">
+    @for (step of stepViews(); track step.index) {
+      <li
+        class="flex-1 flex flex-col items-center gap-1.5"
+        [attr.aria-current]="step.state === 'current' ? 'step' : null"
+      >
+        <div class="flex items-center w-full">
+          <div class="flex-1 h-0.5 transition-all" [class]="step.index === 0 ? '' : lineClass(step.state !== 'upcoming')"></div>
+          <div
+            class="shrink-0 z-10 w-4 h-4 rounded-full flex items-center justify-center text-label-xs font-medium transition-all"
+            [class]="circleClass(step.state)"
+          >
+            @if (step.state === 'completed') {
+              <svg lucideCheck [size]="12"></svg>
+            } @else {
+              <span>{{ step.index + 1 }}</span>
+            }
+          </div>
+          <div
+            class="flex-1 h-0.5 transition-all"
+            [class]="step.index === stepViews().length - 1 ? '' : lineClass(step.state === 'completed')"
+          ></div>
+        </div>
+        @if (step.label) {
+          <span
+            class="text-label-xs text-center px-1"
+            [class]="step.state === 'upcoming' ? 'text-text-subdued' : 'text-text-primary'"
+          >
+            {{ step.label }}
+          </span>
+        }
+      </li>
+    }
+  </ol>
+  <p class="sr-only" aria-live="polite">Step {{ currentStep() + 1 }} of {{ stepCount() }}</p>
+</div>

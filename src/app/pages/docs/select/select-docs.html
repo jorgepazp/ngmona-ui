@@ -1,0 +1,15 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Select</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Single</h2>
+    <ui-select [options]="countries" [(value)]="single" placeholder="Choose a country"></ui-select>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Multi</h2>
+    <ui-select [options]="countries" [multi]="true" [(value)]="multi" placeholder="Choose countries" [maxSelectableLimit]="2"></ui-select>
+  </section>
+</div>

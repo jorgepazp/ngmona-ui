@@ -1,0 +1,6 @@
+<span [class]="badgeClass()" [attr.aria-label]="ariaLabel()">
+  @if (icon(); as ic) {
+    <svg [lucideIcon]="ic" [size]="12" aria-hidden="true"></svg>
+  }
+  <ng-content></ng-content>
+</span>

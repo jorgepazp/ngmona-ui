@@ -1,0 +1,66 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <div class="flex flex-col gap-2">
+    <h1 class="text-heading-xl text-text-primary">Installation</h1>
+    <p class="text-paragraph text-text-subdued">
+      ui-kit ships as a component registry, not an npm package. The CLI copies each component's
+      source files directly into your project, so nothing is pulled in from node_modules at
+      runtime and there is no version to upgrade later.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Prerequisites</h2>
+    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+      <li>Angular 22 or later, using standalone components.</li>
+      <li>Tailwind CSS v4 already wired into your build (<code>@import 'tailwindcss';</code> in your global stylesheet).</li>
+      <li>Node 18 or later to run the CLI.</li>
+    </ul>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">1. Initialize the theme</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Run the init command from the root of your Angular project:
+    </p>
+    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui init</code></pre>
+    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+      <li>Prompts for a seed color for each role: <code>primary</code>, <code>accent</code>, <code>danger</code>, <code>info</code>, <code>warning</code>, <code>success</code> and <code>neutral</code>.</li>
+      <li>Prompts for the path to your global stylesheet (defaults to <code>src/styles.css</code>) and where components should be installed (defaults to <code>src/app/ui</code>).</li>
+      <li>Generates a theme stylesheet from those seed colors, adds an <code>@import</code> for it to your global stylesheet, and writes an <code>ngmona.json</code> config file.</li>
+      <li>Pass <code>-y</code> to accept every default without prompting.</li>
+    </ul>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">2. Add components</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Add one or more components by name:
+    </p>
+    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui add button dropdown-menu</code></pre>
+    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+      <li>Copies each component's source files into the components directory recorded in <code>ngmona.json</code>.</li>
+      <li>Any npm dependency a component needs (for example <code>@angular/cdk</code> or <code>@lucide/angular</code>) is installed automatically if it is missing.</li>
+      <li>Pass <code>-y</code> to overwrite files that already exist, or <code>--dry-run</code> to preview the changes first.</li>
+    </ul>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">3. Browse available components</h2>
+    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui list</code></pre>
+    <p class="text-paragraph-sm text-text-subdued">
+      Add <code>--installed</code> to list only the components already present in your project.
+      The sidebar of this reference lists the same components, each with a live example and its
+      full input, output and two-way-binding tables.
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Next steps</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Since components are copied rather than installed, everything under your components
+      directory is your own code from the moment it lands. See the usage guide for how to import
+      and configure a component, and the color palette guide for how the theme is generated and
+      edited.
+    </p>
+  </section>
+</div>

@@ -6,8 +6,22 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <script>
+    // Sets data-theme before first paint so there's no flash of the wrong theme. Kept in sync
+    // with ThemeService's storage key (src/app/theme/theme.service.ts) — update both if it changes.
+    (function () {
+      var stored = localStorage.getItem('ui-kit-theme');
+      var theme = stored === 'light' || stored === 'dark'
+        ? stored
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
-<body>
+<body >
   <app-root></app-root>
 </body>
 </html>

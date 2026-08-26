@@ -1,0 +1,13 @@
+<span #trigger (click)="toggle()" class="inline-block" [attr.aria-expanded]="open()" aria-haspopup="dialog">
+  <ng-content select="[trigger]"></ng-content>
+</span>
+
+<ng-template #panel>
+  <div
+    role="dialog"
+    class="bg-surface-white border border-neutral-600 rounded shadow-card p-2 min-w-[160px]"
+    [class]="panelClass()"
+  >
+    <ng-content></ng-content>
+  </div>
+</ng-template>

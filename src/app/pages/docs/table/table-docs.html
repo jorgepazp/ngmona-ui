@@ -1,0 +1,26 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Table</h1>
+
+  <app-api-table [doc]="api" />
+
+  <p class="text-paragraph-sm text-text-subdued">
+    Bare styled table primitives — compose with plain <code>&lt;thead&gt;</code>/<code>&lt;tbody&gt;</code> for full control, using the <code>uiTableRow</code>/<code>uiTableHeadCell</code>/<code>uiTableCell</code> attribute directives shown below to style rows and cells. For sorting/pagination/selection out of the box, see the Data Table component.
+  </p>
+
+  <ui-table>
+    <thead>
+      <tr uiTableRow>
+        <th uiTableHeadCell>Name</th>
+        <th uiTableHeadCell>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track row.name) {
+        <tr uiTableRow>
+          <td uiTableCell>{{ row.name }}</td>
+          <td uiTableCell>{{ row.role }}</td>
+        </tr>
+      }
+    </tbody>
+  </ui-table>
+</div>

@@ -1,0 +1,35 @@
+<div [class]="(orientation() === 'vertical' ? 'flex flex-row gap-4' : 'flex flex-col gap-2') + ' ' + classNames()">
+  <div
+    role="tablist"
+    [attr.aria-orientation]="orientation()"
+    [class]="(orientation() === 'vertical' ? 'flex flex-col gap-1 border-r !border-divider !pr-2' : 'flex flex-row gap-1 border-b !border-divider') + ' ' + tabListClassNames()"
+  >
+    @for (panel of panels(); track panel.value(); let i = $index) {
+      <button
+        #tabRef
+        type="button"
+        role="tab"
+        [id]="tabId(panel.value())"
+        [attr.aria-selected]="isActive(panel.value())"
+        [attr.aria-controls]="panelId(panel.value())"
+        [attr.tabindex]="isActive(panel.value()) ? 0 : -1"
+        [disabled]="panel.disabled()"
+        [class]="tabButtonClass(panel)"
+        (click)="select(panel)"
+        (keydown)="onKeydown($event, i)"
+      >
+        @if (panel.icon(); as ic) {
+          <svg [lucideIcon]="ic" [size]="16"></svg>
+        }
+        @if (panel.labelTemplate(); as tpl) {
+          <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+        } @else {
+          {{ panel.label() }}
+        }
+      </button>
+    }
+  </div>
+  <div class="min-w-0 flex-1">
+    <ng-content></ng-content>
+  </div>
+</div>

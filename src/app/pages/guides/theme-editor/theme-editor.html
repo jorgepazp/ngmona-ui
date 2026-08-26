@@ -1,0 +1,80 @@
+<div class="p-8 flex flex-col gap-8 max-w-4xl mx-auto">
+  <div class="flex flex-col gap-2">
+    <h1 class="text-heading-xl text-text-primary">Theme editor</h1>
+    <p class="text-paragraph text-text-subdued">
+      Change any seed color below to see the whole preview update live. This page computes the
+      ramp in the browser with the same code the real generator uses, then overrides the primitive
+      color variables on the preview area only. Nothing here touches the real stylesheet, and
+      nothing here ships to a consumer project.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-3">
+    <div class="flex items-center justify-between">
+      <h2 class="text-label-lg text-text-subdued">Seed colors</h2>
+      <div class="flex items-center gap-2">
+        <ui-button size="sm" variant="tertiary" (clicked)="reset()">Reset</ui-button>
+        <ui-button size="sm" variant="secondary" (clicked)="copySeeds()">
+          {{ copied() ? 'Copied' : 'Copy JSON' }}
+        </ui-button>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-4">
+      @for (role of roles; track role) {
+        <label class="flex items-center gap-2">
+          <input
+            type="color"
+            class="w-8 h-8 rounded border border-divider cursor-pointer"
+            [value]="seeds()[role]"
+            (input)="setSeed(role, $any($event.target).value)"
+          />
+          <span class="flex flex-col leading-tight">
+            <span class="text-label-sm text-text-primary capitalize">{{ role }}</span>
+            <span class="text-caption text-text-subdued font-mono">{{ seeds()[role] }}</span>
+          </span>
+        </label>
+      }
+    </div>
+  </section>
+
+  <section #preview class="flex flex-col gap-6 p-6 rounded-lg border border-divider bg-surface-white">
+    <ui-alert type="info" heading="Live preview">
+      Everything in this section reads from the seed colors above.
+    </ui-alert>
+
+    <ui-card>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <h3 class="text-heading-sm text-text-primary">Card title</h3>
+          <p class="text-paragraph-sm text-text-subdued">
+            Body text uses the neutral text tokens, so it tracks the neutral seed.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <ui-button variant="primary">Primary</ui-button>
+          <ui-button variant="secondary">Secondary</ui-button>
+          <ui-button variant="tertiary">Tertiary</ui-button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <ui-badge variant="primary">Primary</ui-badge>
+          <ui-badge variant="neutral">Neutral</ui-badge>
+          <ui-badge variant="success">Success</ui-badge>
+          <ui-badge variant="warning">Warning</ui-badge>
+          <ui-badge variant="danger">Danger</ui-badge>
+          <ui-badge variant="info">Info</ui-badge>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <ui-avatar variant="primary" initials="PR" alt="Primary"></ui-avatar>
+          <ui-avatar variant="neutral" initials="NE" alt="Neutral"></ui-avatar>
+          <ui-avatar variant="success" initials="SU" alt="Success"></ui-avatar>
+          <ui-avatar variant="warning" initials="WA" alt="Warning"></ui-avatar>
+          <ui-avatar variant="danger" initials="DA" alt="Danger"></ui-avatar>
+          <ui-avatar variant="info" initials="IN" alt="Info"></ui-avatar>
+        </div>
+      </div>
+    </ui-card>
+  </section>
+</div>

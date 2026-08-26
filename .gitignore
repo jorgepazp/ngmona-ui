@@ -5,9 +5,15 @@
 /tmp
 /out-tsc
 /bazel-out
+# esbuild bundle for the CLI (rebuilt via `npm run build` in packages/cli — see package.json
+# "prepack"). registry.json + registry/ in the same package ARE versioned; only dist/ isn't.
+/packages/cli/dist
 
 # Node
 /node_modules
+# npm workspaces nest a package's own node_modules (e.g. packages/cli/node_modules) instead of
+# hoisting when a dep like esbuild has a platform-specific optional dependency — catch those too.
+node_modules/
 npm-debug.log
 yarn-error.log
 

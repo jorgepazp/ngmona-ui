@@ -1,0 +1,122 @@
+import { Component, computed, effect, input, signal } from '@angular/core';
+import { LucideDynamicIcon, LucideUser, type LucideIconInput } from '@lucide/angular';
+
+export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
+export type AvatarShape = 'circle' | 'square';
+export type AvatarVariant = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info';
+export type AvatarStatus = 'none' | 'online' | 'offline' | 'busy' | 'away';
+
+/**
+ * User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried
+ * first when `src` is set and swaps to the initials/icon fallback automatically on load error
+ * (broken URL, 404, etc) via `(error)` on the `<img>`.
+ *
+ * Accessibility: `alt` is the single accessible-name input regardless of which tier renders —
+ * it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the
+ * `role="img"` container otherwise. The initials text and fallback icon are both `aria-hidden`
+ * so screen readers read the one `alt`/`aria-label` name instead of duplicating it.
+ */
+@Component({
+  selector: 'ui-avatar',
+  imports: [LucideDynamicIcon],
+  templateUrl: './avatar.html',
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
+})
+export class Avatar {
+  /** Image URL, tried first. Falls back to `initials` (then `icon`) if unset or the image fails to load. */
+  readonly src = input<string | undefined>(undefined);
+  /** Accessible name, used as `<img alt>` or `aria-label` depending on which tier renders (see class doc). */
+  readonly alt = input('');
+  /** Fallback text (e.g. initials) shown when there's no image; takes priority over `icon`. */
+  readonly initials = input<string | undefined>(undefined);
+  /** Fallback icon shown when there's no image and no `initials`. Defaults to a generic user icon. */
+  readonly icon = input<LucideIconInput | undefined>(undefined);
+  /** Overall size of the avatar and its fallback icon. */
+  readonly size = input<AvatarSize>('md');
+  /** Container shape. */
+  readonly shape = input<AvatarShape>('circle');
+  /** Background/text color used for the initials or icon fallback; ignored while an image is showing. */
+  readonly variant = input<AvatarVariant>('neutral');
+  /** Presence indicator dot rendered in the bottom-right corner; `'none'` hides it. */
+  readonly status = input<AvatarStatus>('none');
+  /** Extra utility classes appended to the root element. */
+  readonly classNames = input('');
+
+  protected readonly fallbackIcon: LucideIconInput = LucideUser;
+
+  private readonly imgError = signal(false);
+  protected readonly showImage = computed(() => !!this.src() && !this.imgError());
+
+  protected readonly iconSize = computed(() => {
+    const map: Record<AvatarSize, number> = { sm: 12, md: 16, lg: 20, xl: 24 };
+    return map[this.size()];
+  });
+
+  protected readonly avatarClass = computed(() => {
+    const base = `relative inline-flex items-center justify-center shrink-0 overflow-hidden select-none font-medium ${this.shapeClass()} ${this.sizeClass()}`;
+    return `${base} ${this.showImage() ? 'bg-neutral-500' : this.variantClass()} ${this.classNames()}`;
+  });
+
+  protected readonly statusClass = computed(() => {
+    const color: Record<Exclude<AvatarStatus, 'none'>, string> = {
+      online: 'bg-success-500',
+      offline: 'bg-neutral-800',
+      busy: 'bg-danger-500',
+      away: 'bg-warning-500',
+    };
+    const status = this.status();
+    return status === 'none' ? '' : `${color[status]} ${this.statusSizeClass()}`;
+  });
+
+  constructor() {
+    // Reset the broken-image flag whenever the caller points to a new src.
+    effect(() => {
+      this.src();
+      this.imgError.set(false);
+    });
+  }
+
+  protected onImgError(): void {
+    this.imgError.set(true);
+  }
+
+  private shapeClass(): string {
+    return this.shape() === 'circle' ? 'rounded-full' : 'rounded';
+  }
+
+  private sizeClass(): string {
+    const map: Record<AvatarSize, string> = {
+      sm: 'w-3 h-3 text-caption',
+      md: 'w-4 h-4 text-label-xs',
+      lg: 'w-5 h-5 text-label-sm',
+      xl: 'w-6 h-6 text-label-md',
+    };
+    return map[this.size()];
+  }
+
+  private statusSizeClass(): string {
+    const map: Record<AvatarSize, string> = {
+      sm: 'w-1 h-1 border',
+      md: 'w-1.5 h-1.5 border-2',
+      lg: 'w-1.5 h-1.5 border-2',
+      xl: 'w-2 h-2 border-2',
+    };
+    return `absolute bottom-0 right-0 rounded-full border-surface-white ${map[this.size()]}`;
+  }
+
+  private variantClass(): string {
+    const map: Record<AvatarVariant, string> = {
+      primary: 'bg-primary-500 text-white',
+      neutral: 'bg-neutral-500 text-text-primary',
+      success: 'bg-surface-success-light text-text-success',
+      warning: 'bg-surface-warning-light text-text-warning',
+      danger: 'bg-surface-danger-light text-text-danger',
+      info: 'bg-surface-info-light text-text-info',
+    };
+    return map[this.variant()];
+  }
+}

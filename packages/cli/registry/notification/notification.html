@@ -1,0 +1,21 @@
+@if (show()) {
+  <aside
+    [class]="notificationClass()"
+    [attr.role]="role()"
+    [attr.aria-live]="ariaLive()"
+    animate.enter="ui-anim-fade-enter"
+    animate.leave="ui-anim-fade-leave"
+  >
+    <ng-content></ng-content>
+    @if (showCloseButton()) {
+      <button
+        type="button"
+        aria-label="Close"
+        (click)="close()"
+        class="absolute right-1 top-1 cursor-pointer transition-opacity hover:opacity-60"
+      >
+        <svg [lucideIcon]="closeIcon" [size]="14"></svg>
+      </button>
+    }
+  </aside>
+}

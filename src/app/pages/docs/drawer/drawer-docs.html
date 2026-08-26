@@ -1,0 +1,49 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Drawer</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Slide from the right (default)</h2>
+    <div>
+      <ui-button (clicked)="rightOpen.set(true)">Open drawer</ui-button>
+    </div>
+    <ui-drawer [(open)]="rightOpen">
+      <ng-template uiTemplate="header">
+        <h2 class="text-heading-sm text-text-primary mb-4">Settings</h2>
+      </ng-template>
+      <p class="text-paragraph-sm text-text-subdued">
+        Drawer body content — projected via default <code>&lt;ng-content&gt;</code> since no
+        <code>content</code> template was supplied.
+      </p>
+      <ng-template uiTemplate="footer">
+        <div class="mt-4 pt-4 border-t border-divider">
+          <ui-button variant="secondary" (clicked)="rightOpen.set(false)">Close</ui-button>
+        </div>
+      </ng-template>
+    </ui-drawer>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Slide from the left</h2>
+    <div>
+      <ui-button variant="secondary" (clicked)="leftOpen.set(true)">Open left drawer</ui-button>
+    </div>
+    <ui-drawer [(open)]="leftOpen" side="left">
+      <p class="text-paragraph-sm text-text-subdued">Left-anchored panel, no header/footer templates.</p>
+    </ui-drawer>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">No backdrop, no close button</h2>
+    <div>
+      <ui-button variant="tertiary" (clicked)="noBackdropOpen.set(true)">Open</ui-button>
+    </div>
+    <ui-drawer [(open)]="noBackdropOpen" [backdrop]="false" [showCloseButton]="false">
+      <p class="text-paragraph-sm text-text-subdued">
+        Press Escape or click outside via your own trigger to close — there's no backdrop or close
+        button here.
+      </p>
+    </ui-drawer>
+  </section>
+</div>

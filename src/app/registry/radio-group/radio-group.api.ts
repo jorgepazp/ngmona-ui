@@ -1,0 +1,81 @@
+// GENERATED FILE — do not edit by hand. Run `npm run api-docs` to regenerate.
+import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
+
+export const radioGroupApi: ComponentApiDoc = {
+  name: "RadioGroup",
+  description: "Single-select list/chip picker over an arbitrary array of options (not a wrapper around individual `<ui-radio>` elements — this renders its own buttons). The original was a stack of `<div (click)=\"...\">`s with no radio semantics at all — not reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the WAI-ARIA \"radio group\" pattern: `role=\"radiogroup\"` + `role=\"radio\"` buttons, roving `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in the original but was declared and never actually used (selection always fell back to `==`) — wired up for real here.",
+  props: [
+    {
+      name: "options",
+      kind: "input",
+      required: false,
+      type: "readonly T[]",
+      defaultValue: "[]",
+      description: "Options rendered as radios/chips, in the given order.",
+    },
+    {
+      name: "type",
+      kind: "input",
+      required: false,
+      type: "'list' | 'chips'",
+      defaultValue: "'list'",
+      description: "Visual layout — a vertical list of rows, or a wrapping row of pill-shaped chips.",
+    },
+    {
+      name: "ariaLabel",
+      kind: "input",
+      required: false,
+      type: "string | undefined",
+      defaultValue: "undefined",
+      description: "Accessible name for the `radiogroup` element.",
+    },
+    {
+      name: "optionClassNames",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Overrides the default classes applied to an unselected option.",
+    },
+    {
+      name: "selectedClassNames",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Overrides the default classes applied to the selected option.",
+    },
+    {
+      name: "containerClassNames",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Overrides the default layout classes on the options container.",
+    },
+    {
+      name: "disabledPredicate",
+      kind: "input",
+      required: false,
+      type: "(option: T) => boolean",
+      defaultValue: "() => false",
+      description: "Called with each option to decide whether it's disabled; return `true` to disable it. Defaults to enabling every option.",
+    },
+    {
+      name: "compareWith",
+      kind: "input",
+      required: false,
+      type: "(a: T, b: T) => boolean",
+      defaultValue: "(a, b) => a === b",
+      description: "Called with `(optionA, optionB)` to decide whether two options are the same selection — override for option objects that aren't reference-equal to the bound value (e.g. reloaded from an API). Defaults to `===`.",
+    },
+    {
+      name: "selectedItem",
+      kind: "output",
+      required: false,
+      type: "T",
+      defaultValue: "",
+      description: "Emits the chosen option when the user selects it, via click or arrow-key navigation.",
+    },
+  ],
+};

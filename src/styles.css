@@ -1,3 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+@import '@angular/cdk/overlay-prebuilt.css';
+@import './styles/theme-colors.css';
+@import './styles/theme-dark.css';
+@import './styles/animations.css';
+
+/*
+ * Color tokens live in ./styles/theme-colors.css — a generated file (see scripts/generate-theme.mjs
+ * and scripts/theme.seeds.json). Everything below is brand-agnostic (typography/spacing/shadows),
+ * unaffected by theme regeneration. Tailwind v4 merges `@theme` blocks across imported files, so
+ * this split is transparent to consumers of the compiled CSS.
+ */
+@theme {
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Spacing primitive: original config generated an 8px grid (index * 8px) up to index 64.
+     Tailwind v4 multiplies every spacing utility by this single base value, so setting
+     it to 8px reproduces that whole scale (and beyond) without enumerating each step. */
+  --spacing: 8px;
+
+  /* Border-radius primitive: everything below derives from --radius-base via calc(), so
+     dialing one value rescales every rounded-* utility in the app. Calibrated so the default
+     (0.5rem) reproduces Tailwind v4's own stock --radius-* scale exactly — purely additive,
+     no visual change until --radius-base itself is edited. */
+  --radius-base: 0.5rem;
+  --radius-xs: calc(var(--radius-base) * 0.25);
+  --radius-sm: calc(var(--radius-base) * 0.5);
+  --radius-md: calc(var(--radius-base) * 0.75);
+  --radius-lg: var(--radius-base);
+  --radius-xl: calc(var(--radius-base) * 1.5);
+  --radius-2xl: calc(var(--radius-base) * 2);
+  --radius-3xl: calc(var(--radius-base) * 3);
+  --radius-4xl: calc(var(--radius-base) * 4);
+  --radius: calc(var(--radius-base) * 0.5);
+
+  /* Border-width: convention, not a token — Tailwind v4 has no themeable border-width namespace
+     (`border`/`border-2` are fixed-value utilities, not var()-driven), so there's nothing for a
+     custom property to plug into. Plain `border`/`border-t/-b/-l/-r` (1px) is for structural/
+     static borders and dividers; `border-2`/`border-b-2` is reserved for interactive/selection
+     emphasis (checked radio/checkbox rings, selected chips, the active tab underline). Don't
+     introduce `border-4`/`8`/arbitrary widths without updating this note. */
+
+  /* Letter-spacing primitive, referenced by the whole type scale below. Deliberately named
+     outside Tailwind's reserved --tracking-* namespace so it doesn't also generate an unwanted
+     `tracking-base` utility class. */
+  --letter-spacing-base: 0.016rem;
+
+  /* Typography scale: display/heading/paragraph/label/link/caption, ported as-is (brand-agnostic).
+     Already semantic (named by purpose, not raw size) — only the previously-repeated
+     letter-spacing/weight literals below are factored into primitives; the scale itself is
+     unchanged. */
+  --text-display-xl: 4rem;
+  --text-display-xl--line-height: 76px;
+  --text-display-xl--font-weight: var(--font-weight-black);
+  --text-display-xl--letter-spacing: var(--letter-spacing-base);
+  --text-display-lg: 3.5rem;
+  --text-display-lg--line-height: 66px;
+  --text-display-lg--font-weight: var(--font-weight-black);
+  --text-display-lg--letter-spacing: var(--letter-spacing-base);
+  --text-display-md: 3rem;
+  --text-display-md--line-height: 58px;
+  --text-display-md--font-weight: var(--font-weight-black);
+  --text-display-md--letter-spacing: var(--letter-spacing-base);
+  --text-display-sm: 2.25rem;
+  --text-display-sm--line-height: 44px;
+  --text-display-sm--font-weight: var(--font-weight-black);
+  --text-display-sm--letter-spacing: var(--letter-spacing-base);
+
+  /* Heading's 700 weight is left as a literal on purpose: no existing --font-weight-* alias sits
+     at exactly 700 (medium:600, bold:800 bracket it), and inventing a usage-specific alias just
+     for this cluster would blur the naming convention (magnitude, not usage) for the rest of the
+     scale. */
+  --text-heading-xl: 2rem;
+  --text-heading-xl--line-height: 38px;
+  --text-heading-xl--font-weight: 700;
+  --text-heading-xl--letter-spacing: var(--letter-spacing-base);
+  --text-heading-lg: 1.5rem;
+  --text-heading-lg--line-height: 30px;
+  --text-heading-lg--font-weight: 700;
+  --text-heading-lg--letter-spacing: var(--letter-spacing-base);
+  --text-heading-md: 1.25rem;
+  --text-heading-md--line-height: 24px;
+  --text-heading-md--font-weight: 700;
+  --text-heading-md--letter-spacing: var(--letter-spacing-base);
+  --text-heading-sm: 1.125rem;
+  --text-heading-sm--line-height: 22px;
+  --text-heading-sm--font-weight: 700;
+  --text-heading-sm--letter-spacing: var(--letter-spacing-base);
+  --text-heading-xs: 1rem;
+  --text-heading-xs--line-height: 20px;
+  --text-heading-xs--font-weight: 700;
+  --text-heading-xs--letter-spacing: var(--letter-spacing-base);
+
+  --text-paragraph-lg: 1.125rem;
+  --text-paragraph-lg--line-height: 26px;
+  --text-paragraph-lg--letter-spacing: var(--letter-spacing-base);
+  --text-paragraph: 1rem;
+  --text-paragraph--line-height: 22px;
+  --text-paragraph--letter-spacing: var(--letter-spacing-base);
+  --text-paragraph-sm: 0.875rem;
+  --text-paragraph-sm--line-height: 20px;
+  --text-paragraph-sm--letter-spacing: var(--letter-spacing-base);
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 16px;
+  --text-caption--letter-spacing: var(--letter-spacing-base);
+
+  --text-link-lg: 1.125rem;
+  --text-link-lg--line-height: 26px;
+  --text-link-lg--font-weight: var(--font-weight-normal);
+  --text-link-lg--letter-spacing: var(--letter-spacing-base);
+  --text-link: 1rem;
+  --text-link--line-height: 22px;
+  --text-link--font-weight: var(--font-weight-normal);
+  --text-link--letter-spacing: var(--letter-spacing-base);
+  --text-link-sm: 0.875rem;
+  --text-link-sm--line-height: 20px;
+  --text-link-sm--font-weight: var(--font-weight-normal);
+  --text-link-sm--letter-spacing: var(--letter-spacing-base);
+
+  --text-label-xl: 1.125rem;
+  --text-label-xl--line-height: 24px;
+  --text-label-xl--font-weight: var(--font-weight-normal);
+  --text-label-xl--letter-spacing: var(--letter-spacing-base);
+  --text-label-lg: 1rem;
+  --text-label-lg--line-height: 24px;
+  --text-label-lg--font-weight: var(--font-weight-normal);
+  --text-label-lg--letter-spacing: var(--letter-spacing-base);
+  --text-label-md: 0.875rem;
+  --text-label-md--line-height: 24px;
+  --text-label-md--font-weight: var(--font-weight-normal);
+  --text-label-md--letter-spacing: var(--letter-spacing-base);
+  --text-label-sm: 0.875rem;
+  --text-label-sm--line-height: 20px;
+  --text-label-sm--font-weight: var(--font-weight-normal);
+  --text-label-sm--letter-spacing: var(--letter-spacing-base);
+  --text-label-xs: 0.75rem;
+  --text-label-xs--line-height: 16px;
+  --text-label-xs--font-weight: var(--font-weight-normal);
+  --text-label-xs--letter-spacing: var(--letter-spacing-base);
+
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-normal: 500;
+  --font-weight-medium: 600;
+  --font-weight-bold: 800;
+  --font-weight-black: 900;
+
+  --font-sans: 'Figtree', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --shadow-card: 0px 2px 8px 0px rgba(14, 21, 32, 0.08), 0px 0px 2px 0px rgba(14, 21, 32, 0.04);
+  --shadow-top-navbar: 0px 2px 12px 0px rgba(14, 21, 32, 0.08), 0px 1px 4px 0px rgba(14, 21, 32, 0.04);
+  --shadow-bottom-navbar: 0px -2px 12px 0px rgba(14, 21, 32, 0.08), 0px -1px 4px 0px rgba(14, 21, 32, 0.04);
+  --shadow-hover: 0px 4px 16px 0px rgba(14, 21, 32, 0.12), 0px 2px 4px 0px rgba(14, 21, 32, 0.1);
+  --shadow-notification: 0px 4px 20px 0px rgba(14, 21, 32, 0.16), 0px 0px 2px 0px rgba(14, 21, 32, 0.12);
+}
+
+body {
+  @apply bg-surface-white ;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbars, themed via the same surface/neutral semantic tokens as the rest of the app —
+   track follows --color-surface-*, thumb follows --color-neutral-*, so a re-theme recolors
+   scrollbars along with everything else with no separate scrollbar palette to maintain. */
+
+/* Modern browsers — Chrome 121+, Edge 121+, Firefox, Safari 18.2+ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-400) var(--color-surface-lighter);
+}
+
+/* Legacy WebKit — older Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--color-surface-lighter);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: var(--color-surface-light);
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: var(--color-surface-medium);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-neutral-400);
+  border-radius: 9999px;
+  min-height: 50px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-neutral-500);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-neutral-600);
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}

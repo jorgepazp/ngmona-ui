@@ -1,0 +1,34 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Separator</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Horizontal (decorative, default)</h2>
+    <div class="text-text-primary">
+      <p>Section one content.</p>
+      <ui-separator classNames="my-3"></ui-separator>
+      <p>Section two content.</p>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Vertical</h2>
+    <div class="flex items-center h-6 gap-3 text-text-primary">
+      <span>Profile</span>
+      <ui-separator orientation="vertical"></ui-separator>
+      <span>Settings</span>
+      <ui-separator orientation="vertical"></ui-separator>
+      <span>Logout</span>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Semantic (non-decorative)</h2>
+    <div class="text-text-primary">
+      <p>An article's content ends here.</p>
+      <ui-separator [decorative]="false" classNames="my-3"></ui-separator>
+      <p>Related articles begin below, meaningfully separated from the above.</p>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,12 @@
+@if (active()) {
+  <div
+    [id]="panelId()"
+    role="tabpanel"
+    [attr.aria-labelledby]="tabId()"
+    tabindex="0"
+    [class]="classNames()"
+
+  >
+    <ng-content></ng-content>
+  </div>
+}

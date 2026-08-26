@@ -1,0 +1,67 @@
+<div [class]="'flex flex-col ' + classNames()">
+  <header [class]="'items-center gap-2 px-4 h-7 shrink-0 border-b border-divider ' + mobileBarClass()">
+    <button
+      type="button"
+      aria-label="Open menu"
+      aria-haspopup="dialog"
+      [attr.aria-expanded]="mobileOpen()"
+      (click)="mobileOpen.set(true)"
+      class="flex items-center justify-center w-4 h-4 -ml-1 cursor-pointer text-text-primary hover:bg-surface-light rounded transition-colors"
+    >
+      <svg [lucideIcon]="menuIcon" [size]="20"></svg>
+    </button>
+    @if (title()) {
+      <span class="text-label-lg font-medium text-text-primary">{{ title() }}</span>
+    }
+  </header>
+
+  <div class="flex flex-1 min-h-0 relative ">
+    <aside [class]="desktopAsideClass() + ' max-h-dvh flex-col shrink-0 border-r sticky top-10 h-min border-divider overflow-y-auto'" [style.width]="width()">
+      @if (headerTemplate(); as h) {
+        <div class="px-4 pt-4 pb-2">
+          <ng-container [ngTemplateOutlet]="h"></ng-container>
+        </div>
+      }
+      <nav [class]="'flex-1 px-2 ' + navClassNames()" [attr.aria-label]="title() || 'Main'">
+        @if (contentTemplate(); as c) {
+          <ng-container [ngTemplateOutlet]="c"></ng-container>
+        }
+      </nav>
+      @if (footerTemplate(); as f) {
+        <div class="px-4 pb-4 pt-2 border-t border-divider">
+          <ng-container [ngTemplateOutlet]="f"></ng-container>
+        </div>
+      }
+    </aside>
+
+    <ui-drawer [(open)]="mobileOpen" side="left" [ariaLabel]="title() || 'Navigation'" [classNames]="'sm:w-72 !px-0 !py-0'">
+      <ng-template uiTemplate="header">
+        @if (headerTemplate(); as h) {
+          <div class="px-4 pt-5 pb-2">
+            <ng-container [ngTemplateOutlet]="h"></ng-container>
+          </div>
+        } @else if (title()) {
+          <div class="px-4 pt-5 pb-2 text-label-lg font-medium text-text-primary">{{ title() }}</div>
+        } @else {
+          <div class="pt-3"></div>
+        }
+      </ng-template>
+      <nav [class]="'px-2 ' + navClassNames()" [attr.aria-label]="title() || 'Main'" (click)="onMobileNavClick()">
+        @if (contentTemplate(); as c) {
+          <ng-container [ngTemplateOutlet]="c"></ng-container>
+        }
+      </nav>
+      <ng-template uiTemplate="footer">
+        @if (footerTemplate(); as f) {
+          <div class="px-4 pb-4 pt-2 border-t border-divider">
+            <ng-container [ngTemplateOutlet]="f"></ng-container>
+          </div>
+        }
+      </ng-template>
+    </ui-drawer>
+
+    <main class="flex-1 min-w-0 overflow-y-auto ">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</div>

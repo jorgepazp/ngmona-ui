@@ -1,0 +1,28 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Input</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Basic</h2>
+    <ui-input label="Email" placeholder="you@example.com" [icon]="mailIcon" [(value)]="text"></ui-input>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Password</h2>
+    <ui-input type="password" label="Password" placeholder="••••••••"></ui-input>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">States</h2>
+    <ui-input label="Success" state="success" caption="Looks good"></ui-input>
+    <ui-input label="Warning" state="warning" caption="Double check this"></ui-input>
+    <ui-input label="Error" state="error" caption="This field is required"></ui-input>
+    <ui-input label="Disabled" [disabled]="true" placeholder="Can't type here"></ui-input>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Search suggestions</h2>
+    <ui-input label="Country" placeholder="Search..." [searchIn]="countries"></ui-input>
+  </section>
+</div>

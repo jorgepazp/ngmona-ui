@@ -1,0 +1,34 @@
+@if (headerTemplate(); as tpl) {
+  <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+}
+
+<div role="radiogroup" [attr.aria-label]="ariaLabel() ?? null" [class]="containerClass()">
+  @for (option of options(); track option; let i = $index) {
+    <button
+      #optionRef
+      type="button"
+      role="radio"
+      [attr.aria-checked]="isSelected(option)"
+      [attr.aria-disabled]="disabledPredicate()(option) || null"
+      [tabIndex]="tabIndexFor(option, i)"
+      [class]="optionClass(option)"
+      (click)="selectItem(option)"
+      (keydown)="onKeydown($event, i)"
+    >
+      @if (optionTemplate(); as tpl) {
+        <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: option, index: i, selected: isSelected(option) }"></ng-container>
+      } @else {
+        <span class="flex gap-0.5 items-center select-none">
+          @if (isSelected(option)) {
+            <svg [lucideIcon]="checkIcon" [size]="16"></svg>
+          }
+          <span>{{ display(option) }}</span>
+        </span>
+      }
+    </button>
+  }
+</div>
+
+@if (footerTemplate(); as tpl) {
+  <ng-container [ngTemplateOutlet]="tpl"></ng-container>
+}

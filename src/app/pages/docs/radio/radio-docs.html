@@ -1,0 +1,12 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Radio</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-2">
+    <ui-radio name="group" value="a" [checked]="picked() === 'a'" (selected)="picked.set('a')" label="Option A"></ui-radio>
+    <ui-radio name="group" value="b" [checked]="picked() === 'b'" (selected)="picked.set('b')" label="Option B"></ui-radio>
+    <ui-radio name="group" value="c" [checked]="picked() === 'c'" (selected)="picked.set('c')" label="Disabled" [disabled]="true"></ui-radio>
+    <p class="text-paragraph-sm text-text-subdued">picked = {{ picked() }}</p>
+  </section>
+</div>

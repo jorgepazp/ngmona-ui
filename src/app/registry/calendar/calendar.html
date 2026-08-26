@@ -1,0 +1,65 @@
+<div class=" text-text-primary select-none">
+  <div class="w-full flex justify-between items-center gap-4 px-1 mb-2">
+    <h2 class="text-heading-md font-medium">{{ monthLabel() }}</h2>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="rounded-full border-none bg-surface-light w-3 h-3 flex justify-center items-center transition-all disabled:opacity-30 disabled:!cursor-not-allowed enabled:hover:bg-surface-hover cursor-pointer"
+        [disabled]="!canGoToPreviousMonth()"
+        (click)="previousMonth()"
+        aria-label="Previous month"
+      >
+        <svg lucideChevronLeft [size]="16"></svg>
+      </button>
+      <button
+        type="button"
+        class="rounded-full border-none bg-surface-light w-3 h-3 flex justify-center items-center transition-all disabled:opacity-30 disabled:!cursor-not-allowed enabled:hover:bg-surface-hover cursor-pointer"
+        [disabled]="!canGoToNextMonth()"
+        (click)="nextMonth()"
+        aria-label="Next month"
+      >
+        <svg lucideChevronRight [size]="16"></svg>
+      </button>
+    </div>
+  </div>
+
+  <div role="grid" [attr.aria-label]="monthLabel()">
+    <div class="grid grid-cols-7 border-b border-divider" role="row">
+      @for (day of weekdayHeaders(); track day.index) {
+        <div
+          role="columnheader"
+          class="w-6 h-6 text-lg uppercase flex items-center justify-center"
+          [class]="isWeekend(day.index) ? 'text-surface-danger' : ''"
+          [attr.aria-label]="day.name"
+        >
+          {{ day.name.slice(0, 1) }}
+        </div>
+      }
+    </div>
+
+    <div>
+      @for (week of weeks(); track $index) {
+        <div class="grid grid-cols-7" role="row">
+          @for (day of week; track $index) {
+            <div class="min-w-[48px] h-6 w-6" role="gridcell">
+              @if (day) {
+                <button
+                  type="button"
+                  class="flex rounded-full justify-center items-center h-full w-full transition-all"
+                  [class]="dayClass(day)"
+                  [disabled]="isDisabled() || isDayDisabled(day)"
+                  [attr.aria-current]="isToday(day) ? 'date' : null"
+                  [attr.aria-pressed]="isSelected(day)"
+                  [attr.aria-label]="dayLabel(day)"
+                  (click)="selectDay(day)"
+                >
+                  {{ day.getDate() }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

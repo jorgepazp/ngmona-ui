@@ -1,0 +1,11 @@
+{
+  "name": "@ngmona-ui/color",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Generates a perceptually-uniform OKLCH color ramp (and derived semantic tokens) from a single seed color per role.",
+  "type": "module",
+  "main": "./src/index.js",
+  "dependencies": {
+    "culori": "^4.0.1"
+  }
+}

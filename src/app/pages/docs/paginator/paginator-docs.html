@@ -1,0 +1,26 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Paginator</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Driving a list (132 items, 10 per page)</h2>
+    <ul class="grid grid-cols-2 gap-1 text-paragraph-sm text-text-primary">
+      @for (item of pageItems(); track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+    <ui-paginator [(page)]="page" [pageCount]="pageCount()"></ui-paginator>
+    <p class="text-paragraph-sm text-text-subdued">page = {{ page() + 1 }} / {{ pageCount() }}</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Many pages (ellipsis + wider sibling range)</h2>
+    <ui-paginator [(page)]="manyPagesCurrent" [pageCount]="40" [siblingCount]="2"></ui-paginator>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Disabled</h2>
+    <ui-paginator [page]="2" [pageCount]="10" [disabled]="true"></ui-paginator>
+  </section>
+</div>

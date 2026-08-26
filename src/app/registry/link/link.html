@@ -1,0 +1,23 @@
+<a
+  [attr.href]="disabled() ? null : href()"
+  [attr.target]="target() ?? null"
+  [attr.rel]="opensNewTab() ? 'noopener noreferrer' : null"
+  [attr.aria-disabled]="disabled() || null"
+  [class]="linkClass()"
+  (click)="onClick($event)"
+>
+  @if (icon(); as ic) {
+    @if (iconPos() === 'left') {
+      <svg [lucideIcon]="ic" [size]="16"></svg>
+    }
+  }
+  <ng-content></ng-content>
+  @if (icon(); as ic) {
+    @if (iconPos() === 'right') {
+      <svg [lucideIcon]="ic" [size]="16"></svg>
+    }
+  }
+  @if (opensNewTab()) {
+    <span class="sr-only">(opens in a new tab)</span>
+  }
+</a>

@@ -1,0 +1,81 @@
+// GENERATED FILE — do not edit by hand. Run `npm run api-docs` to regenerate.
+import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
+
+export const tooltipApi: ComponentApiDoc = {
+  name: "Tooltip",
+  description: "Floating tooltip panel. Not meant to be dropped into a template directly — `TooltipDirective` creates and positions instances of this on demand. Kept as its own component (rather than inlined into the directive) so it can also be shown/positioned manually if ever needed. The original panel carried a set of `before:border-*`/`before:w-0`/`before:h-0` classes meant to draw a CSS border-triangle caret, but the caret is actually rendered by the separate rotated `<span>` square below — those `before:*` utilities were dead weight (a 0×0, invisible pseudo element) left over from an earlier implementation, so they're dropped here. The position class also carried static `left-*`/`top-*`/`bottom-*` utilities that did nothing: this element's position comes from the `[style.left]`/`[style.top]` bindings the directive sets, and an inline style always wins over a class for the same CSS property, so those utilities never had any effect either. Both are removed for a much shorter, honest class list.",
+  props: [
+    {
+      name: "text",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Plain-text body content; ignored when `template` is provided.",
+    },
+    {
+      name: "heading",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Optional bold heading shown above the body content.",
+    },
+    {
+      name: "template",
+      kind: "input",
+      required: false,
+      type: "TemplateRef<unknown> | undefined",
+      defaultValue: "undefined",
+      description: "Custom body content, rendered instead of `text` when set.",
+    },
+    {
+      name: "position",
+      kind: "input",
+      required: false,
+      type: "TooltipPosition",
+      defaultValue: "'right'",
+      description: "Side of the anchor element the panel is placed on.",
+    },
+    {
+      name: "left",
+      kind: "input",
+      required: false,
+      type: "number",
+      defaultValue: "0",
+      description: "Absolute `left` pixel coordinate the panel is positioned at, set by `TooltipDirective`.",
+    },
+    {
+      name: "top",
+      kind: "input",
+      required: false,
+      type: "number",
+      defaultValue: "0",
+      description: "Absolute `top` pixel coordinate the panel is positioned at, set by `TooltipDirective`.",
+    },
+    {
+      name: "width",
+      kind: "input",
+      required: false,
+      type: "number",
+      defaultValue: "231",
+      description: "Max width of the panel in pixels.",
+    },
+    {
+      name: "visible",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "false",
+      description: "Shows or hides the panel.",
+    },
+    {
+      name: "tooltipId",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Id applied to the panel element so a trigger can reference it via `aria-describedby`.",
+    },
+  ],
+};

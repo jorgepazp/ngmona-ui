@@ -1,0 +1,88 @@
+<nav class="bg-neutral-50 sticky top-0 z-10 flex items-center justify-start h-10 border-b border-solid border-divider">
+  <img src="ngmona-logo.svg" alt="ui-kit logo" class="w-24 h-auto mx-4" />
+   <div class="flex items-center justify-between gap-2">
+      <a routerLink="/" class="flex flex-col leading-tight">
+        <span class="text-label-lg font-medium text-text-primary">ui-kit</span>
+        <span class="text-paragraph-sm text-text-subdued">component reference</span>
+      </a>
+      <ui-button
+        variant="icon"
+        [icon]="theme.theme() === 'dark' ? sunIcon : moonIcon"
+        [ariaLabel]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        (clicked)="theme.toggle()"
+      ></ui-button>
+    </div>
+</nav>
+<ui-sidebar title="ui-kit" breakpoint="md" navClassNames="flex flex-col gap-4 pb-4">
+  <ng-template uiTemplate="header">
+ 
+    <ui-search-input class="block" placeholder="Search components…" [(value)]="search"></ui-search-input>
+  </ng-template>
+
+  <ng-template uiTemplate="content">
+    <section class="mb-2">
+      <small class="px-2 text-text-subdued">GUIDES</small>
+      <ul class="list-none m-0 p-0 flex flex-col">
+        <li>
+          <a
+            routerLink="/guides/installation"
+            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
+            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+          >
+            Installation
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/guides/usage"
+            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
+            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+          >
+            Usage
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/guides/theming"
+            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
+            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+          >
+            Theming
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/guides/theme-editor"
+            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
+            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+          >
+            Theme editor
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <small class="px-2 text-text-subdued">COMPONENTS</small>
+      <ul class="list-none m-0 p-0 flex h-full max-h-full overflow-y-auto flex-col">
+        @for (item of filteredNavItems(); track item.path) {
+          <li>
+            <a
+              [routerLink]="['/components', item.path]"
+              routerLinkActive="bg-surface-medium text-primary-500 font-medium"
+              class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+            >
+              {{ item.label }}
+            </a>
+          </li> 
+        } @empty {
+          <li class="px-2 py-1 text-label-sm text-text-subdued">No matches</li>
+        }
+      </ul>
+    </section>
+  </ng-template>
+
+  <router-outlet />
+</ui-sidebar>
+
+<ui-toaster />

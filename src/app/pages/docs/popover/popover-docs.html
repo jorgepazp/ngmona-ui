@@ -1,0 +1,16 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Popover</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <ui-popover [(open)]="open" [panelClass]="'w-64'">
+      <ui-button trigger>Toggle popover</ui-button>
+      <div class="flex flex-col gap-1">
+        <p class="text-label-md text-text-primary font-medium">Popover content</p>
+        <p class="text-paragraph-sm text-text-subdued">Any content can go here — it's only rendered while the popover is open.</p>
+      </div>
+    </ui-popover>
+    <p class="text-paragraph-sm text-text-subdued">open = {{ open() }}</p>
+  </section>
+</div>

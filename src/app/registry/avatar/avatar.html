@@ -1,0 +1,12 @@
+<span [class]="avatarClass()" [attr.role]="showImage() ? null : 'img'" [attr.aria-label]="showImage() ? null : alt() || null">
+  @if (showImage()) {
+    <img [src]="src()" [alt]="alt()" class="w-full h-full object-cover" (error)="onImgError()" />
+  } @else if (initials()) {
+    <span aria-hidden="true">{{ initials() }}</span>
+  } @else {
+    <svg [lucideIcon]="icon() ?? fallbackIcon" [size]="iconSize()" aria-hidden="true"></svg>
+  }
+  @if (status() !== 'none') {
+    <span [class]="statusClass()" aria-hidden="true"></span>
+  }
+</span>

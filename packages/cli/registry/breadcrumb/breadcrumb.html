@@ -1,0 +1,19 @@
+<nav [attr.aria-label]="ariaLabel()" [class]="navClass()">
+  <ol class="flex flex-wrap items-center gap-1 text-label-md">
+    @for (item of items(); track item; let last = $last, i = $index) {
+      <li class="flex items-center gap-1">
+        @if (last) {
+          <span class="flex items-center gap-1 text-text-primary" aria-current="page">
+            @if (item.icon; as ic) {
+              <svg [lucideIcon]="ic" [size]="14"></svg>
+            }
+            {{ item.label }}
+          </span>
+        } @else {
+          <ui-link [href]="item.href" [icon]="item.icon" (clicked)="onItemClick(item, i, $event)">{{ item.label }}</ui-link>
+          <svg [lucideIcon]="separatorIcon()" [size]="14" class="text-icon-subdued" aria-hidden="true"></svg>
+        }
+      </li>
+    }
+  </ol>
+</nav>

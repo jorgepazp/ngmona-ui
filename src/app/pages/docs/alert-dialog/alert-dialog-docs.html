@@ -1,0 +1,38 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Alert Dialog</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Basic</h2>
+    <div>
+      <ui-button (clicked)="defaultOpen.set(true)">Leave page</ui-button>
+    </div>
+    <ui-alert-dialog
+      [open]="defaultOpen()"
+      heading="Leave without saving?"
+      message="You have unsaved changes. If you leave now, they'll be lost."
+      confirmLabel="Leave"
+      cancelLabel="Stay"
+      (confirmed)="defaultOpen.set(false)"
+      (cancelled)="defaultOpen.set(false)"
+    ></ui-alert-dialog>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Danger variant, with loading confirm</h2>
+    <div>
+      <ui-button variant="secondary" (clicked)="dangerOpen.set(true)">Delete account</ui-button>
+    </div>
+    <ui-alert-dialog
+      [open]="dangerOpen()"
+      heading="Delete account"
+      message="This action can't be undone. This will permanently delete your account and all associated data."
+      confirmLabel="Delete"
+      variant="danger"
+      [loading]="loading()"
+      (confirmed)="confirmDelete()"
+      (cancelled)="dangerOpen.set(false)"
+    ></ui-alert-dialog>
+  </section>
+</div>

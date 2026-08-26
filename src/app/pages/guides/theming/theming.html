@@ -1,0 +1,120 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <div class="flex flex-col gap-2">
+    <h1 class="text-heading-xl text-text-primary">Theming</h1>
+    <p class="text-paragraph text-text-subdued">
+      Every color in this library comes from a small set of seed colors. Each seed expands into a
+      ramp of eleven steps in OKLCH color space, which keeps perceived contrast even from step to
+      step no matter the hue. Radius, spacing, and type also come from a small set of primitives,
+      so building a new theme means changing a handful of values, not hundreds.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Roles</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      There are seven color roles: <code>primary</code>, <code>accent</code>, <code>danger</code>,
+      <code>info</code>, <code>warning</code>, <code>success</code>, and <code>neutral</code>.
+      Each role exposes its ramp as Tailwind utilities and CSS custom properties, from
+      <code>50</code> (lightest) to <code>950</code> (darkest).
+    </p>
+    <div class="flex flex-col gap-3">
+      @for (role of roles; track role) {
+        <div class="flex flex-col gap-1">
+          <span class="text-label-sm text-text-primary capitalize">{{ role }}</span>
+          <div class="flex rounded overflow-hidden border border-divider">
+            @for (step of steps; track step) {
+              <div
+                class="flex-1 h-10"
+                [style.background-color]="swatchColor(role, step)"
+                [title]="role + '-' + step"
+              ></div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    <p class="text-paragraph-sm text-text-subdued">
+      Want to see this update live? Try the
+      <a routerLink="/guides/theme-editor" class="text-link hover:text-link-hover">theme editor</a>.
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Semantic tokens</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      The seven ramps feed a semantic layer of tokens grouped by purpose: surface, text, icon,
+      link, border, and divider. Components use these semantic tokens, such as
+      <code>bg-surface-white</code>, <code>text-text-subdued</code>, or
+      <code>border-divider</code>, instead of a raw ramp step. Each semantic token is a live
+      <code>var()</code> reference to a ramp step (the one token with transparency uses
+      <code>color-mix()</code> instead). Changing a seed color updates every semantic token
+      derived from it automatically, with no separate remapping step.
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Base tokens</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Radius, letter spacing, typography, and shadows live in <code>styles.css</code> as plain
+      values, not seeds, since they need no color math. Change <code>--radius-base</code> to
+      rescale every <code>rounded</code> utility at once. Change
+      <code>--letter-spacing-base</code> to adjust tracking across the whole type scale. Edit
+      these directly since there is no generation step for them.
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Generating the theme</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Inside this repository, seed colors live in <code>scripts/theme.seeds.json</code>, one hex
+      value per role:
+    </p>
+    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&#123;
+  "primary": "#D5006C",
+  "accent": "#3B3CF7",
+  "danger": "#FF4B4B",
+  "info": "#007EFF",
+  "warning": "#FFC058",
+  "success": "#15CC96",
+  "neutral": "#7A828C"
+&#125;</code></pre>
+    <p class="text-paragraph-sm text-text-subdued">After editing the seeds, regenerate the stylesheet:</p>
+    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npm run theme:generate</code></pre>
+    <p class="text-paragraph-sm text-text-subdued">
+      This rebuilds <code>src/styles/theme-colors.css</code> from the seeds.
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Using the CLI</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      A project that installs components through the CLI runs <code>npx ngmona-ui init</code>
+      once. Init asks for a seed color per role, then writes two files: a theme file with the
+      color ramps, and a tokens file with radius, typography, and shadows. Both are imported into
+      your stylesheet for you.
+    </p>
+    <p class="text-paragraph-sm text-text-subdued">
+      To change colors later without repeating the whole setup, run the theme command:
+    </p>
+    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui theme --primary "#D5006C" --accent "#3B3CF7"</code></pre>
+    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+      <li>Pass any subset of role flags. Roles left out keep their current seed color.</li>
+      <li>Run the theme command with no flags to get prompted for every role instead.</li>
+      <li>The command rewrites the generated theme file and updates the seeds stored in <code>ngmona.json</code>.</li>
+    </ul>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Editing generated CSS by hand</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      <code>theme-colors.css</code> is generated. To change a whole ramp, edit its seed and
+      regenerate instead of editing the file. Ramp steps such as
+      <code>--color-primary-500</code> are real literal values, so editing one by hand is safe and
+      only affects that step. Everything else in the file, including the bare
+      <code>--color-primary</code> alias and every semantic token, is a reference to a ramp step,
+      so editing a ramp step cascades to everything derived from it. To change one semantic token
+      only, override that specific property somewhere else, such as <code>theme-dark.css</code> or
+      your own stylesheet, instead of editing the primitive it points at.
+    </p>
+  </section>
+</div>

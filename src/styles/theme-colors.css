@@ -1,0 +1,185 @@
+/*
+ * GENERATED FILE — do not hand-maintain the file as a whole. To change a brand color,
+ * edit scripts/theme.seeds.json and re-run `npm run theme:generate`.
+ *
+ * Ramp steps (--color-<role>-<step>) are real literals, safe to hand-edit individually.
+ * Everything else (the bare --color-<role> alias, and every semantic token below) is a
+ * var()/color-mix() reference to a ramp step — editing a ramp step cascades to every alias
+ * and semantic token derived from it. To change just one semantic token, override that
+ * specific property downstream instead of editing the primitive it points at.
+ *
+ * `static` (not plain `@theme`) is required: Tailwind v4 otherwise only emits a theme
+ * variable into the compiled CSS when some utility class in the scanned templates
+ * literally references it. Most ramp steps (e.g. `primary-950`) are never used as a
+ * Tailwind utility directly — they still need to exist as real custom properties for
+ * anything reading them via var()/getComputedStyle outside of a Tailwind class, e.g. the
+ * docs app's color-palette guide.
+ */
+@theme static {
+  --color-primary: var(--color-primary-500);
+  --color-primary-50: oklch(98% 0.011 3.1);
+  --color-primary-100: oklch(93% 0.036 8.6);
+  --color-primary-200: oklch(87% 0.072 9.9);
+  --color-primary-300: oklch(81% 0.113 10.3);
+  --color-primary-400: oklch(74% 0.162 11);
+  --color-primary-500: oklch(68% 0.188 11.8);
+  --color-primary-600: oklch(54% 0.182 11.8);
+  --color-primary-700: oklch(42% 0.168 11.9);
+  --color-primary-800: oklch(31% 0.123 15.4);
+  --color-primary-900: oklch(20% 0.078 17.3);
+  --color-primary-950: oklch(12% 0.049 20.4);
+
+  --color-accent: var(--color-accent-500);
+  --color-accent-50: oklch(99% 0.01 219.6);
+  --color-accent-100: oklch(92% 0.037 254.4);
+  --color-accent-200: oklch(84% 0.079 260.3);
+  --color-accent-300: oklch(76% 0.124 262.3);
+  --color-accent-400: oklch(67% 0.175 264.4);
+  --color-accent-500: oklch(58% 0.199 264.7);
+  --color-accent-600: oklch(47% 0.193 264.7);
+  --color-accent-700: oklch(36% 0.179 264.7);
+  --color-accent-800: oklch(26% 0.155 264.7);
+  --color-accent-900: oklch(18% 0.121 265.5);
+  --color-accent-950: oklch(12% 0.08 266.8);
+
+  --color-danger: var(--color-danger-500);
+  --color-danger-50: oklch(98% 0.011 21.2);
+  --color-danger-100: oklch(92% 0.041 19.2);
+  --color-danger-200: oklch(84% 0.088 18.8);
+  --color-danger-300: oklch(76% 0.144 18.6);
+  --color-danger-400: oklch(68% 0.207 19);
+  --color-danger-500: oklch(60% 0.232 19.2);
+  --color-danger-600: oklch(49% 0.198 21.7);
+  --color-danger-700: oklch(38% 0.155 22.4);
+  --color-danger-800: oklch(28% 0.112 23.6);
+  --color-danger-900: oklch(18% 0.073 25.7);
+  --color-danger-950: oklch(12% 0.047 28.7);
+
+  --color-info: var(--color-info-500);
+  --color-info-50: oklch(99% 0.01 219.6);
+  --color-info-100: oklch(92% 0.037 254.4);
+  --color-info-200: oklch(84% 0.079 260.3);
+  --color-info-300: oklch(76% 0.124 262.3);
+  --color-info-400: oklch(67% 0.175 264.4);
+  --color-info-500: oklch(58% 0.199 264.7);
+  --color-info-600: oklch(47% 0.193 264.7);
+  --color-info-700: oklch(36% 0.179 264.7);
+  --color-info-800: oklch(26% 0.155 264.7);
+  --color-info-900: oklch(18% 0.121 265.5);
+  --color-info-950: oklch(12% 0.08 266.8);
+
+  --color-warning: var(--color-warning-500);
+  --color-warning-50: oklch(98% 0.025 89.3);
+  --color-warning-100: oklch(94% 0.049 77.5);
+  --color-warning-200: oklch(90% 0.081 71.9);
+  --color-warning-300: oklch(85% 0.115 69.1);
+  --color-warning-400: oklch(81% 0.146 65.3);
+  --color-warning-500: oklch(76% 0.164 64.7);
+  --color-warning-600: oklch(60% 0.143 58.9);
+  --color-warning-700: oklch(46% 0.112 57.2);
+  --color-warning-800: oklch(33% 0.081 54.3);
+  --color-warning-900: oklch(20% 0.054 48.8);
+  --color-warning-950: oklch(12% 0.036 40.4);
+
+  --color-success: var(--color-success-500);
+  --color-success-50: oklch(99% 0.022 156.1);
+  --color-success-100: oklch(93% 0.044 154.5);
+  --color-success-200: oklch(85% 0.07 154.5);
+  --color-success-300: oklch(78% 0.095 154.5);
+  --color-success-400: oklch(69% 0.114 154.5);
+  --color-success-500: oklch(60% 0.127 154.5);
+  --color-success-600: oklch(48% 0.122 154);
+  --color-success-700: oklch(38% 0.104 150.5);
+  --color-success-800: oklch(27% 0.08 147.5);
+  --color-success-900: oklch(18% 0.056 144.7);
+  --color-success-950: oklch(11% 0.038 142.5);
+
+  --color-neutral: var(--color-neutral-500);
+  --color-neutral-50: oklch(99% 0.005 264.1);
+  --color-neutral-100: oklch(92% 0.011 268.5);
+  --color-neutral-200: oklch(82% 0.017 268.5);
+  --color-neutral-300: oklch(72% 0.023 268.5);
+  --color-neutral-400: oklch(61% 0.027 268.5);
+  --color-neutral-500: oklch(50% 0.03 268.5);
+  --color-neutral-600: oklch(40% 0.029 268.5);
+  --color-neutral-700: oklch(32% 0.027 268.5);
+  --color-neutral-800: oklch(23% 0.023 268.5);
+  --color-neutral-900: oklch(15% 0.02 268.5);
+  --color-neutral-950: oklch(10% 0.015 268.5);
+
+  /* Semantic surface scale */
+  --color-surface-white: var(--color-white);
+  --color-surface-lighter: var(--color-neutral-50);
+  --color-surface-light: var(--color-neutral-100);
+  --color-surface-medium: var(--color-neutral-300);
+  --color-surface-dark: var(--color-neutral-500);
+  --color-surface-enabled: var(--color-neutral-100);
+  --color-surface-enabled-light: var(--color-white);
+  --color-surface-disabled: var(--color-neutral-300);
+  --color-surface-hover: var(--color-neutral-300);
+  --color-surface-active: var(--color-primary-500);
+  --color-surface-active-inverse: var(--color-white);
+  --color-surface-backdrop: color-mix(in oklab, var(--color-neutral-900) 50%, transparent);
+  --color-surface-success: var(--color-success-700);
+  --color-surface-success-light: var(--color-success-100);
+  --color-surface-info: var(--color-info-700);
+  --color-surface-info-light: var(--color-info-100);
+  --color-surface-danger: var(--color-danger-700);
+  --color-surface-danger-light: var(--color-danger-100);
+  --color-surface-warning: var(--color-warning-700);
+  --color-surface-warning-light: var(--color-warning-100);
+  /* Semantic text scale */
+  --color-text-primary: var(--color-neutral-600);
+  --color-text-secondary: var(--color-neutral-800);
+  --color-text-subdued: var(--color-neutral-400);
+  --color-text-disabled: var(--color-neutral-200);
+  --color-text-primary-inverse: var(--color-white);
+  --color-text-active: var(--color-primary-500);
+  --color-text-active-light: var(--color-primary-300);
+  --color-text-active-inverse: var(--color-white);
+  --color-text-success: var(--color-success-700);
+  --color-text-info: var(--color-info-800);
+  --color-text-danger: var(--color-danger-700);
+  --color-text-warning: var(--color-warning-700);
+  /* Semantic icon scale */
+  --color-icon-default: var(--color-neutral-600);
+  --color-icon-subdued: var(--color-neutral-400);
+  --color-icon-disabled: var(--color-neutral-200);
+  --color-icon-default-inverse: var(--color-white);
+  --color-icon-success: var(--color-success-700);
+  --color-icon-success-light: var(--color-success-500);
+  --color-icon-info: var(--color-info-700);
+  --color-icon-info-light: var(--color-info-500);
+  --color-icon-danger: var(--color-danger-700);
+  --color-icon-danger-light: var(--color-danger-500);
+  --color-icon-warning: var(--color-warning-700);
+  --color-icon-warning-light: var(--color-warning-500);
+  --color-icon-active: var(--color-primary-500);
+  --color-icon-active-light: var(--color-primary-300);
+  /* Semantic link scale */
+  --color-link: var(--color-info-500);
+  --color-link-hover: var(--color-info-300);
+  --color-link-pressed: var(--color-info-800);
+  --color-link-visited: #4a2187;
+  --color-link-disabled: var(--color-neutral-200);
+  --color-link-inverse: var(--color-white);
+  --color-link-hover-inverse: color-mix(in oklab, var(--color-white) 75%, transparent);
+  --color-link-pressed-inverse: var(--color-white);
+  --color-link-disabled-inverse: color-mix(in oklab, var(--color-white) 40%, transparent);
+  --color-link-visited-inverse: #c2ccf5;
+  /* Semantic border scale */
+  --color-border-neutral-light: var(--color-neutral-50);
+  --color-border-neutral: var(--color-neutral-100);
+  --color-border-neutral-medium: var(--color-neutral-200);
+  --color-border-neutral-dark: var(--color-neutral-400);
+  --color-border-state: var(--color-neutral-200);
+  --color-border-hover: var(--color-neutral-400);
+  --color-border-focused: var(--color-neutral-800);
+  --color-border-disabled: var(--color-neutral-300);
+  --color-border-active: var(--color-primary-500);
+  /* Divider scale */
+  --color-divider-light: var(--color-neutral-50);
+  --color-divider: var(--color-neutral-100);
+  --color-divider-medium: var(--color-neutral-500);
+  --color-divider-dark: var(--color-neutral-600);
+}

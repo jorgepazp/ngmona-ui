@@ -1,0 +1,34 @@
+<div
+  #container
+  class="relative flex w-full h-full min-h-0 min-w-0 rounded border border-solid border-neutral-100 overflow-hidden"
+  [class]="(direction() === 'vertical' ? 'flex-col' : 'flex-row') + ' ' + classNames()"
+>
+  <ng-content></ng-content>
+
+  @for (position of handlePositions(); track $index) {
+    <div
+      role="separator"
+      tabindex="0"
+      [attr.aria-orientation]="direction() === 'horizontal' ? 'vertical' : 'horizontal'"
+      [attr.aria-valuenow]="round(position)"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [attr.aria-label]="'Resize between panel ' + ($index + 1) + ' and ' + ($index + 2)"
+      class="group absolute z-10 flex items-center justify-center touch-none select-none outline-none"
+      [class]="
+        (direction() === 'horizontal' ? 'top-0 bottom-0 w-2 -ml-1 cursor-col-resize' : 'left-0 right-0 h-2 -mt-1 cursor-row-resize') +
+        ' ' +
+        handleClassNames()
+      "
+      [style.left.%]="direction() === 'horizontal' ? position : null"
+      [style.top.%]="direction() === 'vertical' ? position : null"
+      (pointerdown)="startDrag($event, $index)"
+      (keydown)="onHandleKeydown($event, $index)"
+    >
+      <span
+        class="pointer-events-none rounded-full bg-neutral-100 transition-colors group-hover:bg-primary-500 group-focus-visible:bg-primary-500"
+        [class]="direction() === 'horizontal' ? 'w-[3px] h-6' : 'h-[3px] w-6'"
+      ></span>
+    </div>
+  }
+</div>

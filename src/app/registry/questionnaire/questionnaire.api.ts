@@ -1,0 +1,81 @@
+// GENERATED FILE — do not edit by hand. Run `npm run api-docs` to regenerate.
+import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
+
+export const questionnaireApi: ComponentApiDoc = {
+  name: "Questionnaire",
+  description: "One-question-at-a-time survey flow: a \"Question X of Y\" progress header, a lettered single-select option list (WAI-ARIA radiogroup — roving tabindex, arrow-key navigation), an optional free-text fallback field, and Next/Back navigation. Each step's answer is either a picked option or the free-text value, never both. Fully controlled: `stepIndex` and `answers` are both `model()`s the caller can read/seed/bind, and `completed` fires with the full answer set when Next is pressed on the last step.",
+  props: [
+    {
+      name: "steps",
+      kind: "input",
+      required: true,
+      type: "readonly QuestionnaireStep[]",
+      defaultValue: "",
+      description: "Ordered list of questions to step through.",
+    },
+    {
+      name: "stepIndex",
+      kind: "model",
+      required: false,
+      type: "number",
+      defaultValue: "0",
+      description: "Zero-based index of the currently shown step. Two-way bindable via `[(stepIndex)]`.",
+    },
+    {
+      name: "answers",
+      kind: "model",
+      required: false,
+      type: "QuestionnaireAnswer[]",
+      defaultValue: "[]",
+      description: "Collected answers, one per visited step. Two-way bindable; seed it to resume a flow in progress.",
+    },
+    {
+      name: "nextLabel",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "'Next'",
+      description: "Label for the Next button on every step except the last.",
+    },
+    {
+      name: "finishLabel",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "'Finish'",
+      description: "Label for the Next button on the last step.",
+    },
+    {
+      name: "backLabel",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "'Back'",
+      description: "Label for the Back button, hidden entirely on the first step.",
+    },
+    {
+      name: "classNames",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Extra utility classes appended to the root element.",
+    },
+    {
+      name: "completed",
+      kind: "output",
+      required: false,
+      type: "QuestionnaireAnswer[]",
+      defaultValue: "",
+      description: "Fires with the full answer set when Next is pressed on the last step.",
+    },
+    {
+      name: "stepChange",
+      kind: "output",
+      required: false,
+      type: "number",
+      defaultValue: "",
+      description: "Fires with the new index whenever the step changes via Next/Back.",
+    },
+  ],
+};

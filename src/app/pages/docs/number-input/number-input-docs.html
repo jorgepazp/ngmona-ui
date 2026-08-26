@@ -1,0 +1,23 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Number Input</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Two-way binding</h2>
+    <ui-number-input label="Quantity" [min]="0" [max]="10" [(value)]="quantity"></ui-number-input>
+    <p class="text-paragraph-sm text-text-subdued">quantity = {{ quantity() }}</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Step</h2>
+    <ui-number-input label="Step of 5" [min]="0" [max]="100" [step]="5" [value]="10"></ui-number-input>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">States</h2>
+    <ui-number-input label="Success" state="success" caption="Looks good" [value]="3"></ui-number-input>
+    <ui-number-input label="Error" state="error" caption="Must be at least 1" [value]="0" [min]="1"></ui-number-input>
+    <ui-number-input label="Disabled" [disabled]="true" [value]="2"></ui-number-input>
+  </section>
+</div>

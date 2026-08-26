@@ -1,0 +1,8 @@
+<div
+  class="flex items-stretch w-fit rounded border border-solid border-neutral-100 bg-surface-white transition-all divide-x divide-neutral-100 overflow-hidden outline outline-[1.5px] outline-transparent hover:border-neutral-300 focus-within:!border-transparent focus-within:outline-neutral-800"
+  [class]="wrapperClass() + ' ' + classNames()"
+>
+  <ng-content select="[prefix]"></ng-content>
+  <ng-content></ng-content>
+  <ng-content select="[suffix]"></ng-content>
+</div>

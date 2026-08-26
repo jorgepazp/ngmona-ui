@@ -1,0 +1,94 @@
+<div class="flex flex-col gap-6">
+  @if (doc().description) {
+    <p class="text-paragraph text-text-primary">{{ doc().description }}</p>
+  }
+
+  @if (inputs().length > 0) {
+    <div class="flex flex-col gap-2">
+      <h2 class="text-label-lg text-text-subdued">Inputs</h2>
+      <ui-table>
+        <thead>
+          <tr uiTableRow>
+            <th uiTableHeadCell>Name</th>
+            <th uiTableHeadCell>Type</th>
+            <th uiTableHeadCell>Default</th>
+            <th uiTableHeadCell>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prop of inputs(); track prop.name) {
+            <tr uiTableRow>
+              <td uiTableCell class="whitespace-nowrap">
+                <code class="text-label-sm">{{ prop.name }}</code>
+                @if (prop.required) {
+                  <span class="ml-1 text-label-xs text-danger-600" title="Required">*</span>
+                }
+              </td>
+              <td uiTableCell class="whitespace-nowrap"><code class="text-label-xs text-text-subdued">{{ prop.type }}</code></td>
+              <td uiTableCell class="whitespace-nowrap">
+                <code class="text-label-xs text-text-subdued">{{ prop.defaultValue || '—' }}</code>
+              </td>
+              <td uiTableCell class="text-paragraph-sm text-text-subdued">{{ prop.description || '—' }}</td>
+            </tr>
+          }
+        </tbody>
+      </ui-table>
+    </div>
+  }
+
+  @if (models().length > 0) {
+    <div class="flex flex-col gap-2">
+      <h2 class="text-label-lg text-text-subdued">Two-way bindings</h2>
+      <p class="text-paragraph-sm text-text-subdued">
+        Each also emits a matching <code>&lt;name&gt;Change</code> output — bind with
+        <code>[(name)]</code> for two-way, or <code>[name]</code> + <code>(nameChange)</code> for one-way control.
+      </p>
+      <ui-table>
+        <thead>
+          <tr uiTableRow>
+            <th uiTableHeadCell>Name</th>
+            <th uiTableHeadCell>Type</th>
+            <th uiTableHeadCell>Default</th>
+            <th uiTableHeadCell>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prop of models(); track prop.name) {
+            <tr uiTableRow>
+              <td uiTableCell class="whitespace-nowrap"><code class="text-label-sm">{{ prop.name }}</code></td>
+              <td uiTableCell class="whitespace-nowrap"><code class="text-label-xs text-text-subdued">{{ prop.type }}</code></td>
+              <td uiTableCell class="whitespace-nowrap">
+                <code class="text-label-xs text-text-subdued">{{ prop.defaultValue || '—' }}</code>
+              </td>
+              <td uiTableCell class="text-paragraph-sm text-text-subdued">{{ prop.description || '—' }}</td>
+            </tr>
+          }
+        </tbody>
+      </ui-table>
+    </div>
+  }
+
+  @if (outputs().length > 0) {
+    <div class="flex flex-col gap-2">
+      <h2 class="text-label-lg text-text-subdued">Outputs</h2>
+      <ui-table>
+        <thead>
+          <tr uiTableRow>
+            <th uiTableHeadCell>Name</th>
+            <th uiTableHeadCell>Payload</th>
+            <th uiTableHeadCell>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prop of outputs(); track prop.name) {
+            <tr uiTableRow>
+              <td uiTableCell class="whitespace-nowrap"><code class="text-label-sm">{{ prop.name }}</code></td>
+              <td uiTableCell class="whitespace-nowrap"><code class="text-label-xs text-text-subdued">{{ prop.type }}</code></td>
+              <td uiTableCell class="text-paragraph-sm text-text-subdued">{{ prop.description || '—' }}</td>
+            </tr>
+          }
+        </tbody>
+      </ui-table>
+    </div>
+  }
+</div>

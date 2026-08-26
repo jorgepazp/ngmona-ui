@@ -1,0 +1,81 @@
+// GENERATED FILE — do not edit by hand. Run `npm run api-docs` to regenerate.
+import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
+
+export const avatarApi: ComponentApiDoc = {
+  name: "Avatar",
+  description: "User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried first when `src` is set and swaps to the initials/icon fallback automatically on load error (broken URL, 404, etc) via `(error)` on the `<img>`. Accessibility: `alt` is the single accessible-name input regardless of which tier renders — it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the `role=\"img\"` container otherwise. The initials text and fallback icon are both `aria-hidden` so screen readers read the one `alt`/`aria-label` name instead of duplicating it.",
+  props: [
+    {
+      name: "src",
+      kind: "input",
+      required: false,
+      type: "string | undefined",
+      defaultValue: "undefined",
+      description: "Image URL, tried first. Falls back to `initials` (then `icon`) if unset or the image fails to load.",
+    },
+    {
+      name: "alt",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Accessible name, used as `<img alt>` or `aria-label` depending on which tier renders (see class doc).",
+    },
+    {
+      name: "initials",
+      kind: "input",
+      required: false,
+      type: "string | undefined",
+      defaultValue: "undefined",
+      description: "Fallback text (e.g. initials) shown when there's no image; takes priority over `icon`.",
+    },
+    {
+      name: "icon",
+      kind: "input",
+      required: false,
+      type: "LucideIconInput | undefined",
+      defaultValue: "undefined",
+      description: "Fallback icon shown when there's no image and no `initials`. Defaults to a generic user icon.",
+    },
+    {
+      name: "size",
+      kind: "input",
+      required: false,
+      type: "AvatarSize",
+      defaultValue: "'md'",
+      description: "Overall size of the avatar and its fallback icon.",
+    },
+    {
+      name: "shape",
+      kind: "input",
+      required: false,
+      type: "AvatarShape",
+      defaultValue: "'circle'",
+      description: "Container shape.",
+    },
+    {
+      name: "variant",
+      kind: "input",
+      required: false,
+      type: "AvatarVariant",
+      defaultValue: "'neutral'",
+      description: "Background/text color used for the initials or icon fallback; ignored while an image is showing.",
+    },
+    {
+      name: "status",
+      kind: "input",
+      required: false,
+      type: "AvatarStatus",
+      defaultValue: "'none'",
+      description: "Presence indicator dot rendered in the bottom-right corner; `'none'` hides it.",
+    },
+    {
+      name: "classNames",
+      kind: "input",
+      required: false,
+      type: "string",
+      defaultValue: "''",
+      description: "Extra utility classes appended to the root element.",
+    },
+  ],
+};

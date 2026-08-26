@@ -1,0 +1,61 @@
+<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+  <h1 class="text-heading-xl text-text-primary">Notification</h1>
+
+  <app-api-table [doc]="api" />
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-label-lg text-text-subdued">Types (auto-dismiss after 3s)</h2>
+    <div class="flex flex-wrap items-center gap-3">
+      <ui-button size="sm" (clicked)="trigger('info')">Info</ui-button>
+      <ui-button size="sm" (clicked)="trigger('success')">Success</ui-button>
+      <ui-button size="sm" (clicked)="trigger('warning')">Warning</ui-button>
+      <ui-button size="sm" (clicked)="trigger('error')">Error</ui-button>
+      <ui-button size="sm" (clicked)="trigger('neutral')">Basic</ui-button>
+    </div>
+  </section>
+
+  <ui-notification
+    [show]="activeType() === 'info'"
+    type="info"
+    position="top-center"
+    (closed)="activeType.set(null)"
+  >
+    <span class="text-label-sm">Heads up — this is an info notification.</span>
+  </ui-notification>
+
+  <ui-notification
+    [show]="activeType() === 'success'"
+    type="success"
+    position="top-center"
+    (closed)="activeType.set(null)"
+  >
+    <span class="text-label-sm">Saved successfully.</span>
+  </ui-notification>
+
+  <ui-notification
+    [show]="activeType() === 'warning'"
+    type="warning"
+    position="top-center"
+    (closed)="activeType.set(null)"
+  >
+    <span class="text-label-sm">Double-check that before continuing.</span>
+  </ui-notification>
+
+  <ui-notification
+    [show]="activeType() === 'error'"
+    type="error"
+    position="top-center"
+    (closed)="activeType.set(null)"
+  >
+    <span class="text-label-sm">Something went wrong.</span>
+  </ui-notification>
+
+  <ui-notification
+    [show]="activeType() === 'neutral'"
+    type="neutral"
+    position="top-center"
+    (closed)="activeType.set(null)"
+  >
+    <span class="text-label-sm">A neutral, low-emphasis notification.</span>
+  </ui-notification>
+</div>

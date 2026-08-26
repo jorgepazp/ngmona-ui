@@ -1,0 +1,73 @@
+@if (label()) {
+  <label [attr.for]="resolvedId()" class="relative block mb-0.5 text-sm font-medium text-neutral-500">{{ label() }}</label>
+}
+
+<div class="relative">
+  <input
+    #trigger
+    type="text"
+    role="combobox"
+    autocomplete="off"
+    [id]="resolvedId()"
+    [disabled]="isDisabled()"
+    [value]="query()"
+    [placeholder]="placeholder()"
+    aria-autocomplete="list"
+    [attr.aria-haspopup]="'listbox'"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-controls]="listboxId()"
+    [attr.aria-activedescendant]="isOpen() && activeIndex() >= 0 ? optionDomId(activeIndex()) : null"
+    (input)="onInput($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (keydown)="onTriggerKeydown($event)"
+    class="w-full text-label-sm h-6 text-left transition-all appearance-none bg-surface-white cursor-text outline-transparent border-neutral-100 hover:border-neutral-300 !border border-solid text-neutral-500 rounded !px-2 !py-1.5 !pr-6 !outline !outline-[1.5px] focus:!outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 disabled:cursor-not-allowed"
+  />
+  <button
+    type="button"
+    tabindex="-1"
+    aria-hidden="true"
+    [disabled]="isDisabled()"
+    (mousedown)="$event.preventDefault()"
+    (click)="onChevronClick()"
+    class="absolute right-1.5 top-0 bottom-0 flex items-center text-neutral-100 disabled:cursor-not-allowed"
+  >
+    <svg [lucideIcon]="chevronIcon" [size]="16"></svg>
+  </button>
+
+  <ng-template #panel>
+    <ul
+      [id]="listboxId()"
+      role="listbox"
+      animate.enter="ui-anim-fade-enter"
+      animate.leave="ui-anim-fade-leave"
+      (mousedown)="$event.preventDefault()"
+      (mouseenter)="hoveringPanel = true"
+      (mouseleave)="hoveringPanel = false"
+      class="pl-0 !m-0 bg-surface-white border border-neutral-600 rounded shadow-card !py-0.5 overflow-y-auto max-h-52 list-none"
+    >
+      @for (option of filteredOptions(); track option; let i = $index) {
+        <li
+          [id]="optionDomId(i)"
+          role="option"
+          [attr.aria-selected]="isOptionSelected(option)"
+          [attr.aria-disabled]="isOptionDisabled(option) || null"
+          (click)="selectOption(option)"
+          [class]="(i === activeIndex() ? 'bg-neutral-300 ' : '') + (isOptionDisabled(option) ? 'opacity-50 pointer-events-none ' : '')"
+          class="flex gap-2 items-center justify-between !px-2 !py-1 select-none cursor-pointer hover:bg-neutral-300 text-neutral-500 text-label-sm"
+        >
+          <span class="truncate">{{ optionLabelOf(option) }}</span>
+          @if (isOptionSelected(option)) {
+            <svg [lucideIcon]="checkIcon" [size]="14" class="shrink-0 text-primary-500"></svg>
+          }
+        </li>
+      } @empty {
+        <li class="!px-2 !py-1 text-label-sm text-neutral-100 select-none">No results found</li>
+      }
+    </ul>
+  </ng-template>
+
+  @if (caption()) {
+    <small class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+  }
+</div>

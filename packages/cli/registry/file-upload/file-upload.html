@@ -1,0 +1,55 @@
+<div>
+  <label
+    [attr.for]="inputId()"
+    class="p-[20px] rounded-xl border flex gap-3 items-center transition-colors"
+    [class]="labelClass()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+  >
+    <input
+      [id]="inputId()"
+      type="file"
+      class="sr-only"
+      [accept]="acceptAttr()"
+      [disabled]="disabled() || loading() || !!file()"
+      (change)="onInputChange($event)"
+    />
+
+    @if (!file()) {
+      @if (loading()) {
+        <svg lucideLoaderCircle class="animate-spin shrink-0 text-icon-subdued" [size]="24"></svg>
+      } @else {
+        <svg lucideUpload class="shrink-0 text-icon-subdued" [size]="24"></svg>
+      }
+      <div class="flex flex-col gap-1">
+        <strong class="text-link-sm text-info-500" [class]="loading() ? 'opacity-60' : ''">
+          {{ loading() ? 'Uploading…' : 'Attach a document' }}
+        </strong>
+        <small class="text-caption text-text-subdued sm:whitespace-nowrap">
+          Format {{ extensionsLabel() }} up to {{ maxSizeLabel() }}
+        </small>
+      </div>
+    } @else {
+      <svg lucideCheckCircle2 [size]="28" class="text-success-600 shrink-0"></svg>
+      <div class="flex justify-between items-center w-full gap-2">
+        <div class="flex flex-col gap-1 min-w-0">
+          <p class="truncate m-0 text-paragraph-sm text-text-primary">{{ file()!.name }}</p>
+          <small class="text-caption font-bold text-text-subdued">Uploaded</small>
+        </div>
+        <button
+          type="button"
+          class="p-1 flex items-center shrink-0 text-icon-subdued hover:text-icon-danger cursor-pointer"
+          (click)="remove($event)"
+          aria-label="Remove file"
+        >
+          <svg lucideX [size]="18"></svg>
+        </button>
+      </div>
+    }
+  </label>
+
+  @if (errorMessage(); as message) {
+    <p class="text-caption text-danger-600 mt-1" role="alert">{{ message }}</p>
+  }
+</div>
