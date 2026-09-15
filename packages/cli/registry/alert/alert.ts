@@ -14,14 +14,12 @@ import { UiTemplateDirective } from '../shared/ui-template.directive';
 export type AlertType = 'info' | 'success' | 'warning' | 'error';
 
 /**
- * Inline, static banner — unlike `Notification`, this isn't fixed-position/toast-like, it's meant
- * to sit directly in page content (e.g. above a form). Uncontrolled: dismissing hides it via an
- * internal signal (no `open`/`show` input to wire up for the common case), but a `dismissed`
- * output is still emitted so a caller can react (e.g. remove it from a list).
+ * Inline banner for contextual messages within page content, such as a warning above a form.
+ * Use `Notification` instead for temporary, toast-like messages.
  *
- * `type` drives both the icon and the color, same pattern as `Notification`, and the same
- * `alert`/`status` role split: `error` interrupts (`role="alert"`), everything else is announced
- * politely (`role="status"`) since it doesn't need to steal focus to be noticed.
+ * `type` sets the icon, color and ARIA role: `error` uses `role="alert"` to interrupt, the other
+ * types use `role="status"`. There is no `open` input; dismissing hides the alert internally and
+ * emits `dismissed` so the caller can react, e.g. to remove it from a list.
  */
 @Component({
   selector: 'ui-alert',
@@ -76,14 +74,14 @@ export class Alert {
   protected readonly typeClass = computed(() => {
     switch (this.type()) {
       case 'success':
-        return 'bg-success-100 !border-success-500 text-success-800';
+        return 'bg-surface-success-light border-success-500 text-text-success';
       case 'error':
-        return 'bg-danger-100 !border-danger-500 text-danger-800';
+        return 'bg-surface-danger-light border-danger-500 text-text-danger';
       case 'warning':
-        return 'bg-warning-100 !border-warning-500 text-warning-800';
+        return 'bg-surface-warning-light border-warning-500 text-text-warning';
       case 'info':
       default:
-        return 'bg-info-100 !border-info-500 text-info-800';
+        return 'bg-surface-info-light border-info-500 text-text-info';
     }
   });
 

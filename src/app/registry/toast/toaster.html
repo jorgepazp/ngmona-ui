@@ -7,6 +7,8 @@
         [type]="toast.type"
         [showCloseButton]="toast.showCloseButton"
         (closed)="dismiss(toast.id)"
+        animate.enter="ui-anim-toast-enter"
+        animate.leave="ui-anim-toast-leave"
       >
         {{ toast.message }}
       </ui-notification>

@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const badgeApi: ComponentApiDoc = {
   name: "Badge",
-  description: "Small status/label pill. `primary` and `neutral` render solid (they have no near-white tint in the palette to pair with dark text); the status variants (`success`/`warning`/`danger`/`info`) use the dedicated `--color-surface-*-light` / `--color-text-*` token pairs, which is exactly what that semantic pair exists for — a legible light-bg/dark-text combination without hand -computing opacity tricks. Badges are text-first by convention (never color alone) so no extra ARIA is needed for the common case. When a badge stands in for a count/status on another element with no visible text of its own, pass `ariaLabel` to give it an accessible name.",
+  description: "Small label used to show a status, category or count. `primary` and `neutral` render with a solid background. The status variants (`success`, `warning`, `danger`, `info`) render with a light background and matching text color. When a badge conveys meaning without its own visible text, such as a bare status dot, pass `ariaLabel` to give it an accessible name.",
   props: [
     {
       name: "variant",

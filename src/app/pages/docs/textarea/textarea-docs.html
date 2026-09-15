@@ -6,9 +6,11 @@
   <section class="flex flex-col gap-3">
     <ui-textarea label="Feedback" placeholder="Tell us what you think" [(value)]="text" [maxLength]="140"></ui-textarea>
     <p class="text-paragraph-sm text-text-subdued">length = {{ text().length }}</p>
+    <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <ui-textarea label="Disabled" [disabled]="true" placeholder="Can't type here"></ui-textarea>
+    <docs-code-tabs [html]="disabledHtml" [ts]="disabledTs" />
   </section>
 </div>

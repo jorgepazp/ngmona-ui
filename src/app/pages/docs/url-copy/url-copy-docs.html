@@ -6,16 +6,19 @@
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Default</h2>
     <ui-url-copy url="https://example.com/contract/sample"></ui-url-copy>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Custom labels</h2>
     <ui-url-copy url="https://example.com/invite/abc123" label="Copy invite link" copiedLabel="Link copied!"></ui-url-copy>
+    <docs-code-tabs [html]="customLabelsHtml" [ts]="customLabelsTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Copied output</h2>
     <ui-url-copy url="https://example.com/share/xyz" (copied)="copyCount.set(copyCount() + 1)"></ui-url-copy>
     <p class="text-paragraph-sm text-text-subdued">copied {{ copyCount() }} time(s)</p>
+    <docs-code-tabs [html]="copiedOutputHtml" [ts]="copiedOutputTs" />
   </section>
 </div>

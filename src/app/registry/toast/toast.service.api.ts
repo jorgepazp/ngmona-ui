@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const toastServiceApi: ComponentApiDoc = {
   name: "ToastService",
-  description: "Queues toast messages for `Toaster` to render (one `Toaster` mounted once, typically in the app shell). Each entry is drawn with the existing `Notification` component in `stacked` mode — this service only adds the queueing/auto-dismiss/stacking layer `Notification` doesn't have on its own (it's a single controlled toast, not a queue).",
+  description: "Queues toast messages for `Toaster` to render (mount one `Toaster`, typically in the app shell). Each entry renders with the `Notification` component in `stacked` mode; this service adds the queueing, auto-dismiss and stacking behavior that `Notification` alone doesn't have.",
   props: [
 
   ],

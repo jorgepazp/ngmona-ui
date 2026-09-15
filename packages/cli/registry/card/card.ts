@@ -3,12 +3,9 @@ import { Component, computed, input } from '@angular/core';
 type CardShadow = 'hover' | 'always' | 'none';
 
 /**
- * Plain bordered container with an optional card shadow. Identical across all three source
- * forks, so this is a straight port. Fixed the surface/border classes: the original referenced
- * `bg-color-surface-white` / `border-color-border-neutral`, which aren't real utilities under
- * the new token names (`--color-surface-white`, `--color-border-neutral`) — Tailwind generates
- * `bg-surface-white` / `border-border-neutral` from those, so the intended background/border
- * were silently never applied.
+ * Plain bordered container with an optional shadow.
+ *
+ * Use `shadow` to control when the shadow appears: on hover, always, or never.
  */
 @Component({
   selector: 'ui-card',

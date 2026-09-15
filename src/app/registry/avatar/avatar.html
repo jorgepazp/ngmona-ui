@@ -1,6 +1,6 @@
 <span [class]="avatarClass()" [attr.role]="showImage() ? null : 'img'" [attr.aria-label]="showImage() ? null : alt() || null">
   @if (showImage()) {
-    <img [src]="src()" [alt]="alt()" class="w-full h-full object-cover" (error)="onImgError()" />
+    <img [src]="src()" [alt]="alt()" class="w-full h-full object-cover " [class]="shapeClass()" (error)="onImgError()" />
   } @else if (initials()) {
     <span aria-hidden="true">{{ initials() }}</span>
   } @else {

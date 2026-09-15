@@ -13,7 +13,7 @@
         <h2 class="text-heading-sm text-text-primary mb-4">Settings</h2>
       </ng-template>
       <p class="text-paragraph-sm text-text-subdued">
-        Drawer body content — projected via default <code>&lt;ng-content&gt;</code> since no
+        Drawer body content, projected via default <code>&lt;ng-content&gt;</code> since no
         <code>content</code> template was supplied.
       </p>
       <ng-template uiTemplate="footer">
@@ -22,6 +22,7 @@
         </div>
       </ng-template>
     </ui-drawer>
+    <docs-code-tabs [html]="rightHtml" [ts]="rightTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -32,6 +33,7 @@
     <ui-drawer [(open)]="leftOpen" side="left">
       <p class="text-paragraph-sm text-text-subdued">Left-anchored panel, no header/footer templates.</p>
     </ui-drawer>
+    <docs-code-tabs [html]="leftHtml" [ts]="leftTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -41,9 +43,10 @@
     </div>
     <ui-drawer [(open)]="noBackdropOpen" [backdrop]="false" [showCloseButton]="false">
       <p class="text-paragraph-sm text-text-subdued">
-        Press Escape or click outside via your own trigger to close — there's no backdrop or close
+        Press Escape or click outside via your own trigger to close. There's no backdrop or close
         button here.
       </p>
     </ui-drawer>
+    <docs-code-tabs [html]="noBackdropHtml" [ts]="noBackdropTs" />
   </section>
 </div>

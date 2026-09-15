@@ -10,6 +10,7 @@
       <ui-link href="#" underline="always">Always</ui-link>
       <ui-link href="#" underline="none">None</ui-link>
     </div>
+    <docs-code-tabs [html]="underlineHtml" [ts]="underlineTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -18,10 +19,12 @@
       <ui-link href="#" [icon]="arrowIcon" iconPos="right">Continue</ui-link>
       <ui-link href="https://example.com" target="_blank">Opens in a new tab</ui-link>
     </div>
+    <docs-code-tabs [html]="iconHtml" [ts]="iconTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">States</h2>
     <ui-link href="#" [disabled]="true">Disabled</ui-link>
+    <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 </div>

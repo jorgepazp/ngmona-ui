@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const buttonApi: ComponentApiDoc = {
   name: "Button",
-  description: "Button with primary/secondary/tertiary/icon-only variants, loading and inverse states. Colors resolve through the `--color-primary-*` theme tokens (see styles.css) — override those CSS variables to reskin every button at once.",
+  description: "Button with `primary`, `secondary`, `tertiary` and `icon`-only variants, plus loading and inverse states. Colors are driven by the `--color-primary-*` theme tokens; override those CSS variables to restyle every button at once.",
   props: [
     {
       name: "variant",

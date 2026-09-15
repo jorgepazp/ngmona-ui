@@ -7,14 +7,11 @@ export type AvatarVariant = 'primary' | 'neutral' | 'success' | 'warning' | 'dan
 export type AvatarStatus = 'none' | 'online' | 'offline' | 'busy' | 'away';
 
 /**
- * User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried
- * first when `src` is set and swaps to the initials/icon fallback automatically on load error
- * (broken URL, 404, etc) via `(error)` on the `<img>`.
+ * User or entity avatar with automatic fallback between an image, initials and an icon.
  *
- * Accessibility: `alt` is the single accessible-name input regardless of which tier renders —
- * it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the
- * `role="img"` container otherwise. The initials text and fallback icon are both `aria-hidden`
- * so screen readers read the one `alt`/`aria-label` name instead of duplicating it.
+ * When `src` is set the image is shown first, and falls back to `initials` (then `icon`)
+ * automatically if it fails to load. `alt` is the accessible name in every case: it is used as
+ * the `<img alt>` when an image renders, and as `aria-label` on the container otherwise.
  */
 @Component({
   selector: 'ui-avatar',
@@ -57,19 +54,19 @@ export class Avatar {
   });
 
   protected readonly avatarClass = computed(() => {
-    const base = `relative inline-flex items-center justify-center shrink-0 overflow-hidden select-none font-medium ${this.shapeClass()} ${this.sizeClass()}`;
-    return `${base} ${this.showImage() ? 'bg-neutral-500' : this.variantClass()} ${this.classNames()}`;
+    const base = `relative inline-flex items-center justify-center shrink-0 select-none font-medium ${this.shapeClass()} ${this.sizeClass()}`;
+    return `${base} ${this.showImage() ? 'bg-neutral-100' : this.variantClass()} ${this.classNames()}`;
   });
 
   protected readonly statusClass = computed(() => {
     const color: Record<Exclude<AvatarStatus, 'none'>, string> = {
-      online: 'bg-success-500',
-      offline: 'bg-neutral-800',
-      busy: 'bg-danger-500',
-      away: 'bg-warning-500',
+      online: 'bg-success-400',
+      offline: 'bg-neutral-400',
+      busy: 'bg-danger-400',
+      away: 'bg-warning-400',
     };
     const status = this.status();
-    return status === 'none' ? '' : `${color[status]} ${this.statusSizeClass()}`;
+    return status === 'none' ? '' : ` ${color[status]} ${this.statusSizeClass()}`;
   });
 
   constructor() {
@@ -84,7 +81,7 @@ export class Avatar {
     this.imgError.set(true);
   }
 
-  private shapeClass(): string {
+  shapeClass(): string {
     return this.shape() === 'circle' ? 'rounded-full' : 'rounded';
   }
 
@@ -111,7 +108,7 @@ export class Avatar {
   private variantClass(): string {
     const map: Record<AvatarVariant, string> = {
       primary: 'bg-primary-500 text-white',
-      neutral: 'bg-neutral-500 text-text-primary',
+      neutral: 'bg-surface-light text-text-primary',
       success: 'bg-surface-success-light text-text-success',
       warning: 'bg-surface-warning-light text-text-warning',
       danger: 'bg-surface-danger-light text-text-danger',

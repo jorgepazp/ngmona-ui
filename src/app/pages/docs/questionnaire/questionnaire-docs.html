@@ -9,7 +9,7 @@
     <div class="border border-divider rounded-lg p-6 max-w-lg">
       @if (result(); as answers) {
         <div class="flex flex-col gap-4">
-          <p class="text-label-md font-medium text-text-primary">All done — here's what was collected:</p>
+          <p class="text-label-md font-medium text-text-primary">All done. Here's what was collected:</p>
           <ul class="list-none m-0 p-0 flex flex-col gap-1">
             @for (answer of answers; track answer.stepId) {
               <li class="text-paragraph-sm text-text-subdued">
@@ -30,5 +30,6 @@
         ></ui-questionnaire>
       }
     </div>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 </div>

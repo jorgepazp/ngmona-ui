@@ -16,22 +16,12 @@ import { Tooltip, TooltipPosition } from './tooltip';
 let nextTooltipId = 0;
 
 /**
- * `[uiTooltip]="'Some text'"` — shows a `Tooltip` panel near the host element on hover, focus,
- * or touch-and-hold.
+ * Shows a tooltip panel near the host element on hover, focus, or touch-and-hold. Set the
+ * tooltip text directly on the directive: `[uiTooltip]="'Some text'"`.
  *
- * Modernized from the original `ComponentFactoryResolver`-based implementation (deprecated since
- * Angular 13, and the whole reason this migration was called out): `ViewContainerRef.createComponent`
- * takes the component type directly now, no factory resolver needed. The original also manually
- * attached the view to `ApplicationRef` and appended its root node to `document.body` to escape
- * ancestor clipping — since the panel is `position: fixed`, it's positioned relative to the
- * viewport regardless of where it sits in the DOM, so that manual `attachView`/`appendChild`/
- * `detachView` dance is dropped; `ViewContainerRef.createComponent` alone is enough, and
- * `componentRef.destroy()` cleans it up correctly.
- *
- * Also fixes a real accessibility gap: the original only listened for `mouseenter`/`mouseleave`
- * and touch, so keyboard-only users could never trigger the tooltip. `focus`/`blur` handling is
- * added here, plus `aria-describedby` on the host element pointing at the tooltip's `id` while
- * it's visible, so screen readers announce it.
+ * Automatically flips to the opposite side of `position` when the requested side doesn't fit in
+ * the viewport. Use `showDelay` and `hideDelay` to delay showing or hiding, and `forceVisible` to
+ * control visibility programmatically instead of relying on hover, focus or touch.
  */
 @Directive({
   selector: '[uiTooltip]',
@@ -62,6 +52,14 @@ export class TooltipDirective implements OnDestroy {
   readonly width = input(231);
   /** Overrides hover/focus/touch handling to show or hide the tooltip programmatically. */
   readonly forceVisible = input<boolean | undefined>(undefined, { alias: 'uiTooltipVisible' });
+
+  private static readonly VIEWPORT_MARGIN = 8;
+  private static readonly OPPOSITE_POSITION: Record<TooltipPosition, TooltipPosition> = {
+    above: 'below',
+    below: 'above',
+    left: 'right',
+    right: 'left',
+  };
 
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly viewContainerRef = inject(ViewContainerRef);
@@ -123,40 +121,66 @@ export class TooltipDirective implements OnDestroy {
   }
 
   private applyState(): void {
-    if (!this.componentRef) return;
+    const ref = this.componentRef;
+    if (!ref) return;
 
-    const { left, right, top, bottom } = this.elementRef.nativeElement.getBoundingClientRect();
-    const position = this.position();
-    let x = 0;
-    let y = 0;
-    switch (position) {
-      case 'below':
-        x = Math.round((right - left) / 2 + left);
-        y = Math.round(bottom);
-        break;
-      case 'above':
-        x = Math.round((right - left) / 2 + left);
-        y = Math.round(top);
-        break;
-      case 'left':
-        x = Math.round(left);
-        y = Math.round(top + (bottom - top) / 2);
-        break;
-      case 'right':
-      default:
-        x = Math.round(right);
-        y = Math.round(top + (bottom - top) / 2);
-        break;
+    ref.setInput('text', this.uiTooltip());
+    ref.setInput('heading', this.heading());
+    ref.setInput('template', this.template());
+    ref.setInput('width', this.width());
+    ref.setInput('tooltipId', this.tooltipId);
+
+    // Render once at the requested side so the panel has real dimensions to check against the viewport.
+    const requested = this.position();
+    ref.setInput('position', requested);
+    ref.changeDetectorRef.detectChanges();
+
+    const anchorRect = this.elementRef.nativeElement.getBoundingClientRect();
+    const panelEl = ref.location.nativeElement.firstElementChild as HTMLElement | null;
+    const position = panelEl ? this.resolvePosition(anchorRect, panelEl.getBoundingClientRect(), requested) : requested;
+
+    if (position !== requested) {
+      ref.setInput('position', position);
     }
 
-    this.componentRef.setInput('text', this.uiTooltip());
-    this.componentRef.setInput('heading', this.heading());
-    this.componentRef.setInput('template', this.template());
-    this.componentRef.setInput('position', position);
-    this.componentRef.setInput('width', this.width());
-    this.componentRef.setInput('left', x);
-    this.componentRef.setInput('top', y);
-    this.componentRef.setInput('tooltipId', this.tooltipId);
+    const { left, top } = this.coordinatesFor(anchorRect, position);
+    ref.setInput('left', left);
+    ref.setInput('top', top);
+  }
+
+  private resolvePosition(anchor: DOMRect, panel: DOMRect, requested: TooltipPosition): TooltipPosition {
+    const fits = (position: TooltipPosition): boolean => {
+      const margin = TooltipDirective.VIEWPORT_MARGIN;
+      switch (position) {
+        case 'below':
+          return anchor.bottom + panel.height + margin <= window.innerHeight;
+        case 'above':
+          return anchor.top - panel.height - margin >= 0;
+        case 'right':
+          return anchor.right + panel.width + margin <= window.innerWidth;
+        case 'left':
+        default:
+          return anchor.left - panel.width - margin >= 0;
+      }
+    };
+
+    if (fits(requested)) return requested;
+    const opposite = TooltipDirective.OPPOSITE_POSITION[requested];
+    return fits(opposite) ? opposite : requested;
+  }
+
+  private coordinatesFor(anchor: DOMRect, position: TooltipPosition): { left: number; top: number } {
+    switch (position) {
+      case 'below':
+        return { left: Math.round((anchor.right - anchor.left) / 2 + anchor.left), top: Math.round(anchor.bottom) };
+      case 'above':
+        return { left: Math.round((anchor.right - anchor.left) / 2 + anchor.left), top: Math.round(anchor.top) };
+      case 'left':
+        return { left: Math.round(anchor.left), top: Math.round(anchor.top + (anchor.bottom - anchor.top) / 2) };
+      case 'right':
+      default:
+        return { left: Math.round(anchor.right), top: Math.round(anchor.top + (anchor.bottom - anchor.top) / 2) };
+    }
   }
 
   private destroyTooltip(): void {

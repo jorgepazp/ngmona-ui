@@ -10,6 +10,7 @@
       <ui-separator classNames="my-3"></ui-separator>
       <p>Section two content.</p>
     </div>
+    <docs-code-tabs [html]="horizontalHtml" [ts]="horizontalTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -21,6 +22,7 @@
       <ui-separator orientation="vertical"></ui-separator>
       <span>Logout</span>
     </div>
+    <docs-code-tabs [html]="verticalHtml" [ts]="verticalTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -30,5 +32,6 @@
       <ui-separator [decorative]="false" classNames="my-3"></ui-separator>
       <p>Related articles begin below, meaningfully separated from the above.</p>
     </div>
+    <docs-code-tabs [html]="semanticHtml" [ts]="semanticTs" />
   </section>
 </div>

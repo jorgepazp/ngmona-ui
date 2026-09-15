@@ -1,21 +1,14 @@
-import { Component, computed, contentChildren, input } from '@angular/core';
+import { Component, computed, contentChildren, input, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { LucideCircle } from '@lucide/angular';
 import { UiTemplateDirective } from '../../shared/ui-template.directive';
 
 /**
- * Single entry in a `ui-timeline`. Must be a direct child of `<ui-timeline>` — renders as a
- * plain `<li>` (`:host { display: contents }`) so the parent's `<ol>`/`<li>` structure stays real.
+ * Single entry in a `ui-timeline`. Must be a direct child of `ui-timeline`.
  *
- * Supports plain `title`/`content` string inputs, or `<ng-template uiTemplate="marker|title|content">`
- * for custom content (same named-slot pattern as `Checkbox`'s label template).
- *
- * The original required a manually-set `isLast` @Input to hide the connector line past the final
- * item — easy to forget, and silently wrong the moment items are added, removed, or reordered
- * without updating it. Replaced here with Tailwind's `group-last:` variant driven by real DOM
- * position, so it's always correct with no coordination needed from the parent or the consumer.
- * Also fixes a typo'd, nonexistent `bg-color-surface-white` class (should have been
- * `bg-surface-white`, the actual theme token) that silently left that patch transparent.
+ * Supports plain `title`/`content` string inputs, or `marker`, `title` and `content` templates
+ * via `uiTemplate` for custom content. Set `activeMarker` to highlight the marker as the current
+ * entry.
  */
 @Component({
   selector: 'ui-timeline-item',
@@ -34,6 +27,14 @@ export class TimelineItem {
   readonly content = input('');
   /** Highlights the marker as the active/current entry (a small filled dot instead of an outline). */
   readonly activeMarker = input(false);
+
+  /**
+   * Whether this is the last item in the group. `Timeline` is the one writing to this — read-only
+   * from the outside. Can't rely on CSS `:last-child` here since this component's `display:
+   * contents` host keeps each `<li>` under its own wrapper element, so every item is its parent's
+   * only (and thus last) child.
+   */
+  readonly isLast = signal(false);
 
   protected readonly circleIcon = LucideCircle;
 

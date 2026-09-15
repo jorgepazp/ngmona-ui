@@ -9,20 +9,24 @@
     <p class="text-paragraph-sm text-text-subdued">
       selected = {{ selectedDate() ? selectedDate()!.toDateString() : 'none' }}
     </p>
+    <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Deselectable, weekends disabled</h2>
     <ui-calendar [canDeselectDate]="true" [disabledWeekdays]="[0, 6]"></ui-calendar>
+    <docs-code-tabs [html]="weekendsHtml" [ts]="weekendsTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Bounded to the next 3 months, past dates allowed</h2>
     <ui-calendar [minEnabledDate]="minDate" [maxEnabledDate]="maxDate" [canSelectPreviousDates]="true"></ui-calendar>
+    <docs-code-tabs [html]="boundedHtml" [ts]="boundedTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Disabled</h2>
     <ui-calendar [disabled]="true"></ui-calendar>
+    <docs-code-tabs [html]="disabledHtml" [ts]="disabledTs" />
   </section>
 </div>

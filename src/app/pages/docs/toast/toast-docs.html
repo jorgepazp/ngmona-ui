@@ -4,7 +4,7 @@
   <app-api-table [doc]="api" />
 
   <p class="text-paragraph-sm text-text-subdued">
-    Inject <code>ToastService</code> anywhere and call <code>toast.show(...)</code> — a single
+    Inject <code>ToastService</code> anywhere and call <code>toast.show(...)</code>. A single
     <code>&lt;ui-toaster /&gt;</code> mounted once in the app shell renders and stacks them.
   </p>
 
@@ -15,4 +15,5 @@
     <ui-button (clicked)="toast.warning('Careful with that')">Warning</ui-button>
     <ui-button (clicked)="toast.show('Bottom left', { position: 'bottom-left' })">Bottom left</ui-button>
   </section>
+  <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
 </div>

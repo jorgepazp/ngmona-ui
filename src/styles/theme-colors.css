@@ -111,12 +111,12 @@
   --color-surface-white: var(--color-white);
   --color-surface-lighter: var(--color-neutral-50);
   --color-surface-light: var(--color-neutral-100);
-  --color-surface-medium: var(--color-neutral-300);
+  --color-surface-medium: var(--color-neutral-200);
   --color-surface-dark: var(--color-neutral-500);
   --color-surface-enabled: var(--color-neutral-100);
   --color-surface-enabled-light: var(--color-white);
-  --color-surface-disabled: var(--color-neutral-300);
-  --color-surface-hover: var(--color-neutral-300);
+  --color-surface-disabled: var(--color-neutral-200);
+  --color-surface-hover: var(--color-neutral-200);
   --color-surface-active: var(--color-primary-500);
   --color-surface-active-inverse: var(--color-white);
   --color-surface-backdrop: color-mix(in oklab, var(--color-neutral-900) 50%, transparent);
@@ -169,9 +169,9 @@
   --color-link-visited-inverse: #c2ccf5;
   /* Semantic border scale */
   --color-border-neutral-light: var(--color-neutral-50);
-  --color-border-neutral: var(--color-neutral-100);
-  --color-border-neutral-medium: var(--color-neutral-200);
-  --color-border-neutral-dark: var(--color-neutral-400);
+  --color-border-neutral: var(--color-neutral-200);
+  --color-border-neutral-medium: var(--color-neutral-500);
+  --color-border-neutral-dark: var(--color-neutral-600);
   --color-border-state: var(--color-neutral-200);
   --color-border-hover: var(--color-neutral-400);
   --color-border-focused: var(--color-neutral-800);
@@ -180,6 +180,6 @@
   /* Divider scale */
   --color-divider-light: var(--color-neutral-50);
   --color-divider: var(--color-neutral-100);
-  --color-divider-medium: var(--color-neutral-500);
-  --color-divider-dark: var(--color-neutral-600);
+  --color-divider-medium: var(--color-neutral-200);
+  --color-divider-dark: var(--color-neutral-300);
 }

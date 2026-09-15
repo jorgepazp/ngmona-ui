@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const numberInputApi: ComponentApiDoc = {
   name: "NumberInput",
-  description: "Real `<input type=\"number\">` (native numeric keyboard on mobile, mouse-wheel and arrow-key increment for free) flanked by visible +/- stepper buttons that call the same clamp/step logic, composed inside `InputGroup` so the three pieces read as one bordered control. Reuses `Input`'s *conventions* (id-generation counter + `id` override, label/caption `UiTemplateDirective` slots, the same input text/border/disabled classes) rather than nesting `Input` itself: `Input`'s border/focus styling lives directly on its own inner `<input>` with no seam exposed to strip it for nesting inside a group without reaching into its internals. Own template + `InputGroup` composition avoids that. Buttons are real `<button type=\"button\">`s with `aria-label`s (they're icon-only), disabled individually once the value is clamped against `min`/`max`.",
+  description: "Numeric input with increment and decrement buttons, composed inside `InputGroup`. Clamps the value between `min` and `max`; the corresponding button disables once a limit is reached. `step` sets the amount added or subtracted per button press.",
   props: [
     {
       name: "value",

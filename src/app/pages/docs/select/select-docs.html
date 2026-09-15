@@ -6,10 +6,12 @@
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Single</h2>
     <ui-select [options]="countries" [(value)]="single" placeholder="Choose a country"></ui-select>
+    <docs-code-tabs [html]="singleHtml" [ts]="singleTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Multi</h2>
     <ui-select [options]="countries" [multi]="true" [(value)]="multi" placeholder="Choose countries" [maxSelectableLimit]="2"></ui-select>
+    <docs-code-tabs [html]="multiHtml" [ts]="multiTs" />
   </section>
 </div>

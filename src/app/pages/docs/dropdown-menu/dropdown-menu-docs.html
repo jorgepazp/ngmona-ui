@@ -3,7 +3,7 @@
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-3"> 
     <h2 class="text-label-lg text-text-subdued">Basic</h2>
     <ui-dropdown-menu>
       <ng-template uiTemplate="button">Options</ng-template>
@@ -37,6 +37,7 @@
       Arrow Up/Down move focus between items, Home/End jump to the ends, Escape closes and returns
       focus to the trigger.
     </p>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -44,5 +45,6 @@
     <ui-dropdown-menu [disabled]="true">
       <ng-template uiTemplate="button">Disabled</ng-template>
     </ui-dropdown-menu>
+    <docs-code-tabs [html]="disabledHtml" [ts]="disabledTs" />
   </section>
 </div>

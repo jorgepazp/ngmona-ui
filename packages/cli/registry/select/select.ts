@@ -19,23 +19,12 @@ import { UiTemplateDirective } from '../shared/ui-template.directive';
 let nextId = 0;
 
 /**
- * Single or multi select with a custom (non-native) dropdown listbox.
+ * Single or multi-select with a custom dropdown listbox.
  *
- * Two real bugs fixed from the original: (1) the option data passed in was mutated in place to
- * track a `selected` flag on each object — including objects owned by the caller, not copies.
- * Selection is now derived by comparing against `value()`/`value()[]` instead, so option data is
- * never touched. (2) the multi-select option row nested a full interactive checkbox inside a
- * `(click)` row — clicking the checkbox fired both its own `(change)` and the row's `(click)`,
- * toggling the option twice (back to its original state). The checkbox is now a purely visual
- * indicator; only the row's own click/keyboard handler drives selection.
- *
- * The original had no ARIA at all (no listbox/option roles, no keyboard navigation). Added
- * `aria-haspopup`/`aria-expanded` on the trigger, `role="listbox"`/`role="option"` with
- * `aria-selected`, and Up/Down/Home/End/Enter/Escape keyboard support via `aria-activedescendant`.
- *
- * The original also registered a `fade` animation trigger that was never actually bound anywhere
- * in the template — the listbox popped open/closed with no transition at all despite the trigger
- * existing. Now wired onto the listbox's `@if` block.
+ * Set `multi` to allow selecting more than one option; `value` then holds an array of extracted
+ * `optionValue`s instead of the whole option. Options can be plain values or objects; when using
+ * objects, set `optionLabel`, `optionValue` and `optionDisabledKey` to the property names to read
+ * from each. Use `maxSelectableLimit` to cap how many options can be selected in `multi` mode.
  */
 @Component({
   selector: 'ui-select',
@@ -78,8 +67,8 @@ export class Select implements ControlValueAccessor {
   readonly id = input<string | undefined>(undefined);
 
   /**
-   * For `multi()`, the value is an array of extracted `optionValue`s. For single-select, it's
-   * the whole selected option (matching the original library's contract).
+   * For `multi`, the value is an array of extracted `optionValue`s. For single-select, it's the
+   * whole selected option.
    */
   readonly value = model<unknown>(undefined);
   /** Emits the newly selected option (single-select) or the updated value array (multi-select) on every selection change. */

@@ -5,7 +5,7 @@
 
   <p class="text-paragraph-sm text-text-subdued">
     Drag a handle, or focus one and use the arrow keys (Home/End to jump to an edge). The group
-    needs an explicit height from its container — set it via <code>classNames</code>.
+    needs an explicit height from its container: set it via <code>classNames</code>.
   </p>
 
   <section class="flex flex-col gap-3">
@@ -18,6 +18,7 @@
         Main content
       </div>
     </ui-resizable>
+    <docs-code-tabs [html]="horizontalHtml" [ts]="horizontalTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -33,5 +34,6 @@
         Footer
       </div>
     </ui-resizable>
+    <docs-code-tabs [html]="verticalHtml" [ts]="verticalTs" />
   </section>
 </div>

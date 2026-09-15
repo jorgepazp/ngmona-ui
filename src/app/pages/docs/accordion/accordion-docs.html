@@ -18,6 +18,7 @@
         This item is disabled and can't be expanded.
       </ui-accordion-item>
     </ui-accordion>
+    <docs-code-tabs [html]="singleHtml" [ts]="singleTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -33,5 +34,6 @@
         Both items can be open at once here.
       </ui-accordion-item>
     </ui-accordion>
+    <docs-code-tabs [html]="multipleHtml" [ts]="multipleTs" />
   </section>
 </div>

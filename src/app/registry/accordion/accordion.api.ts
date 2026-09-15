@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const accordionApi: ComponentApiDoc = {
   name: "Accordion",
-  description: "Wraps `ui-accordion-item` children (like `Timeline`/`TimelineItem`). Coordination between the parent and its items — which value(s) are expanded, single-vs-multiple-open, and Up/Down/Home/ End navigation between headers — is done by each `AccordionItem` injecting this component directly (`inject(Accordion)`), the same way `Checkbox`/`Radio` inject `NG_VALUE_ACCESSOR` machinery, just without the forms indirection since there's no `ControlValueAccessor` need here. `expandedValues` is a `model<string[]>` so the whole open/closed set can be bound with `[(expandedValues)]` for a fully controlled accordion, or left uncontrolled (defaults to `[]`).",
+  description: "Vertically stacked set of collapsible sections. Wrap `ui-accordion-item` children inside `ui-accordion`, each identified by its own `value`. Bind `[(expandedValues)]` to control which item(s) are open, or leave it uncontrolled (all closed by default). `multiple` allows more than one section open at once. Arrow Up/Down, Home and End move focus between section headers.",
   props: [
     {
       name: "expandedValues",

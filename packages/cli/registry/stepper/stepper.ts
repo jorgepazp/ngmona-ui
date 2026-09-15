@@ -11,13 +11,7 @@ interface StepView {
 
 /**
  * Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a
- * checkmark on completed steps and the active step called out via `aria-current="step"`.
- *
- * The original `tbk-stepper` across all three forks (all three were byte-identical, and one had
- * an empty, unused `.css` file) wasn't really a stepper at all — it was a single `X de Y` progress
- * bar with no per-step markers, so there was nothing resembling a "completed step" to mark. This
- * rebuilds it as a proper discrete step indicator, which is what every mainstream "Stepper"
- * component (Ant Design Steps, MUI Stepper, etc.) actually renders.
+ * checkmark on completed steps and the active step marked with `aria-current="step"`.
  */
 @Component({
   selector: 'ui-stepper',
@@ -55,11 +49,11 @@ export class Stepper {
         return 'bg-primary-500 text-white ring-4 ring-primary-100';
       case 'upcoming':
       default:
-        return 'bg-neutral-500 text-text-subdued';
+        return 'bg-surface-medium text-white';
     }
   }
 
   protected lineClass(filled: boolean): string {
-    return filled ? 'bg-primary-500' : 'bg-neutral-500';
+    return filled ? 'bg-primary-500' : 'bg-surface-medium';
   }
 }

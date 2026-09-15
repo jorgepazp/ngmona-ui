@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const checkboxApi: ComponentApiDoc = {
   name: "Checkbox",
-  description: "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Fixes carried over from the original: the visible label is now inside the `<label>` element (previously a sibling `<span>`, so clicking the text or reading it via a screen reader never worked), and the change output now fires on every user interaction (previously it only fired from `writeValue`, i.e. programmatic sets — a bug the original left a TODO comment about).",
+  description: "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Use `indeterminate` for a presentation-only mixed state, such as a \"select all\" checkbox with a partial selection. It does not affect `checked`.",
   props: [
     {
       name: "checked",

@@ -8,9 +8,10 @@
       <ui-button trigger>Toggle popover</ui-button>
       <div class="flex flex-col gap-1">
         <p class="text-label-md text-text-primary font-medium">Popover content</p>
-        <p class="text-paragraph-sm text-text-subdued">Any content can go here — it's only rendered while the popover is open.</p>
+        <p class="text-paragraph-sm text-text-subdued">Any content can go here; it's only rendered while the popover is open.</p>
       </div>
     </ui-popover>
     <p class="text-paragraph-sm text-text-subdued">open = {{ open() }}</p>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 </div>

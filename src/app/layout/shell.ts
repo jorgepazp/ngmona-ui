@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { LucideMoon, LucideSun } from '@lucide/angular';
+import { LucideGitBranch, LucideMoon, LucideSun } from '@lucide/angular';
 import { Button } from '../registry/button/button';
 import { SearchInput } from '../registry/search-input/search-input';
 import { Sidebar } from '../registry/sidebar/sidebar';
@@ -18,6 +18,7 @@ export class Shell {
   protected readonly theme = inject(ThemeService);
   protected readonly sunIcon = LucideSun;
   protected readonly moonIcon = LucideMoon;
+  protected readonly gitIcon = LucideGitBranch;
 
   protected readonly search = signal('');
   protected readonly filteredNavItems = computed(() => {

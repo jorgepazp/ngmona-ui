@@ -3,11 +3,13 @@ import { Component, computed, input } from '@angular/core';
 export type SeparatorOrientation = 'horizontal' | 'vertical';
 
 /**
- * Thin dividing line. Most separators in a layout are purely presentational (spacing between
- * unrelated blocks), so `decorative` defaults to `true` and the line is `aria-hidden` — assistive
- * tech skips straight over it, same as it would a plain visual rule. Set `decorative` to `false`
- * only when the separator genuinely marks a semantic break between two sections of content; that
- * flips it to `role="separator"` with `aria-orientation` so it's announced.
+ * Thin dividing line.
+ *
+ * Most separators in a layout are purely presentational, so `decorative` defaults to `true` and
+ * the line is `aria-hidden`; assistive technology skips over it like a plain visual rule. Set
+ * `decorative` to `false` only when the separator marks a genuine semantic break between two
+ * sections of content; it then renders with `role="separator"` and `aria-orientation` so it gets
+ * announced.
  */
 @Component({
   selector: 'ui-separator',

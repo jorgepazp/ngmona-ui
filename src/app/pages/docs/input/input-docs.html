@@ -6,11 +6,13 @@
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Basic</h2>
     <ui-input label="Email" placeholder="you@example.com" [icon]="mailIcon" [(value)]="text"></ui-input>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Password</h2>
     <ui-input type="password" label="Password" placeholder="••••••••"></ui-input>
+    <docs-code-tabs [html]="passwordHtml" [ts]="passwordTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -19,10 +21,12 @@
     <ui-input label="Warning" state="warning" caption="Double check this"></ui-input>
     <ui-input label="Error" state="error" caption="This field is required"></ui-input>
     <ui-input label="Disabled" [disabled]="true" placeholder="Can't type here"></ui-input>
+    <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Search suggestions</h2>
     <ui-input label="Country" placeholder="Search..." [searchIn]="countries"></ui-input>
+    <docs-code-tabs [html]="searchHtml" [ts]="searchTs" />
   </section>
 </div>

@@ -14,12 +14,13 @@
       <kbd class="rounded border border-neutral-600 !px-1 text-label-xs">⌘K</kbd>
     </button>
     <p class="text-paragraph-sm text-text-subdued">
-      Also bound globally on this page — press Cmd+K (or Ctrl+K) anywhere to toggle it. That global
+      Also bound globally on this page: press Cmd+K (or Ctrl+K) anywhere to toggle it. That global
       shortcut lives in <code>CommandDocs</code> (a plain <code>@HostListener('document:keydown', ...)</code>),
       not inside the <code>Command</code> component itself.
     </p>
     <p class="text-paragraph-sm text-text-subdued">Last selected: {{ lastSelected() }}</p>
 
     <ui-command [(open)]="open" [groups]="groups" (selected)="onSelected($event)"></ui-command>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 </div>

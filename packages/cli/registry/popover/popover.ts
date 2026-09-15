@@ -2,19 +2,8 @@ import { Component, ElementRef, TemplateRef, ViewContainerRef, effect, inject, i
 import { DEFAULT_FLOATING_POSITIONS, FloatingPanel } from '../shared/floating-panel';
 
 /**
- * Generic trigger + floating panel. Mark the trigger element with the `trigger` attribute
- * (projected via `[trigger]`); everything else passed as content becomes the panel body, only
- * rendered once the popover opens:
- *
- * ```html
- * <ui-popover [(open)]="isOpen">
- *   <button trigger>Open</button>
- *   <div class="p-2">Panel content</div>
- * </ui-popover>
- * ```
- *
- * Built on `FloatingPanel` (CDK Overlay) — the same primitive `Combobox`/`Autocomplete`/`Command`
- * use directly when they need tighter control over their own markup instead of content projection.
+ * Generic trigger and floating panel. Mark the trigger element with the `trigger` attribute;
+ * every other projected child becomes the panel body, rendered only once the popover opens.
  */
 @Component({
   selector: 'ui-popover',

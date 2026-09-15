@@ -17,6 +17,7 @@
         <ui-button (clicked)="basicOpen.set(false)">Delete</ui-button>
       </div>
     </ui-modal>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -45,5 +46,6 @@
         </div>
       </ng-template>
     </ui-modal>
+    <docs-code-tabs [html]="templatedHtml" [ts]="templatedTs" />
   </section>
 </div>

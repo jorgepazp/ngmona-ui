@@ -14,14 +14,12 @@ import { UiTemplateDirective } from '../shared/ui-template.directive';
 export type AlertType = 'info' | 'success' | 'warning' | 'error';
 
 /**
- * Inline, static banner — unlike `Notification`, this isn't fixed-position/toast-like, it's meant
- * to sit directly in page content (e.g. above a form). Uncontrolled: dismissing hides it via an
- * internal signal (no `open`/`show` input to wire up for the common case), but a `dismissed`
- * output is still emitted so a caller can react (e.g. remove it from a list).
+ * Inline banner for contextual messages within page content, such as a warning above a form.
+ * Use `Notification` instead for temporary, toast-like messages.
  *
- * `type` drives both the icon and the color, same pattern as `Notification`, and the same
- * `alert`/`status` role split: `error` interrupts (`role="alert"`), everything else is announced
- * politely (`role="status"`) since it doesn't need to steal focus to be noticed.
+ * `type` sets the icon, color and ARIA role: `error` uses `role="alert"` to interrupt, the other
+ * types use `role="status"`. There is no `open` input; dismissing hides the alert internally and
+ * emits `dismissed` so the caller can react, e.g. to remove it from a list.
  */
 @Component({
   selector: 'ui-alert',

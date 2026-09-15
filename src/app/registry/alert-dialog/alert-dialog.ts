@@ -7,17 +7,13 @@ let nextId = 0;
 export type AlertDialogVariant = 'default' | 'danger';
 
 /**
- * Confirmation dialog built on top of `Modal` rather than duplicating its focus-trap/backdrop/
- * animation logic. Two ARIA-driven differences from a plain `Modal`:
- *  - renders with `role="alertdialog"` (via the `role` input added to `Modal` for this purpose)
- *    instead of `role="dialog"`, and
- *  - the `message` is wired to the panel's `aria-describedby` (via `Modal`'s new `describedBy`
- *    input) so assistive tech reads the consequence of the action along with the heading.
+ * Confirmation dialog for actions that need an explicit confirm or cancel, such as deleting a
+ * record. Use it instead of `Modal` when the content is a `heading`, a `message` and two actions,
+ * rather than arbitrary projected content.
  *
- * Unlike `Modal`, content isn't arbitrary — `message` plus explicit confirm/cancel actions only.
- * `closeOnBackdrop` defaults to `false` (unlike `Modal`'s default of `true`): a destructive
- * confirmation shouldn't be dismissible by an accidental click outside it. Escape still cancels,
- * matching the standard alertdialog pattern where Escape is equivalent to the Cancel action.
+ * Renders with `role="alertdialog"` and exposes `message` through `aria-describedby` so assistive
+ * technology reads it together with the heading. Clicking the backdrop does not dismiss the
+ * dialog by default; Escape and the Cancel button both emit `cancelled`.
  */
 @Component({
   selector: 'ui-alert-dialog',

@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ApiTable } from '../../../docs-ui/api-table/api-table';
+import { CodeTabs } from '../../../docs-ui/code-tabs/code-tabs';
 import { Button } from '../../../registry/button/button';
 import { dataTableApi } from '../../../registry/data-table/data-table.api';
 import { DataTable, DataTableColumn } from '../../../registry/data-table/data-table';
@@ -26,7 +27,7 @@ function makeUsers(count: number): User[] {
 
 @Component({
   selector: 'docs-data-table',
-  imports: [DataTable, UiTemplateDirective, Button, ApiTable, Badge],
+  imports: [DataTable, UiTemplateDirective, Button, ApiTable, Badge, CodeTabs],
   templateUrl: './data-table-docs.html',
 })
 export default class DataTableDocs {
@@ -65,4 +66,62 @@ export default class DataTableDocs {
         return 'danger';
     }
   }
+
+  protected readonly basicHtml = `<ui-data-table
+  [data]="users()"
+  [columns]="columns"
+  [rowKey]="rowKey"
+  selectable="multi"
+  [(selected)]="selected"
+  [loading]="loading()"
+  [pageSize]="10"
+  ariaLabel="Users"
+>
+  <ng-template uiTemplate="cell-status" let-row>
+    <ui-badge [variant]="statusClass(row.status)">{{ row.status }}</ui-badge>
+  </ng-template>
+  <ng-template uiTemplate="empty">
+    <span>No users match; try adjusting your search.</span>
+  </ng-template>
+</ui-data-table>`;
+
+  protected readonly basicTs = `import { Component, signal } from '@angular/core';
+import { Badge, type BadgeVariant } from './ui/badge/badge';
+import { DataTable, type DataTableColumn } from './ui/data-table/data-table';
+import { UiTemplateDirective } from './ui/shared/ui-template.directive';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  status: 'active' | 'invited' | 'suspended';
+}
+
+@Component({
+  selector: 'app-users-table',
+  imports: [DataTable, UiTemplateDirective, Badge],
+  templateUrl: './users-table.html',
+})
+export class UsersTable {
+  users = signal<User[]>([/* ... */]);
+  columns: DataTableColumn<User>[] = [
+    { key: 'name', header: 'Name', sortable: true },
+    { key: 'email', header: 'Email', sortable: true },
+    { key: 'status', header: 'Status', sortable: true },
+  ];
+  selected = signal<User[]>([]);
+  loading = signal(false);
+  rowKey = (row: User) => row.id;
+
+  statusClass(status: User['status']): BadgeVariant {
+    switch (status) {
+      case 'active':
+        return 'success';
+      case 'invited':
+        return 'info';
+      case 'suspended':
+        return 'danger';
+    }
+  }
+}`;
 }

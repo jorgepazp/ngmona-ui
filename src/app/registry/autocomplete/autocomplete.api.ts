@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const autocompleteApi: ComponentApiDoc = {
   name: "Autocomplete",
-  description: "Free-text input with a filterable, keyboard-navigable suggestions dropdown. Unlike `Combobox`, whatever the user types IS the committed `value` — suggestions are only an assist, never a constraint, so submitting text that matches nothing in `suggestions()` is fully supported. This is the `FloatingPanel`-based, keyboard-navigable evolution of `Input`'s `searchIn` feature (which was click-only). Built directly on `FloatingPanel` rather than `Combobox` because the \"value is always whatever's typed\" semantics don't fit `Combobox`'s \"value is always one of the options\" contract.",
+  description: "Free-text input with a filterable, keyboard-navigable list of suggestions. Unlike `Combobox`, the typed text is always the committed `value`. Suggestions in `suggestions` are only an assist: submitting text that matches none of them is fully supported. Use Arrow Up/Down to move through the list, Enter to select the highlighted suggestion, and Escape to close it.",
   props: [
     {
       name: "suggestions",

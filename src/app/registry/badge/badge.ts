@@ -5,15 +5,12 @@ export type BadgeVariant = 'primary' | 'neutral' | 'success' | 'warning' | 'dang
 export type BadgeSize = 'sm' | 'md';
 
 /**
- * Small status/label pill. `primary` and `neutral` render solid (they have no near-white tint in
- * the palette to pair with dark text); the status variants (`success`/`warning`/`danger`/`info`)
- * use the dedicated `--color-surface-*-light` / `--color-text-*` token pairs, which is exactly
- * what that semantic pair exists for — a legible light-bg/dark-text combination without hand
- * -computing opacity tricks.
+ * Small label used to show a status, category or count.
  *
- * Badges are text-first by convention (never color alone) so no extra ARIA is needed for the
- * common case. When a badge stands in for a count/status on another element with no visible
- * text of its own, pass `ariaLabel` to give it an accessible name.
+ * `primary` and `neutral` render with a solid background. The status variants (`success`,
+ * `warning`, `danger`, `info`) render with a light background and matching text color. When a
+ * badge conveys meaning without its own visible text, such as a bare status dot, pass `ariaLabel`
+ * to give it an accessible name.
  */
 @Component({
   selector: 'ui-badge',
@@ -55,7 +52,7 @@ export class Badge {
   private variantClass(): string {
     const map: Record<BadgeVariant, string> = {
       primary: 'bg-primary-500 text-white',
-      neutral: 'bg-neutral-500 text-text-primary',
+      neutral: 'bg-surface-medium text-text-primary',
       success: 'bg-surface-success-light text-text-success',
       warning: 'bg-surface-warning-light text-text-warning',
       danger: 'bg-surface-danger-light text-text-danger',

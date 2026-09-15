@@ -28,18 +28,12 @@ function paginationRange(current: number, total: number, siblingCount: number): 
 }
 
 /**
- * Page-number navigation bar: previous/next buttons plus a condensed page-number range with
- * ellipses (first, last, current ± `siblingCount`). Purely presentational — it controls a `page`
- * index, the caller slices its own dataset based on that.
+ * Page-number navigation with previous and next buttons plus a condensed page-number range that
+ * collapses to ellipses for large page counts.
  *
- * The original bundled this together with dataset slicing and three named content-projection
- * slots (item template / info template / empty-state template), conflating two unrelated
- * responsibilities — rendering a list vs. picking a page — into one component. Split apart here:
- * `Paginator` now only owns the page-range control, matching how mainstream libraries model this
- * (MUI Pagination, Ant Design Pagination, PrimeNG Paginator all separate the two). The page-range
- * algorithm is also a full rewrite: the original `doPaging()` had accumulated special-cased magic
- * numbers (`i != 4`, `pageCount - 5`, `currentPage != 4`) that read like unfixed edge-case patches
- * rather than a designed algorithm; this uses the standard sibling+ellipsis range algorithm.
+ * Purely presentational: it only controls a `page` index. Slicing the underlying dataset is left
+ * to the caller. Use `siblingCount` to control how many page numbers show on each side of the
+ * current page.
  */
 @Component({
   selector: 'ui-paginator',

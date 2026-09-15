@@ -13,6 +13,7 @@
         >The request could not be completed.</ui-alert
       >
     </div>
+    <docs-code-tabs [html]="typesHtml" [ts]="typesTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -26,6 +27,7 @@
         >Reset dismissible example</ui-button
       >
     }
+    <docs-code-tabs [html]="dismissibleHtml" [ts]="dismissibleTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -37,5 +39,6 @@
         <ui-button size="sm" variant="secondary">Use another card</ui-button>
       </ng-template>
     </ui-alert>
+    <docs-code-tabs [html]="actionsHtml" [ts]="actionsTs" />
   </section>
 </div>

@@ -1,16 +1,24 @@
-<nav class="bg-neutral-50 sticky top-0 z-10 flex items-center justify-start h-10 border-b border-solid border-divider">
-  <img src="ngmona-logo.svg" alt="ui-kit logo" class="w-24 h-auto mx-4" />
-   <div class="flex items-center justify-between gap-2">
+<nav class="bg-surface-lighter sticky top-0 z-10 flex items-center justify-start h-10 border-b border-solid border-divider">
+  <img src="ngmona-iso.svg" alt="ui-kit logo" class="w-8 h-auto mx-4" />
+   <div class="flex items-center w-full justify-between gap-2">
       <a routerLink="/" class="flex flex-col leading-tight">
-        <span class="text-label-lg font-medium text-text-primary">ui-kit</span>
+        <span class="text-2xl font-medium text-text-primary">ngmona UI</span>
         <span class="text-paragraph-sm text-text-subdued">component reference</span>
       </a>
+      <div class="flex items-center gap-2">
+
       <ui-button
         variant="icon"
         [icon]="theme.theme() === 'dark' ? sunIcon : moonIcon"
         [ariaLabel]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
         (clicked)="theme.toggle()"
       ></ui-button>
+      <ui-button
+        variant="icon"
+        [icon]="gitIcon"
+        [ariaLabel]="'View source code on GitHub'"
+      ></ui-button>
+      </div>
     </div>
 </nav>
 <ui-sidebar title="ui-kit" breakpoint="md" navClassNames="flex flex-col gap-4 pb-4">

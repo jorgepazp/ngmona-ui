@@ -13,6 +13,7 @@
       <ui-badge variant="danger">Danger</ui-badge>
       <ui-badge variant="info">Info</ui-badge>
     </div>
+    <docs-code-tabs [html]="variantsHtml" [ts]="variantsTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -21,6 +22,7 @@
       <ui-badge size="sm" variant="primary">Small</ui-badge>
       <ui-badge size="md" variant="primary">Medium</ui-badge>
     </div>
+    <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -28,6 +30,7 @@
     <div class="flex items-center gap-3">
       <ui-badge variant="success" [icon]="checkIcon">Verified</ui-badge>
     </div>
+    <docs-code-tabs [html]="iconHtml" [ts]="iconTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -36,5 +39,6 @@
       <ui-badge variant="info" [pill]="true">Pill</ui-badge>
       <ui-badge variant="info" [pill]="false">Square</ui-badge>
     </div>
+    <docs-code-tabs [html]="shapeHtml" [ts]="shapeTs" />
   </section>
 </div>

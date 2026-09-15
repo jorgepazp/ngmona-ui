@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const inputApi: ComponentApiDoc = {
   name: "Input",
-  description: "Text input with label/caption slots, left/right icon, password visibility toggle, validation states, and an optional inline \"search in list\" suggestion dropdown. A11y fixes over the original: the clear button and the password-visibility toggle were plain `<em>` icon elements with a `(click)` handler — not focusable, not operable from a keyboard. Both are real `<button type=\"button\">`s now. The error/caption text is linked to the input via `aria-describedby`, and `state=\"error\"` sets `aria-invalid`. The suggestion list now has `role=\"listbox\"`/`role=\"option\"` and Up/Down/Enter/Escape keyboard support instead of being mouse-only. A `fade` animation trigger was also registered but never bound to the suggestion list's `@if` block — now wired up so it actually fades in/out.",
+  description: "Text input with label and caption slots, a leading or trailing icon, a password visibility toggle, validation states, and an optional inline suggestion dropdown. Set `type=\"password\"` to add a show/hide toggle button, or `type=\"number\"` to restrict typed characters to digits. Use `searchIn` to show a filterable list of suggestions below the field as the user types; navigate it with Arrow Up/Down, Enter and Escape.",
   props: [
     {
       name: "value",

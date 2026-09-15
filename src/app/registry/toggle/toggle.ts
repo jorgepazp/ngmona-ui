@@ -7,10 +7,6 @@ type ToggleColor = 'default' | 'info' | 'success' | 'warning' | 'danger';
  * Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with
  * `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone
  * usage.
- *
- * Same interactive-emit bug fixed here as in Checkbox: the original only notified listeners
- * from `writeValue` (a programmatic set), never from the actual user click — `effect()` on the
- * `checked` model signal now covers both paths uniformly.
  */
 @Component({
   selector: 'ui-toggle',

@@ -6,25 +6,12 @@ export type NotificationPosition =
   'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
 
 /**
- * Toast-style notification, positioned fixed to a screen corner/edge. Controlled via `show`, like
- * `Modal` — the caller flips it back to `false` on `closed` instead of the component managing its
- * own visibility.
+ * Toast-style notification anchored to a corner or edge of the screen.
  *
- * The original drove its slide-in/out with a position-aware `translate-x`/`translate-y` switch
- * timed by an `rxjs` `timer(200)`, mirroring the same choreography bug pattern as the original
- * Modal. That's replaced with a fade animation on the `@if` block's enter/leave via
- * `animate.enter`/`animate.leave`.
- *
- * Multi-brand `type` values (`accent-tbk`/`accent-onepay`/`accent-webpay`/`custom`) are dropped —
- * see `styles.css` for why the brand palette collapsed to a single `primary`/`accent` pair.
- *
- * `hideCloseButton` (default `true`, i.e. no close button unless explicitly turned off) is
- * renamed to `showCloseButton` (default `true`, i.e. shown unless explicitly turned off) to match
- * `Modal`'s naming and drop the double-negative default.
- *
- * `stacked` (default `false`) drops the built-in `fixed`+corner-position classes so a parent can
- * lay several of these out itself — used by `Toaster` (`../toast.ts`) to stack multiple queued
- * toasts in the same corner instead of having them all render on top of each other.
+ * Controlled via `show`, similar to `Modal`: set it back to `false` when `(closed)` fires. `type`
+ * sets the icon, color and ARIA role: `error` interrupts, the rest announce politely. Set
+ * `stacked` to drop the built-in fixed positioning so a parent, such as `Toaster`, can lay out
+ * several notifications itself.
  */
 @Component({
   selector: 'ui-notification',
@@ -57,16 +44,16 @@ export class Notification {
   private readonly typeClass = computed(() => {
     switch (this.type()) {
       case 'success':
-        return 'bg-success-100 !border-success-500 text-success-800';
+        return 'bg-surface-success-light text-surface-success border-surface-success';
       case 'error':
-        return 'bg-danger-100 !border-danger-500 text-danger-800';
+        return 'bg-surface-danger-light text-surface-danger border-surface-danger';
       case 'warning':
-        return 'bg-warning-100 !border-warning-500 text-warning-800';
+        return 'bg-surface-warning-light text-surface-warning border-surface-warning';
       case 'neutral':
-        return 'bg-neutral-300 !border-neutral-600 text-neutral-900';
+        return 'bg-surface-neutral !border-border-neutral text-text-primary';
       case 'info':
       default:
-        return 'bg-info-100 !border-info-500 text-info-800';
+        return 'bg-surface-info-light text-surface-info border-surface-info';
     }
   });
 

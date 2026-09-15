@@ -48,7 +48,6 @@ const CATEGORY_MAP = {
   'file-upload': 'form',
   input: 'form',
   'input-group': 'form',
-  label: 'form',
   link: 'navigation',
   modal: 'overlay',
   notification: 'feedback',

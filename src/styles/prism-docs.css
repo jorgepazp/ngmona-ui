@@ -1,0 +1,73 @@
+/*
+ * Minimal Prism token palette for the docs site's code-tabs viewer (see
+ * src/app/docs-ui/code-tabs). Scoped under .docs-code so it never leaks into the rest of the app,
+ * and kept independent of the light/dark theme tokens — code blocks stay dark regardless of the
+ * site's active theme, same convention as GitHub/PrimeNG/shadcn.
+ */
+.docs-code code[class*='language-'],
+.docs-code pre[class*='language-'] {
+  color: #c9d1d9;
+  font-family: var(--font-mono);
+  text-shadow: none;
+}
+
+.docs-code .token.comment,
+.docs-code .token.prolog,
+.docs-code .token.doctype,
+.docs-code .token.cdata {
+  color: #7d8590;
+}
+
+.docs-code .token.punctuation {
+  color: #c9d1d9;
+}
+
+.docs-code .token.tag,
+.docs-code .token.attr-name,
+.docs-code .token.namespace,
+.docs-code .token.deleted {
+  color: #7ee787;
+}
+
+.docs-code .token.property,
+.docs-code .token.constant,
+.docs-code .token.symbol {
+  color: #79c0ff;
+}
+
+.docs-code .token.boolean,
+.docs-code .token.number {
+  color: #ffa657;
+}
+
+.docs-code .token.selector,
+.docs-code .token.attr-value,
+.docs-code .token.string,
+.docs-code .token.char,
+.docs-code .token.builtin,
+.docs-code .token.inserted {
+  color: #a5d6ff;
+}
+
+.docs-code .token.operator,
+.docs-code .token.entity,
+.docs-code .token.url {
+  color: #c9d1d9;
+}
+
+.docs-code .token.atrule,
+.docs-code .token.keyword {
+  color: #ff7b72;
+}
+
+.docs-code .token.function,
+.docs-code .token.class-name,
+.docs-code .token.function-variable {
+  color: #d2a8ff;
+}
+
+.docs-code .token.regex,
+.docs-code .token.important,
+.docs-code .token.variable {
+  color: #ffa657;
+}

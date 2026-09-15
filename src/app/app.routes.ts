@@ -80,10 +80,6 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/docs/link/link-docs'),
       },
       {
-        path: 'components/label',
-        loadComponent: () => import('./pages/docs/label/label-docs'),
-      },
-      {
         path: 'components/spinner',
         loadComponent: () => import('./pages/docs/spinner/spinner-docs'),
       },

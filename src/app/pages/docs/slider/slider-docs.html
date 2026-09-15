@@ -7,11 +7,13 @@
     <h2 class="text-label-lg text-text-subdued">Two-way binding</h2>
     <ui-slider label="Volume" [(value)]="volume"></ui-slider>
     <p class="text-paragraph-sm text-text-subdued">volume = {{ volume() }}</p>
+    <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Custom range + step</h2>
     <ui-slider label="Rating" [min]="0" [max]="10" [step]="1" [value]="6"></ui-slider>
+    <docs-code-tabs [html]="rangeHtml" [ts]="rangeTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -25,11 +27,13 @@
       [formatValue]="formatPrice"
       caption="Announced to screen readers as a dollar amount, not a raw number"
     ></ui-slider>
+    <docs-code-tabs [html]="formattedHtml" [ts]="formattedTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">States</h2>
     <ui-slider label="No value badge" [showValue]="false" [value]="30"></ui-slider>
     <ui-slider label="Disabled" [disabled]="true" [value]="55"></ui-slider>
+    <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 </div>

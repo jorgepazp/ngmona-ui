@@ -1,18 +1,11 @@
 import { Component, input } from '@angular/core';
 
 /**
- * Indeterminate loading spinner (animated arc), for cases that need a standalone spinner rather
- * than `ui-button`'s built-in `[loading]` state.
+ * Indeterminate loading spinner (animated arc), for standalone use rather than `ui-button`'s
+ * built-in `loading` state.
  *
- * Both source copies (FTD/uiSDP; this component didn't exist in base) were identical, down to a
- * `TODO: quitar HEX del stroke a clases tailwind` comment — i.e. the original authors already
- * flagged that hardcoding the stroke color as a hex string (`#D5006C`, which is just
- * `--color-primary-300`) instead of a Tailwind class was wrong. Fixed here: the SVG now strokes
- * with `currentColor` and color is set via a `text-*` class (`classNames`, defaults to
- * `text-primary-500`), so it reskins the same way every other component in this library does.
- *
- * Accessibility: the original had none. Added `role="status"` plus an `ariaLabel` (defaults to
- * "Loading") so screen readers announce the loading state instead of silently seeing nothing.
+ * The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with
+ * `role="status"` and `ariaLabel` so screen readers announce the loading state.
  */
 @Component({
   selector: 'ui-spinner',

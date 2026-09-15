@@ -3,6 +3,7 @@
 @import './styles/theme-colors.css';
 @import './styles/theme-dark.css';
 @import './styles/animations.css';
+@import './styles/prism-docs.css';
 
 /*
  * Color tokens live in ./styles/theme-colors.css — a generated file (see scripts/generate-theme.mjs

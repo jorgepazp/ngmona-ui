@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   contentChildren,
+  effect,
   ElementRef,
   forwardRef,
   input,
@@ -12,22 +13,24 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideCheckCircle2, LucideDynamicIcon } from '@lucide/angular';
+import { Paginator } from '../paginator/paginator';
 import { UiTemplateDirective } from '../shared/ui-template.directive';
 
 /**
- * Single-select list/chip picker over an arbitrary array of options (not a wrapper around
- * individual `<ui-radio>` elements — this renders its own buttons).
+ * List or chip picker over an array of options, rendered as its own buttons rather than
+ * individual `ui-radio` elements. Single-select by default; set `multiple` for a
+ * checkbox-group-style multi-select.
  *
- * The original was a stack of `<div (click)="...">`s with no radio semantics at all — not
- * reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the
- * WAI-ARIA "radio group" pattern: `role="radiogroup"` + `role="radio"` buttons, roving
- * `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in
- * the original but was declared and never actually used (selection always fell back to `==`) —
- * wired up for real here.
+ * Follows the WAI-ARIA pattern for the mode in use: `role="radiogroup"` for single-select,
+ * `role="group"` with checkboxes for `multiple`, with roving `tabindex` and arrow-key navigation
+ * between options. Use `compareWith` to control how options are matched against the bound value,
+ * for example when option objects are reloaded from an API and aren't reference-equal. Set
+ * `paginator` to page the rendered options through a built-in paginator instead of rendering them
+ * all at once.
  */
 @Component({
   selector: 'ui-radio-group',
-  imports: [NgTemplateOutlet, LucideDynamicIcon],
+  imports: [NgTemplateOutlet, LucideDynamicIcon, Paginator],
   templateUrl: './radio-group.html',
   providers: [
     {
@@ -54,6 +57,12 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
   readonly disabledPredicate = input<(option: T) => boolean>(() => false);
   /** Called with `(optionA, optionB)` to decide whether two options are the same selection — override for option objects that aren't reference-equal to the bound value (e.g. reloaded from an API). Defaults to `===`. */
   readonly compareWith = input<(a: T, b: T) => boolean>((a, b) => a === b);
+  /** Allows selecting more than one option at once, rendered as a checkbox group instead of a radio group. */
+  readonly multiple = input(false);
+  /** Pages the rendered options through a `ui-paginator` instead of rendering them all at once. */
+  readonly paginator = input(false);
+  /** Number of options shown per page when `paginator` is enabled. */
+  readonly pageSize = input(5);
 
   /** Emits the chosen option when the user selects it, via click or arrow-key navigation. */
   readonly selectedItem = output<T>();
@@ -68,23 +77,42 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
   private readonly optionRefs = viewChildren<ElementRef<HTMLButtonElement>>('optionRef');
 
   protected readonly value = signal<T | undefined>(undefined);
+  protected readonly values = signal<readonly T[]>([]);
 
   protected readonly containerClass = computed(
     () => this.containerClassNames() || (this.type() === 'list' ? 'flex flex-col gap-1' : 'flex flex-wrap gap-1'),
   );
 
-  private onChange: (value: T | undefined) => void = () => {};
+  protected readonly page = signal(0);
+  protected readonly pageCount = computed(() => Math.max(Math.ceil(this.options().length / this.pageSize()), 1));
+  protected readonly pagedOptions = computed(() => {
+    if (!this.paginator()) return this.options();
+    const start = this.page() * this.pageSize();
+    return this.options().slice(start, start + this.pageSize());
+  });
+
+  private onChange: (value: T | readonly T[] | undefined) => void = () => {};
   private onTouched: () => void = () => {};
 
+  constructor() {
+    effect(() => {
+      this.options();
+      this.page.set(0);
+    });
+  }
+
   protected isSelected(option: T): boolean {
+    if (this.multiple()) {
+      return this.values().some((selected) => this.compareWith()(option, selected));
+    }
     const current = this.value();
     return current !== undefined && this.compareWith()(option, current);
   }
 
   protected optionClass(option: T): string {
-    const base = this.type() === 'list' ? 'p-2 rounded-xl bg-white border-2 border-neutral-500' : 'px-[14px] whitespace-nowrap py-[6px] rounded-full border-2 text-paragraph-sm flex items-center justify-center';
+    const base = this.type() === 'list' ? 'p-2 rounded-xl bg-surface border-2 border-border-neutral text-text-primary' : 'px-2 whitespace-nowrap py-1 rounded-full text-text-primary border-2 border-border-neutral text-sm flex items-center justify-center';
     const selected = this.optionClassNames() || base;
-    const active = this.selectedClassNames() || (this.type() === 'list' ? `${base} border-primary-500` : `${base} bg-neutral-500 border-transparent font-medium`);
+    const active = this.selectedClassNames() || (this.type() === 'list' ? `${base} !border-border-active bg-surface-active/10` : `${base} bg-surface-enabled text-surface border-transparent font-medium`);
     const state = this.isSelected(option) ? active : selected;
     const disabled = this.disabledPredicate()(option) ? 'opacity-50 pointer-events-none' : '';
     return `cursor-pointer transition-all select-none ${state} ${disabled}`;
@@ -98,8 +126,16 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
     if (this.disabledPredicate()(option)) {
       return;
     }
-    this.value.set(option);
-    this.onChange(option);
+    if (this.multiple()) {
+      const current = this.values();
+      const index = current.findIndex((selected) => this.compareWith()(option, selected));
+      const next = index > -1 ? current.filter((_, i) => i !== index) : [...current, option];
+      this.values.set(next);
+      this.onChange(next);
+    } else {
+      this.value.set(option);
+      this.onChange(option);
+    }
     this.selectedItem.emit(option);
   }
 
@@ -127,8 +163,12 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
         return;
     }
     event.preventDefault();
-    const nextOption = this.options()[nextIndex];
     refs[nextIndex]?.nativeElement.focus();
+    if (this.multiple()) {
+      // Checkbox-group convention: arrow keys move focus only, Space/Enter toggles.
+      return;
+    }
+    const nextOption = this.pagedOptions()[nextIndex];
     if (nextOption !== undefined && !this.disabledPredicate()(nextOption)) {
       this.selectItem(nextOption);
     }
@@ -136,7 +176,7 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
 
   protected tabIndexFor(option: T, index: number): number {
     if (this.isSelected(option)) return 0;
-    const hasSelection = this.value() !== undefined;
+    const hasSelection = this.multiple() ? this.values().length > 0 : this.value() !== undefined;
     return !hasSelection && index === 0 ? 0 : -1;
   }
 
@@ -144,11 +184,15 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
     return this.templates().find((t) => t.name() === name)?.template;
   }
 
-  writeValue(value: T | undefined): void {
-    this.value.set(value);
+  writeValue(value: T | readonly T[] | undefined): void {
+    if (this.multiple()) {
+      this.values.set(Array.isArray(value) ? value : []);
+    } else {
+      this.value.set(value as T | undefined);
+    }
   }
 
-  registerOnChange(fn: (value: T | undefined) => void): void {
+  registerOnChange(fn: (value: T | readonly T[] | undefined) => void): void {
     this.onChange = fn;
   }
 

@@ -6,7 +6,7 @@
       "name": "accordion",
       "type": "component",
       "category": "layout",
-      "description": "Wraps `ui-accordion-item` children (like `Timeline`/`TimelineItem`). Coordination between the parent and its items — which value(s) are expanded, single-vs-multiple-open, and Up/Down/Home/ End navigation between headers — is done by each `AccordionItem` injecting this component directly (`inject(Accordion)`), the same way `Checkbox`/`Radio` inject `NG_VALUE_ACCESSOR` machinery, just without the forms indirection since there's no `ControlValueAccessor` need here. `expandedValues` is a `model<string[]>` so the whole open/closed set can be bound with `[(expandedValues)]` for a fully controlled accordion, or left uncontrolled (defaults to `[]`).",
+      "description": "Vertically stacked set of collapsible sections. Wrap `ui-accordion-item` children inside `ui-accordion`, each identified by its own `value`. Bind `[(expandedValues)]` to control which item(s) are open, or leave it uncontrolled (all closed by default). `multiple` allows more than one section open at once. Arrow Up/Down, Home and End move focus between section headers.",
       "files": [
         {
           "path": "accordion-item/accordion-item.html",
@@ -33,7 +33,7 @@
       ],
       "api": {
         "name": "Accordion",
-        "description": "Wraps `ui-accordion-item` children (like `Timeline`/`TimelineItem`). Coordination between the parent and its items — which value(s) are expanded, single-vs-multiple-open, and Up/Down/Home/ End navigation between headers — is done by each `AccordionItem` injecting this component directly (`inject(Accordion)`), the same way `Checkbox`/`Radio` inject `NG_VALUE_ACCESSOR` machinery, just without the forms indirection since there's no `ControlValueAccessor` need here. `expandedValues` is a `model<string[]>` so the whole open/closed set can be bound with `[(expandedValues)]` for a fully controlled accordion, or left uncontrolled (defaults to `[]`).",
+        "description": "Vertically stacked set of collapsible sections. Wrap `ui-accordion-item` children inside `ui-accordion`, each identified by its own `value`. Bind `[(expandedValues)]` to control which item(s) are open, or leave it uncontrolled (all closed by default). `multiple` allows more than one section open at once. Arrow Up/Down, Home and End move focus between section headers.",
         "props": [
           {
             "name": "expandedValues",
@@ -74,7 +74,7 @@
       "name": "alert",
       "type": "component",
       "category": "feedback",
-      "description": "Inline, static banner — unlike `Notification`, this isn't fixed-position/toast-like, it's meant to sit directly in page content (e.g. above a form). Uncontrolled: dismissing hides it via an internal signal (no `open`/`show` input to wire up for the common case), but a `dismissed` output is still emitted so a caller can react (e.g. remove it from a list). `type` drives both the icon and the color, same pattern as `Notification`, and the same `alert`/`status` role split: `error` interrupts (`role=\"alert\"`), everything else is announced politely (`role=\"status\"`) since it doesn't need to steal focus to be noticed.",
+      "description": "Inline banner for contextual messages within page content, such as a warning above a form. Use `Notification` instead for temporary, toast-like messages. `type` sets the icon, color and ARIA role: `error` uses `role=\"alert\"` to interrupt, the other types use `role=\"status\"`. There is no `open` input; dismissing hides the alert internally and emits `dismissed` so the caller can react, e.g. to remove it from a list.",
       "files": [
         {
           "path": "alert.html",
@@ -93,7 +93,7 @@
       ],
       "api": {
         "name": "Alert",
-        "description": "Inline, static banner — unlike `Notification`, this isn't fixed-position/toast-like, it's meant to sit directly in page content (e.g. above a form). Uncontrolled: dismissing hides it via an internal signal (no `open`/`show` input to wire up for the common case), but a `dismissed` output is still emitted so a caller can react (e.g. remove it from a list). `type` drives both the icon and the color, same pattern as `Notification`, and the same `alert`/`status` role split: `error` interrupts (`role=\"alert\"`), everything else is announced politely (`role=\"status\"`) since it doesn't need to steal focus to be noticed.",
+        "description": "Inline banner for contextual messages within page content, such as a warning above a form. Use `Notification` instead for temporary, toast-like messages. `type` sets the icon, color and ARIA role: `error` uses `role=\"alert\"` to interrupt, the other types use `role=\"status\"`. There is no `open` input; dismissing hides the alert internally and emits `dismissed` so the caller can react, e.g. to remove it from a list.",
         "props": [
           {
             "name": "type",
@@ -158,7 +158,7 @@
       "name": "alert-dialog",
       "type": "component",
       "category": "overlay",
-      "description": "Confirmation dialog built on top of `Modal` rather than duplicating its focus-trap/backdrop/ animation logic. Two ARIA-driven differences from a plain `Modal`: - renders with `role=\"alertdialog\"` (via the `role` input added to `Modal` for this purpose) instead of `role=\"dialog\"`, and - the `message` is wired to the panel's `aria-describedby` (via `Modal`'s new `describedBy` input) so assistive tech reads the consequence of the action along with the heading. Unlike `Modal`, content isn't arbitrary — `message` plus explicit confirm/cancel actions only. `closeOnBackdrop` defaults to `false` (unlike `Modal`'s default of `true`): a destructive confirmation shouldn't be dismissible by an accidental click outside it. Escape still cancels, matching the standard alertdialog pattern where Escape is equivalent to the Cancel action.",
+      "description": "Confirmation dialog for actions that need an explicit confirm or cancel, such as deleting a record. Use it instead of `Modal` when the content is a `heading`, a `message` and two actions, rather than arbitrary projected content. Renders with `role=\"alertdialog\"` and exposes `message` through `aria-describedby` so assistive technology reads it together with the heading. Clicking the backdrop does not dismiss the dialog by default; Escape and the Cancel button both emit `cancelled`.",
       "files": [
         {
           "path": "alert-dialog.html",
@@ -176,7 +176,7 @@
       "npmDependencies": [],
       "api": {
         "name": "AlertDialog",
-        "description": "Confirmation dialog built on top of `Modal` rather than duplicating its focus-trap/backdrop/ animation logic. Two ARIA-driven differences from a plain `Modal`: - renders with `role=\"alertdialog\"` (via the `role` input added to `Modal` for this purpose) instead of `role=\"dialog\"`, and - the `message` is wired to the panel's `aria-describedby` (via `Modal`'s new `describedBy` input) so assistive tech reads the consequence of the action along with the heading. Unlike `Modal`, content isn't arbitrary — `message` plus explicit confirm/cancel actions only. `closeOnBackdrop` defaults to `false` (unlike `Modal`'s default of `true`): a destructive confirmation shouldn't be dismissible by an accidental click outside it. Escape still cancels, matching the standard alertdialog pattern where Escape is equivalent to the Cancel action.",
+        "description": "Confirmation dialog for actions that need an explicit confirm or cancel, such as deleting a record. Use it instead of `Modal` when the content is a `heading`, a `message` and two actions, rather than arbitrary projected content. Renders with `role=\"alertdialog\"` and exposes `message` through `aria-describedby` so assistive technology reads it together with the heading. Clicking the backdrop does not dismiss the dialog by default; Escape and the Cancel button both emit `cancelled`.",
         "props": [
           {
             "name": "open",
@@ -281,7 +281,7 @@
       "name": "autocomplete",
       "type": "component",
       "category": "form",
-      "description": "Free-text input with a filterable, keyboard-navigable suggestions dropdown. Unlike `Combobox`, whatever the user types IS the committed `value` — suggestions are only an assist, never a constraint, so submitting text that matches nothing in `suggestions()` is fully supported. This is the `FloatingPanel`-based, keyboard-navigable evolution of `Input`'s `searchIn` feature (which was click-only). Built directly on `FloatingPanel` rather than `Combobox` because the \"value is always whatever's typed\" semantics don't fit `Combobox`'s \"value is always one of the options\" contract.",
+      "description": "Free-text input with a filterable, keyboard-navigable list of suggestions. Unlike `Combobox`, the typed text is always the committed `value`. Suggestions in `suggestions` are only an assist: submitting text that matches none of them is fully supported. Use Arrow Up/Down to move through the list, Enter to select the highlighted suggestion, and Escape to close it.",
       "files": [
         {
           "path": "autocomplete.html",
@@ -298,7 +298,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Autocomplete",
-        "description": "Free-text input with a filterable, keyboard-navigable suggestions dropdown. Unlike `Combobox`, whatever the user types IS the committed `value` — suggestions are only an assist, never a constraint, so submitting text that matches nothing in `suggestions()` is fully supported. This is the `FloatingPanel`-based, keyboard-navigable evolution of `Input`'s `searchIn` feature (which was click-only). Built directly on `FloatingPanel` rather than `Combobox` because the \"value is always whatever's typed\" semantics don't fit `Combobox`'s \"value is always one of the options\" contract.",
+        "description": "Free-text input with a filterable, keyboard-navigable list of suggestions. Unlike `Combobox`, the typed text is always the committed `value`. Suggestions in `suggestions` are only an assist: submitting text that matches none of them is fully supported. Use Arrow Up/Down to move through the list, Enter to select the highlighted suggestion, and Escape to close it.",
         "props": [
           {
             "name": "suggestions",
@@ -371,7 +371,7 @@
       "name": "avatar",
       "type": "component",
       "category": "data-display",
-      "description": "User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried first when `src` is set and swaps to the initials/icon fallback automatically on load error (broken URL, 404, etc) via `(error)` on the `<img>`. Accessibility: `alt` is the single accessible-name input regardless of which tier renders — it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the `role=\"img\"` container otherwise. The initials text and fallback icon are both `aria-hidden` so screen readers read the one `alt`/`aria-label` name instead of duplicating it.",
+      "description": "User or entity avatar with automatic fallback between an image, initials and an icon. When `src` is set the image is shown first, and falls back to `initials` (then `icon`) automatically if it fails to load. `alt` is the accessible name in every case: it is used as the `<img alt>` when an image renders, and as `aria-label` on the container otherwise.",
       "files": [
         {
           "path": "avatar.html",
@@ -388,7 +388,7 @@
       ],
       "api": {
         "name": "Avatar",
-        "description": "User/entity avatar with a three-tier fallback: image -> initials -> icon. The image is tried first when `src` is set and swaps to the initials/icon fallback automatically on load error (broken URL, 404, etc) via `(error)` on the `<img>`. Accessibility: `alt` is the single accessible-name input regardless of which tier renders — it's used as the real `<img alt>` when an image is showing, and as `aria-label` on the `role=\"img\"` container otherwise. The initials text and fallback icon are both `aria-hidden` so screen readers read the one `alt`/`aria-label` name instead of duplicating it.",
+        "description": "User or entity avatar with automatic fallback between an image, initials and an icon. When `src` is set the image is shown first, and falls back to `initials` (then `icon`) automatically if it fails to load. `alt` is the accessible name in every case: it is used as the `<img alt>` when an image renders, and as `aria-label` on the container otherwise.",
         "props": [
           {
             "name": "src",
@@ -469,7 +469,7 @@
       "name": "badge",
       "type": "component",
       "category": "feedback",
-      "description": "Small status/label pill. `primary` and `neutral` render solid (they have no near-white tint in the palette to pair with dark text); the status variants (`success`/`warning`/`danger`/`info`) use the dedicated `--color-surface-*-light` / `--color-text-*` token pairs, which is exactly what that semantic pair exists for — a legible light-bg/dark-text combination without hand -computing opacity tricks. Badges are text-first by convention (never color alone) so no extra ARIA is needed for the common case. When a badge stands in for a count/status on another element with no visible text of its own, pass `ariaLabel` to give it an accessible name.",
+      "description": "Small label used to show a status, category or count. `primary` and `neutral` render with a solid background. The status variants (`success`, `warning`, `danger`, `info`) render with a light background and matching text color. When a badge conveys meaning without its own visible text, such as a bare status dot, pass `ariaLabel` to give it an accessible name.",
       "files": [
         {
           "path": "badge.html",
@@ -486,7 +486,7 @@
       ],
       "api": {
         "name": "Badge",
-        "description": "Small status/label pill. `primary` and `neutral` render solid (they have no near-white tint in the palette to pair with dark text); the status variants (`success`/`warning`/`danger`/`info`) use the dedicated `--color-surface-*-light` / `--color-text-*` token pairs, which is exactly what that semantic pair exists for — a legible light-bg/dark-text combination without hand -computing opacity tricks. Badges are text-first by convention (never color alone) so no extra ARIA is needed for the common case. When a badge stands in for a count/status on another element with no visible text of its own, pass `ariaLabel` to give it an accessible name.",
+        "description": "Small label used to show a status, category or count. `primary` and `neutral` render with a solid background. The status variants (`success`, `warning`, `danger`, `info`) render with a light background and matching text color. When a badge conveys meaning without its own visible text, such as a bare status dot, pass `ariaLabel` to give it an accessible name.",
         "props": [
           {
             "name": "variant",
@@ -543,7 +543,7 @@
       "name": "breadcrumb",
       "type": "component",
       "category": "navigation",
-      "description": "Breadcrumb trail. Data-driven via `items` rather than content-projected, so the last-item \"current page\" treatment and the separators between items can be derived structurally instead of asking every consumer to remember to mark them by hand. Every item except the last renders through `ui-link` (this library's existing Link component) so it inherits its focus/hover/disabled treatment for free. The last item is current-page: it renders as plain text with `aria-current=\"page\"` (not a link — you're already there) per the WAI-ARIA breadcrumb pattern. Separator icons between items are `aria-hidden` since the `<ol>` list structure already conveys the hierarchy to assistive tech; the trailing `nav[aria-label]` is what identifies the whole region as a breadcrumb landmark.",
+      "description": "Navigation trail showing the path to the current page. Built from `items` rather than projected content, so the current-page treatment and the separators between items are handled automatically. Every item except the last renders as a `ui-link`; the last renders as plain text with `aria-current=\"page\"`.",
       "files": [
         {
           "path": "breadcrumb.html",
@@ -562,7 +562,7 @@
       ],
       "api": {
         "name": "Breadcrumb",
-        "description": "Breadcrumb trail. Data-driven via `items` rather than content-projected, so the last-item \"current page\" treatment and the separators between items can be derived structurally instead of asking every consumer to remember to mark them by hand. Every item except the last renders through `ui-link` (this library's existing Link component) so it inherits its focus/hover/disabled treatment for free. The last item is current-page: it renders as plain text with `aria-current=\"page\"` (not a link — you're already there) per the WAI-ARIA breadcrumb pattern. Separator icons between items are `aria-hidden` since the `<ol>` list structure already conveys the hierarchy to assistive tech; the trailing `nav[aria-label]` is what identifies the whole region as a breadcrumb landmark.",
+        "description": "Navigation trail showing the path to the current page. Built from `items` rather than projected content, so the current-page treatment and the separators between items are handled automatically. Every item except the last renders as a `ui-link`; the last renders as plain text with `aria-current=\"page\"`.",
         "props": [
           {
             "name": "items",
@@ -611,7 +611,7 @@
       "name": "button",
       "type": "component",
       "category": "action",
-      "description": "Button with primary/secondary/tertiary/icon-only variants, loading and inverse states. Colors resolve through the `--color-primary-*` theme tokens (see styles.css) — override those CSS variables to reskin every button at once.",
+      "description": "Button with `primary`, `secondary`, `tertiary` and `icon`-only variants, plus loading and inverse states. Colors are driven by the `--color-primary-*` theme tokens; override those CSS variables to restyle every button at once.",
       "files": [
         {
           "path": "button.html",
@@ -628,7 +628,7 @@
       ],
       "api": {
         "name": "Button",
-        "description": "Button with primary/secondary/tertiary/icon-only variants, loading and inverse states. Colors resolve through the `--color-primary-*` theme tokens (see styles.css) — override those CSS variables to reskin every button at once.",
+        "description": "Button with `primary`, `secondary`, `tertiary` and `icon`-only variants, plus loading and inverse states. Colors are driven by the `--color-primary-*` theme tokens; override those CSS variables to restyle every button at once.",
         "props": [
           {
             "name": "variant",
@@ -741,7 +741,7 @@
       "name": "calendar",
       "type": "component",
       "category": "form",
-      "description": "Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based `[(selected)]` two-way binding for standalone usage — same bridging pattern as `Checkbox`. Fixes carried over from the original: `canSelectCurrentDay` was inverted (it disabled today instead of enabling it) and was redundant with a second, always-on \"no past dates\" check inside `selectDay` that ran regardless of `canSelectPreviousDates` — between the two, today's date could never actually be selected no matter which inputs were set. Both are fixed here: a single `isDayDisabled` check handles today/past/future consistently. The next/previous-month buttons also used to render inconsistently when disabled — the \"prev\" button vanished (`*ngIf`) while \"next\" tried (and failed, via a nonexistent `text-color-icon-disabled` class) to dim; both are now real `disabled` buttons with matching, working styles. The offset math for the first week of the month has been rewritten as a single modulo expression — the original had an unmodded subtraction that went negative for some `startDayOffset` values, worked around with a second special-cased branch elsewhere in the matrix-building loop. The prev/next-month buttons also carried a `fade` trigger binding that was pure dead weight: both buttons are always mounted (never inserted/removed), so the enter/leave transitions it declared could never fire — removed rather than migrated.",
+      "description": "Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based `[(selected)]` two-way binding for standalone usage. Restrict which dates are selectable with `disabledDates`, `disabledWeekdays`, `enabledDates`, `canSelectPreviousDates`, `canSelectCurrentDay`, `minEnabledDate` and `maxEnabledDate`. Set `canDeselectDate` to allow clearing the selection by clicking the selected day again.",
       "files": [
         {
           "path": "calendar.html",
@@ -758,7 +758,7 @@
       ],
       "api": {
         "name": "Calendar",
-        "description": "Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based `[(selected)]` two-way binding for standalone usage — same bridging pattern as `Checkbox`. Fixes carried over from the original: `canSelectCurrentDay` was inverted (it disabled today instead of enabling it) and was redundant with a second, always-on \"no past dates\" check inside `selectDay` that ran regardless of `canSelectPreviousDates` — between the two, today's date could never actually be selected no matter which inputs were set. Both are fixed here: a single `isDayDisabled` check handles today/past/future consistently. The next/previous-month buttons also used to render inconsistently when disabled — the \"prev\" button vanished (`*ngIf`) while \"next\" tried (and failed, via a nonexistent `text-color-icon-disabled` class) to dim; both are now real `disabled` buttons with matching, working styles. The offset math for the first week of the month has been rewritten as a single modulo expression — the original had an unmodded subtraction that went negative for some `startDayOffset` values, worked around with a second special-cased branch elsewhere in the matrix-building loop. The prev/next-month buttons also carried a `fade` trigger binding that was pure dead weight: both buttons are always mounted (never inserted/removed), so the enter/leave transitions it declared could never fire — removed rather than migrated.",
+        "description": "Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based `[(selected)]` two-way binding for standalone usage. Restrict which dates are selectable with `disabledDates`, `disabledWeekdays`, `enabledDates`, `canSelectPreviousDates`, `canSelectCurrentDay`, `minEnabledDate` and `maxEnabledDate`. Set `canDeselectDate` to allow clearing the selection by clicking the selected day again.",
         "props": [
           {
             "name": "selected",
@@ -871,7 +871,7 @@
       "name": "card",
       "type": "component",
       "category": "layout",
-      "description": "Plain bordered container with an optional card shadow. Identical across all three source forks, so this is a straight port. Fixed the surface/border classes: the original referenced `bg-color-surface-white` / `border-color-border-neutral`, which aren't real utilities under the new token names (`--color-surface-white`, `--color-border-neutral`) — Tailwind generates `bg-surface-white` / `border-border-neutral` from those, so the intended background/border were silently never applied.",
+      "description": "Plain bordered container with an optional shadow. Use `shadow` to control when the shadow appears: on hover, always, or never.",
       "files": [
         {
           "path": "card.html",
@@ -886,7 +886,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Card",
-        "description": "Plain bordered container with an optional card shadow. Identical across all three source forks, so this is a straight port. Fixed the surface/border classes: the original referenced `bg-color-surface-white` / `border-color-border-neutral`, which aren't real utilities under the new token names (`--color-surface-white`, `--color-border-neutral`) — Tailwind generates `bg-surface-white` / `border-border-neutral` from those, so the intended background/border were silently never applied.",
+        "description": "Plain bordered container with an optional shadow. Use `shadow` to control when the shadow appears: on hover, always, or never.",
         "props": [
           {
             "name": "shadow",
@@ -911,7 +911,7 @@
       "name": "checkbox",
       "type": "component",
       "category": "form",
-      "description": "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Fixes carried over from the original: the visible label is now inside the `<label>` element (previously a sibling `<span>`, so clicking the text or reading it via a screen reader never worked), and the change output now fires on every user interaction (previously it only fired from `writeValue`, i.e. programmatic sets — a bug the original left a TODO comment about).",
+      "description": "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Use `indeterminate` for a presentation-only mixed state, such as a \"select all\" checkbox with a partial selection. It does not affect `checked`.",
       "files": [
         {
           "path": "checkbox.html",
@@ -930,7 +930,7 @@
       ],
       "api": {
         "name": "Checkbox",
-        "description": "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Fixes carried over from the original: the visible label is now inside the `<label>` element (previously a sibling `<span>`, so clicking the text or reading it via a screen reader never worked), and the change output now fires on every user interaction (previously it only fired from `writeValue`, i.e. programmatic sets — a bug the original left a TODO comment about).",
+        "description": "Checkbox with native forms interop (`ControlValueAccessor`, works with `formControlName`/ `ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Use `indeterminate` for a presentation-only mixed state, such as a \"select all\" checkbox with a partial selection. It does not affect `checked`.",
         "props": [
           {
             "name": "checked",
@@ -971,7 +971,7 @@
       "name": "combobox",
       "type": "component",
       "category": "form",
-      "description": "Single-select combobox: a text-input trigger (instead of `Select`'s button trigger) that filters its option list as you type, but still only lets you land on one of the supplied options — free text you don't select from the list is never committed as `value`. For unconstrained free text with suggestions, use `Autocomplete` instead. Positioned with `FloatingPanel` (CDK Overlay) rather than `Select`'s manual absolute positioning. Follows the same `optionLabel`/`optionValue` accessor-function shape as `Select` so option data (plain objects, or primitives) works identically between the two. The displayed input text (\"query\") is a separate signal from the committed `value`: while the panel is open it reflects whatever the user is typing/filtering with; once the panel closes it resyncs to the label of the committed value (or empties out if nothing is selected).",
+      "description": "Single-select combobox with a searchable, filterable trigger input, unlike `Select`'s button trigger. Only lets you commit one of the supplied `options` as `value`; typed text that doesn't match an option is never committed. Use `Autocomplete` instead for free text with suggestions. Options can be plain values or objects. When using objects, set `optionLabel`, `optionValue` and `optionDisabledKey` to the property names to read from each option.",
       "files": [
         {
           "path": "combobox.html",
@@ -990,7 +990,7 @@
       ],
       "api": {
         "name": "Combobox",
-        "description": "Single-select combobox: a text-input trigger (instead of `Select`'s button trigger) that filters its option list as you type, but still only lets you land on one of the supplied options — free text you don't select from the list is never committed as `value`. For unconstrained free text with suggestions, use `Autocomplete` instead. Positioned with `FloatingPanel` (CDK Overlay) rather than `Select`'s manual absolute positioning. Follows the same `optionLabel`/`optionValue` accessor-function shape as `Select` so option data (plain objects, or primitives) works identically between the two. The displayed input text (\"query\") is a separate signal from the committed `value`: while the panel is open it reflects whatever the user is typing/filtering with; once the panel closes it resyncs to the label of the committed value (or empties out if nothing is selected).",
+        "description": "Single-select combobox with a searchable, filterable trigger input, unlike `Select`'s button trigger. Only lets you commit one of the supplied `options` as `value`; typed text that doesn't match an option is never committed. Use `Autocomplete` instead for free text with suggestions. Options can be plain values or objects. When using objects, set `optionLabel`, `optionValue` and `optionDisabledKey` to the property names to read from each option.",
         "props": [
           {
             "name": "options",
@@ -1087,7 +1087,7 @@
       "name": "command",
       "type": "component",
       "category": "overlay",
-      "description": "⌘K-style command palette: a centered, viewport-anchored dialog with a search input that filters a grouped list of actions, full keyboard navigation across the filtered flat list, and an `selected` output emitting the chosen item's `value`. Deliberately NOT built on `FloatingPanel` — that primitive anchors a panel to a trigger element (flip/shift positioning), which isn't the right model for a viewport-centered dialog with no trigger element of its own. Instead this reuses `Modal`'s backdrop + centered-panel + focus-trap structure directly, since a command palette is conventionally dialog-like. The component itself is a controlled, focused piece: it owns filtering/navigation/selection, but opening it globally (e.g. a `(keydown.meta.k)` listener) is left to the consuming page — see the docs page for an example.",
+      "description": "Command palette (⌘K-style) shown as a centered dialog with a search input that filters a grouped list of actions, with full keyboard navigation and a `selected` output emitting the chosen item's `value`. Bind `[(open)]` to control visibility. Opening it globally, for example from a keyboard shortcut, is left to the consuming page.",
       "files": [
         {
           "path": "command.html",
@@ -1104,7 +1104,7 @@
       ],
       "api": {
         "name": "Command",
-        "description": "⌘K-style command palette: a centered, viewport-anchored dialog with a search input that filters a grouped list of actions, full keyboard navigation across the filtered flat list, and an `selected` output emitting the chosen item's `value`. Deliberately NOT built on `FloatingPanel` — that primitive anchors a panel to a trigger element (flip/shift positioning), which isn't the right model for a viewport-centered dialog with no trigger element of its own. Instead this reuses `Modal`'s backdrop + centered-panel + focus-trap structure directly, since a command palette is conventionally dialog-like. The component itself is a controlled, focused piece: it owns filtering/navigation/selection, but opening it globally (e.g. a `(keydown.meta.k)` listener) is left to the consuming page — see the docs page for an example.",
+        "description": "Command palette (⌘K-style) shown as a centered dialog with a search input that filters a grouped list of actions, with full keyboard navigation and a `selected` output emitting the chosen item's `value`. Bind `[(open)]` to control visibility. Opening it globally, for example from a keyboard shortcut, is left to the consuming page.",
         "props": [
           {
             "name": "open",
@@ -1161,7 +1161,7 @@
       "name": "data-table",
       "type": "component",
       "category": "data-display",
-      "description": "Sortable, paginated, selectable table driven by a column config, with per-column custom cell and header templates (`<ng-template uiTemplate=\"cell-<key>\" let-row let-column=\"column\">`, `uiTemplate=\"header-<key>\"`, `uiTemplate=\"empty\"`) via the existing `UiTemplateDirective`. Two modes, switched by whether `totalCount` is provided: - **Client-side** (default): pass the full dataset via `data`; sorting/filtering/paging all happen in-memory against it. - **Controlled**: pass `totalCount` (the full row count on the server) and `data` containing only the *current page's* rows. The table stops slicing/sorting/filtering internally and instead just reflects `page`/`sortState`/`globalFilter` changes — read them (they're all `model()`s, so `(pageChange)`/`(sortStateChange)`/`(globalFilterChange)` or `[(page)]` etc. work) and refetch from the backend. Row selection identity is decided by `rowKey` (defaults to the row object itself via reference equality) — pass e.g. `(row) => row.id` for rows that get recreated across page fetches.",
+      "description": "Sortable, paginated, selectable table driven by a column config. Customize rendering per column with `uiTemplate=\"cell-<key>\"` and `uiTemplate=\"header-<key>\"`, and the empty state with `uiTemplate=\"empty\"`. By default the table runs in client-side mode: pass the full dataset via `data`, and sorting, filtering and paging all happen in memory. Set `totalCount` to switch to controlled mode: pass only the current page's rows in `data`, and the table reflects `page`, `sortState` and `globalFilter` changes instead of slicing or sorting internally, so you can refetch from the backend. Set `rowKey` to extract a stable identity per row, for example `(row) => row.id`, when rows are recreated across page fetches. It defaults to the row object itself.",
       "files": [
         {
           "path": "data-table.html",
@@ -1185,7 +1185,7 @@
       ],
       "api": {
         "name": "DataTable",
-        "description": "Sortable, paginated, selectable table driven by a column config, with per-column custom cell and header templates (`<ng-template uiTemplate=\"cell-<key>\" let-row let-column=\"column\">`, `uiTemplate=\"header-<key>\"`, `uiTemplate=\"empty\"`) via the existing `UiTemplateDirective`. Two modes, switched by whether `totalCount` is provided: - **Client-side** (default): pass the full dataset via `data`; sorting/filtering/paging all happen in-memory against it. - **Controlled**: pass `totalCount` (the full row count on the server) and `data` containing only the *current page's* rows. The table stops slicing/sorting/filtering internally and instead just reflects `page`/`sortState`/`globalFilter` changes — read them (they're all `model()`s, so `(pageChange)`/`(sortStateChange)`/`(globalFilterChange)` or `[(page)]` etc. work) and refetch from the backend. Row selection identity is decided by `rowKey` (defaults to the row object itself via reference equality) — pass e.g. `(row) => row.id` for rows that get recreated across page fetches.",
+        "description": "Sortable, paginated, selectable table driven by a column config. Customize rendering per column with `uiTemplate=\"cell-<key>\"` and `uiTemplate=\"header-<key>\"`, and the empty state with `uiTemplate=\"empty\"`. By default the table runs in client-side mode: pass the full dataset via `data`, and sorting, filtering and paging all happen in memory. Set `totalCount` to switch to controlled mode: pass only the current page's rows in `data`, and the table reflects `page`, `sortState` and `globalFilter` changes instead of slicing or sorting internally, so you can refetch from the backend. Set `rowKey` to extract a stable identity per row, for example `(row) => row.id`, when rows are recreated across page fetches. It defaults to the row object itself.",
         "props": [
           {
             "name": "data",
@@ -1298,7 +1298,7 @@
       "name": "drawer",
       "type": "component",
       "category": "overlay",
-      "description": "Slide-in drawer/panel overlay with an optional backdrop, opened from the left or right edge. Supports named `header`/`content`/`footer` templates (via `uiTemplate`) with `<ng-content>` as the default body when no `content` template is supplied. Behaves as a modal dialog: `role=\"dialog\"`, `aria-modal`, closes on Escape, traps Tab focus within the panel while open, and moves focus into the panel on open. Renamed from `Sidebar`: this is an overlay panel (backdrop, opens on top of the page), not the persistent responsive navigation layout — that's the separate `Sidebar` component (`../sidebar/sidebar`), which composes this one internally for its mobile off-canvas nav. The original component faked its slide-in/out with manual `timer(0)`/`timer(200)` RxJS calls that toggled CSS classes: opening relied on a `timer(0)` macrotask landing before the next paint (fragile — intermittently skips the transition), and closing unmounted the panel via `*ngIf` after a hardcoded 200ms timeout while the panel's own CSS class declared a 500ms transition, so a close would visibly jump/cut the animation short. `animate.enter`/`animate.leave` replace both hacks: they trigger off real DOM insertion/removal and the `@if` block won't unmount the view until the leave animation actually finishes. `disableAnimations` is implemented by binding `undefined` in place of an animation class (the native API's `animate.enter`/`animate.leave` classes accept a dynamic value), since there's no per-subtree animation-disable binding like the old engine's `[@.disabled]`.",
+      "description": "Slide-in panel overlay opened from the left or right edge, with an optional backdrop. Supports named `header`, `content` and `footer` templates via `uiTemplate`; content is projected directly when no `content` template is given. Behaves like a modal dialog: it renders with `role=\"dialog\"`, closes on Escape, traps Tab focus inside the panel while open, and moves focus into the panel when it opens. Use `Sidebar` instead for a persistent, always-visible navigation layout.",
       "files": [
         {
           "path": "drawer.html",
@@ -1317,7 +1317,7 @@
       ],
       "api": {
         "name": "Drawer",
-        "description": "Slide-in drawer/panel overlay with an optional backdrop, opened from the left or right edge. Supports named `header`/`content`/`footer` templates (via `uiTemplate`) with `<ng-content>` as the default body when no `content` template is supplied. Behaves as a modal dialog: `role=\"dialog\"`, `aria-modal`, closes on Escape, traps Tab focus within the panel while open, and moves focus into the panel on open. Renamed from `Sidebar`: this is an overlay panel (backdrop, opens on top of the page), not the persistent responsive navigation layout — that's the separate `Sidebar` component (`../sidebar/sidebar`), which composes this one internally for its mobile off-canvas nav. The original component faked its slide-in/out with manual `timer(0)`/`timer(200)` RxJS calls that toggled CSS classes: opening relied on a `timer(0)` macrotask landing before the next paint (fragile — intermittently skips the transition), and closing unmounted the panel via `*ngIf` after a hardcoded 200ms timeout while the panel's own CSS class declared a 500ms transition, so a close would visibly jump/cut the animation short. `animate.enter`/`animate.leave` replace both hacks: they trigger off real DOM insertion/removal and the `@if` block won't unmount the view until the leave animation actually finishes. `disableAnimations` is implemented by binding `undefined` in place of an animation class (the native API's `animate.enter`/`animate.leave` classes accept a dynamic value), since there's no per-subtree animation-disable binding like the old engine's `[@.disabled]`.",
+        "description": "Slide-in panel overlay opened from the left or right edge, with an optional backdrop. Supports named `header`, `content` and `footer` templates via `uiTemplate`; content is projected directly when no `content` template is given. Behaves like a modal dialog: it renders with `role=\"dialog\"`, closes on Escape, traps Tab focus inside the panel while open, and moves focus into the panel when it opens. Use `Sidebar` instead for a persistent, always-visible navigation layout.",
         "props": [
           {
             "name": "open",
@@ -1488,7 +1488,7 @@
       "name": "file-upload",
       "type": "component",
       "category": "form",
-      "description": "Single-file drop zone with a real `<input type=\"file\">` underneath — clicking, dragging a file onto it, or tabbing to it and pressing Enter/Space all work. The original hid the input with `class=\"hidden\"` (`display: none`, which also makes it unfocusable) behind a plain `<div (click)>` with no `tabindex`/`role`, so keyboard-only users had no way to open the file picker at all. Here the input is visually hidden with `sr-only` (stays focusable) and nested inside a `<label>`, so native label-activates-control behavior provides full keyboard support for free, with no custom key handling needed. Other fixes made while porting (the component was identical across both forks that had it): - `maxFileSizeInMB` returned only the first character of the string `maxFileSize / 1024` — correct by coincidence for the 8 MB default, wrong for almost any other value (e.g. 12 MB rendered as \"1 MB\"). Replaced with `Math.round(maxFileSizeBytes / 1024 / 1024)`. - The file picker's `accept` attribute was a hardcoded string, completely ignoring the `extensions` input — configuring `extensions` never changed what the OS file dialog offered. It's now derived from `extensions()`. - Extension validation compared the browser-reported MIME subtype against the `extensions` list, so a configured `'jpg'` entry could never match (browsers always report `.jpg` files as MIME type `image/jpeg`, never `image/jpg`) — dead, unreachable config. Validation now checks the actual filename extension first, with MIME type as a secondary signal. - Rejected files (wrong type, too large) silently did nothing — no feedback at all. Now surfaces a `role=\"alert\"` message. - Dropped the fake `rxjs` `delay(500)` \"upload\" — the component never actually uploaded anything over the network, so the spinner was simulating work that didn't exist. Selection is now synchronous; a `loading` input lets the caller show a spinner while *their* upload request is in flight. The default `jpg`/`jpeg`/`png`/`pdf` whitelist is kept as the default `extensions` value, not hardcoded as the only option — pass a different array to accept other file types.",
+      "description": "Single-file drop zone backed by a native `<input type=\"file\">`. Supports clicking, dragging a file onto it, or focusing it and pressing Enter or Space. Restrict accepted files with `extensions`; files with a different extension or larger than `maxFileSizeBytes` are rejected with an inline error message. Set `loading` to show a spinner while your own upload request is in flight. The component only handles file selection; it does not perform the upload itself.",
       "files": [
         {
           "path": "file-upload.html",
@@ -1509,7 +1509,7 @@
       ],
       "api": {
         "name": "FileUpload",
-        "description": "Single-file drop zone with a real `<input type=\"file\">` underneath — clicking, dragging a file onto it, or tabbing to it and pressing Enter/Space all work. The original hid the input with `class=\"hidden\"` (`display: none`, which also makes it unfocusable) behind a plain `<div (click)>` with no `tabindex`/`role`, so keyboard-only users had no way to open the file picker at all. Here the input is visually hidden with `sr-only` (stays focusable) and nested inside a `<label>`, so native label-activates-control behavior provides full keyboard support for free, with no custom key handling needed. Other fixes made while porting (the component was identical across both forks that had it): - `maxFileSizeInMB` returned only the first character of the string `maxFileSize / 1024` — correct by coincidence for the 8 MB default, wrong for almost any other value (e.g. 12 MB rendered as \"1 MB\"). Replaced with `Math.round(maxFileSizeBytes / 1024 / 1024)`. - The file picker's `accept` attribute was a hardcoded string, completely ignoring the `extensions` input — configuring `extensions` never changed what the OS file dialog offered. It's now derived from `extensions()`. - Extension validation compared the browser-reported MIME subtype against the `extensions` list, so a configured `'jpg'` entry could never match (browsers always report `.jpg` files as MIME type `image/jpeg`, never `image/jpg`) — dead, unreachable config. Validation now checks the actual filename extension first, with MIME type as a secondary signal. - Rejected files (wrong type, too large) silently did nothing — no feedback at all. Now surfaces a `role=\"alert\"` message. - Dropped the fake `rxjs` `delay(500)` \"upload\" — the component never actually uploaded anything over the network, so the spinner was simulating work that didn't exist. Selection is now synchronous; a `loading` input lets the caller show a spinner while *their* upload request is in flight. The default `jpg`/`jpeg`/`png`/`pdf` whitelist is kept as the default `extensions` value, not hardcoded as the only option — pass a different array to accept other file types.",
+        "description": "Single-file drop zone backed by a native `<input type=\"file\">`. Supports clicking, dragging a file onto it, or focusing it and pressing Enter or Space. Restrict accepted files with `extensions`; files with a different extension or larger than `maxFileSizeBytes` are rejected with an inline error message. Set `loading` to show a spinner while your own upload request is in flight. The component only handles file selection; it does not perform the upload itself.",
         "props": [
           {
             "name": "id",
@@ -1566,7 +1566,7 @@
       "name": "input",
       "type": "component",
       "category": "form",
-      "description": "Text input with label/caption slots, left/right icon, password visibility toggle, validation states, and an optional inline \"search in list\" suggestion dropdown. A11y fixes over the original: the clear button and the password-visibility toggle were plain `<em>` icon elements with a `(click)` handler — not focusable, not operable from a keyboard. Both are real `<button type=\"button\">`s now. The error/caption text is linked to the input via `aria-describedby`, and `state=\"error\"` sets `aria-invalid`. The suggestion list now has `role=\"listbox\"`/`role=\"option\"` and Up/Down/Enter/Escape keyboard support instead of being mouse-only. A `fade` animation trigger was also registered but never bound to the suggestion list's `@if` block — now wired up so it actually fades in/out.",
+      "description": "Text input with label and caption slots, a leading or trailing icon, a password visibility toggle, validation states, and an optional inline suggestion dropdown. Set `type=\"password\"` to add a show/hide toggle button, or `type=\"number\"` to restrict typed characters to digits. Use `searchIn` to show a filterable list of suggestions below the field as the user types; navigate it with Arrow Up/Down, Enter and Escape.",
       "files": [
         {
           "path": "input.html",
@@ -1585,7 +1585,7 @@
       ],
       "api": {
         "name": "Input",
-        "description": "Text input with label/caption slots, left/right icon, password visibility toggle, validation states, and an optional inline \"search in list\" suggestion dropdown. A11y fixes over the original: the clear button and the password-visibility toggle were plain `<em>` icon elements with a `(click)` handler — not focusable, not operable from a keyboard. Both are real `<button type=\"button\">`s now. The error/caption text is linked to the input via `aria-describedby`, and `state=\"error\"` sets `aria-invalid`. The suggestion list now has `role=\"listbox\"`/`role=\"option\"` and Up/Down/Enter/Escape keyboard support instead of being mouse-only. A `fade` animation trigger was also registered but never bound to the suggestion list's `@if` block — now wired up so it actually fades in/out.",
+        "description": "Text input with label and caption slots, a leading or trailing icon, a password visibility toggle, validation states, and an optional inline suggestion dropdown. Set `type=\"password\"` to add a show/hide toggle button, or `type=\"number\"` to restrict typed characters to digits. Use `searchIn` to show a filterable list of suggestions below the field as the user types; navigate it with Arrow Up/Down, Enter and Escape.",
         "props": [
           {
             "name": "value",
@@ -1762,7 +1762,7 @@
       "name": "input-group",
       "type": "component",
       "category": "form",
-      "description": "Layout primitive that visually joins prefix/suffix addons (icons, text, buttons) with a projected input into one bordered unit — e.g. `$` + amount + `.00`, or a search box + \"Go\" button. It is *not* a form control: it carries no value, implements no `ControlValueAccessor`, and needs no special ARIA beyond whatever the projected children already provide. Border/focus styling reacts to the focus state of anything inside the group via `:focus-within`, so the projected control doesn't need its own border/outline — strip those off (see the docs page for the exact classes) so only the group's border shows. Addons are plain content projection rather than named `UiTemplateDirective` slots: `[prefix]`/ `[suffix]` attribute selectors are simpler for \"arbitrary markup on either side of an input\" and don't need the indirection of a named `<ng-template>`.",
+      "description": "Layout primitive that visually joins prefix and suffix addons (icons, text, buttons) with a projected input into one bordered unit, for example a currency symbol plus an amount field, or a search box with a \"Go\" button. Project addons with the `prefix` and `suffix` attributes on either side of the input. The group's border reacts to focus of anything inside it; remove the border and outline from the projected input so only the group's border shows.",
       "files": [
         {
           "path": "input-group.html",
@@ -1777,7 +1777,7 @@
       "npmDependencies": [],
       "api": {
         "name": "InputGroup",
-        "description": "Layout primitive that visually joins prefix/suffix addons (icons, text, buttons) with a projected input into one bordered unit — e.g. `$` + amount + `.00`, or a search box + \"Go\" button. It is *not* a form control: it carries no value, implements no `ControlValueAccessor`, and needs no special ARIA beyond whatever the projected children already provide. Border/focus styling reacts to the focus state of anything inside the group via `:focus-within`, so the projected control doesn't need its own border/outline — strip those off (see the docs page for the exact classes) so only the group's border shows. Addons are plain content projection rather than named `UiTemplateDirective` slots: `[prefix]`/ `[suffix]` attribute selectors are simpler for \"arbitrary markup on either side of an input\" and don't need the indirection of a named `<ng-template>`.",
+        "description": "Layout primitive that visually joins prefix and suffix addons (icons, text, buttons) with a projected input into one bordered unit, for example a currency symbol plus an amount field, or a search box with a \"Go\" button. Project addons with the `prefix` and `suffix` attributes on either side of the input. The group's border reacts to focus of anything inside it; remove the border and outline from the projected input so only the group's border shows.",
         "props": [
           {
             "name": "disabled",
@@ -1807,42 +1807,10 @@
       }
     },
     {
-      "name": "label",
-      "type": "component",
-      "category": "form",
-      "description": "Small pill-shaped tag/badge. Identical logic across all three forks. The original shipped a sibling `label.component.css` with `@apply`-based classes (`.info-label`, `.success-label`, `.warning-label`, `.danger-label`, `.tbk-label`, `.tbk-label-generic`) that were never referenced by the template (`getColorClass()` only ever returned `bg-warning-300` or `bg-neutral-500`) — dead code, dropped entirely. `.tbk-label` also referenced `bg-transbank-300`, a class that doesn't exist in any Tailwind config in any of the three forks. `mb-0` (added by FTD/uiSDP, missing from base) is kept to stop the label from picking up a stray bottom margin.",
-      "files": [
-        {
-          "path": "label.html",
-          "type": "template"
-        },
-        {
-          "path": "label.ts",
-          "type": "component"
-        }
-      ],
-      "registryDependencies": [],
-      "npmDependencies": [],
-      "api": {
-        "name": "Label",
-        "description": "Small pill-shaped tag/badge. Identical logic across all three forks. The original shipped a sibling `label.component.css` with `@apply`-based classes (`.info-label`, `.success-label`, `.warning-label`, `.danger-label`, `.tbk-label`, `.tbk-label-generic`) that were never referenced by the template (`getColorClass()` only ever returned `bg-warning-300` or `bg-neutral-500`) — dead code, dropped entirely. `.tbk-label` also referenced `bg-transbank-300`, a class that doesn't exist in any Tailwind config in any of the three forks. `mb-0` (added by FTD/uiSDP, missing from base) is kept to stop the label from picking up a stray bottom margin.",
-        "props": [
-          {
-            "name": "color",
-            "kind": "input",
-            "required": false,
-            "type": "LabelColor",
-            "defaultValue": "'normal'",
-            "description": "Visual color scheme — `'highlight'` renders on a warning-tinted background, `'normal'` on neutral gray."
-          }
-        ]
-      }
-    },
-    {
       "name": "link",
       "type": "component",
       "category": "navigation",
-      "description": "Text link with optional leading/trailing icon and underline behavior. Fixes carried over from the original: `target` no longer defaults to `_blank` — the base fork forced every link (including internal/in-app ones) to open a new tab unconditionally, which is rarely what you want; callers now opt in explicitly. `rel=\"noopener noreferrer\"` is applied automatically whenever `target=\"_blank\"` is set (FTD/uiSDP added this by hand but only on the base string, not derived from `target`, so it stayed correct only by coincidence). The disabled state (added by FTD/uiSDP, missing from base) is merged in. Color now uses the dedicated `--color-link-*` token family instead of `text-info-500` — same value, but the correct semantic token instead of borrowing the info color.",
+      "description": "Text link with an optional leading or trailing icon and configurable underline behavior. Setting `target=\"_blank\"` automatically adds `rel=\"noopener noreferrer\"` and an accessible hint that the link opens in a new tab.",
       "files": [
         {
           "path": "link.html",
@@ -1859,7 +1827,7 @@
       ],
       "api": {
         "name": "Link",
-        "description": "Text link with optional leading/trailing icon and underline behavior. Fixes carried over from the original: `target` no longer defaults to `_blank` — the base fork forced every link (including internal/in-app ones) to open a new tab unconditionally, which is rarely what you want; callers now opt in explicitly. `rel=\"noopener noreferrer\"` is applied automatically whenever `target=\"_blank\"` is set (FTD/uiSDP added this by hand but only on the base string, not derived from `target`, so it stayed correct only by coincidence). The disabled state (added by FTD/uiSDP, missing from base) is merged in. Color now uses the dedicated `--color-link-*` token family instead of `text-info-500` — same value, but the correct semantic token instead of borrowing the info color.",
+        "description": "Text link with an optional leading or trailing icon and configurable underline behavior. Setting `target=\"_blank\"` automatically adds `rel=\"noopener noreferrer\"` and an accessible hint that the link opens in a new tab.",
         "props": [
           {
             "name": "href",
@@ -1932,7 +1900,7 @@
       "name": "modal",
       "type": "component",
       "category": "overlay",
-      "description": "Controlled dialog: the caller owns `open` (typically a signal bound with `[open]`) and reacts to `closed` to flip it back to `false` — the component never mutates its own visibility, so there's no timer choreography like the original's `translate-y` transition dance. The fade animation fires automatically on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. The original (FTD/uiSDP forks) repositioned itself on resize via a hand-rolled `ResizeObserver`/`MutationObserver` pair that queried `document.querySelector('.modal-content')` — a global lookup that would grab the wrong element as soon as two modals existed on the page. That machinery existed to patch a layout that mixed `absolute` positioning with flex centering; this version centers the panel with plain in-flow flexbox + `max-height`/`overflow-y-auto` instead, so oversized content already fits the viewport with pure CSS and no observers. Focus is trapped inside the panel while open (Tab/Shift+Tab wrap at the panel edges) and restored to whatever triggered the modal once it closes.",
+      "description": "Dialog that displays content in a layer above the page, blocking interaction with the rest of the UI until dismissed. Use it for confirmations, forms, or any content that needs the user's full attention. `open` is controlled by the caller: bind it to a signal and set it back to `false` when `(closed)` fires. Content can be projected directly, or split into `header`, `content` and `footer` sections with `uiTemplate` for full control over each region. Focus is trapped inside the panel while open (Tab/Shift+Tab wrap at the panel edges) and restored to the element that opened the modal once it closes.",
       "files": [
         {
           "path": "modal.html",
@@ -1951,7 +1919,7 @@
       ],
       "api": {
         "name": "Modal",
-        "description": "Controlled dialog: the caller owns `open` (typically a signal bound with `[open]`) and reacts to `closed` to flip it back to `false` — the component never mutates its own visibility, so there's no timer choreography like the original's `translate-y` transition dance. The fade animation fires automatically on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. The original (FTD/uiSDP forks) repositioned itself on resize via a hand-rolled `ResizeObserver`/`MutationObserver` pair that queried `document.querySelector('.modal-content')` — a global lookup that would grab the wrong element as soon as two modals existed on the page. That machinery existed to patch a layout that mixed `absolute` positioning with flex centering; this version centers the panel with plain in-flow flexbox + `max-height`/`overflow-y-auto` instead, so oversized content already fits the viewport with pure CSS and no observers. Focus is trapped inside the panel while open (Tab/Shift+Tab wrap at the panel edges) and restored to whatever triggered the modal once it closes.",
+        "description": "Dialog that displays content in a layer above the page, blocking interaction with the rest of the UI until dismissed. Use it for confirmations, forms, or any content that needs the user's full attention. `open` is controlled by the caller: bind it to a signal and set it back to `false` when `(closed)` fires. Content can be projected directly, or split into `header`, `content` and `footer` sections with `uiTemplate` for full control over each region. Focus is trapped inside the panel while open (Tab/Shift+Tab wrap at the panel edges) and restored to the element that opened the modal once it closes.",
         "props": [
           {
             "name": "open",
@@ -2024,7 +1992,7 @@
       "name": "notification",
       "type": "component",
       "category": "feedback",
-      "description": "Toast-style notification, positioned fixed to a screen corner/edge. Controlled via `show`, like `Modal` — the caller flips it back to `false` on `closed` instead of the component managing its own visibility. The original drove its slide-in/out with a position-aware `translate-x`/`translate-y` switch timed by an `rxjs` `timer(200)`, mirroring the same choreography bug pattern as the original Modal. That's replaced with a fade animation on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. Multi-brand `type` values (`accent-tbk`/`accent-onepay`/`accent-webpay`/`custom`) are dropped — see `styles.css` for why the brand palette collapsed to a single `primary`/`accent` pair. `hideCloseButton` (default `true`, i.e. no close button unless explicitly turned off) is renamed to `showCloseButton` (default `true`, i.e. shown unless explicitly turned off) to match `Modal`'s naming and drop the double-negative default. `stacked` (default `false`) drops the built-in `fixed`+corner-position classes so a parent can lay several of these out itself — used by `Toaster` (`../toast.ts`) to stack multiple queued toasts in the same corner instead of having them all render on top of each other.",
+      "description": "Toast-style notification anchored to a corner or edge of the screen. Controlled via `show`, similar to `Modal`: set it back to `false` when `(closed)` fires. `type` sets the icon, color and ARIA role: `error` interrupts, the rest announce politely. Set `stacked` to drop the built-in fixed positioning so a parent, such as `Toaster`, can lay out several notifications itself.",
       "files": [
         {
           "path": "notification.html",
@@ -2041,7 +2009,7 @@
       ],
       "api": {
         "name": "Notification",
-        "description": "Toast-style notification, positioned fixed to a screen corner/edge. Controlled via `show`, like `Modal` — the caller flips it back to `false` on `closed` instead of the component managing its own visibility. The original drove its slide-in/out with a position-aware `translate-x`/`translate-y` switch timed by an `rxjs` `timer(200)`, mirroring the same choreography bug pattern as the original Modal. That's replaced with a fade animation on the `@if` block's enter/leave via `animate.enter`/`animate.leave`. Multi-brand `type` values (`accent-tbk`/`accent-onepay`/`accent-webpay`/`custom`) are dropped — see `styles.css` for why the brand palette collapsed to a single `primary`/`accent` pair. `hideCloseButton` (default `true`, i.e. no close button unless explicitly turned off) is renamed to `showCloseButton` (default `true`, i.e. shown unless explicitly turned off) to match `Modal`'s naming and drop the double-negative default. `stacked` (default `false`) drops the built-in `fixed`+corner-position classes so a parent can lay several of these out itself — used by `Toaster` (`../toast.ts`) to stack multiple queued toasts in the same corner instead of having them all render on top of each other.",
+        "description": "Toast-style notification anchored to a corner or edge of the screen. Controlled via `show`, similar to `Modal`: set it back to `false` when `(closed)` fires. `type` sets the icon, color and ARIA role: `error` interrupts, the rest announce politely. Set `stacked` to drop the built-in fixed positioning so a parent, such as `Toaster`, can lay out several notifications itself.",
         "props": [
           {
             "name": "show",
@@ -2106,7 +2074,7 @@
       "name": "number-input",
       "type": "component",
       "category": "form",
-      "description": "Real `<input type=\"number\">` (native numeric keyboard on mobile, mouse-wheel and arrow-key increment for free) flanked by visible +/- stepper buttons that call the same clamp/step logic, composed inside `InputGroup` so the three pieces read as one bordered control. Reuses `Input`'s *conventions* (id-generation counter + `id` override, label/caption `UiTemplateDirective` slots, the same input text/border/disabled classes) rather than nesting `Input` itself: `Input`'s border/focus styling lives directly on its own inner `<input>` with no seam exposed to strip it for nesting inside a group without reaching into its internals. Own template + `InputGroup` composition avoids that. Buttons are real `<button type=\"button\">`s with `aria-label`s (they're icon-only), disabled individually once the value is clamped against `min`/`max`.",
+      "description": "Numeric input with increment and decrement buttons, composed inside `InputGroup`. Clamps the value between `min` and `max`; the corresponding button disables once a limit is reached. `step` sets the amount added or subtracted per button press.",
       "files": [
         {
           "path": "number-input.html",
@@ -2126,7 +2094,7 @@
       ],
       "api": {
         "name": "NumberInput",
-        "description": "Real `<input type=\"number\">` (native numeric keyboard on mobile, mouse-wheel and arrow-key increment for free) flanked by visible +/- stepper buttons that call the same clamp/step logic, composed inside `InputGroup` so the three pieces read as one bordered control. Reuses `Input`'s *conventions* (id-generation counter + `id` override, label/caption `UiTemplateDirective` slots, the same input text/border/disabled classes) rather than nesting `Input` itself: `Input`'s border/focus styling lives directly on its own inner `<input>` with no seam exposed to strip it for nesting inside a group without reaching into its internals. Own template + `InputGroup` composition avoids that. Buttons are real `<button type=\"button\">`s with `aria-label`s (they're icon-only), disabled individually once the value is clamped against `min`/`max`.",
+        "description": "Numeric input with increment and decrement buttons, composed inside `InputGroup`. Clamps the value between `min` and `max`; the corresponding button disables once a limit is reached. `step` sets the amount added or subtracted per button press.",
         "props": [
           {
             "name": "value",
@@ -2223,7 +2191,7 @@
       "name": "paginator",
       "type": "component",
       "category": "navigation",
-      "description": "Page-number navigation bar: previous/next buttons plus a condensed page-number range with ellipses (first, last, current ± `siblingCount`). Purely presentational — it controls a `page` index, the caller slices its own dataset based on that. The original bundled this together with dataset slicing and three named content-projection slots (item template / info template / empty-state template), conflating two unrelated responsibilities — rendering a list vs. picking a page — into one component. Split apart here: `Paginator` now only owns the page-range control, matching how mainstream libraries model this (MUI Pagination, Ant Design Pagination, PrimeNG Paginator all separate the two). The page-range algorithm is also a full rewrite: the original `doPaging()` had accumulated special-cased magic numbers (`i != 4`, `pageCount - 5`, `currentPage != 4`) that read like unfixed edge-case patches rather than a designed algorithm; this uses the standard sibling+ellipsis range algorithm.",
+      "description": "Page-number navigation with previous and next buttons plus a condensed page-number range that collapses to ellipses for large page counts. Purely presentational: it only controls a `page` index. Slicing the underlying dataset is left to the caller. Use `siblingCount` to control how many page numbers show on each side of the current page.",
       "files": [
         {
           "path": "paginator.html",
@@ -2240,7 +2208,7 @@
       ],
       "api": {
         "name": "Paginator",
-        "description": "Page-number navigation bar: previous/next buttons plus a condensed page-number range with ellipses (first, last, current ± `siblingCount`). Purely presentational — it controls a `page` index, the caller slices its own dataset based on that. The original bundled this together with dataset slicing and three named content-projection slots (item template / info template / empty-state template), conflating two unrelated responsibilities — rendering a list vs. picking a page — into one component. Split apart here: `Paginator` now only owns the page-range control, matching how mainstream libraries model this (MUI Pagination, Ant Design Pagination, PrimeNG Paginator all separate the two). The page-range algorithm is also a full rewrite: the original `doPaging()` had accumulated special-cased magic numbers (`i != 4`, `pageCount - 5`, `currentPage != 4`) that read like unfixed edge-case patches rather than a designed algorithm; this uses the standard sibling+ellipsis range algorithm.",
+        "description": "Page-number navigation with previous and next buttons plus a condensed page-number range that collapses to ellipses for large page counts. Purely presentational: it only controls a `page` index. Slicing the underlying dataset is left to the caller. Use `siblingCount` to control how many page numbers show on each side of the current page.",
         "props": [
           {
             "name": "page",
@@ -2289,7 +2257,7 @@
       "name": "popover",
       "type": "component",
       "category": "overlay",
-      "description": "Generic trigger + floating panel. Mark the trigger element with the `trigger` attribute (projected via `[trigger]`); everything else passed as content becomes the panel body, only rendered once the popover opens: ```html <ui-popover [(open)]=\"isOpen\"> <button trigger>Open</button> <div class=\"p-2\">Panel content</div> </ui-popover> ``` Built on `FloatingPanel` (CDK Overlay) — the same primitive `Combobox`/`Autocomplete`/`Command` use directly when they need tighter control over their own markup instead of content projection.",
+      "description": "Generic trigger and floating panel. Mark the trigger element with the `trigger` attribute; every other projected child becomes the panel body, rendered only once the popover opens.",
       "files": [
         {
           "path": "popover.html",
@@ -2306,7 +2274,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Popover",
-        "description": "Generic trigger + floating panel. Mark the trigger element with the `trigger` attribute (projected via `[trigger]`); everything else passed as content becomes the panel body, only rendered once the popover opens: ```html <ui-popover [(open)]=\"isOpen\"> <button trigger>Open</button> <div class=\"p-2\">Panel content</div> </ui-popover> ``` Built on `FloatingPanel` (CDK Overlay) — the same primitive `Combobox`/`Autocomplete`/`Command` use directly when they need tighter control over their own markup instead of content projection.",
+        "description": "Generic trigger and floating panel. Mark the trigger element with the `trigger` attribute; every other projected child becomes the panel body, rendered only once the popover opens.",
         "props": [
           {
             "name": "open",
@@ -2605,7 +2573,7 @@
       "name": "radio-group",
       "type": "component",
       "category": "form",
-      "description": "Single-select list/chip picker over an arbitrary array of options (not a wrapper around individual `<ui-radio>` elements — this renders its own buttons). The original was a stack of `<div (click)=\"...\">`s with no radio semantics at all — not reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the WAI-ARIA \"radio group\" pattern: `role=\"radiogroup\"` + `role=\"radio\"` buttons, roving `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in the original but was declared and never actually used (selection always fell back to `==`) — wired up for real here.",
+      "description": "List or chip picker over an array of options, rendered as its own buttons rather than individual `ui-radio` elements. Single-select by default; set `multiple` for a checkbox-group-style multi-select. Follows the WAI-ARIA pattern for the mode in use: `role=\"radiogroup\"` for single-select, `role=\"group\"` with checkboxes for `multiple`, with roving `tabindex` and arrow-key navigation between options. Use `compareWith` to control how options are matched against the bound value, for example when option objects are reloaded from an API and aren't reference-equal. Set `paginator` to page the rendered options through a built-in paginator instead of rendering them all at once.",
       "files": [
         {
           "path": "radio-group.html",
@@ -2617,6 +2585,7 @@
         }
       ],
       "registryDependencies": [
+        "paginator",
         "shared"
       ],
       "npmDependencies": [
@@ -2624,7 +2593,7 @@
       ],
       "api": {
         "name": "RadioGroup",
-        "description": "Single-select list/chip picker over an arbitrary array of options (not a wrapper around individual `<ui-radio>` elements — this renders its own buttons). The original was a stack of `<div (click)=\"...\">`s with no radio semantics at all — not reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the WAI-ARIA \"radio group\" pattern: `role=\"radiogroup\"` + `role=\"radio\"` buttons, roving `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in the original but was declared and never actually used (selection always fell back to `==`) — wired up for real here.",
+        "description": "List or chip picker over an array of options, rendered as its own buttons rather than individual `ui-radio` elements. Single-select by default; set `multiple` for a checkbox-group-style multi-select. Follows the WAI-ARIA pattern for the mode in use: `role=\"radiogroup\"` for single-select, `role=\"group\"` with checkboxes for `multiple`, with roving `tabindex` and arrow-key navigation between options. Use `compareWith` to control how options are matched against the bound value, for example when option objects are reloaded from an API and aren't reference-equal. Set `paginator` to page the rendered options through a built-in paginator instead of rendering them all at once.",
         "props": [
           {
             "name": "options",
@@ -2691,6 +2660,30 @@
             "description": "Called with `(optionA, optionB)` to decide whether two options are the same selection — override for option objects that aren't reference-equal to the bound value (e.g. reloaded from an API). Defaults to `===`."
           },
           {
+            "name": "multiple",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Allows selecting more than one option at once, rendered as a checkbox group instead of a radio group."
+          },
+          {
+            "name": "paginator",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Pages the rendered options through a `ui-paginator` instead of rendering them all at once."
+          },
+          {
+            "name": "pageSize",
+            "kind": "input",
+            "required": false,
+            "type": "number",
+            "defaultValue": "5",
+            "description": "Number of options shown per page when `paginator` is enabled."
+          },
+          {
             "name": "selectedItem",
             "kind": "output",
             "required": false,
@@ -2705,7 +2698,7 @@
       "name": "resizable",
       "type": "component",
       "category": "layout",
-      "description": "Resizable panel group: N panes (each marked with the `uiResizablePane` directive, projected as plain content) separated by drag handles. Dragging is plain `pointerdown`/`pointermove`/`pointerup` listeners rather than `@angular/cdk/drag-drop`'s `CdkDrag`. `CdkDrag` is built around free transform-based dragging of a single element; it doesn't map cleanly onto \"redistribute a percentage split between two adjacent flex-basis panes while clamping both to their own min/max\" — plain pointer events end up simpler and more direct for this shape of problem. Each handle follows the WAI-ARIA \"separator\" pattern: `role=\"separator\"`, `aria-orientation`, and `aria-valuenow`/`aria-valuemin`/`aria-valuemax` tracking the boundary's position as a percentage of the group. It's a real focusable, keyboard-operable element — Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`, Home/End send it to the group's start/end (as far as the neighboring panes' `minSize`/`maxSize` allow).",
+      "description": "Resizable panel group: any number of panes, each marked with the `uiResizablePane` directive, separated by drag handles. Each handle follows the WAI-ARIA separator pattern and is keyboard operable. Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`. Home and End send it to the group's start or end, within the neighboring panes' `minSize`/`maxSize`.",
       "files": [
         {
           "path": "resizable-pane.directive.ts",
@@ -2724,7 +2717,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Resizable",
-        "description": "Resizable panel group: N panes (each marked with the `uiResizablePane` directive, projected as plain content) separated by drag handles. Dragging is plain `pointerdown`/`pointermove`/`pointerup` listeners rather than `@angular/cdk/drag-drop`'s `CdkDrag`. `CdkDrag` is built around free transform-based dragging of a single element; it doesn't map cleanly onto \"redistribute a percentage split between two adjacent flex-basis panes while clamping both to their own min/max\" — plain pointer events end up simpler and more direct for this shape of problem. Each handle follows the WAI-ARIA \"separator\" pattern: `role=\"separator\"`, `aria-orientation`, and `aria-valuenow`/`aria-valuemin`/`aria-valuemax` tracking the boundary's position as a percentage of the group. It's a real focusable, keyboard-operable element — Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`, Home/End send it to the group's start/end (as far as the neighboring panes' `minSize`/`maxSize` allow).",
+        "description": "Resizable panel group: any number of panes, each marked with the `uiResizablePane` directive, separated by drag handles. Each handle follows the WAI-ARIA separator pattern and is keyboard operable. Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`. Home and End send it to the group's start or end, within the neighboring panes' `minSize`/`maxSize`.",
         "props": [
           {
             "name": "direction",
@@ -2773,7 +2766,7 @@
       "name": "search-input",
       "type": "component",
       "category": "form",
-      "description": "Search box built from `Input`'s own conventions (id-generation counter, label/caption `UiTemplateDirective` slots, the exact same `<input>` border/focus/disabled classes) rather than nesting `Input` as a child component. Nesting would need to reach into `Input`'s internal DOM to place a trailing clear button next to its already-hardcoded left search icon — Angular's view encapsulation doesn't allow that without `::ng-deep`, so this owns its template instead. `role=\"search\"` on the wrapper, a real `<button>` clear (\"x\") that only renders once there's text, and a `search` output debounced (default 300ms, `debounceMs` overridable) via a plain `setTimeout`/`effect()` pair — no rxjs, matching how this batch of components avoids pulling rxjs into anything that doesn't already depend on it. Clearing emits immediately, bypassing the debounce, since it's an explicit user action rather than mid-typing input.",
+      "description": "Search box with a leading search icon and a clear button that appears once there's text. `search` emits the current value `debounceMs` after the user stops typing. Clearing emits immediately, bypassing the debounce.",
       "files": [
         {
           "path": "search-input.html",
@@ -2792,7 +2785,7 @@
       ],
       "api": {
         "name": "SearchInput",
-        "description": "Search box built from `Input`'s own conventions (id-generation counter, label/caption `UiTemplateDirective` slots, the exact same `<input>` border/focus/disabled classes) rather than nesting `Input` as a child component. Nesting would need to reach into `Input`'s internal DOM to place a trailing clear button next to its already-hardcoded left search icon — Angular's view encapsulation doesn't allow that without `::ng-deep`, so this owns its template instead. `role=\"search\"` on the wrapper, a real `<button>` clear (\"x\") that only renders once there's text, and a `search` output debounced (default 300ms, `debounceMs` overridable) via a plain `setTimeout`/`effect()` pair — no rxjs, matching how this batch of components avoids pulling rxjs into anything that doesn't already depend on it. Clearing emits immediately, bypassing the debounce, since it's an explicit user action rather than mid-typing input.",
+        "description": "Search box with a leading search icon and a clear button that appears once there's text. `search` emits the current value `debounceMs` after the user stops typing. Clearing emits immediately, bypassing the debounce.",
         "props": [
           {
             "name": "value",
@@ -2881,7 +2874,7 @@
       "name": "select",
       "type": "component",
       "category": "form",
-      "description": "Single or multi select with a custom (non-native) dropdown listbox. Two real bugs fixed from the original: (1) the option data passed in was mutated in place to track a `selected` flag on each object — including objects owned by the caller, not copies. Selection is now derived by comparing against `value()`/`value()[]` instead, so option data is never touched. (2) the multi-select option row nested a full interactive checkbox inside a `(click)` row — clicking the checkbox fired both its own `(change)` and the row's `(click)`, toggling the option twice (back to its original state). The checkbox is now a purely visual indicator; only the row's own click/keyboard handler drives selection. The original had no ARIA at all (no listbox/option roles, no keyboard navigation). Added `aria-haspopup`/`aria-expanded` on the trigger, `role=\"listbox\"`/`role=\"option\"` with `aria-selected`, and Up/Down/Home/End/Enter/Escape keyboard support via `aria-activedescendant`. The original also registered a `fade` animation trigger that was never actually bound anywhere in the template — the listbox popped open/closed with no transition at all despite the trigger existing. Now wired onto the listbox's `@if` block.",
+      "description": "Single or multi-select with a custom dropdown listbox. Set `multi` to allow selecting more than one option; `value` then holds an array of extracted `optionValue`s instead of the whole option. Options can be plain values or objects; when using objects, set `optionLabel`, `optionValue` and `optionDisabledKey` to the property names to read from each. Use `maxSelectableLimit` to cap how many options can be selected in `multi` mode.",
       "files": [
         {
           "path": "select.html",
@@ -2900,7 +2893,7 @@
       ],
       "api": {
         "name": "Select",
-        "description": "Single or multi select with a custom (non-native) dropdown listbox. Two real bugs fixed from the original: (1) the option data passed in was mutated in place to track a `selected` flag on each object — including objects owned by the caller, not copies. Selection is now derived by comparing against `value()`/`value()[]` instead, so option data is never touched. (2) the multi-select option row nested a full interactive checkbox inside a `(click)` row — clicking the checkbox fired both its own `(change)` and the row's `(click)`, toggling the option twice (back to its original state). The checkbox is now a purely visual indicator; only the row's own click/keyboard handler drives selection. The original had no ARIA at all (no listbox/option roles, no keyboard navigation). Added `aria-haspopup`/`aria-expanded` on the trigger, `role=\"listbox\"`/`role=\"option\"` with `aria-selected`, and Up/Down/Home/End/Enter/Escape keyboard support via `aria-activedescendant`. The original also registered a `fade` animation trigger that was never actually bound anywhere in the template — the listbox popped open/closed with no transition at all despite the trigger existing. Now wired onto the listbox's `@if` block.",
+        "description": "Single or multi-select with a custom dropdown listbox. Set `multi` to allow selecting more than one option; `value` then holds an array of extracted `optionValue`s instead of the whole option. Options can be plain values or objects; when using objects, set `optionLabel`, `optionValue` and `optionDisabledKey` to the property names to read from each. Use `maxSelectableLimit` to cap how many options can be selected in `multi` mode.",
         "props": [
           {
             "name": "options",
@@ -3004,7 +2997,7 @@
             "required": false,
             "type": "unknown",
             "defaultValue": "undefined",
-            "description": "For `multi()`, the value is an array of extracted `optionValue`s. For single-select, it's the whole selected option (matching the original library's contract)."
+            "description": "For `multi`, the value is an array of extracted `optionValue`s. For single-select, it's the whole selected option."
           },
           {
             "name": "selected",
@@ -3021,7 +3014,7 @@
       "name": "separator",
       "type": "component",
       "category": "layout",
-      "description": "Thin dividing line. Most separators in a layout are purely presentational (spacing between unrelated blocks), so `decorative` defaults to `true` and the line is `aria-hidden` — assistive tech skips straight over it, same as it would a plain visual rule. Set `decorative` to `false` only when the separator genuinely marks a semantic break between two sections of content; that flips it to `role=\"separator\"` with `aria-orientation` so it's announced.",
+      "description": "Thin dividing line. Most separators in a layout are purely presentational, so `decorative` defaults to `true` and the line is `aria-hidden`; assistive technology skips over it like a plain visual rule. Set `decorative` to `false` only when the separator marks a genuine semantic break between two sections of content; it then renders with `role=\"separator\"` and `aria-orientation` so it gets announced.",
       "files": [
         {
           "path": "separator.ts",
@@ -3032,7 +3025,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Separator",
-        "description": "Thin dividing line. Most separators in a layout are purely presentational (spacing between unrelated blocks), so `decorative` defaults to `true` and the line is `aria-hidden` — assistive tech skips straight over it, same as it would a plain visual rule. Set `decorative` to `false` only when the separator genuinely marks a semantic break between two sections of content; that flips it to `role=\"separator\"` with `aria-orientation` so it's announced.",
+        "description": "Thin dividing line. Most separators in a layout are purely presentational, so `decorative` defaults to `true` and the line is `aria-hidden`; assistive technology skips over it like a plain visual rule. Set `decorative` to `false` only when the separator marks a genuine semantic break between two sections of content; it then renders with `role=\"separator\"` and `aria-orientation` so it gets announced.",
         "props": [
           {
             "name": "orientation",
@@ -3093,7 +3086,7 @@
       "name": "sidebar",
       "type": "component",
       "category": "navigation",
-      "description": "Responsive app-shell layout: a persistent nav column on desktop that collapses to a hamburger button + top bar on mobile, opening the same nav as an off-canvas panel. Wraps the page body (passed as default content) next to the nav, so it's meant to sit once at the root of a routed app (e.g. replacing a hand-rolled header+nav+main layout), not nested per-page. The nav itself is a single `uiTemplate=\"content\"` template, instantiated twice (desktop aside + mobile drawer) via `ngTemplateOutlet` — not `<ng-content>`, which can only render its projected nodes in one place. `header`/`footer` templates are optional chrome (e.g. a logo, a user menu) shown above/below the nav in both layouts. The mobile off-canvas panel reuses `Drawer` (`side=\"left\"`) rather than reimplementing backdrop/focus-trap/Escape-to-close/slide-in behavior — on mobile this component's nav really is just a left `Drawer` with a hamburger trigger.",
+      "description": "Responsive app-shell layout: a persistent navigation column on desktop that collapses to a hamburger button and top bar on mobile, opening the same navigation as an off-canvas panel. Wrap the page body as the default projected content. This component is meant to sit once at the root of a routed app, rather than nested per page. Provide the navigation itself with a `content` template via `uiTemplate`, and optional `header`/`footer` templates for chrome such as a logo or a user menu, shown in both layouts. `breakpoint` sets the Tailwind breakpoint at and above which the navigation becomes a persistent column instead of an off-canvas panel.",
       "files": [
         {
           "path": "sidebar.html",
@@ -3113,7 +3106,7 @@
       ],
       "api": {
         "name": "Sidebar",
-        "description": "Responsive app-shell layout: a persistent nav column on desktop that collapses to a hamburger button + top bar on mobile, opening the same nav as an off-canvas panel. Wraps the page body (passed as default content) next to the nav, so it's meant to sit once at the root of a routed app (e.g. replacing a hand-rolled header+nav+main layout), not nested per-page. The nav itself is a single `uiTemplate=\"content\"` template, instantiated twice (desktop aside + mobile drawer) via `ngTemplateOutlet` — not `<ng-content>`, which can only render its projected nodes in one place. `header`/`footer` templates are optional chrome (e.g. a logo, a user menu) shown above/below the nav in both layouts. The mobile off-canvas panel reuses `Drawer` (`side=\"left\"`) rather than reimplementing backdrop/focus-trap/Escape-to-close/slide-in behavior — on mobile this component's nav really is just a left `Drawer` with a hamburger trigger.",
+        "description": "Responsive app-shell layout: a persistent navigation column on desktop that collapses to a hamburger button and top bar on mobile, opening the same navigation as an off-canvas panel. Wrap the page body as the default projected content. This component is meant to sit once at the root of a routed app, rather than nested per page. Provide the navigation itself with a `content` template via `uiTemplate`, and optional `header`/`footer` templates for chrome such as a logo or a user menu, shown in both layouts. `breakpoint` sets the Tailwind breakpoint at and above which the navigation becomes a persistent column instead of an off-canvas panel.",
         "props": [
           {
             "name": "mobileOpen",
@@ -3222,7 +3215,7 @@
       "name": "slider",
       "type": "component",
       "category": "form",
-      "description": "Single-thumb range slider built on the native `<input type=\"range\">` rather than a hand-built div thumb/track pair, so keyboard support (arrow keys, Home/End, Page Up/Down) and touch dragging come for free from the browser. The filled portion of the track is a decorative absolutely-positioned overlay sitting *behind* the (transparent-track) range input — the input itself stays the actual hit target and focusable element throughout. `formatValue` drives both the visible value badge and `aria-valuetext`, for sliders where the raw number alone isn't self-explanatory (e.g. `(v) => `$${v}`` for a currency slider, or a duration formatter). Follows `Input`'s id-generation (`nextId` counter + `id` override) and label/caption `UiTemplateDirective` slot conventions.",
+      "description": "Single-thumb range slider built on the native `<input type=\"range\">`, with full keyboard (arrow keys, Home/End, Page Up/Down) and touch support. Use `formatValue` to customize the visible value badge and `aria-valuetext` for values that aren't self-explanatory as a raw number, for example a currency or duration formatter.",
       "files": [
         {
           "path": "slider.html",
@@ -3239,7 +3232,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Slider",
-        "description": "Single-thumb range slider built on the native `<input type=\"range\">` rather than a hand-built div thumb/track pair, so keyboard support (arrow keys, Home/End, Page Up/Down) and touch dragging come for free from the browser. The filled portion of the track is a decorative absolutely-positioned overlay sitting *behind* the (transparent-track) range input — the input itself stays the actual hit target and focusable element throughout. `formatValue` drives both the visible value badge and `aria-valuetext`, for sliders where the raw number alone isn't self-explanatory (e.g. `(v) => `$${v}`` for a currency slider, or a duration formatter). Follows `Input`'s id-generation (`nextId` counter + `id` override) and label/caption `UiTemplateDirective` slot conventions.",
+        "description": "Single-thumb range slider built on the native `<input type=\"range\">`, with full keyboard (arrow keys, Home/End, Page Up/Down) and touch support. Use `formatValue` to customize the visible value badge and `aria-valuetext` for values that aren't self-explanatory as a raw number, for example a currency or duration formatter.",
         "props": [
           {
             "name": "value",
@@ -3344,7 +3337,7 @@
       "name": "spinner",
       "type": "component",
       "category": "feedback",
-      "description": "Indeterminate loading spinner (animated arc), for cases that need a standalone spinner rather than `ui-button`'s built-in `[loading]` state. Both source copies (FTD/uiSDP; this component didn't exist in base) were identical, down to a `TODO: quitar HEX del stroke a clases tailwind` comment — i.e. the original authors already flagged that hardcoding the stroke color as a hex string (`#D5006C`, which is just `--color-primary-300`) instead of a Tailwind class was wrong. Fixed here: the SVG now strokes with `currentColor` and color is set via a `text-*` class (`classNames`, defaults to `text-primary-500`), so it reskins the same way every other component in this library does. Accessibility: the original had none. Added `role=\"status\"` plus an `ariaLabel` (defaults to \"Loading\") so screen readers announce the loading state instead of silently seeing nothing.",
+      "description": "Indeterminate loading spinner (animated arc), for standalone use rather than `ui-button`'s built-in `loading` state. The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with `role=\"status\"` and `ariaLabel` so screen readers announce the loading state.",
       "files": [
         {
           "path": "spinner.html",
@@ -3359,7 +3352,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Spinner",
-        "description": "Indeterminate loading spinner (animated arc), for cases that need a standalone spinner rather than `ui-button`'s built-in `[loading]` state. Both source copies (FTD/uiSDP; this component didn't exist in base) were identical, down to a `TODO: quitar HEX del stroke a clases tailwind` comment — i.e. the original authors already flagged that hardcoding the stroke color as a hex string (`#D5006C`, which is just `--color-primary-300`) instead of a Tailwind class was wrong. Fixed here: the SVG now strokes with `currentColor` and color is set via a `text-*` class (`classNames`, defaults to `text-primary-500`), so it reskins the same way every other component in this library does. Accessibility: the original had none. Added `role=\"status\"` plus an `ariaLabel` (defaults to \"Loading\") so screen readers announce the loading state instead of silently seeing nothing.",
+        "description": "Indeterminate loading spinner (animated arc), for standalone use rather than `ui-button`'s built-in `loading` state. The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with `role=\"status\"` and `ariaLabel` so screen readers announce the loading state.",
         "props": [
           {
             "name": "size",
@@ -3392,7 +3385,7 @@
       "name": "stepper",
       "type": "component",
       "category": "layout",
-      "description": "Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a checkmark on completed steps and the active step called out via `aria-current=\"step\"`. The original `tbk-stepper` across all three forks (all three were byte-identical, and one had an empty, unused `.css` file) wasn't really a stepper at all — it was a single `X de Y` progress bar with no per-step markers, so there was nothing resembling a \"completed step\" to mark. This rebuilds it as a proper discrete step indicator, which is what every mainstream \"Stepper\" component (Ant Design Steps, MUI Stepper, etc.) actually renders.",
+      "description": "Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a checkmark on completed steps and the active step marked with `aria-current=\"step\"`.",
       "files": [
         {
           "path": "stepper.html",
@@ -3409,7 +3402,7 @@
       ],
       "api": {
         "name": "Stepper",
-        "description": "Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a checkmark on completed steps and the active step called out via `aria-current=\"step\"`. The original `tbk-stepper` across all three forks (all three were byte-identical, and one had an empty, unused `.css` file) wasn't really a stepper at all — it was a single `X de Y` progress bar with no per-step markers, so there was nothing resembling a \"completed step\" to mark. This rebuilds it as a proper discrete step indicator, which is what every mainstream \"Stepper\" component (Ant Design Steps, MUI Stepper, etc.) actually renders.",
+        "description": "Horizontal multi-step progress indicator: numbered circles connected by a fill line, with a checkmark on completed steps and the active step marked with `aria-current=\"step\"`.",
         "props": [
           {
             "name": "steps",
@@ -3461,7 +3454,7 @@
       "name": "tabs",
       "type": "component",
       "category": "layout",
-      "description": "Full WAI-ARIA tabs pattern: `ui-tabs` draws the `role=\"tablist\"` strip itself, reading label/icon/disabled metadata off each projected `ui-tab-panel` child (via `contentChildren`, same injected-parent coordination as `Accordion`/`AccordionItem`); each `TabPanel` renders its own `role=\"tabpanel\"` region only while active, so the panel content stays physically anchored where the caller wrote it in the template instead of being re-parented. Roving `tabindex` (selected tab is `0`, the rest `-1`) plus Left/Right (or Up/Down when `orientation=\"vertical\"`) and Home/End keyboard navigation between tabs — a hard requirement for a real tabs widget, not optional polish. `active` is a `model<string>`, so it can be left uncontrolled (the first non-disabled panel is auto-selected) or bound with `[(active)]` for a fully controlled tab set.",
+      "description": "Tab set following the WAI-ARIA tabs pattern. Each projected `ui-tab-panel` child provides its own label, icon and disabled state, and renders its content only while active. Navigate between tabs with Left/Right (or Up/Down when `orientation=\"vertical\"`), Home and End. Leave `active` unset to auto-select the first non-disabled tab, or bind `[(active)]` for a fully controlled tab set.",
       "files": [
         {
           "path": "tab-panel/tab-panel.html",
@@ -3488,7 +3481,7 @@
       ],
       "api": {
         "name": "Tabs",
-        "description": "Full WAI-ARIA tabs pattern: `ui-tabs` draws the `role=\"tablist\"` strip itself, reading label/icon/disabled metadata off each projected `ui-tab-panel` child (via `contentChildren`, same injected-parent coordination as `Accordion`/`AccordionItem`); each `TabPanel` renders its own `role=\"tabpanel\"` region only while active, so the panel content stays physically anchored where the caller wrote it in the template instead of being re-parented. Roving `tabindex` (selected tab is `0`, the rest `-1`) plus Left/Right (or Up/Down when `orientation=\"vertical\"`) and Home/End keyboard navigation between tabs — a hard requirement for a real tabs widget, not optional polish. `active` is a `model<string>`, so it can be left uncontrolled (the first non-disabled panel is auto-selected) or bound with `[(active)]` for a fully controlled tab set.",
+        "description": "Tab set following the WAI-ARIA tabs pattern. Each projected `ui-tab-panel` child provides its own label, icon and disabled state, and renders its content only while active. Navigate between tabs with Left/Right (or Up/Down when `orientation=\"vertical\"`), Home and End. Leave `active` unset to auto-select the first non-disabled tab, or bind `[(active)]` for a fully controlled tab set.",
         "props": [
           {
             "name": "active",
@@ -3692,7 +3685,7 @@
       "name": "toggle",
       "type": "component",
       "category": "form",
-      "description": "Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Same interactive-emit bug fixed here as in Checkbox: the original only notified listeners from `writeValue` (a programmatic set), never from the actual user click — `effect()` on the `checked` model signal now covers both paths uniformly.",
+      "description": "Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage.",
       "files": [
         {
           "path": "toggle.html",
@@ -3707,7 +3700,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Toggle",
-        "description": "Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage. Same interactive-emit bug fixed here as in Checkbox: the original only notified listeners from `writeValue` (a programmatic set), never from the actual user click — `effect()` on the `checked` model signal now covers both paths uniformly.",
+        "description": "Boolean on/off switch with native forms interop (`ControlValueAccessor`, works with `formControlName`/`ngModel`) and a signal-based `[(checked)]` two-way binding for standalone usage.",
         "props": [
           {
             "name": "checked",
@@ -3756,7 +3749,7 @@
       "name": "tooltip",
       "type": "component",
       "category": "overlay",
-      "description": "Floating tooltip panel. Not meant to be dropped into a template directly — `TooltipDirective` creates and positions instances of this on demand. Kept as its own component (rather than inlined into the directive) so it can also be shown/positioned manually if ever needed. The original panel carried a set of `before:border-*`/`before:w-0`/`before:h-0` classes meant to draw a CSS border-triangle caret, but the caret is actually rendered by the separate rotated `<span>` square below — those `before:*` utilities were dead weight (a 0×0, invisible pseudo element) left over from an earlier implementation, so they're dropped here. The position class also carried static `left-*`/`top-*`/`bottom-*` utilities that did nothing: this element's position comes from the `[style.left]`/`[style.top]` bindings the directive sets, and an inline style always wins over a class for the same CSS property, so those utilities never had any effect either. Both are removed for a much shorter, honest class list.",
+      "description": "Floating tooltip panel used internally by the `uiTooltip` directive, which creates and positions instances of it on demand. Not meant to be used directly in a template; apply `uiTooltip` to an element instead.",
       "files": [
         {
           "path": "tooltip.directive.ts",
@@ -3775,7 +3768,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Tooltip",
-        "description": "Floating tooltip panel. Not meant to be dropped into a template directly — `TooltipDirective` creates and positions instances of this on demand. Kept as its own component (rather than inlined into the directive) so it can also be shown/positioned manually if ever needed. The original panel carried a set of `before:border-*`/`before:w-0`/`before:h-0` classes meant to draw a CSS border-triangle caret, but the caret is actually rendered by the separate rotated `<span>` square below — those `before:*` utilities were dead weight (a 0×0, invisible pseudo element) left over from an earlier implementation, so they're dropped here. The position class also carried static `left-*`/`top-*`/`bottom-*` utilities that did nothing: this element's position comes from the `[style.left]`/`[style.top]` bindings the directive sets, and an inline style always wins over a class for the same CSS property, so those utilities never had any effect either. Both are removed for a much shorter, honest class list.",
+        "description": "Floating tooltip panel used internally by the `uiTooltip` directive, which creates and positions instances of it on demand. Not meant to be used directly in a template; apply `uiTooltip` to an element instead.",
         "props": [
           {
             "name": "text",
@@ -3856,7 +3849,7 @@
       "name": "url-copy",
       "type": "component",
       "category": "data-display",
-      "description": "Click-to-copy URL chip. All three source copies were identical. Changes from the original: - `url` was a plain `@Input()` defaulting to a hardcoded `www.transbank.cl/firmacontrato/ejemplo` URL. It's now `input.required<string>()` — there is no sensible generic default for a URL. - The original rendered a `<div (click)=\"copyUrl()\">`, which is not keyboard-operable and has no accessible role — a real a11y bug. It's now a real `<button type=\"button\">`. - The \"copied\" feedback was a `tbk-notification` toast in the top-right corner of the *page*, entirely disconnected from the control that triggered it. That component isn't part of this migration batch (and pulling in a whole toast/notification system for one chip is overkill for a copy-paste primitive), so feedback is now inline: the icon and trailing label swap to a checkmark + `copiedLabel` for `duration` ms, then revert. This also fixes a dead `showNotification` input that was declared but never actually read anywhere in the original template — the notification always showed regardless of its value. - `notificationText` (Spanish default \"Enlace copiado\") is renamed `copiedLabel` (default \"Copied!\"); `label` default is now \"Copy URL\" instead of \"Copiar URL\" — component defaults are English now, same as Button/Checkbox. - Adds a `copied` output so consumers can react (e.g. analytics) without polling clipboard state.",
+      "description": "Click-to-copy URL chip. Copies `url` to the clipboard when clicked, and shows `copiedLabel` in place of `label` for `duration` ms as feedback. Emits `copied` once the URL has been successfully written to the clipboard, so callers can react, for example to log analytics.",
       "files": [
         {
           "path": "url-copy.html",
@@ -3873,7 +3866,7 @@
       ],
       "api": {
         "name": "UrlCopy",
-        "description": "Click-to-copy URL chip. All three source copies were identical. Changes from the original: - `url` was a plain `@Input()` defaulting to a hardcoded `www.transbank.cl/firmacontrato/ejemplo` URL. It's now `input.required<string>()` — there is no sensible generic default for a URL. - The original rendered a `<div (click)=\"copyUrl()\">`, which is not keyboard-operable and has no accessible role — a real a11y bug. It's now a real `<button type=\"button\">`. - The \"copied\" feedback was a `tbk-notification` toast in the top-right corner of the *page*, entirely disconnected from the control that triggered it. That component isn't part of this migration batch (and pulling in a whole toast/notification system for one chip is overkill for a copy-paste primitive), so feedback is now inline: the icon and trailing label swap to a checkmark + `copiedLabel` for `duration` ms, then revert. This also fixes a dead `showNotification` input that was declared but never actually read anywhere in the original template — the notification always showed regardless of its value. - `notificationText` (Spanish default \"Enlace copiado\") is renamed `copiedLabel` (default \"Copied!\"); `label` default is now \"Copy URL\" instead of \"Copiar URL\" — component defaults are English now, same as Button/Checkbox. - Adds a `copied` output so consumers can react (e.g. analytics) without polling clipboard state.",
+        "description": "Click-to-copy URL chip. Copies `url` to the clipboard when clicked, and shows `copiedLabel` in place of `label` for `duration` ms as feedback. Emits `copied` once the URL has been successfully written to the clipboard, so callers can react, for example to log analytics.",
         "props": [
           {
             "name": "url",

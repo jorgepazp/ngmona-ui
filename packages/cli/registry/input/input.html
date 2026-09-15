@@ -1,10 +1,10 @@
 <div [class]="classNames()">
   @if (labelTemplate(); as tpl) {
-    <div class="mb-0.5 text-neutral-500 text-xs font-medium flex justify-between">
+    <div class="mb-0.5 text-text-primary text-xs font-medium flex justify-between">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (label()) {
-    <label [attr.for]="resolvedId()" class="mb-0.5 text-neutral-500 text-xs font-medium block">{{ label() }}</label>
+    <label [attr.for]="resolvedId()" class="mb-0.5 text-text-primary text-xs font-medium block">{{ label() }}</label>
   }
 
   <div class="relative w-full group">
@@ -26,8 +26,8 @@
       [type]="resolvedType()"
       [value]="value()"
       [placeholder]="placeholder()"
-      class="custom-input transition-all !px-2 !py-1 text-label-md text-neutral-500 h-6 rounded ring-0 border-neutral-100 !border placeholder:text-neutral-300 placeholder:font-regular w-full disabled:placeholder:text-neutral-100 disabled:group-hover:!border-border-neutral-medium !border-solid group-hover:border-neutral-300 outline-[1.5px] font-medium outline outline-transparent focus:!border-transparent focus:outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100"
-      [class]="(state() === 'success' ? '!border-success-500 ' : state() === 'warning' ? '!border-warning-500 ' : state() === 'error' ? '!border-danger-500 ' : '') + (type() === 'password' && !showPassword() && value() ? 'text-xl tracking-widest ' : '') + (iconPos() === 'left' ? '!pl-5' : '')"
+      class="custom-input transition-all !px-2 !py-1 text-label-md text-text-primary h-6 rounded ring-0 border-neutral-100 !border placeholder:text-neutral-300 placeholder:font-regular w-full disabled:placeholder:text-text-subdued disabled:group-hover:!border-border-neutral-medium !border-solid group-hover:border-neutral-300 font-medium outline outline-transparent focus:!border-transparent focus:outline-border-neutral disabled:bg-surface-disabled/80 disabled:border-surface-dark disabled:text-text-subdued"
+      [class]="(state() === 'success' ? '!border-success ' : state() === 'warning' ? '!border-warning ' : state() === 'error' ? '!border-danger ' : '') + (type() === 'password' && !showPassword() && value() ? 'text-xl tracking-widest ' : '') + (iconPos() === 'left' ? '!pl-5' : '')"
       (input)="onInputEvent($event)"
       (keypress)="avoidUnwantedChars($event)"
       (focus)="onFocus($event)"
@@ -45,7 +45,7 @@
       </button>
     } @else if (icon(); as ic) {
       <span
-        class="pointer-events-none transition-all absolute top-1 bottom-1 flex justify-center items-center text-neutral-900"
+        class="pointer-events-none transition-all absolute top-1 bottom-1 flex justify-center items-center text-text-primary"
         [class]="(state() === 'success' ? '!text-success ' : state() === 'warning' ? '!text-warning ' : state() === 'error' ? '!text-danger ' : '') + (iconPos() === 'left' && type() !== 'password' ? 'left-2' : 'right-2')"
       >
         <svg [lucideIcon]="ic" [size]="16"></svg>
@@ -60,7 +60,7 @@
         [attr.aria-pressed]="showPassword()"
         (click)="showPassword.set(!showPassword())"
       >
-        <svg [lucideIcon]="showPassword() ? eyeIcon : eyeOffIcon" [size]="18"></svg>
+        <svg class="text-text-primary" [lucideIcon]="showPassword() ? eyeIcon : eyeOffIcon" [size]="18"></svg>
       </button>
     }
 
@@ -72,14 +72,14 @@
         animate.leave="ui-anim-fade-leave"
         (mouseenter)="hoveringSuggestions = true"
         (mouseleave)="hoveringSuggestions = false"
-        class="absolute !p-0.5 flex flex-col bg-surface-white w-full top-full z-20 mt-0.5 max-h-32 rounded border-neutral-600 border"
+        class="absolute !p-0.5 flex flex-col bg-surface-white w-full top-full z-20 mt-0.5 max-h-32 rounded border-border-neutral border"
       >
         <ul class="overflow-y-auto list-none px-0 mb-0">
           @for (item of suggestions(); track item) {
             <li
               role="option"
               [attr.aria-selected]="item === value()"
-              class="w-full !p-1 cursor-pointer select-none transition-colors hover:bg-neutral-300 text-neutral-500 text-label-md"
+              class="w-full !p-1 cursor-pointer select-none transition-colors hover:bg-surface-hover/60 text-text-primary text-label-md"
               (click)="selectSuggestion(item)"
             >
               {{ item }}

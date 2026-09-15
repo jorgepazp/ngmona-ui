@@ -9,16 +9,11 @@ export interface BreadcrumbItem {
 }
 
 /**
- * Breadcrumb trail. Data-driven via `items` rather than content-projected, so the last-item
- * "current page" treatment and the separators between items can be derived structurally instead
- * of asking every consumer to remember to mark them by hand.
+ * Navigation trail showing the path to the current page.
  *
- * Every item except the last renders through `ui-link` (this library's existing Link component)
- * so it inherits its focus/hover/disabled treatment for free. The last item is current-page: it
- * renders as plain text with `aria-current="page"` (not a link — you're already there) per the
- * WAI-ARIA breadcrumb pattern. Separator icons between items are `aria-hidden` since the `<ol>`
- * list structure already conveys the hierarchy to assistive tech; the trailing `nav[aria-label]`
- * is what identifies the whole region as a breadcrumb landmark.
+ * Built from `items` rather than projected content, so the current-page treatment and the
+ * separators between items are handled automatically. Every item except the last renders as a
+ * `ui-link`; the last renders as plain text with `aria-current="page"`.
  */
 @Component({
   selector: 'ui-breadcrumb',

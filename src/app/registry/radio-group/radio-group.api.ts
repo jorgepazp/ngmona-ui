@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const radioGroupApi: ComponentApiDoc = {
   name: "RadioGroup",
-  description: "Single-select list/chip picker over an arbitrary array of options (not a wrapper around individual `<ui-radio>` elements — this renders its own buttons). The original was a stack of `<div (click)=\"...\">`s with no radio semantics at all — not reachable or operable via keyboard, nothing announced to screen readers. Rebuilt here on the WAI-ARIA \"radio group\" pattern: `role=\"radiogroup\"` + `role=\"radio\"` buttons, roving `tabindex`, and Up/Down/Left/Right arrow-key navigation. The `compareWith` input existed in the original but was declared and never actually used (selection always fell back to `==`) — wired up for real here.",
+  description: "List or chip picker over an array of options, rendered as its own buttons rather than individual `ui-radio` elements. Single-select by default; set `multiple` for a checkbox-group-style multi-select. Follows the WAI-ARIA pattern for the mode in use: `role=\"radiogroup\"` for single-select, `role=\"group\"` with checkboxes for `multiple`, with roving `tabindex` and arrow-key navigation between options. Use `compareWith` to control how options are matched against the bound value, for example when option objects are reloaded from an API and aren't reference-equal. Set `paginator` to page the rendered options through a built-in paginator instead of rendering them all at once.",
   props: [
     {
       name: "options",
@@ -68,6 +68,30 @@ export const radioGroupApi: ComponentApiDoc = {
       type: "(a: T, b: T) => boolean",
       defaultValue: "(a, b) => a === b",
       description: "Called with `(optionA, optionB)` to decide whether two options are the same selection — override for option objects that aren't reference-equal to the bound value (e.g. reloaded from an API). Defaults to `===`.",
+    },
+    {
+      name: "multiple",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "false",
+      description: "Allows selecting more than one option at once, rendered as a checkbox group instead of a radio group.",
+    },
+    {
+      name: "paginator",
+      kind: "input",
+      required: false,
+      type: "boolean",
+      defaultValue: "false",
+      description: "Pages the rendered options through a `ui-paginator` instead of rendering them all at once.",
+    },
+    {
+      name: "pageSize",
+      kind: "input",
+      required: false,
+      type: "number",
+      defaultValue: "5",
+      description: "Number of options shown per page when `paginator` is enabled.",
     },
     {
       name: "selectedItem",

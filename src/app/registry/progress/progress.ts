@@ -56,7 +56,7 @@ export class Progress {
 
   protected readonly trackClass = computed(() => {
     const size: Record<ProgressSize, string> = { sm: 'h-1', md: 'h-1.5', lg: 'h-2' };
-    return `relative w-full overflow-hidden rounded-full bg-neutral-500 ${size[this.size()]} ${this.classNames()}`;
+    return `relative w-full overflow-hidden rounded-full bg-surface-light ${size[this.size()]} ${this.classNames()}`;
   });
 
   protected readonly fillClass = computed(() => {

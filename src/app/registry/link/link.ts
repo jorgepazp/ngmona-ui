@@ -5,16 +5,10 @@ type LinkUnderline = 'hover' | 'always' | 'none';
 type LinkTarget = '_blank' | '_parent' | '_self' | '_top';
 
 /**
- * Text link with optional leading/trailing icon and underline behavior.
+ * Text link with an optional leading or trailing icon and configurable underline behavior.
  *
- * Fixes carried over from the original: `target` no longer defaults to `_blank` — the base fork
- * forced every link (including internal/in-app ones) to open a new tab unconditionally, which is
- * rarely what you want; callers now opt in explicitly. `rel="noopener noreferrer"` is applied
- * automatically whenever `target="_blank"` is set (FTD/uiSDP added this by hand but only on the
- * base string, not derived from `target`, so it stayed correct only by coincidence). The
- * disabled state (added by FTD/uiSDP, missing from base) is merged in. Color now uses the
- * dedicated `--color-link-*` token family instead of `text-info-500` — same value, but the
- * correct semantic token instead of borrowing the info color.
+ * Setting `target="_blank"` automatically adds `rel="noopener noreferrer"` and an accessible hint
+ * that the link opens in a new tab.
  */
 @Component({
   selector: 'ui-link',

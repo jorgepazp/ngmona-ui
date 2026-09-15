@@ -22,12 +22,12 @@ export const SEMANTIC_MAP = {
   'color-surface-white': { literal: 'var(--color-white)' },
   'color-surface-lighter': { scale: 'neutral', step: 50 },
   'color-surface-light': { scale: 'neutral', step: 100 },
-  'color-surface-medium': { scale: 'neutral', step: 300 },
+  'color-surface-medium': { scale: 'neutral', step: 200 },
   'color-surface-dark': { scale: 'neutral', step: 500 },
   'color-surface-enabled': { scale: 'neutral', step: 100 },
   'color-surface-enabled-light': { literal: 'var(--color-white)' },
   'color-surface-disabled': { scale: 'neutral', step: 300 },
-  'color-surface-hover': { scale: 'neutral', step: 300 },
+  'color-surface-hover': { scale: 'neutral', step: 200 },
   'color-surface-active': { scale: 'primary', step: 500 },
   'color-surface-active-inverse': { literal: 'var(--color-white)' },
   'color-surface-backdrop': { scale: 'neutral', step: 900, alpha: 0.5 },
@@ -85,7 +85,7 @@ export const SEMANTIC_MAP = {
 
   // Semantic border scale
   'color-border-neutral-light': { scale: 'neutral', step: 50 },
-  'color-border-neutral': { scale: 'neutral', step: 300 },
+  'color-border-neutral': { scale: 'neutral', step: 200 },
   'color-border-neutral-medium': { scale: 'neutral', step: 500 },
   'color-border-neutral-dark': { scale: 'neutral', step: 600 },
   'color-border-state': { scale: 'neutral', step: 200 },
@@ -96,9 +96,9 @@ export const SEMANTIC_MAP = {
 
   // Divider scale
   'color-divider-light': { scale: 'neutral', step: 50 },
-  'color-divider': { scale: 'neutral', step: 300 },
-  'color-divider-medium': { scale: 'neutral', step: 500 },
-  'color-divider-dark': { scale: 'neutral', step: 600 },
+  'color-divider': { scale: 'neutral', step: 100 },
+  'color-divider-medium': { scale: 'neutral', step: 200 },
+  'color-divider-dark': { scale: 'neutral', step: 300 },
 };
 
 /**

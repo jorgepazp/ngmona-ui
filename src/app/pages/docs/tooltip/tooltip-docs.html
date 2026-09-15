@@ -5,7 +5,7 @@
 
   <h2 class="text-heading-md text-text-primary">Tooltip directive</h2>
   <p class="text-paragraph-sm text-text-subdued">
-    The <code>[uiTooltip]</code> directive is what you apply to a trigger element in practice — it
+    The <code>[uiTooltip]</code> directive is what you apply to a trigger element in practice. It
     creates and positions a <code>Tooltip</code> panel on hover, focus, or touch-and-hold.
   </p>
   <app-api-table [doc]="directiveApi" />
@@ -46,6 +46,7 @@
         Right
       </button>
     </div>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -61,5 +62,6 @@
         Hover me
       </button>
     </div>
+    <docs-code-tabs [html]="headingHtml" [ts]="headingTs" />
   </section>
 </div>

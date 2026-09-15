@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ApiTable } from '../../../docs-ui/api-table/api-table';
+import { CodeTabs } from '../../../docs-ui/code-tabs/code-tabs';
 import { Button } from '../../../registry/button/button';
 import { Questionnaire, QuestionnaireAnswer, QuestionnaireStep } from '../../../registry/questionnaire/questionnaire';
 import { questionnaireApi } from '../../../registry/questionnaire/questionnaire.api';
@@ -40,7 +41,7 @@ const STEPS: QuestionnaireStep[] = [
 
 @Component({
   selector: 'docs-questionnaire',
-  imports: [Questionnaire, ApiTable, Button],
+  imports: [Questionnaire, ApiTable, Button, CodeTabs],
   templateUrl: './questionnaire-docs.html',
 })
 export default class QuestionnaireDocs {
@@ -59,4 +60,40 @@ export default class QuestionnaireDocs {
     this.answers.set([]);
     this.result.set(null);
   }
+
+  protected readonly basicHtml = `<ui-questionnaire
+  [steps]="steps"
+  [(stepIndex)]="stepIndex"
+  [(answers)]="answers"
+  (completed)="onCompleted($event)"
+></ui-questionnaire>`;
+
+  protected readonly basicTs = `import { Component, signal } from '@angular/core';
+import { Questionnaire, type QuestionnaireAnswer, type QuestionnaireStep } from './ui/questionnaire/questionnaire';
+
+@Component({
+  selector: 'app-feedback-survey',
+  imports: [Questionnaire],
+  templateUrl: './feedback-survey.html',
+})
+export class FeedbackSurvey {
+  steps: QuestionnaireStep[] = [
+    {
+      id: 'priority',
+      title: 'How urgent is this?',
+      options: [
+        { id: 'now', label: 'Blocking' },
+        { id: 'soon', label: 'Soon' },
+        { id: 'later', label: 'Eventually' },
+      ],
+    },
+  ];
+
+  stepIndex = signal(0);
+  answers = signal<QuestionnaireAnswer[]>([]);
+
+  onCompleted(answers: QuestionnaireAnswer[]): void {
+    console.log('survey completed', answers);
+  }
+}`;
 }

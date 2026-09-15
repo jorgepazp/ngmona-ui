@@ -10,15 +10,18 @@
       <ui-button variant="secondary" size="sm" [disabled]="current() === 0" (clicked)="back()">Back</ui-button>
       <ui-button size="sm" [disabled]="current() === labels.length - 1" (clicked)="forward()">Next</ui-button>
     </div>
+    <docs-code-tabs [html]="interactiveHtml" [ts]="interactiveTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">No labels, 5 steps</h2>
     <ui-stepper [steps]="5" [currentStep]="2"></ui-stepper>
+    <docs-code-tabs [html]="noLabelsHtml" [ts]="noLabelsTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">All completed</h2>
     <ui-stepper [labels]="labels" [currentStep]="labels.length"></ui-stepper>
+    <docs-code-tabs [html]="completedHtml" [ts]="completedTs" />
   </section>
 </div>

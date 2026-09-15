@@ -12,15 +12,18 @@
     </ul>
     <ui-paginator [(page)]="page" [pageCount]="pageCount()"></ui-paginator>
     <p class="text-paragraph-sm text-text-subdued">page = {{ page() + 1 }} / {{ pageCount() }}</p>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Many pages (ellipsis + wider sibling range)</h2>
     <ui-paginator [(page)]="manyPagesCurrent" [pageCount]="40" [siblingCount]="2"></ui-paginator>
+    <docs-code-tabs [html]="manyPagesHtml" [ts]="manyPagesTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Disabled</h2>
     <ui-paginator [page]="2" [pageCount]="10" [disabled]="true"></ui-paginator>
+    <docs-code-tabs [html]="disabledHtml" [ts]="disabledTs" />
   </section>
 </div>

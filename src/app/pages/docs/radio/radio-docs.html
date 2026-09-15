@@ -8,5 +8,6 @@
     <ui-radio name="group" value="b" [checked]="picked() === 'b'" (selected)="picked.set('b')" label="Option B"></ui-radio>
     <ui-radio name="group" value="c" [checked]="picked() === 'c'" (selected)="picked.set('c')" label="Disabled" [disabled]="true"></ui-radio>
     <p class="text-paragraph-sm text-text-subdued">picked = {{ picked() }}</p>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 </div>

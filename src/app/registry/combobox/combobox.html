@@ -1,5 +1,5 @@
 @if (label()) {
-  <label [attr.for]="resolvedId()" class="relative block mb-0.5 text-sm font-medium text-neutral-500">{{ label() }}</label>
+  <label [attr.for]="resolvedId()" class="relative block mb-0.5 text-sm font-medium text-text-primary">{{ label() }}</label>
 }
 
 <div class="relative">
@@ -44,7 +44,7 @@
       (mousedown)="$event.preventDefault()"
       (mouseenter)="hoveringPanel = true"
       (mouseleave)="hoveringPanel = false"
-      class="pl-0 !m-0 bg-surface-white border border-neutral-600 rounded shadow-card !py-0.5 overflow-y-auto max-h-52 list-none"
+      class="pl-0 !m-0 bg-surface-white border border-border-neutral rounded shadow-card !py-0.5 overflow-y-auto max-h-52 list-none"
     >
       @for (option of filteredOptions(); track option; let i = $index) {
         <li
@@ -53,12 +53,12 @@
           [attr.aria-selected]="isOptionSelected(option)"
           [attr.aria-disabled]="isOptionDisabled(option) || null"
           (click)="selectOption(option)"
-          [class]="(i === activeIndex() ? 'bg-neutral-300 ' : '') + (isOptionDisabled(option) ? 'opacity-50 pointer-events-none ' : '')"
-          class="flex gap-2 items-center justify-between !px-2 !py-1 select-none cursor-pointer hover:bg-neutral-300 text-neutral-500 text-label-sm"
+          [class]="(i === activeIndex() ? 'bg-surface-active/20 !text-surface-active' : '') + (isOptionDisabled(option) ? 'opacity-50 pointer-events-none ' : '')"
+          class="flex gap-2 items-center justify-between !px-2 !py-1 select-none cursor-pointer hover:bg-surface-hover/50 text-text-primary text-label-sm"
         >
           <span class="truncate">{{ optionLabelOf(option) }}</span>
           @if (isOptionSelected(option)) {
-            <svg [lucideIcon]="checkIcon" [size]="14" class="shrink-0 text-primary-500"></svg>
+            <svg [lucideIcon]="checkIcon" [size]="14" class="shrink-0 "></svg>
           }
         </li>
       } @empty {

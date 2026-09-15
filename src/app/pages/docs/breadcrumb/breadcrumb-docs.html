@@ -6,15 +6,18 @@
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Basic</h2>
     <ui-breadcrumb [items]="basicItems" (itemClick)="onItemClick($event)"></ui-breadcrumb>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">With leading icon</h2>
     <ui-breadcrumb [items]="iconItems"></ui-breadcrumb>
+    <docs-code-tabs [html]="iconHtml" [ts]="iconTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Deep trail</h2>
     <ui-breadcrumb [items]="deepItems"></ui-breadcrumb>
+    <docs-code-tabs [html]="deepHtml" [ts]="deepTs" />
   </section>
 </div>

@@ -7,6 +7,7 @@
     <h2 class="text-label-lg text-text-subdued">Two-way binding</h2>
     <ui-checkbox [(checked)]="isChecked" label="Accept terms"></ui-checkbox>
     <p class="text-paragraph-sm text-text-subdued">checked = {{ isChecked() }}</p>
+    <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -15,5 +16,6 @@
     <ui-checkbox [checked]="true" label="Checked"></ui-checkbox>
     <ui-checkbox [disabled]="true" label="Disabled"></ui-checkbox>
     <ui-checkbox [checked]="true" [disabled]="true" label="Disabled + checked"></ui-checkbox>
+    <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 </div>

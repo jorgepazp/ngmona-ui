@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const resizableApi: ComponentApiDoc = {
   name: "Resizable",
-  description: "Resizable panel group: N panes (each marked with the `uiResizablePane` directive, projected as plain content) separated by drag handles. Dragging is plain `pointerdown`/`pointermove`/`pointerup` listeners rather than `@angular/cdk/drag-drop`'s `CdkDrag`. `CdkDrag` is built around free transform-based dragging of a single element; it doesn't map cleanly onto \"redistribute a percentage split between two adjacent flex-basis panes while clamping both to their own min/max\" — plain pointer events end up simpler and more direct for this shape of problem. Each handle follows the WAI-ARIA \"separator\" pattern: `role=\"separator\"`, `aria-orientation`, and `aria-valuenow`/`aria-valuemin`/`aria-valuemax` tracking the boundary's position as a percentage of the group. It's a real focusable, keyboard-operable element — Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`, Home/End send it to the group's start/end (as far as the neighboring panes' `minSize`/`maxSize` allow).",
+  description: "Resizable panel group: any number of panes, each marked with the `uiResizablePane` directive, separated by drag handles. Each handle follows the WAI-ARIA separator pattern and is keyboard operable. Left/Right (horizontal) or Up/Down (vertical) nudge the split by `step`. Home and End send it to the group's start or end, within the neighboring panes' `minSize`/`maxSize`.",
   props: [
     {
       name: "direction",

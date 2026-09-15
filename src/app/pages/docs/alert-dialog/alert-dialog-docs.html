@@ -17,6 +17,7 @@
       (confirmed)="defaultOpen.set(false)"
       (cancelled)="defaultOpen.set(false)"
     ></ui-alert-dialog>
+    <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -34,5 +35,6 @@
       (confirmed)="confirmDelete()"
       (cancelled)="dangerOpen.set(false)"
     ></ui-alert-dialog>
+    <docs-code-tabs [html]="dangerHtml" [ts]="dangerTs" />
   </section>
 </div>

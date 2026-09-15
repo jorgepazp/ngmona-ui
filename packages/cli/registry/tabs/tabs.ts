@@ -8,18 +8,12 @@ let nextInstanceId = 0;
 export type TabsOrientation = 'horizontal' | 'vertical';
 
 /**
- * Full WAI-ARIA tabs pattern: `ui-tabs` draws the `role="tablist"` strip itself, reading
- * label/icon/disabled metadata off each projected `ui-tab-panel` child (via `contentChildren`,
- * same injected-parent coordination as `Accordion`/`AccordionItem`); each `TabPanel` renders its
- * own `role="tabpanel"` region only while active, so the panel content stays physically anchored
- * where the caller wrote it in the template instead of being re-parented.
+ * Tab set following the WAI-ARIA tabs pattern. Each projected `ui-tab-panel` child provides its
+ * own label, icon and disabled state, and renders its content only while active.
  *
- * Roving `tabindex` (selected tab is `0`, the rest `-1`) plus Left/Right (or Up/Down when
- * `orientation="vertical"`) and Home/End keyboard navigation between tabs — a hard requirement for
- * a real tabs widget, not optional polish.
- *
- * `active` is a `model<string>`, so it can be left uncontrolled (the first non-disabled panel is
- * auto-selected) or bound with `[(active)]` for a fully controlled tab set.
+ * Navigate between tabs with Left/Right (or Up/Down when `orientation="vertical"`), Home and End.
+ * Leave `active` unset to auto-select the first non-disabled tab, or bind `[(active)]` for a
+ * fully controlled tab set.
  */
 @Component({
   selector: 'ui-tabs',

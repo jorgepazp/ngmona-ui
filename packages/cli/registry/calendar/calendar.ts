@@ -40,22 +40,11 @@ function addMonths(date: Date, amount: number): Date {
 
 /**
  * Month-grid date picker with native forms interop (`ControlValueAccessor`) and a signal-based
- * `[(selected)]` two-way binding for standalone usage — same bridging pattern as `Checkbox`.
+ * `[(selected)]` two-way binding for standalone usage.
  *
- * Fixes carried over from the original: `canSelectCurrentDay` was inverted (it disabled today
- * instead of enabling it) and was redundant with a second, always-on "no past dates" check inside
- * `selectDay` that ran regardless of `canSelectPreviousDates` — between the two, today's date could
- * never actually be selected no matter which inputs were set. Both are fixed here: a single
- * `isDayDisabled` check handles today/past/future consistently. The next/previous-month buttons
- * also used to render inconsistently when disabled — the "prev" button vanished (`*ngIf`) while
- * "next" tried (and failed, via a nonexistent `text-color-icon-disabled` class) to dim; both
- * are now real `disabled` buttons with matching, working styles. The offset math for the first
- * week of the month has been rewritten as a single modulo expression — the original had an
- * unmodded subtraction that went negative for some `startDayOffset` values, worked around with a
- * second special-cased branch elsewhere in the matrix-building loop. The prev/next-month buttons
- * also carried a `fade` trigger binding that was pure dead weight: both buttons are always
- * mounted (never inserted/removed), so the enter/leave transitions it declared could never fire —
- * removed rather than migrated.
+ * Restrict which dates are selectable with `disabledDates`, `disabledWeekdays`, `enabledDates`,
+ * `canSelectPreviousDates`, `canSelectCurrentDay`, `minEnabledDate` and `maxEnabledDate`. Set
+ * `canDeselectDate` to allow clearing the selection by clicking the selected day again.
  */
 @Component({
   selector: 'ui-calendar',
@@ -206,7 +195,7 @@ export class Calendar implements ControlValueAccessor {
   protected dayClass(date: Date): string {
     const disabled = this.isDisabled() || this.isDayDisabled(date);
     const selected = this.isSelected(date);
-    const classes = [disabled ? 'opacity-30 !cursor-not-allowed' : 'cursor-pointer hover:bg-neutral-500'];
+    const classes = [disabled ? 'opacity-30 !cursor-not-allowed' : 'cursor-pointer hover:bg-surface-light'];
 
     if (selected) {
       classes.push('bg-primary-500 !text-white hover:!bg-primary-500');
@@ -214,7 +203,7 @@ export class Calendar implements ControlValueAccessor {
       classes.push('text-danger-500');
     }
     if (this.isToday(date) && !selected) {
-      classes.push('font-bold ring-1 ring-inset ring-primary-500');
+      classes.push('font-semibold text-primary ring-1 ring-inset ring-primary-500');
     }
     return classes.join(' ');
   }

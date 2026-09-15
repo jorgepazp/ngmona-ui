@@ -6,16 +6,11 @@ import { UiTemplateDirective } from '../shared/ui-template.directive';
 let nextId = 0;
 
 /**
- * Single-thumb range slider built on the native `<input type="range">` rather than a hand-built
- * div thumb/track pair, so keyboard support (arrow keys, Home/End, Page Up/Down) and touch
- * dragging come for free from the browser. The filled portion of the track is a decorative
- * absolutely-positioned overlay sitting *behind* the (transparent-track) range input — the input
- * itself stays the actual hit target and focusable element throughout.
+ * Single-thumb range slider built on the native `<input type="range">`, with full keyboard
+ * (arrow keys, Home/End, Page Up/Down) and touch support.
  *
- * `formatValue` drives both the visible value badge and `aria-valuetext`, for sliders where the
- * raw number alone isn't self-explanatory (e.g. `(v) => `$${v}`` for a currency slider, or a
- * duration formatter). Follows `Input`'s id-generation (`nextId` counter + `id` override) and
- * label/caption `UiTemplateDirective` slot conventions.
+ * Use `formatValue` to customize the visible value badge and `aria-valuetext` for values that
+ * aren't self-explanatory as a raw number, for example a currency or duration formatter.
  */
 @Component({
   selector: 'ui-slider',

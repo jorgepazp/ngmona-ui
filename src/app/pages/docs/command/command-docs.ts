@@ -13,16 +13,17 @@ import {
 } from '@lucide/angular';
 import { Command, type CommandGroupDef } from '../../../registry/command/command';
 import { ApiTable } from '../../../docs-ui/api-table/api-table';
+import { CodeTabs } from '../../../docs-ui/code-tabs/code-tabs';
 import { commandApi } from '../../../registry/command/command.api';
 
 /**
  * The component itself is a controlled, focused piece (just `[(open)]` + `groups` + `selected`).
- * Wiring a global "⌘K / Ctrl+K opens it from anywhere" shortcut is left to the consuming page —
+ * Wiring a global "Cmd+K / Ctrl+K opens it from anywhere" shortcut is left to the consuming page;
  * this `@HostListener` is that example.
  */
 @Component({
   selector: 'docs-command',
-  imports: [Command, ApiTable],
+  imports: [Command, ApiTable, CodeTabs],
   templateUrl: './command-docs.html',
 })
 export default class CommandDocs {
@@ -69,4 +70,44 @@ export default class CommandDocs {
   protected onSelected(value: unknown): void {
     this.lastSelected.set(`${value}`);
   }
+
+  protected readonly basicHtml = `<button type="button" (click)="open.set(true)">Open command palette</button>
+
+<ui-command [(open)]="open" [groups]="groups" (selected)="onSelected($event)"></ui-command>`;
+
+  protected readonly basicTs = `import { Component, HostListener, signal } from '@angular/core';
+import { LucideFileText, LucideMail } from '@lucide/angular';
+import { Command, type CommandGroupDef } from './ui/command/command';
+
+@Component({
+  selector: 'app-command-menu',
+  imports: [Command],
+  templateUrl: './command-menu.html',
+})
+export class CommandMenu {
+  open = signal(false);
+
+  groups: CommandGroupDef[] = [
+    {
+      label: 'Actions',
+      items: [
+        { label: 'New file', value: 'new-file', icon: LucideFileText, keywords: ['create', 'document'] },
+        { label: 'Invite member', value: 'invite', icon: LucideMail, keywords: ['email', 'team'] },
+      ],
+    },
+  ];
+
+  // Open the palette from anywhere with Cmd+K / Ctrl+K.
+  @HostListener('document:keydown', ['$event'])
+  onGlobalKeydown(event: KeyboardEvent): void {
+    const isShortcut = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k';
+    if (!isShortcut) return;
+    event.preventDefault();
+    this.open.set(!this.open());
+  }
+
+  onSelected(value: unknown): void {
+    console.log('selected', value);
+  }
+}`;
 }

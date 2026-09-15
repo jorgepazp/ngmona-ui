@@ -23,7 +23,6 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { label: 'File Upload', path: 'file-upload' },
   { label: 'Input', path: 'input' },
   { label: 'Input Group', path: 'input-group' },
-  { label: 'Label', path: 'label' },
   { label: 'Link', path: 'link' },
   { label: 'Modal', path: 'modal' },
   { label: 'Notification', path: 'notification' },

@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../../docs-ui/api-table/api-table';
 
 export const tabPanelApi: ComponentApiDoc = {
   name: "TabPanel",
-  description: "Single panel of a `ui-tabs`. Must be a direct child of `<ui-tabs>` — the parent reads `label`/ `icon`/`disabled`/a `label` template off this component to draw its own tab strip button (same injected-parent pattern as `AccordionItem`), while this component renders only its own `role=\"tabpanel\"` region, and only while active — inactive panels aren't mounted at all.",
+  description: "Single panel of a `ui-tabs`. Must be a direct child of `ui-tabs`; the parent reads `label`, `icon` and `disabled` off this component to draw its tab strip button. Only the active panel is rendered.",
   props: [
     {
       name: "value",

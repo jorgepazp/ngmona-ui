@@ -19,17 +19,10 @@ import { UiTemplateDirective } from '../shared/ui-template.directive';
 let nextId = 0;
 
 /**
- * Search box built from `Input`'s own conventions (id-generation counter, label/caption
- * `UiTemplateDirective` slots, the exact same `<input>` border/focus/disabled classes) rather
- * than nesting `Input` as a child component. Nesting would need to reach into `Input`'s internal
- * DOM to place a trailing clear button next to its already-hardcoded left search icon — Angular's
- * view encapsulation doesn't allow that without `::ng-deep`, so this owns its template instead.
+ * Search box with a leading search icon and a clear button that appears once there's text.
  *
- * `role="search"` on the wrapper, a real `<button>` clear ("x") that only renders once there's
- * text, and a `search` output debounced (default 300ms, `debounceMs` overridable) via a plain
- * `setTimeout`/`effect()` pair — no rxjs, matching how this batch of components avoids pulling
- * rxjs into anything that doesn't already depend on it. Clearing emits immediately, bypassing the
- * debounce, since it's an explicit user action rather than mid-typing input.
+ * `search` emits the current value `debounceMs` after the user stops typing. Clearing emits
+ * immediately, bypassing the debounce.
  */
 @Component({
   selector: 'ui-search-input',

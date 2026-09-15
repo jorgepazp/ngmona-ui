@@ -11,6 +11,7 @@
       <ui-button variant="tertiary">Tertiary</ui-button>
       <ui-button variant="icon" [icon]="heartIcon" ariaLabel="Like"></ui-button>
     </div>
+    <docs-code-tabs [html]="variantsHtml" [ts]="variantsTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -20,6 +21,7 @@
       <ui-button [loading]="true">Loading</ui-button>
       <ui-button [icon]="downloadIcon" iconPos="left">With icon</ui-button>
     </div>
+    <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -30,6 +32,7 @@
       <ui-button size="default">Default</ui-button>
       <ui-button size="xl">Extra large</ui-button>
     </div>
+    <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
 
   <section class="flex flex-col gap-3 bg-neutral-500 p-4 rounded">
@@ -39,5 +42,6 @@
       <ui-button variant="secondary" [inverse]="true">Secondary</ui-button>
       <ui-button variant="tertiary" [inverse]="true">Tertiary</ui-button>
     </div>
+    <docs-code-tabs [html]="inverseHtml" [ts]="inverseTs" />
   </section>
 </div>

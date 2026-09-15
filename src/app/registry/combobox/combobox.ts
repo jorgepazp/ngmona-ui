@@ -20,18 +20,14 @@ import { FloatingPanel } from '../shared/floating-panel';
 let nextId = 0;
 
 /**
- * Single-select combobox: a text-input trigger (instead of `Select`'s button trigger) that
- * filters its option list as you type, but still only lets you land on one of the supplied
- * options — free text you don't select from the list is never committed as `value`. For
- * unconstrained free text with suggestions, use `Autocomplete` instead.
+ * Single-select combobox with a searchable, filterable trigger input, unlike `Select`'s button
+ * trigger.
  *
- * Positioned with `FloatingPanel` (CDK Overlay) rather than `Select`'s manual absolute
- * positioning. Follows the same `optionLabel`/`optionValue` accessor-function shape as `Select`
- * so option data (plain objects, or primitives) works identically between the two.
+ * Only lets you commit one of the supplied `options` as `value`; typed text that doesn't match
+ * an option is never committed. Use `Autocomplete` instead for free text with suggestions.
  *
- * The displayed input text ("query") is a separate signal from the committed `value`: while the
- * panel is open it reflects whatever the user is typing/filtering with; once the panel closes it
- * resyncs to the label of the committed value (or empties out if nothing is selected).
+ * Options can be plain values or objects. When using objects, set `optionLabel`, `optionValue`
+ * and `optionDisabledKey` to the property names to read from each option.
  */
 @Component({
   selector: 'ui-combobox',

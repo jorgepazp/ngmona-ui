@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const tooltipApi: ComponentApiDoc = {
   name: "Tooltip",
-  description: "Floating tooltip panel. Not meant to be dropped into a template directly — `TooltipDirective` creates and positions instances of this on demand. Kept as its own component (rather than inlined into the directive) so it can also be shown/positioned manually if ever needed. The original panel carried a set of `before:border-*`/`before:w-0`/`before:h-0` classes meant to draw a CSS border-triangle caret, but the caret is actually rendered by the separate rotated `<span>` square below — those `before:*` utilities were dead weight (a 0×0, invisible pseudo element) left over from an earlier implementation, so they're dropped here. The position class also carried static `left-*`/`top-*`/`bottom-*` utilities that did nothing: this element's position comes from the `[style.left]`/`[style.top]` bindings the directive sets, and an inline style always wins over a class for the same CSS property, so those utilities never had any effect either. Both are removed for a much shorter, honest class list.",
+  description: "Floating tooltip panel used internally by the `uiTooltip` directive, which creates and positions instances of it on demand. Not meant to be used directly in a template; apply `uiTooltip` to an element instead.",
   props: [
     {
       name: "text",

@@ -5,9 +5,11 @@ type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'icon';
 type ButtonSize = 'default' | 'xl' | 'md' | 'sm';
 
 /**
- * Button with primary/secondary/tertiary/icon-only variants, loading and inverse states.
- * Colors resolve through the `--color-primary-*` theme tokens (see styles.css) — override
- * those CSS variables to reskin every button at once.
+ * Button with `primary`, `secondary`, `tertiary` and `icon`-only variants, plus loading and
+ * inverse states.
+ *
+ * Colors are driven by the `--color-primary-*` theme tokens; override those CSS variables to
+ * restyle every button at once.
  */
 @Component({
   selector: 'ui-button',
@@ -55,7 +57,7 @@ export class Button {
 
   protected readonly buttonClass = computed(() => {
     const variant = this.variant();
-    const base = `select-none flex font-medium justify-center relative items-center transition-all cursor-pointer disabled:cursor-not-allowed rounded h-min whitespace-nowrap ${this.sizeClass()} !outline outline-transparent !outline-2 outline-offset-2`;
+    const base = `select-none flex font-medium justify-center relative items-center transition-colors cursor-pointer disabled:cursor-not-allowed rounded h-min whitespace-nowrap ${this.sizeClass()} !outline outline-transparent !outline-2 outline-offset-2  `;
 
     switch (variant) {
       case 'secondary':
@@ -63,8 +65,8 @@ export class Button {
       case 'tertiary':
         return `${base} !border-none ${this.tertiaryClass()}`;
       case 'icon':
-        return `${base} bg-neutral-500 !border-none !rounded-full min-w-fit !w-[32px] !h-[32px] active:!outline-transparent [&:not(:active)]:focus:!outline-info-500 ${
-          this.disabled() ? 'text-neutral-800' : 'text-info-500 hover:bg-neutral-100 hover:text-info-300'
+        return `${base} bg-neutral-100 !border-none !rounded-full min-w-fit !w-[32px] !h-[32px] active:!outline-transparent [&:not(:active)]:focus:!outline-accent-500  ${
+          this.disabled() ? 'text-neutral-200' : 'text-neutral-500 hover:bg-accent-100 hover:text-accent-500'
         }`;
       case 'primary':
       default:
@@ -93,7 +95,7 @@ export class Button {
     if (this.disabled()) {
       return this.inverse()
         ? 'bg-surface-white/25 text-white/60'
-        : '!bg-neutral-500 !text-neutral-800 !border-none';
+        : 'bg-neutral-100 text-neutral-300 border-none';
     }
     return this.inverse()
       ? 'bg-white text-primary-500 hover:bg-white/85 active:bg-white active:!outline-transparent [&:not(:active)]:focus:!outline-white'
@@ -109,7 +111,7 @@ export class Button {
     if (this.inverse()) {
       return '!border-solid !border border-white bg-surface-white/0 text-white hover:bg-surface-white/15 active:bg-surface-white/10 active:!outline-transparent [&:not(:active)]:focus:outline-white';
     }
-    return '!border border-solid !border-primary-500 text-primary-100 bg-primary-300/0 hover:bg-primary-300/5 active:bg-primary-300/10 active:!outline-transparent [&:not(:active)]:focus:!outline-primary-500';
+    return '!border border-solid !border-primary-500 text-primary-500 bg-primary-300/0 hover:bg-primary-300/5 active:bg-primary-300/10 active:!outline-transparent [&:not(:active)]:focus:!outline-primary-500';
   }
 
   private tertiaryClass(): string {

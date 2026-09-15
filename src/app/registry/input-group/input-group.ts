@@ -3,18 +3,13 @@ import { Component, computed, input } from '@angular/core';
 type InputGroupState = 'success' | 'warning' | 'error' | null;
 
 /**
- * Layout primitive that visually joins prefix/suffix addons (icons, text, buttons) with a
- * projected input into one bordered unit — e.g. `$` + amount + `.00`, or a search box + "Go"
- * button. It is *not* a form control: it carries no value, implements no `ControlValueAccessor`,
- * and needs no special ARIA beyond whatever the projected children already provide.
+ * Layout primitive that visually joins prefix and suffix addons (icons, text, buttons) with a
+ * projected input into one bordered unit, for example a currency symbol plus an amount field, or
+ * a search box with a "Go" button.
  *
- * Border/focus styling reacts to the focus state of anything inside the group via
- * `:focus-within`, so the projected control doesn't need its own border/outline — strip those off
- * (see the docs page for the exact classes) so only the group's border shows.
- *
- * Addons are plain content projection rather than named `UiTemplateDirective` slots: `[prefix]`/
- * `[suffix]` attribute selectors are simpler for "arbitrary markup on either side of an input" and
- * don't need the indirection of a named `<ng-template>`.
+ * Project addons with the `prefix` and `suffix` attributes on either side of the input. The
+ * group's border reacts to focus of anything inside it; remove the border and outline from the
+ * projected input so only the group's border shows.
  */
 @Component({
   selector: 'ui-input-group',
@@ -38,7 +33,7 @@ export class InputGroup {
           : state === 'error'
             ? '!border-danger-500 focus-within:!border-danger-500 '
             : '';
-    const disabledClass = this.disabled() ? 'opacity-60 pointer-events-none bg-surface-disabled ' : '';
+    const disabledClass = this.disabled() ? 'opacity-60 pointer-events-none bg-surface-neutral ' : '';
     return stateClass + disabledClass;
   });
 }

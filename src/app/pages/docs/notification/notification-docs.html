@@ -4,7 +4,11 @@
   <app-api-table [doc]="api" />
 
   <section class="flex flex-col gap-3">
-    <h2 class="text-label-lg text-text-subdued">Types (auto-dismiss after 3s)</h2>
+    <h2 class="text-label-lg text-text-subdued">Types (queued FIFO, auto-dismiss after 3s)</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Only one notification is ever on screen. Clicking several buttons in a row queues them up
+      and plays them back one at a time, in the order they were triggered.
+    </p>
     <div class="flex flex-wrap items-center gap-3">
       <ui-button size="sm" (clicked)="trigger('info')">Info</ui-button>
       <ui-button size="sm" (clicked)="trigger('success')">Success</ui-button>
@@ -15,47 +19,13 @@
   </section>
 
   <ui-notification
-    [show]="activeType() === 'info'"
-    type="info"
+    [show]="show()"
+    [type]="currentType() ?? 'info'"
     position="top-center"
-    (closed)="activeType.set(null)"
+    (closed)="dismiss()"
   >
-    <span class="text-label-sm">Heads up — this is an info notification.</span>
+    <span class="text-label-sm">{{ currentMessage() }}</span>
   </ui-notification>
 
-  <ui-notification
-    [show]="activeType() === 'success'"
-    type="success"
-    position="top-center"
-    (closed)="activeType.set(null)"
-  >
-    <span class="text-label-sm">Saved successfully.</span>
-  </ui-notification>
-
-  <ui-notification
-    [show]="activeType() === 'warning'"
-    type="warning"
-    position="top-center"
-    (closed)="activeType.set(null)"
-  >
-    <span class="text-label-sm">Double-check that before continuing.</span>
-  </ui-notification>
-
-  <ui-notification
-    [show]="activeType() === 'error'"
-    type="error"
-    position="top-center"
-    (closed)="activeType.set(null)"
-  >
-    <span class="text-label-sm">Something went wrong.</span>
-  </ui-notification>
-
-  <ui-notification
-    [show]="activeType() === 'neutral'"
-    type="neutral"
-    position="top-center"
-    (closed)="activeType.set(null)"
-  >
-    <span class="text-label-sm">A neutral, low-emphasis notification.</span>
-  </ui-notification>
+  <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
 </div>

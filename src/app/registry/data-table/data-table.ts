@@ -25,21 +25,18 @@ export interface DataTableSort {
 }
 
 /**
- * Sortable, paginated, selectable table driven by a column config, with per-column custom cell
- * and header templates (`<ng-template uiTemplate="cell-<key>" let-row let-column="column">`,
- * `uiTemplate="header-<key>"`, `uiTemplate="empty"`) via the existing `UiTemplateDirective`.
+ * Sortable, paginated, selectable table driven by a column config. Customize rendering per
+ * column with `uiTemplate="cell-<key>"` and `uiTemplate="header-<key>"`, and the empty state with
+ * `uiTemplate="empty"`.
  *
- * Two modes, switched by whether `totalCount` is provided:
- * - **Client-side** (default): pass the full dataset via `data`; sorting/filtering/paging all
- *   happen in-memory against it.
- * - **Controlled**: pass `totalCount` (the full row count on the server) and `data` containing
- *   only the *current page's* rows. The table stops slicing/sorting/filtering internally and
- *   instead just reflects `page`/`sortState`/`globalFilter` changes — read them (they're all
- *   `model()`s, so `(pageChange)`/`(sortStateChange)`/`(globalFilterChange)` or `[(page)]` etc.
- *   work) and refetch from the backend.
+ * By default the table runs in client-side mode: pass the full dataset via `data`, and sorting,
+ * filtering and paging all happen in memory. Set `totalCount` to switch to controlled mode: pass
+ * only the current page's rows in `data`, and the table reflects `page`, `sortState` and
+ * `globalFilter` changes instead of slicing or sorting internally, so you can refetch from the
+ * backend.
  *
- * Row selection identity is decided by `rowKey` (defaults to the row object itself via reference
- * equality) — pass e.g. `(row) => row.id` for rows that get recreated across page fetches.
+ * Set `rowKey` to extract a stable identity per row, for example `(row) => row.id`, when rows are
+ * recreated across page fetches. It defaults to the row object itself.
  */
 @Component({
   selector: 'ui-data-table',

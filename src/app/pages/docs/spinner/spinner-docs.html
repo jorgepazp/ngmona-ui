@@ -10,6 +10,7 @@
       <ui-spinner [size]="36"></ui-spinner>
       <ui-spinner [size]="52"></ui-spinner>
     </div>
+    <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
 
   <section class="flex flex-col gap-3">
@@ -19,10 +20,12 @@
       <ui-spinner [size]="36" classNames="text-accent-500"></ui-spinner>
       <ui-spinner [size]="36" classNames="text-neutral-300"></ui-spinner>
     </div>
+    <docs-code-tabs [html]="colorHtml" [ts]="colorTs" />
   </section>
 
   <section class="flex flex-col gap-3">
     <h2 class="text-label-lg text-text-subdued">Custom label</h2>
     <ui-spinner [size]="36" ariaLabel="Saving changes"></ui-spinner>
+    <docs-code-tabs [html]="labelHtml" [ts]="labelTs" />
   </section>
 </div>
