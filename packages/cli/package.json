@@ -18,13 +18,11 @@
     "build": "node scripts/build-registry.mjs && node scripts/build-base-tokens.mjs && node scripts/bundle.mjs",
     "prepack": "npm run build"
   },
-  "dependencies": {
+  "devDependencies": {
     "@ngmona-ui/color": "*",
     "@clack/prompts": "^0.11.0",
     "commander": "^13.1.0",
-    "culori": "^4.0.1"
-  },
-  "devDependencies": {
+    "culori": "^4.0.1",
     "esbuild": "^0.25.0"
   }
 }
