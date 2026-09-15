@@ -1,10 +1,10 @@
 <div [class]="'flex flex-col ' + classNames()">
   @if (labelTemplate(); as tpl) {
-    <div class="mb-0.5 text-neutral-500 text-xs font-medium flex justify-between">
+    <div class="mb-0.5 text-text-subdued text-xs font-medium flex justify-between">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (label()) {
-    <label [attr.for]="resolvedId()" class="mb-0.5 text-neutral-500 text-xs font-medium block">{{ label() }}</label>
+    <label [attr.for]="resolvedId()" class="mb-0.5 text-text-primary text-xs font-medium block">{{ label() }}</label>
   }
 
   <ui-input-group [disabled]="isDisabled()" [state]="state()">
@@ -12,7 +12,7 @@
       prefix
       type="button"
       aria-label="Decrease"
-      class="flex items-center justify-center w-6 h-6 shrink-0 text-neutral-900 disabled:text-neutral-800 disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-300 transition-colors"
+      class="flex items-center justify-center w-6 h-6 shrink-0 text-text-primary disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer hover:bg-surface-light transition-colors"
       [disabled]="!canDecrement()"
       (click)="decrement()"
     >
@@ -23,7 +23,7 @@
       [id]="resolvedId()"
       [name]="resolvedId()"
       type="number"
-      class="w-16 min-w-0 text-center !px-1 !py-1 text-label-md text-neutral-500 h-6 border-none outline-none bg-transparent placeholder:text-neutral-300 placeholder:font-regular font-medium disabled:text-neutral-100 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      class="w-16 min-w-0 text-center !px-1 !py-1 text-label-md text-text-subdued h-6 border-none outline-none bg-transparent placeholder:text-text-subdued placeholder:font-regular font-medium disabled:text-text-disabled [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       [value]="value()"
       [disabled]="isDisabled()"
       [placeholder]="placeholder()"
@@ -39,7 +39,7 @@
       suffix
       type="button"
       aria-label="Increase"
-      class="flex items-center justify-center w-6 h-6 shrink-0 text-neutral-900 disabled:text-neutral-800 disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-300 transition-colors"
+      class="flex items-center justify-center w-6 h-6 shrink-0 text-text-primary border-l border-border-neutral disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer hover:bg-surface-light transition-colors"
       [disabled]="!canIncrement()"
       (click)="increment()"
     >
@@ -48,10 +48,10 @@
   </ui-input-group>
 
   @if (captionTemplate(); as tpl) {
-    <div [id]="captionId()" class="mt-0.5 text-xs text-neutral-300">
+    <div [id]="captionId()" class="mt-0.5 text-xs text-text-subdued">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (caption()) {
-    <small [id]="captionId()" class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+    <small [id]="captionId()" class="mt-0.5 text-xs text-text-subdued block">{{ caption() }}</small>
   }
 </div>
