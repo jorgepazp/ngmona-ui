@@ -3,25 +3,20 @@ FROM node:22.22.3 AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-
 RUN npm ci
 
 COPY . .
-
 RUN npm run build
 
-# Debug: mostrar qué generó Angular
-RUN find /app/dist -maxdepth 3 -type f | sort
 
+FROM node:22.22.3-alpine
 
-FROM nginx:alpine
+WORKDIR /app
 
-RUN rm -rf /usr/share/nginx/html/*
+RUN npm install -g serve
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-COPY --from=build /app/dist/ui-kit/ /usr/share/nginx/html/
+COPY --from=build /app/dist/ui-kit ./dist
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "dist", "-l", "80"]
