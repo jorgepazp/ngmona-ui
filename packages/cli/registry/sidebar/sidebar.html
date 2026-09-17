@@ -16,13 +16,13 @@
   </header>
 
   <div class="flex flex-1 min-h-0 relative ">
-    <aside [class]="desktopAsideClass() + ' max-h-dvh flex-col shrink-0 border-r sticky top-10 h-min border-divider overflow-y-auto'" [style.width]="width()">
+    <aside [class]="desktopAsideClass() + ' h-dvh flex-col shrink-0 border-r sticky top-0 border-divider'" [style.width]="width()">
       @if (headerTemplate(); as h) {
         <div class="px-4 pt-4 pb-2">
           <ng-container [ngTemplateOutlet]="h"></ng-container>
         </div>
       }
-      <nav [class]="'flex-1 px-2 ' + navClassNames()" [attr.aria-label]="title() || 'Main'">
+      <nav [class]="'flex-1 min-h-0 overflow-y-auto px-2 ' + navClassNames()" [attr.aria-label]="title() || 'Main'">
         @if (contentTemplate(); as c) {
           <ng-container [ngTemplateOutlet]="c"></ng-container>
         }

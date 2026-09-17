@@ -1,6 +1,8 @@
 import {
   Component,
   ElementRef,
+  TemplateRef,
+  ViewContainerRef,
   computed,
   contentChildren,
   effect,
@@ -12,24 +14,27 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { collapseEnter, collapseLeave } from '../shared/animations';
+import { FloatingPanel } from '../shared/floating-panel';
 import { UiTemplateDirective } from '../shared/ui-template.directive';
 
 /**
  * Trigger button + floating panel, with named `button`/`menu` templates (via `uiTemplate`) for
  * custom trigger content and menu items — falls back to plain text if omitted.
  *
+ * Positioned with `FloatingPanel` (flip/shift, repositions on scroll), same as `Popover` and
+ * `Combobox` — the panel is rendered through a CDK overlay rather than as a DOM child of the
+ * trigger, so it's never clipped or forced into scroll by an overflow/scrolling ancestor.
+ *
  * Menu semantics: trigger has `aria-haspopup="menu"` + `aria-expanded`, the panel has
- * `role="menu"`, closes on outside click and Escape (returning focus to the trigger), and
- * Up/Down/Home/End arrow keys move focus between elements marked `role="menuitem"` inside the
+ * `role="menu"`, closes on outside click and Escape (returning focus to the trigger on Escape),
+ * and Up/Down/Home/End arrow keys move focus between elements marked `role="menuitem"` inside the
  * panel content the caller provides.
  */
 @Component({
   selector: 'ui-dropdown-menu',
   imports: [NgTemplateOutlet],
   templateUrl: './dropdown-menu.html',
-  host: {
-    '(document:click)': 'onDocumentClick($event)',
-  },
+  providers: [FloatingPanel],
 })
 export class DropdownMenu {
   protected readonly collapseEnter = collapseEnter;
@@ -41,7 +46,7 @@ export class DropdownMenu {
   readonly disableMenu = input(false);
   /** Whether the panel is visible. Two-way bindable via `[(open)]`. */
   readonly open = model(false);
-  /** Extra utility classes appended to the trigger button, for one-off overrides. */
+  /** Extra utility classes appended to the floating panel element. */
   readonly classNames = input('');
   /** Accessible label applied to the trigger button. */
   readonly ariaLabel = input('Menu');
@@ -53,9 +58,12 @@ export class DropdownMenu {
   /** Fires on every trigger click, even when `disableMenu` is `true` and no panel opens. */
   readonly buttonClicked = output<void>();
 
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panel');
+  private readonly floatingPanel = inject(FloatingPanel);
+  private readonly viewContainerRef = inject(ViewContainerRef);
+
   private readonly triggerRef = viewChild<ElementRef<HTMLButtonElement>>('trigger');
+  private readonly panelTemplate = viewChild<TemplateRef<unknown>>('panel');
+  private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panelRoot');
 
   private readonly templates = contentChildren(UiTemplateDirective);
   protected readonly buttonTemplate = computed(
@@ -66,10 +74,34 @@ export class DropdownMenu {
   );
 
   constructor() {
-    // Move focus onto the first menu item whenever the panel opens, so arrow-key navigation
-    // works immediately without an extra Tab/click.
+    // Bridge `open` to FloatingPanel — same pattern as Popover/Combobox.
     effect(() => {
-      if (this.open()) {
+      const isOpen = this.open();
+      const trigger = this.triggerRef()?.nativeElement;
+      const panel = this.panelTemplate();
+      if (!trigger || !panel) return;
+
+      if (isOpen) {
+        this.floatingPanel.open(trigger, panel, this.viewContainerRef, { panelClass: this.classNames() });
+      } else {
+        this.floatingPanel.close();
+      }
+    });
+
+    // Reflect FloatingPanel closing itself (outside click) back into our own state. Escape is
+    // handled and stopped in onPanelKeydown below so it never reaches here, since that path also
+    // needs to return focus to the trigger.
+    effect(() => {
+      if (!this.floatingPanel.isOpen() && this.open()) {
+        this.open.set(false);
+        this.closed.emit();
+      }
+    });
+
+    // Move focus onto the first menu item once the panel is actually attached, so arrow-key
+    // navigation works immediately without an extra Tab/click.
+    effect(() => {
+      if (this.floatingPanel.isOpen()) {
         queueMicrotask(() => {
           const items = this.menuItems();
           (items[0] ?? this.panelRef()?.nativeElement)?.focus();
@@ -96,13 +128,6 @@ export class DropdownMenu {
     this.closed.emit();
     if (returnFocus) {
       this.triggerRef()?.nativeElement.focus();
-    }
-  }
-
-  protected onDocumentClick(event: MouseEvent): void {
-    if (!this.open()) return;
-    if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.close();
     }
   }
 
@@ -135,6 +160,10 @@ export class DropdownMenu {
         break;
       case 'Escape':
         event.preventDefault();
+        // Stop it from also reaching FloatingPanel's own document-level Escape listener — we
+        // handle the close ourselves so we can return focus to the trigger, which FloatingPanel's
+        // generic close (shared with Popover/Combobox) doesn't do.
+        event.stopPropagation();
         this.close(true);
         break;
       case 'Tab':

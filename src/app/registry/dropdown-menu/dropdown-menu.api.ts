@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const dropdownMenuApi: ComponentApiDoc = {
   name: "DropdownMenu",
-  description: "Trigger button + floating panel, with named `button`/`menu` templates (via `uiTemplate`) for custom trigger content and menu items — falls back to plain text if omitted. Menu semantics: trigger has `aria-haspopup=\"menu\"` + `aria-expanded`, the panel has `role=\"menu\"`, closes on outside click and Escape (returning focus to the trigger), and Up/Down/Home/End arrow keys move focus between elements marked `role=\"menuitem\"` inside the panel content the caller provides.",
+  description: "Trigger button + floating panel, with named `button`/`menu` templates (via `uiTemplate`) for custom trigger content and menu items — falls back to plain text if omitted. Positioned with `FloatingPanel` (flip/shift, repositions on scroll), same as `Popover` and `Combobox` — the panel is rendered through a CDK overlay rather than as a DOM child of the trigger, so it's never clipped or forced into scroll by an overflow/scrolling ancestor. Menu semantics: trigger has `aria-haspopup=\"menu\"` + `aria-expanded`, the panel has `role=\"menu\"`, closes on outside click and Escape (returning focus to the trigger on Escape), and Up/Down/Home/End arrow keys move focus between elements marked `role=\"menuitem\"` inside the panel content the caller provides.",
   props: [
     {
       name: "disabled",
@@ -35,7 +35,7 @@ export const dropdownMenuApi: ComponentApiDoc = {
       required: false,
       type: "string",
       defaultValue: "''",
-      description: "Extra utility classes appended to the trigger button, for one-off overrides.",
+      description: "Extra utility classes appended to the floating panel element.",
     },
     {
       name: "ariaLabel",

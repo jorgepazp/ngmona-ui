@@ -9,7 +9,8 @@
     "test": "ng test",
     "api-docs": "node scripts/generate-api-docs.mjs",
     "theme:generate": "node scripts/generate-theme.mjs",
-    "registry:build": "node packages/cli/scripts/build-registry.mjs"
+    "registry:build": "node packages/cli/scripts/build-registry.mjs",
+    "generate": "npm run api-docs && npm run registry:build"
   },
   "private": true,
   "packageManager": "npm@10.9.8",

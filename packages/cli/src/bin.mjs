@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
 import { initCommand } from './commands/init.mjs';
 import { addCommand } from './commands/add.mjs';
+import { updateCommand } from './commands/update.mjs';
 import { listCommand } from './commands/list.mjs';
 import { themeCommand } from './commands/theme.mjs';
 import { ROLES } from '@ngmona-ui/color';
@@ -34,6 +35,16 @@ program
   .option('--dry-run', 'show what would happen without writing anything', false)
   .action((components, opts) =>
     addCommand({ cwd: process.cwd(), packageRoot, names: components, yes: opts.yes, dryRun: opts.dryRun }),
+  );
+
+program
+  .command('update')
+  .description('Update installed components to match the current registry, without overwriting local edits')
+  .argument('[components...]', 'component names to update (defaults to everything installed)', [])
+  .option('-y, --yes', 'also overwrite files with local edits, discarding those edits', false)
+  .option('--dry-run', 'show what would happen without writing anything', false)
+  .action((components, opts) =>
+    updateCommand({ cwd: process.cwd(), packageRoot, names: components, yes: opts.yes, dryRun: opts.dryRun }),
   );
 
 program

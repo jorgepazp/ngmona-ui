@@ -52,7 +52,9 @@ export class FloatingPanel implements OnDestroy {
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       hasBackdrop: false,
       width: config?.matchOriginWidth ? origin.getBoundingClientRect().width : undefined,
-      panelClass: config?.panelClass,
+      // CDK applies each entry via classList.add, which throws on a token containing spaces —
+      // split a Tailwind-style class string into individual tokens rather than passing it whole.
+      panelClass: config?.panelClass?.split(/\s+/).filter(Boolean),
     });
 
     this.overlayRef.attach(new TemplatePortal(template, viewContainerRef));
