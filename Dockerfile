@@ -15,7 +15,7 @@ WORKDIR /app
 
 RUN npm install -g serve
 
-COPY --from=build /app/dist/ui-kit ./dist
+COPY --from=build /app/dist/ui-kit/browser ./dist
 
 EXPOSE 80
 
