@@ -5,6 +5,7 @@ import { loadRegistry, resolveWithDependencies, registrySourceDir } from '../lib
 import { hashContent, listFilesRecursive } from '../lib/fs-utils.js';
 import { readConfig, writeConfig } from '../lib/config.js';
 import { installPackages, readConsumerDependencyNames } from '../lib/pkg-manager.js';
+import { createPrefixTransform, logPrefixReport, syncThemeFiles } from '../lib/prefix/index.js';
 
 const SUMMARY_HEADINGS = {
   updated: 'Updated',
@@ -84,6 +85,16 @@ export async function updateCommand(ctx) {
     p.log.info(`Also installing new dependencies: ${newDeps.map((e) => e.name).join(', ')}`);
   }
 
+  // With a Tailwind prefix, "the registry's version" of a file means its prefixed rewrite — that's
+  // what `add` wrote and hashed, so it's what every comparison below has to use too.
+  let prefixTransform;
+  try {
+    prefixTransform = await createPrefixTransform({ cwd, packageRoot, config });
+  } catch (error) {
+    p.cancel(error.message);
+    return;
+  }
+
   const destRoot = join(cwd, config.aliases.components);
   const installedUpdate = { ...config.installed };
   const allNpmDeps = new Set();
@@ -102,7 +113,8 @@ export async function updateCommand(ctx) {
     for (const relPath of registryFiles) {
       const srcPath = join(srcDir, relPath);
       const destPath = join(destDir, relPath);
-      const newContent = readFileSync(srcPath);
+      const rawContent = readFileSync(srcPath);
+      const newContent = prefixTransform ? prefixTransform.transform(`${entry.name}/${relPath}`, rawContent) : rawContent;
       const newHash = hashContent(newContent);
       const baseHash = baseHashByPath.get(relPath);
       const localExists = existsSync(destPath);
@@ -176,6 +188,9 @@ export async function updateCommand(ctx) {
     }
     for (const dep of entry.npmDependencies) allNpmDeps.add(dep);
   }
+
+  if (prefixTransform) logPrefixReport(prefixTransform, { detailed: dryRun });
+  if (prefixTransform) syncThemeFiles({ cwd, config, prefix: prefixTransform.prefix, dryRun });
 
   const consumerDeps = readConsumerDependencyNames(cwd);
   const missingNpmDeps = [...allNpmDeps].filter((dep) => !consumerDeps.has(dep));

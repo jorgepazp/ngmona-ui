@@ -16,15 +16,16 @@ export function writeConfig(cwd, config) {
 }
 
 /**
- * @param {{ themeCssPath: string, tokensCssPath: string, stylesheetPath: string, componentsPath: string, seeds: Record<string,string> }} opts
+ * @param {{ themeCssPath: string, tokensCssPath: string, stylesheetPath: string, componentsPath: string, seeds: Record<string,string>, prefix?: string }} opts
  */
-export function createConfig({ themeCssPath, tokensCssPath, stylesheetPath, componentsPath, seeds }) {
+export function createConfig({ themeCssPath, tokensCssPath, stylesheetPath, componentsPath, seeds, prefix }) {
   return {
     style: 'default',
     tailwind: {
       css: stylesheetPath,
       themeCss: themeCssPath,
       tokensCss: tokensCssPath,
+      ...(prefix ? { prefix } : {}),
     },
     aliases: {
       components: componentsPath,

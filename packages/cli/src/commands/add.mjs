@@ -4,8 +4,12 @@ import { loadRegistry, resolveWithDependencies, registrySourceDir } from '../lib
 import { copyEntry } from '../lib/fs-utils.js';
 import { readConfig, writeConfig } from '../lib/config.js';
 import { installPackages, readConsumerDependencyNames } from '../lib/pkg-manager.js';
+import { createPrefixTransform, logPrefixReport, syncThemeFiles } from '../lib/prefix/index.js';
 
-/** @param {{ cwd: string, packageRoot: string, names: string[], yes: boolean, dryRun: boolean }} ctx */
+/**
+ * @param {{ cwd: string, packageRoot: string, names: string[], yes: boolean, dryRun: boolean }} ctx
+ * @returns {Promise<{ results: Record<string, object[]>, prefixReports?: Map<string, { changes: object[], flags: object[] }> } | undefined>}
+ */
 export async function addCommand(ctx) {
   const { cwd, packageRoot, names, yes, dryRun } = ctx;
   p.intro('ngmona-ui add');
@@ -38,9 +42,18 @@ export async function addCommand(ctx) {
     p.log.info(`Also installing dependencies: ${extra.map((e) => e.name).join(', ')}`);
   }
 
+  let prefixTransform;
+  try {
+    prefixTransform = await createPrefixTransform({ cwd, packageRoot, config });
+  } catch (error) {
+    p.cancel(error.message);
+    return;
+  }
+
   const destRoot = join(cwd, config.aliases.components);
   const allNpmDeps = new Set();
   const installedUpdate = { ...config.installed };
+  const resultsByEntry = {};
 
   for (const entry of resolved) {
     const srcDir = registrySourceDir(packageRoot, entry.name);
@@ -49,6 +62,7 @@ export async function addCommand(ctx) {
     let askedOverwriteAll = null;
     const results = copyEntry(srcDir, destDir, {
       dryRun,
+      transform: prefixTransform && ((relPath, content) => prefixTransform.transform(`${entry.name}/${relPath}`, content)),
       onConflict: (relPath) => {
         if (yes) return true;
         if (askedOverwriteAll !== null) return askedOverwriteAll;
@@ -56,6 +70,7 @@ export async function addCommand(ctx) {
       },
     });
 
+    resultsByEntry[entry.name] = results;
     for (const r of results) {
       if (r.action === 'skipped') {
         p.log.warn(`${entry.name}/${r.path} already exists and differs — skipped (use --yes to overwrite).`);
@@ -69,6 +84,9 @@ export async function addCommand(ctx) {
 
     for (const dep of entry.npmDependencies) allNpmDeps.add(dep);
   }
+
+  if (prefixTransform) logPrefixReport(prefixTransform, { detailed: dryRun });
+  if (prefixTransform) syncThemeFiles({ cwd, config, prefix: prefixTransform.prefix, dryRun });
 
   const consumerDeps = readConsumerDependencyNames(cwd);
   const missingNpmDeps = [...allNpmDeps].filter((dep) => !consumerDeps.has(dep));
@@ -90,4 +108,6 @@ export async function addCommand(ctx) {
       ? `Dry run: would install ${resolved.map((e) => e.name).join(', ')}.`
       : `Installed: ${resolved.map((e) => e.name).join(', ')}.`,
   );
+
+  return { results: resultsByEntry, prefixReports: prefixTransform?.reports };
 }

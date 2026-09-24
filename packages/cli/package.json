@@ -16,7 +16,8 @@
     "build:registry": "node scripts/build-registry.mjs",
     "build:tokens": "node scripts/build-base-tokens.mjs",
     "build": "node scripts/build-registry.mjs && node scripts/build-base-tokens.mjs && node scripts/bundle.mjs",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@ngmona-ui/color": "*",

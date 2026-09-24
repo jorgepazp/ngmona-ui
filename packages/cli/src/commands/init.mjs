@@ -4,13 +4,23 @@ import * as p from '@clack/prompts';
 import { buildTheme, renderThemeColorsBlock, ROLES } from '@ngmona-ui/color';
 import { DEFAULT_SEEDS } from '../lib/default-seeds.js';
 import { createConfig, writeConfig, readConfig } from '../lib/config.js';
+import { PREFIX_PATTERN } from '../lib/prefix/token.js';
+import { prefixThemeReferences } from '../lib/prefix/theme.js';
 
-/** @param {{ cwd: string, packageRoot: string, yes: boolean }} ctx */
+/** @param {{ cwd: string, packageRoot: string, yes: boolean, prefix?: string }} ctx */
 export async function initCommand(ctx) {
   const { cwd, packageRoot } = ctx;
   p.intro('ngmona-ui init');
 
-  if (readConfig(cwd)) {
+  const existingConfig = readConfig(cwd);
+  // Reinitializing keeps a previously configured prefix unless --prefix overrides it.
+  const prefix = ctx.prefix ?? existingConfig?.tailwind?.prefix;
+  if (prefix && !PREFIX_PATTERN.test(prefix)) {
+    p.cancel(`Invalid Tailwind prefix "${prefix}" — Tailwind v4 prefixes are lowercase letters only (e.g. "tw").`);
+    return;
+  }
+
+  if (existingConfig) {
     const proceed = ctx.yes || (await p.confirm({ message: 'ngmona.json already exists — reinitialize?', initialValue: false }));
     if (p.isCancel(proceed) || !proceed) {
       p.cancel('Aborted.');
@@ -63,7 +73,10 @@ export async function initCommand(ctx) {
   const spin = p.spinner();
   spin.start('Generating theme');
   const theme = buildTheme(seeds);
-  const themeCss = renderThemeColorsBlock(theme, ROLES, 'run `ngmona theme` to change your brand colors.');
+  const themeCss = prefixThemeReferences(
+    renderThemeColorsBlock(theme, ROLES, 'run `ngmona theme` to change your brand colors.'),
+    prefix,
+  );
 
   const themeCssAbs = join(cwd, themeCssPath);
   mkdirSync(dirname(themeCssAbs), { recursive: true });
@@ -71,11 +84,13 @@ export async function initCommand(ctx) {
 
   // Radius, letter spacing, typography scale, font weights, shadows — everything that isn't a
   // color and so doesn't depend on a seed. Written once here, never rewritten by `ngmona theme`.
-  const tokensCss = readFileSync(join(packageRoot, 'templates', 'base-tokens.css'), 'utf8');
+  const tokensCss = prefixThemeReferences(readFileSync(join(packageRoot, 'templates', 'base-tokens.css'), 'utf8'), prefix);
   const tokensCssAbs = join(cwd, tokensCssPath);
   mkdirSync(dirname(tokensCssAbs), { recursive: true });
   writeFileSync(tokensCssAbs, tokensCss, 'utf8');
 
+  // Only the theme and token files are imported here, never `@import 'tailwindcss'` itself: that
+  // stays the consumer's own line, which is also where a prefix has to be declared (prefix(tw)).
   const stylesheetAbs = join(cwd, stylesheetPath);
   const importLines = [
     `@import '${relativeImport(stylesheetPath, themeCssPath)}';`,
@@ -94,11 +109,26 @@ export async function initCommand(ctx) {
 
   mkdirSync(join(cwd, componentsPath), { recursive: true });
 
-  const config = createConfig({ themeCssPath, tokensCssPath, stylesheetPath, componentsPath, seeds });
+  if (prefix) warnIfPrefixNotDeclared(stylesheetAbs, stylesheetPath, prefix);
+
+  const config = createConfig({ themeCssPath, tokensCssPath, stylesheetPath, componentsPath, seeds, prefix });
   writeConfig(cwd, config);
   spin.stop('Theme generated');
 
   p.outro(`Done. Wrote ${themeCssPath} and ${tokensCssPath}, updated ${stylesheetPath}, and created ngmona.json.`);
+}
+
+function warnIfPrefixNotDeclared(stylesheetAbs, stylesheetPath, prefix) {
+  const css = readFileSync(stylesheetAbs, 'utf8');
+  const tailwindImport = /@import\s+['"]tailwindcss['"][^;]*;/.exec(css)?.[0];
+  if (!tailwindImport) {
+    p.log.warn(
+      `${stylesheetPath} has no @import 'tailwindcss' — make sure the stylesheet that imports Tailwind ` +
+        `declares the prefix: @import 'tailwindcss' prefix(${prefix});`,
+    );
+  } else if (!new RegExp(`prefix\\(\\s*${prefix}\\s*\\)`).test(tailwindImport)) {
+    p.log.warn(`${stylesheetPath} imports Tailwind without prefix(${prefix}) — change it to: @import 'tailwindcss' prefix(${prefix});`);
+  }
 }
 
 function relativeImport(fromFile, toFile) {

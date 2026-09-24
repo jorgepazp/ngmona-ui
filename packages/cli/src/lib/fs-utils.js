@@ -26,14 +26,16 @@ export function listFilesRecursive(dir) {
 /**
  * Copies every file from `srcDir` into `destDir`, calling `onConflict(relPath)` -> boolean
  * (true = overwrite) when the destination already exists and differs. Returns the list of
- * { path, hash, action } written or skipped.
+ * { path, hash, action } written or skipped. `transform(relPath, content)`, when given, rewrites
+ * each file before it's compared and written (used for the Tailwind prefix).
  */
-export function copyEntry(srcDir, destDir, { onConflict, dryRun } = {}) {
+export function copyEntry(srcDir, destDir, { onConflict, dryRun, transform } = {}) {
   const results = [];
   for (const relPath of listFilesRecursive(srcDir)) {
     const srcPath = join(srcDir, relPath);
     const destPath = join(destDir, relPath);
-    const content = readFileSync(srcPath);
+    const raw = readFileSync(srcPath);
+    const content = transform ? transform(relPath, raw) : raw;
     const hash = hashContent(content);
 
     let action = 'created';

@@ -3,6 +3,8 @@ import { join } from 'node:path';
 import * as p from '@clack/prompts';
 import { buildTheme, renderThemeColorsBlock, ROLES } from '@ngmona-ui/color';
 import { readConfig, writeConfig } from '../lib/config.js';
+import { configuredPrefix } from '../lib/prefix/index.js';
+import { prefixThemeReferences } from '../lib/prefix/theme.js';
 
 /** @param {{ cwd: string, flags: Partial<Record<string,string>> }} ctx */
 export async function themeCommand(ctx) {
@@ -34,7 +36,10 @@ export async function themeCommand(ctx) {
   const spin = p.spinner();
   spin.start('Regenerating theme');
   const theme = buildTheme(seeds);
-  const css = renderThemeColorsBlock(theme, ROLES, 'run `ngmona theme` to change your brand colors.');
+  const css = prefixThemeReferences(
+    renderThemeColorsBlock(theme, ROLES, 'run `ngmona theme` to change your brand colors.'),
+    configuredPrefix(config),
+  );
   writeFileSync(join(cwd, config.tailwind.themeCss), css, 'utf8');
   writeConfig(cwd, { ...config, theme: { seeds } });
   spin.stop('Theme regenerated');
