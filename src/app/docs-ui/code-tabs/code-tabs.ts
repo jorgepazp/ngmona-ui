@@ -5,6 +5,11 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 
+// Highlighting happens in `highlighted()` below. Without this, Prism also runs its own automatic
+// highlightAll() shortly after load, which re-highlights (and adds `language-*` to the <pre> of)
+// only the code blocks that happen to be rendered by then — so a block's styling depended on timing.
+Prism.manual = true;
+
 type CodeLang = 'html' | 'ts';
 
 /**
