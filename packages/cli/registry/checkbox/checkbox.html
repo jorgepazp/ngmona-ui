@@ -2,7 +2,7 @@
   <span class="relative block w-2 h-2 rounded shrink-0 mt-px transition-all" [class]="checked() || indeterminate() ? 'active:shadow-primary-300' : 'active:shadow-neutral-600'">
     <span
       class="absolute transition-opacity w-2 h-2 top-0 z-10 flex items-center justify-center rounded text-surface-white"
-      [class]="(checked() || indeterminate() ? '' : 'opacity-0 text-surface-white') + (isDisabled() ? '!bg-text-disabled' : 'bg-surface-active text-white')"
+      [class]="(checked() || indeterminate() ? '' : 'opacity-0 text-surface-white') + ' ' + (isDisabled() ? '!bg-text-disabled' : 'bg-surface-active text-white')"
       aria-hidden="true"
     >
       <svg [lucideIcon]="indeterminate() ? minusIcon : checkIcon"  [size]="12"></svg>
