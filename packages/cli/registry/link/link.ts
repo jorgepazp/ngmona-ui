@@ -42,7 +42,7 @@ export class Link {
   protected readonly opensNewTab = computed(() => this.target() === '_blank');
 
   protected readonly linkClass = computed(() => {
-    const base = 'inline-flex items-center gap-0.5 font-medium transition-colors';
+    const base = 'inline-flex items-center gap-1 font-semibold transition-colors';
     const underlineClass = {
       hover: 'hover:underline',
       always: 'underline',

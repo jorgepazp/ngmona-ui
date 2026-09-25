@@ -1,5 +1,5 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
-  <div class="flex flex-col gap-2">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
+  <div class="flex flex-col gap-4">
     <h1 class="text-heading-xl text-text-primary">Installation</h1>
     <p class="text-paragraph text-text-subdued">
       ui-kit ships as a component registry, not an npm package. The CLI copies each component's
@@ -8,22 +8,22 @@
     </p>
   </div>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Prerequisites</h2>
-    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+    <ul class="list-disc pl-10 flex flex-col gap-2 text-paragraph-sm text-text-primary">
       <li>Angular 22 or later, using standalone components.</li>
       <li>Tailwind CSS v4 already wired into your build (<code>@import 'tailwindcss';</code> in your global stylesheet).</li>
       <li>Node 18 or later to run the CLI.</li>
     </ul>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">1. Initialize the theme</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Run the init command from the root of your Angular project:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui init</code></pre>
-    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui init</code></pre>
+    <ul class="list-disc pl-10 flex flex-col gap-2 text-paragraph-sm text-text-primary">
       <li>Prompts for a seed color for each role: <code>primary</code>, <code>accent</code>, <code>danger</code>, <code>info</code>, <code>warning</code>, <code>success</code> and <code>neutral</code>.</li>
       <li>Prompts for the path to your global stylesheet (defaults to <code>src/styles.css</code>) and where components should be installed (defaults to <code>src/app/ui</code>).</li>
       <li>Generates a theme stylesheet from those seed colors, adds an <code>@import</code> for it to your global stylesheet, and writes an <code>ngmona.json</code> config file.</li>
@@ -31,22 +31,22 @@
     </ul>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">2. Add components</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Add one or more components by name:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui add button dropdown-menu</code></pre>
-    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui add button dropdown-menu</code></pre>
+    <ul class="list-disc pl-10 flex flex-col gap-2 text-paragraph-sm text-text-primary">
       <li>Copies each component's source files into the components directory recorded in <code>ngmona.json</code>.</li>
       <li>Any npm dependency a component needs (for example <code>@angular/cdk</code> or <code>@lucide/angular</code>) is installed automatically if it is missing.</li>
       <li>Pass <code>-y</code> to overwrite files that already exist, or <code>--dry-run</code> to preview the changes first.</li>
     </ul>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">3. Browse available components</h2>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui list</code></pre>
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui list</code></pre>
     <p class="text-paragraph-sm text-text-subdued">
       Add <code>--installed</code> to list only the components already present in your project.
       The sidebar of this reference lists the same components, each with a live example and its
@@ -54,7 +54,7 @@
     </p>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Using a Tailwind prefix</h2>
     <p class="text-paragraph-sm text-text-subdued">
       If your project already compiles Tailwind with a prefix (for example alongside Bootstrap, so
@@ -62,13 +62,13 @@
       the CLI which prefix you use and every component is installed with it. Your stylesheet keeps
       its own Tailwind import, which is where the prefix is declared:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>/* src/styles.css */
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>/* src/styles.css */
 @import 'tailwindcss' prefix(tw);</code></pre>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui init --prefix tw
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui init --prefix tw
 
 // or, in an existing ngmona.json:
 &#123; "tailwind": &#123; "css": "src/styles.css", "prefix": "tw" &#125; &#125;</code></pre>
-    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+    <ul class="list-disc pl-10 flex flex-col gap-2 text-paragraph-sm text-text-primary">
       <li>
         <code>add</code> and <code>update</code> rewrite every Tailwind class as they write the files, in Tailwind v4
         syntax: <code>flex</code> → <code>tw:flex</code>, <code>hover:bg-primary-300</code> →
@@ -101,7 +101,29 @@
     </ul>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Upgrading from the 8px spacing scale</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Components now use Tailwind's standard scales, so <code>p-4</code> or <code>font-medium</code> mean the
+      same thing in ngmona as in the rest of your app. If your tokens file was written by an older
+      <code>init</code>, <code>add</code> and <code>update</code> warn about it. To upgrade:
+    </p>
+    <ul class="list-disc pl-10 flex flex-col gap-2 text-paragraph-sm text-text-primary">
+      <li>
+        In your tokens file, change <code>--spacing: 8px</code> to <code>--spacing: 0.25rem</code>, and use Tailwind's
+        font weights: <code>normal</code> 400, <code>medium</code> 500, <code>semibold</code> 600, <code>bold</code> 700,
+        <code>extrabold</code> 800.
+      </li>
+      <li>
+        In your own templates, double the numbers of spacing classes you took from ngmona's scale
+        (<code>py-1.5</code> → <code>py-3</code>, <code>gap-1</code> → <code>gap-2</code>), and rename
+        <code>font-medium</code> → <code>font-semibold</code>, <code>font-bold</code> → <code>font-extrabold</code>,
+        <code>font-regular</code> → <code>font-normal</code>.
+      </li>
+    </ul>
+  </section>
+
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Next steps</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Since components are copied rather than installed, everything under your components

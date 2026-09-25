@@ -1,7 +1,7 @@
 <div>
   <label
     [attr.for]="inputId()"
-    class="p-[20px] rounded-xl border flex gap-3 items-center transition-colors"
+    class="p-[20px] rounded-xl border flex gap-6 items-center transition-colors"
     [class]="labelClass()"
     (dragover)="onDragOver($event)"
     (dragleave)="onDragLeave()"
@@ -22,7 +22,7 @@
       } @else {
         <svg lucideUpload class="shrink-0 text-icon-subdued" [size]="24"></svg>
       }
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-2">
         <strong class="text-link-sm text-info-500" [class]="loading() ? 'opacity-60' : ''">
           {{ loading() ? 'Uploading…' : 'Attach a document' }}
         </strong>
@@ -32,14 +32,14 @@
       </div>
     } @else {
       <svg lucideCheckCircle2 [size]="28" class="text-success-600 shrink-0"></svg>
-      <div class="flex justify-between items-center w-full gap-2">
-        <div class="flex flex-col gap-1 min-w-0">
+      <div class="flex justify-between items-center w-full gap-4">
+        <div class="flex flex-col gap-2 min-w-0">
           <p class="truncate m-0 text-paragraph-sm text-text-primary">{{ file()!.name }}</p>
-          <small class="text-caption font-bold text-text-subdued">Uploaded</small>
+          <small class="text-caption font-extrabold text-text-subdued">Uploaded</small>
         </div>
         <button
           type="button"
-          class="p-1 flex items-center shrink-0 text-icon-subdued hover:text-icon-danger cursor-pointer"
+          class="p-2 flex items-center shrink-0 text-icon-subdued hover:text-icon-danger cursor-pointer"
           (click)="remove($event)"
           aria-label="Remove file"
         >
@@ -50,6 +50,6 @@
   </label>
 
   @if (errorMessage(); as message) {
-    <p class="text-caption text-danger-600 mt-1" role="alert">{{ message }}</p>
+    <p class="text-caption text-danger-600 mt-2" role="alert">{{ message }}</p>
   }
 </div>

@@ -20,12 +20,12 @@ export class TableRow {}
 
 @Directive({
   selector: '[uiTableHeadCell]',
-  host: { class: 'text-left px-2 py-1.5 text-label-sm font-medium text-text-subdued whitespace-nowrap' },
+  host: { class: 'text-left px-4 py-3 text-label-sm font-semibold text-text-subdued whitespace-nowrap' },
 })
 export class TableHeadCell {}
 
 @Directive({
   selector: '[uiTableCell]',
-  host: { class: 'px-2 py-1.5 align-middle' },
+  host: { class: 'px-4 py-3 align-middle' },
 })
 export class TableCell {}

@@ -9,11 +9,11 @@
     ></div>
 
     <div
-      class="relative flex h-full w-full items-end justify-center overflow-y-auto sm:items-center sm:py-12"
+      class="relative flex h-full w-full items-end justify-center overflow-y-auto sm:items-center sm:py-24"
     >
       <div
         #panel
-        class="relative z-10 max-h-[calc(100vh-2rem)] w-full overflow-y-auto rounded-t-2xl bg-surface-white !px-4 !py-5 sm:max-w-xl sm:rounded-2xl md:max-w-3xl {{
+        class="relative z-10 max-h-[calc(100vh-2rem)] w-full overflow-y-auto rounded-t-2xl bg-surface-white !px-8 !py-10 sm:max-w-xl sm:rounded-2xl md:max-w-3xl {{
           classNames()
         }}"
         [attr.role]="role()"
@@ -31,7 +31,7 @@
             type="button"
             aria-label="Close"
             (click)="close()"
-            class="absolute right-2 top-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-none bg-surface-light text-text-primary transition-opacity hover:bg-surface-hover"
+            class="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-surface-light text-text-primary transition-opacity hover:bg-surface-hover"
           >
             <svg [lucideIcon]="closeIcon" [size]="16"></svg>
           </button>
@@ -42,7 +42,7 @@
             <ng-container [ngTemplateOutlet]="tpl"></ng-container>
           </div>
         } @else if (heading()) {
-          <h2 [id]="titleId" class="text-heading-sm text-text-primary !mb-2 !mr-6">
+          <h2 [id]="titleId" class="text-heading-sm text-text-primary !mb-4 !mr-12">
             {{ heading() }}
           </h2>
         }

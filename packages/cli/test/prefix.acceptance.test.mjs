@@ -14,6 +14,7 @@ import { nonClassReason } from './helpers/class-positions.mjs';
 import { internalVariableNames, normalizeRules, utilitySelectors } from './helpers/css-compare.mjs';
 import { loadTypeScript } from '../src/lib/prefix/load-deps.js';
 import { updateCommand } from '../src/commands/update.mjs';
+import { warnAboutLegacyTokens } from '../src/lib/legacy-tokens.js';
 import { prefixToken } from '../src/lib/prefix/token.js';
 
 const PREFIX = 'tw';
@@ -170,3 +171,16 @@ function snapshotComponentsSafe(cwd) {
     return {};
   }
 }
+
+describe('tokens files written by an older init', () => {
+  it('are reported: old 8px spacing and font weights would mis-size the new components', async () => {
+    const cwd = await createFixture('legacy-tokens');
+    const config = JSON.parse(readFileSync(join(cwd, 'ngmona.json'), 'utf8'));
+    expect(warnAboutLegacyTokens(cwd, config)).toEqual([]);
+
+    const tokensPath = join(cwd, config.tailwind.tokensCss);
+    const current = readFileSync(tokensPath, 'utf8');
+    writeFileSync(tokensPath, current.replace('--spacing: 0.25rem;', '--spacing: 8px;').replace('--font-weight-medium: 500;', '--font-weight-medium: 600;'));
+    expect(warnAboutLegacyTokens(cwd, config)).toHaveLength(2);
+  });
+});

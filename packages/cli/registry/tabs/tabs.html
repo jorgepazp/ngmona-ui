@@ -1,8 +1,8 @@
-<div [class]="(orientation() === 'vertical' ? 'flex flex-row gap-4' : 'flex flex-col gap-2') + ' ' + classNames()">
+<div [class]="(orientation() === 'vertical' ? 'flex flex-row gap-8' : 'flex flex-col gap-4') + ' ' + classNames()">
   <div
     role="tablist"
     [attr.aria-orientation]="orientation()"
-    [class]="(orientation() === 'vertical' ? 'flex flex-col gap-1 border-r !border-divider !pr-2' : 'flex flex-row gap-1 border-b !border-divider') + ' ' + tabListClassNames()"
+    [class]="(orientation() === 'vertical' ? 'flex flex-col gap-2 border-r !border-divider !pr-4' : 'flex flex-row gap-2 border-b !border-divider') + ' ' + tabListClassNames()"
   >
     @for (panel of panels(); track panel.value(); let i = $index) {
       <button

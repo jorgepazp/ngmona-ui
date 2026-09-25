@@ -80,7 +80,7 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
   protected readonly values = signal<readonly T[]>([]);
 
   protected readonly containerClass = computed(
-    () => this.containerClassNames() || (this.type() === 'list' ? 'flex flex-col gap-1' : 'flex flex-wrap gap-1'),
+    () => this.containerClassNames() || (this.type() === 'list' ? 'flex flex-col gap-2' : 'flex flex-wrap gap-2'),
   );
 
   protected readonly page = signal(0);
@@ -110,9 +110,9 @@ export class RadioGroup<T = unknown> implements ControlValueAccessor {
   }
 
   protected optionClass(option: T): string {
-    const base = this.type() === 'list' ? 'p-2 rounded-xl bg-surface border-2 border-border-neutral text-text-primary' : 'px-2 whitespace-nowrap py-1 rounded-full text-text-primary border-2 border-border-neutral text-sm flex items-center justify-center';
+    const base = this.type() === 'list' ? 'p-4 rounded-xl bg-surface border-2 border-border-neutral text-text-primary' : 'px-4 whitespace-nowrap py-2 rounded-full text-text-primary border-2 border-border-neutral text-sm flex items-center justify-center';
     const selected = this.optionClassNames() || base;
-    const active = this.selectedClassNames() || (this.type() === 'list' ? `${base} !border-border-active bg-surface-active/10` : `${base} bg-surface-enabled text-surface border-transparent font-medium`);
+    const active = this.selectedClassNames() || (this.type() === 'list' ? `${base} !border-border-active bg-surface-active/10` : `${base} bg-surface-enabled text-surface border-transparent font-semibold`);
     const state = this.isSelected(option) ? active : selected;
     const disabled = this.disabledPredicate()(option) ? 'opacity-50 pointer-events-none' : '';
     return `cursor-pointer transition-all select-none ${state} ${disabled}`;

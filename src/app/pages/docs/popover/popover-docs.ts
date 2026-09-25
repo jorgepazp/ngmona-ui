@@ -14,10 +14,10 @@ export default class PopoverDocs {
   protected readonly open = signal(false);
   protected readonly api = popoverApi;
 
-  protected readonly basicHtml = `<ui-popover [(open)]="open" [panelClass]="'w-64'">
+  protected readonly basicHtml = `<ui-popover [(open)]="open" [panelClass]="'w-128'">
   <ui-button trigger>Toggle popover</ui-button>
-  <div class="flex flex-col gap-1">
-    <p class="font-medium">Popover content</p>
+  <div class="flex flex-col gap-2">
+    <p class="font-semibold">Popover content</p>
     <p>Any content can go here; it's only rendered while the popover is open.</p>
   </div>
 </ui-popover>`;

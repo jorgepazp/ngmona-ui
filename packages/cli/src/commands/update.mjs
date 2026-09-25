@@ -6,6 +6,7 @@ import { hashContent, listFilesRecursive } from '../lib/fs-utils.js';
 import { readConfig, writeConfig } from '../lib/config.js';
 import { installPackages, readConsumerDependencyNames } from '../lib/pkg-manager.js';
 import { createPrefixTransform, logPrefixReport, syncThemeFiles } from '../lib/prefix/index.js';
+import { warnAboutLegacyTokens } from '../lib/legacy-tokens.js';
 
 const SUMMARY_HEADINGS = {
   updated: 'Updated',
@@ -189,6 +190,7 @@ export async function updateCommand(ctx) {
     for (const dep of entry.npmDependencies) allNpmDeps.add(dep);
   }
 
+  warnAboutLegacyTokens(cwd, config);
   if (prefixTransform) logPrefixReport(prefixTransform, { detailed: dryRun });
   if (prefixTransform) syncThemeFiles({ cwd, config, prefix: prefixTransform.prefix, dryRun });
 

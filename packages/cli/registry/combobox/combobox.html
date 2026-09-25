@@ -1,5 +1,5 @@
 @if (label()) {
-  <label [attr.for]="resolvedId()" class="relative block mb-0.5 text-sm font-medium text-text-primary">{{ label() }}</label>
+  <label [attr.for]="resolvedId()" class="relative block mb-1 text-sm font-semibold text-text-primary">{{ label() }}</label>
 }
 
 <div class="relative">
@@ -21,7 +21,7 @@
     (focus)="onFocus()"
     (blur)="onBlur()"
     (keydown)="onTriggerKeydown($event)"
-    class="w-full text-label-sm h-6 text-left transition-all appearance-none bg-surface-white cursor-text outline-transparent border-border-neutral hover:border-border-hover !border border-solid text-text-primary rounded !px-2 !py-1.5 !pr-6 !outline !outline-[1.5px] focus:!outline-border-hover disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 disabled:cursor-not-allowed"
+    class="w-full text-label-sm h-12 text-left transition-all appearance-none bg-surface-white cursor-text outline-transparent border-border-neutral hover:border-border-hover !border border-solid text-text-primary rounded !px-4 !py-3 !pr-12 !outline !outline-[1.5px] focus:!outline-border-hover disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 disabled:cursor-not-allowed"
   />
   <button
     type="button"
@@ -30,7 +30,7 @@
     [disabled]="isDisabled()"
     (mousedown)="$event.preventDefault()"
     (click)="onChevronClick()"
-    class="absolute right-1.5 top-0 bottom-0 flex items-center text-neutral-100 disabled:cursor-not-allowed"
+    class="absolute right-3 top-0 bottom-0 flex items-center text-neutral-100 disabled:cursor-not-allowed"
   >
     <svg [lucideIcon]="chevronIcon" [size]="16"></svg>
   </button>
@@ -44,7 +44,7 @@
       (mousedown)="$event.preventDefault()"
       (mouseenter)="hoveringPanel = true"
       (mouseleave)="hoveringPanel = false"
-      class="pl-0 !m-0 bg-surface-white border border-border-neutral rounded shadow-card !py-0.5 overflow-y-auto max-h-52 list-none"
+      class="pl-0 !m-0 bg-surface-white border border-border-neutral rounded shadow-card !py-1 overflow-y-auto max-h-104 list-none"
     >
       @for (option of filteredOptions(); track option; let i = $index) {
         <li
@@ -54,7 +54,7 @@
           [attr.aria-disabled]="isOptionDisabled(option) || null"
           (click)="selectOption(option)"
           [class]="(i === activeIndex() ? 'bg-surface-active/20 !text-surface-active' : '') + (isOptionDisabled(option) ? 'opacity-50 pointer-events-none ' : '')"
-          class="flex gap-2 items-center justify-between !px-2 !py-1 select-none cursor-pointer hover:bg-surface-hover/50 text-text-primary text-label-sm"
+          class="flex gap-4 items-center justify-between !px-4 !py-2 select-none cursor-pointer hover:bg-surface-hover/50 text-text-primary text-label-sm"
         >
           <span class="truncate">{{ optionLabelOf(option) }}</span>
           @if (isOptionSelected(option)) {
@@ -62,12 +62,12 @@
           }
         </li>
       } @empty {
-        <li class="!px-2 !py-1 text-label-sm text-neutral-100 select-none">No results found</li>
+        <li class="!px-4 !py-2 text-label-sm text-neutral-100 select-none">No results found</li>
       }
     </ul>
   </ng-template>
 
   @if (caption()) {
-    <small class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+    <small class="mt-1 text-xs text-neutral-300 block">{{ caption() }}</small>
   }
 </div>

@@ -12,9 +12,9 @@ import { skeletonApi } from '../../../registry/skeleton/skeleton.api';
 export default class SkeletonDocs {
   protected readonly api = skeletonApi;
 
-  protected readonly basicHtml = `<div class="flex items-center gap-2">
+  protected readonly basicHtml = `<div class="flex items-center gap-4">
   <ui-skeleton width="40px" height="40px" classNames="rounded-full"></ui-skeleton>
-  <div class="flex flex-col gap-1.5 flex-1">
+  <div class="flex flex-col gap-3 flex-1">
     <ui-skeleton height="12px" width="60%"></ui-skeleton>
     <ui-skeleton height="12px" width="40%"></ui-skeleton>
   </div>

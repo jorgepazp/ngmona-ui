@@ -1,4 +1,4 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Input Group</h1>
 
   <app-api-table [doc]="api" />
@@ -8,49 +8,49 @@
     (<code>border-none outline-none bg-transparent</code>) so only the group's border shows.
   </p>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Text prefix + suffix</h2>
     <ui-input-group>
-      <span prefix class="flex items-center px-2 text-text-primary text-label-md bg-surface-light">$</span>
+      <span prefix class="flex items-center px-4 text-text-primary text-label-md bg-surface-light">$</span>
       <input
-        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-2 !py-1 text-label-md text-text-primary h-6 placeholder:text-neutral-300"
+        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-4 !py-2 text-label-md text-text-primary h-12 placeholder:text-neutral-300"
         placeholder="0.00"
       />
-      <span suffix class="flex items-center px-2 text-text-primary text-label-md bg-surface-light">USD</span>
+      <span suffix class="flex items-center px-4 text-text-primary text-label-md bg-surface-light">USD</span>
     </ui-input-group>
     <docs-code-tabs [html]="amountHtml" [ts]="amountTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Icon prefix + button suffix</h2>
     <ui-input-group>
-      <span prefix class="flex items-center px-2 text-text-primary">
+      <span prefix class="flex items-center px-4 text-text-primary">
         <svg [lucideIcon]="searchIcon" [size]="16"></svg>
       </span>
       <input
-        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-2 !py-1 text-label-md text-text-primary h-6 placeholder:text-text-subdued"
+        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-4 !py-2 text-label-md text-text-primary h-12 placeholder:text-text-subdued"
         placeholder="Search..."
       />
-      <ui-button suffix variant="primary" size="sm" classNames="!rounded-none h-full !py-2 rounded-r">Go</ui-button>
+      <ui-button suffix variant="primary" size="sm" classNames="!rounded-none h-full !py-4 rounded-r">Go</ui-button>
     </ui-input-group>
     <docs-code-tabs [html]="searchHtml" [ts]="searchTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">States</h2>
     <ui-input-group state="error">
-     <span prefix class="flex items-center px-2 text-text-primary">
+     <span prefix class="flex items-center px-4 text-text-primary">
         #
       </span>
       <input
-        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-2 !py-1 text-label-md text-neutral-500 h-6"
+        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-4 !py-2 text-label-md text-neutral-500 h-12"
         value="not-a-number"
       />
     </ui-input-group>
     <ui-input-group [disabled]="true">
-      <span prefix class="flex items-center px-2 text-text-primary">$</span>
+      <span prefix class="flex items-center px-4 text-text-primary">$</span>
       <input
-        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-2 !py-1 text-label-md text-neutral-500 h-6"
+        class="flex-1 min-w-0 border-none outline-none bg-transparent !px-4 !py-2 text-label-md text-neutral-500 h-12"
         placeholder="Disabled"
         disabled
       />

@@ -1,5 +1,5 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
-  <div class="flex flex-col gap-2">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
+  <div class="flex flex-col gap-4">
     <h1 class="text-heading-xl text-text-primary">Theming</h1>
     <p class="text-paragraph text-text-subdued">
       Every color in this library comes from a small set of seed colors. Each seed expands into a
@@ -9,7 +9,7 @@
     </p>
   </div>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Roles</h2>
     <p class="text-paragraph-sm text-text-subdued">
       There are seven color roles: <code>primary</code>, <code>accent</code>, <code>danger</code>,
@@ -17,14 +17,14 @@
       Each role exposes its ramp as Tailwind utilities and CSS custom properties, from
       <code>50</code> (lightest) to <code>950</code> (darkest).
     </p>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-6">
       @for (role of roles; track role) {
-        <div class="flex flex-col gap-1">
+        <div class="flex flex-col gap-2">
           <span class="text-label-sm text-text-primary capitalize">{{ role }}</span>
           <div class="flex rounded overflow-hidden border border-divider">
             @for (step of steps; track step) {
               <div
-                class="flex-1 h-10"
+                class="flex-1 h-20"
                 [style.background-color]="swatchColor(role, step)"
                 [title]="role + '-' + step"
               ></div>
@@ -39,7 +39,7 @@
     </p>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Semantic tokens</h2>
     <p class="text-paragraph-sm text-text-subdued">
       The seven ramps feed a semantic layer of tokens grouped by purpose: surface, text, icon,
@@ -52,7 +52,7 @@
     </p>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Base tokens</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Radius, letter spacing, typography, and shadows live in <code>styles.css</code> as plain
@@ -63,13 +63,13 @@
     </p>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Generating the theme</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Inside this repository, seed colors live in <code>scripts/theme.seeds.json</code>, one hex
       value per role:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&#123;
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&#123;
   "primary": "#D5006C",
   "accent": "#3B3CF7",
   "danger": "#FF4B4B",
@@ -79,13 +79,13 @@
   "neutral": "#7A828C"
 &#125;</code></pre>
     <p class="text-paragraph-sm text-text-subdued">After editing the seeds, regenerate the stylesheet:</p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npm run theme:generate</code></pre>
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npm run theme:generate</code></pre>
     <p class="text-paragraph-sm text-text-subdued">
       This rebuilds <code>src/styles/theme-colors.css</code> from the seeds.
     </p>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Using the CLI</h2>
     <p class="text-paragraph-sm text-text-subdued">
       A project that installs components through the CLI runs <code>npx ngmona-ui init</code>
@@ -96,15 +96,15 @@
     <p class="text-paragraph-sm text-text-subdued">
       To change colors later without repeating the whole setup, run the theme command:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui theme --primary "#D5006C" --accent "#3B3CF7"</code></pre>
-    <ul class="list-disc pl-5 flex flex-col gap-1 text-paragraph-sm text-text-primary">
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>npx ngmona-ui theme --primary "#D5006C" --accent "#3B3CF7"</code></pre>
+    <ul class="list-disc pl-10 flex flex-col gap-2 text-paragraph-sm text-text-primary">
       <li>Pass any subset of role flags. Roles left out keep their current seed color.</li>
       <li>Run the theme command with no flags to get prompted for every role instead.</li>
       <li>The command rewrites the generated theme file and updates the seeds stored in <code>ngmona.json</code>.</li>
     </ul>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Editing generated CSS by hand</h2>
     <p class="text-paragraph-sm text-text-subdued">
       <code>theme-colors.css</code> is generated. To change a whole ramp, edit its seed and

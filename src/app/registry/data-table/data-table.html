@@ -1,9 +1,9 @@
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-4">
   <ui-table [attr.aria-label]="ariaLabel() ?? null">
     <thead>
       <tr uiTableRow>
         @if (selectable() === 'multi') {
-          <th uiTableHeadCell class="w-8">
+          <th uiTableHeadCell class="w-16">
             <ui-checkbox
               [checked]="allOnPageSelected()"
               [indeterminate]="someOnPageSelected()"
@@ -12,14 +12,14 @@
             ></ui-checkbox>
           </th>
         } @else if (selectable() === 'single') {
-          <th uiTableHeadCell class="w-8"></th>
+          <th uiTableHeadCell class="w-16"></th>
         }
         @for (column of columns(); track column.key) {
           <th uiTableHeadCell [style.width]="column.width" [class]="alignClass(column.align)">
             @if (headerTemplate(column.key); as tpl) {
               <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: column }"></ng-container>
             } @else if (column.sortable) {
-              <button type="button" class="inline-flex items-center gap-1 cursor-pointer hover:text-text-primary" (click)="toggleSort(column)">
+              <button type="button" class="inline-flex items-center gap-2 cursor-pointer hover:text-text-primary" (click)="toggleSort(column)">
                 {{ column.header }}
                 @if (sortState()?.key === column.key) {
                   <svg [lucideIcon]="sortState()!.direction === 'asc' ? chevronUpIcon : chevronDownIcon" [size]="14"></svg>
@@ -48,7 +48,7 @@
         }
       } @else if (pagedData().length === 0) {
         <tr>
-          <td [attr.colspan]="columns().length + (selectable() !== 'none' ? 1 : 0)" class="text-center py-4 text-text-subdued text-paragraph-sm">
+          <td [attr.colspan]="columns().length + (selectable() !== 'none' ? 1 : 0)" class="text-center py-8 text-text-subdued text-paragraph-sm">
             @if (emptyTemplate(); as tpl) {
               <ng-container [ngTemplateOutlet]="tpl"></ng-container>
             } @else {

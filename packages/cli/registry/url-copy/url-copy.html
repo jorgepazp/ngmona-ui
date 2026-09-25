@@ -2,7 +2,7 @@
   type="button"
   (click)="copyUrl()"
   [class]="
-    'mt-2 inline-flex w-fit cursor-pointer items-center gap-1 rounded border border-border-neutral p-1 transition-colors hover:bg-surface-enabled ' +
+    'mt-4 inline-flex w-fit cursor-pointer items-center gap-2 rounded border border-border-neutral p-2 transition-colors hover:bg-surface-enabled ' +
     classNames()
   "
 >
@@ -14,7 +14,7 @@
   <span class="w-3xs overflow-hidden text-ellipsis whitespace-nowrap text-left text-label-xs text-link">{{
     url()
   }}</span>
-  <span class="border-l border-border-neutral pl-3 text-label-xs text-text-subdued" aria-live="polite">{{
+  <span class="border-l border-border-neutral pl-6 text-label-xs text-text-subdued" aria-live="polite">{{
     displayLabel()
   }}</span>
 </button>

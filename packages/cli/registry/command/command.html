@@ -19,7 +19,7 @@
       animate.leave="ui-anim-fade-leave"
       (keydown.tab)="onKeydownTab($event)"
     >
-      <div class="flex items-center gap-2 border-b border-border-neutral !px-3">
+      <div class="flex items-center gap-4 border-b border-border-neutral !px-6">
         <svg [lucideIcon]="searchIcon" [size]="16" class="shrink-0 text-text-subdued"></svg>
         <input
           #searchInput
@@ -34,14 +34,14 @@
           [attr.aria-activedescendant]="flatItems().length ? itemDomId(activeIndex()) : null"
           (input)="onQueryChange($event)"
           (keydown)="onSearchKeydown($event)"
-          class="w-full border-none bg-transparent !py-2.5 text-label-md text-text-primary outline-none placeholder:text-text-subdued"
+          class="w-full border-none bg-transparent !py-5 text-label-md text-text-primary outline-none placeholder:text-text-subdued"
         />
       </div>
 
-      <ul [id]="listboxId" role="listbox" class="!m-0 max-h-80 list-none overflow-y-auto !p-1.5">
+      <ul [id]="listboxId" role="listbox" class="!m-0 max-h-160 list-none overflow-y-auto !p-3">
         @for (group of filteredGroups(); track group.label) {
           <li role="group" [attr.aria-label]="group.label">
-            <div class="!px-1.5 !pt-1.5 !pb-0.5 text-label-xs font-medium text-text-subdued">{{ group.label }}</div>
+            <div class="!px-3 !pt-3 !pb-1 text-label-xs font-semibold text-text-subdued">{{ group.label }}</div>
             <ul class="!m-0 list-none !p-0">
               @for (item of group.items; track item.value) {
                 <li
@@ -56,7 +56,7 @@
                     (flatItems().indexOf(item) === activeIndex() ? 'bg-surface-light ' : '') +
                     (item.disabled ? 'opacity-50 pointer-events-none ' : '')
                   "
-                  class="flex cursor-pointer select-none items-center gap-2 rounded !px-2 !py-1.5 text-label-sm text-neutral-500 hover:bg-surface-hover/30"
+                  class="flex cursor-pointer select-none items-center gap-4 rounded !px-4 !py-3 text-label-sm text-neutral-500 hover:bg-surface-hover/30"
                 >
                   @if (item.icon) {
                     <svg [lucideIcon]="item.icon" [size]="16" class="shrink-0 text-neutral-300"></svg>
@@ -67,14 +67,14 @@
             </ul>
           </li>
         } @empty {
-          <li class="!px-2 !py-6 text-center text-label-sm text-text-subdued">{{ emptyText() }}</li>
+          <li class="!px-4 !py-12 text-center text-label-sm text-text-subdued">{{ emptyText() }}</li>
         }
       </ul>
 
-      <div class="flex items-center gap-3 border-t border-border-neutral !px-3 !py-1.5 text-label-xs text-text-subdued">
-        <span class="flex items-center gap-1"><kbd class="rounded border border-border-neutral !px-1">↑↓</kbd> navigate</span>
-        <span class="flex items-center gap-1"><kbd class="rounded border border-border-neutral !px-1">↵</kbd> select</span>
-        <span class="flex items-center gap-1"><kbd class="rounded border border-border-neutral !px-1">esc</kbd> close</span>
+      <div class="flex items-center gap-6 border-t border-border-neutral !px-6 !py-3 text-label-xs text-text-subdued">
+        <span class="flex items-center gap-2"><kbd class="rounded border border-border-neutral !px-2">↑↓</kbd> navigate</span>
+        <span class="flex items-center gap-2"><kbd class="rounded border border-border-neutral !px-2">↵</kbd> select</span>
+        <span class="flex items-center gap-2"><kbd class="rounded border border-border-neutral !px-2">esc</kbd> close</span>
       </div>
     </div>
   </div>

@@ -1,21 +1,21 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Input</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Basic</h2>
     <ui-input label="Email" placeholder="you@example.com" [icon]="mailIcon" [(value)]="text"></ui-input>
     <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Password</h2>
     <ui-input type="password" label="Password" placeholder="••••••••"></ui-input>
     <docs-code-tabs [html]="passwordHtml" [ts]="passwordTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">States</h2>
     <ui-input label="Success" state="success" caption="Looks good"></ui-input>
     <ui-input label="Warning" state="warning" caption="Double check this"></ui-input>
@@ -24,7 +24,7 @@
     <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Search suggestions</h2>
     <ui-input label="Country" placeholder="Search..." [searchIn]="countries"></ui-input>
     <docs-code-tabs [html]="searchHtml" [ts]="searchTs" />

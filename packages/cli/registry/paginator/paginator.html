@@ -1,7 +1,7 @@
-<nav [class]="'flex gap-1 justify-center items-center ' + classNames()" aria-label="Pagination">
+<nav [class]="'flex gap-2 justify-center items-center ' + classNames()" aria-label="Pagination">
   <button
     type="button"
-    class="w-5 h-5 inline-flex items-center justify-center rounded transition-all cursor-pointer text-text-primary hover:enabled:bg-surface-light disabled:!cursor-not-allowed disabled:text-text-disabled"
+    class="w-10 h-10 inline-flex items-center justify-center rounded transition-all cursor-pointer text-text-primary hover:enabled:bg-surface-light disabled:!cursor-not-allowed disabled:text-text-disabled"
     [disabled]="disabled() || !canGoPrevious()"
     (click)="previous()"
     aria-label="Previous page"
@@ -11,12 +11,12 @@
 
   @for (item of pages(); track $index) {
     @if (item === 'ellipsis') {
-      <span class="w-5 h-5 flex items-center justify-center select-none text-text-subdued" aria-hidden="true">&hellip;</span>
+      <span class="w-10 h-10 flex items-center justify-center select-none text-text-subdued" aria-hidden="true">&hellip;</span>
     } @else {
       <button
         type="button"
-        class="w-5 h-5 inline-flex items-center justify-center rounded text-label-sm transition-all cursor-pointer"
-        [class]="item - 1 === page() ? 'bg-primary-500 text-white font-bold' : 'text-text-primary hover:bg-surface-light'"
+        class="w-10 h-10 inline-flex items-center justify-center rounded text-label-sm transition-all cursor-pointer"
+        [class]="item - 1 === page() ? 'bg-primary-500 text-white font-extrabold' : 'text-text-primary hover:bg-surface-light'"
         [disabled]="disabled()"
         [attr.aria-current]="item - 1 === page() ? 'page' : null"
         [attr.aria-label]="'Page ' + item"
@@ -29,7 +29,7 @@
 
   <button
     type="button"
-    class="w-5 h-5 inline-flex items-center justify-center rounded transition-all cursor-pointer text-text-primary hover:enabled:bg-surface-light disabled:!cursor-not-allowed disabled:text-text-disabled"
+    class="w-10 h-10 inline-flex items-center justify-center rounded transition-all cursor-pointer text-text-primary hover:enabled:bg-surface-light disabled:!cursor-not-allowed disabled:text-text-disabled"
     [disabled]="disabled() || !canGoNext()"
     (click)="next()"
     aria-label="Next page"

@@ -16,7 +16,7 @@
       [attr.aria-label]="'Resize between panel ' + ($index + 1) + ' and ' + ($index + 2)"
       class="group absolute z-10 flex items-center justify-center touch-none select-none outline-none"
       [class]="
-        (direction() === 'horizontal' ? 'top-0 bottom-0 w-2 -ml-1 cursor-col-resize' : 'left-0 right-0 h-2 -mt-1 cursor-row-resize') +
+        (direction() === 'horizontal' ? 'top-0 bottom-0 w-4 -ml-2 cursor-col-resize' : 'left-0 right-0 h-4 -mt-2 cursor-row-resize') +
         ' ' +
         handleClassNames()
       "
@@ -27,7 +27,7 @@
     >
       <span
         class="pointer-events-none rounded-full bg-neutral-100 transition-colors group-hover:bg-primary-500 group-focus-visible:bg-primary-500"
-        [class]="direction() === 'horizontal' ? 'w-[3px] h-6' : 'h-[3px] w-6'"
+        [class]="direction() === 'horizontal' ? 'w-[3px] h-12' : 'h-[3px] w-12'"
       ></span>
     </div>
   }

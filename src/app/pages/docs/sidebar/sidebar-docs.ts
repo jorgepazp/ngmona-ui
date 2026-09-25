@@ -17,9 +17,9 @@ export default class SidebarDocs {
 
   protected readonly basicHtml = `<ui-sidebar title="Acme Inc" breakpoint="md">
   <ng-template uiTemplate="header">
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-4">
       <ui-avatar initials="AC" size="sm" alt="Acme Inc"></ui-avatar>
-      <span class="font-medium">Acme Inc</span>
+      <span class="font-semibold">Acme Inc</span>
     </div>
   </ng-template>
 
@@ -32,7 +32,7 @@ export default class SidebarDocs {
   </ng-template>
 
   <ng-template uiTemplate="footer">
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-4">
       <ui-avatar initials="JD" size="sm" alt="Jamie Doe"></ui-avatar>
       <span>Jamie Doe</span>
     </div>

@@ -1,11 +1,11 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Spinner</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Sizes</h2>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-8">
       <ui-spinner [size]="24"></ui-spinner>
       <ui-spinner [size]="36"></ui-spinner>
       <ui-spinner [size]="52"></ui-spinner>
@@ -13,9 +13,9 @@
     <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Color</h2>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-8">
       <ui-spinner [size]="36" classNames="text-primary-500"></ui-spinner>
       <ui-spinner [size]="36" classNames="text-accent-500"></ui-spinner>
       <ui-spinner [size]="36" classNames="text-neutral-300"></ui-spinner>
@@ -23,7 +23,7 @@
     <docs-code-tabs [html]="colorHtml" [ts]="colorTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Custom label</h2>
     <ui-spinner [size]="36" ariaLabel="Saving changes"></ui-spinner>
     <docs-code-tabs [html]="labelHtml" [ts]="labelTs" />

@@ -1,29 +1,29 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Radio Group</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">List</h2>
     <ui-radio-group [options]="options" [(ngModel)]="fruit" ariaLabel="Fruit"></ui-radio-group>
     <p class="text-paragraph-sm text-text-subdued">selected = {{ fruit }}</p>
     <docs-code-tabs [html]="listHtml" [ts]="listTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Chips</h2>
     <ui-radio-group [options]="options" type="chips" [(ngModel)]="fruit" ariaLabel="Fruit"></ui-radio-group>
     <docs-code-tabs [html]="chipsHtml" [ts]="chipsTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Multiple</h2>
     <ui-radio-group [options]="options" [multiple]="true" [(ngModel)]="fruits" ariaLabel="Fruits"></ui-radio-group>
     <p class="text-paragraph-sm text-text-subdued">selected = {{ fruits }}</p>
     <docs-code-tabs [html]="multipleHtml" [ts]="multipleTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Paginated</h2>
     <ui-radio-group [options]="pagedOptions" [paginator]="true" [pageSize]="2" [(ngModel)]="fruit" ariaLabel="Fruit"></ui-radio-group>
     <docs-code-tabs [html]="paginatedHtml" [ts]="paginatedTs" />

@@ -1,5 +1,5 @@
-<div class="p-8 max-w-3xl mx-auto flex flex-col gap-6">
-  <div class="flex flex-col gap-2">
+<div class="p-16 max-w-3xl mx-auto flex flex-col gap-12">
+  <div class="flex flex-col gap-4">
     <h1 class="text-display-desktop-sm text-text-primary">ui-kit</h1>
     <p class="text-paragraph text-text-subdued">
       A consolidated, modern rebuild of a Tailwind-styled Angular component set. Components here
@@ -9,11 +9,11 @@
     </p>
   </div>
 
-  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
     @for (item of navItems; track item.path) {
       <a
         [routerLink]="['/components', item.path]"
-        class="block px-3 py-2 rounded border border-border-neutral hover:border-primary-500 hover:bg-surface-light transition-colors text-label-md text-text-primary"
+        class="block px-6 py-4 rounded border border-border-neutral hover:border-primary-500 hover:bg-surface-light transition-colors text-label-md text-text-primary"
       >
         {{ item.label }}
       </a>

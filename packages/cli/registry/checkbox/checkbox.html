@@ -1,7 +1,7 @@
-<label class="flex gap-1.5 items-center select-none " [class]="isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer'">
-  <span class="relative block w-2 h-2 rounded shrink-0 mt-px transition-all" [class]="checked() || indeterminate() ? 'active:shadow-primary-300' : 'active:shadow-neutral-600'">
+<label class="flex gap-3 items-center select-none " [class]="isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer'">
+  <span class="relative block w-4 h-4 rounded shrink-0 mt-px transition-all" [class]="checked() || indeterminate() ? 'active:shadow-primary-300' : 'active:shadow-neutral-600'">
     <span
-      class="absolute transition-opacity w-2 h-2 top-0 z-10 flex items-center justify-center rounded text-surface-white"
+      class="absolute transition-opacity w-4 h-4 top-0 z-10 flex items-center justify-center rounded text-surface-white"
       [class]="(checked() || indeterminate() ? '' : 'opacity-0 text-surface-white') + ' ' + (isDisabled() ? '!bg-text-disabled' : 'bg-surface-active text-white')"
       aria-hidden="true"
     >
@@ -9,7 +9,7 @@
     </span>
     <input
       type="checkbox"
-      class="custom-input absolute cursor-pointer z-0 appearance-none outline-none w-2 h-2 focus:outline-none  bg-surface-white ring-0 ring-offset-0 outline-0 focus:ring-0 focus:ring-offset-0 rounded border-2 border-solid"
+      class="custom-input absolute cursor-pointer z-0 appearance-none outline-none w-4 h-4 focus:outline-none  bg-surface-white ring-0 ring-offset-0 outline-0 focus:ring-0 focus:ring-offset-0 rounded border-2 border-solid"
       [class]="isDisabled() ? 'border-text-disabled' : 'border-text-primary'"
       [disabled]="isDisabled()"
       [checked]="checked()"

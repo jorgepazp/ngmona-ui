@@ -1,11 +1,11 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Progress</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Values</h2>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-6">
       <ui-progress [value]="25" ariaLabel="Upload progress"></ui-progress>
       <ui-progress [value]="60" ariaLabel="Upload progress"></ui-progress>
       <ui-progress [value]="100" ariaLabel="Upload progress"></ui-progress>
@@ -13,15 +13,15 @@
     <docs-code-tabs [html]="valuesHtml" [ts]="valuesTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Indeterminate</h2>
     <ui-progress ariaLabel="Loading"></ui-progress>
     <docs-code-tabs [html]="indeterminateHtml" [ts]="indeterminateTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Sizes</h2>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-6">
       <ui-progress size="sm" [value]="45" ariaLabel="Progress"></ui-progress>
       <ui-progress size="md" [value]="45" ariaLabel="Progress"></ui-progress>
       <ui-progress size="lg" [value]="45" ariaLabel="Progress"></ui-progress>
@@ -29,9 +29,9 @@
     <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Variants</h2>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-6">
       <ui-progress variant="primary" [value]="70" ariaLabel="Progress"></ui-progress>
       <ui-progress variant="success" [value]="70" ariaLabel="Progress"></ui-progress>
       <ui-progress variant="warning" [value]="70" ariaLabel="Progress"></ui-progress>
@@ -41,7 +41,7 @@
     <docs-code-tabs [html]="variantsHtml" [ts]="variantsTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Custom value text</h2>
     <ui-progress [value]="3" [max]="5" valueText="3 of 5 steps complete" ariaLabel="Setup progress"></ui-progress>
     <docs-code-tabs [html]="valueTextHtml" [ts]="valueTextTs" />

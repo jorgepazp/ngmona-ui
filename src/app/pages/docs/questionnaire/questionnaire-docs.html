@@ -1,16 +1,16 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Questionnaire</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Multi-step flow</h2>
 
-    <div class="border border-divider rounded-lg p-6 max-w-lg">
+    <div class="border border-divider rounded-lg p-12 max-w-lg">
       @if (result(); as answers) {
-        <div class="flex flex-col gap-4">
-          <p class="text-label-md font-medium text-text-primary">All done. Here's what was collected:</p>
-          <ul class="list-none m-0 p-0 flex flex-col gap-1">
+        <div class="flex flex-col gap-8">
+          <p class="text-label-md font-semibold text-text-primary">All done. Here's what was collected:</p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-2">
             @for (answer of answers; track answer.stepId) {
               <li class="text-paragraph-sm text-text-subdued">
                 <code class="text-label-xs">{{ answer.stepId }}</code>: {{ answer.optionId ?? answer.otherText }}

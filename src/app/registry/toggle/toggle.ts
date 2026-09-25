@@ -35,7 +35,7 @@ export class Toggle implements ControlValueAccessor {
   protected readonly isDisabled = computed(() => this.disabled() || this.formDisabled());
 
   protected readonly trackClass = computed(() => {
-    const size = this.size() === 'lg' ? 'w-7 h-4 after:top-0.5 after:left-0.5 after:h-3 after:w-3' : 'w-[44px] h-3 after:top-[2px] after:left-[2px] after:h-[20px] after:w-[20px]';
+    const size = this.size() === 'lg' ? 'w-14 h-8 after:top-1 after:left-1 after:h-6 after:w-6' : 'w-[44px] h-6 after:top-[2px] after:left-[2px] after:h-[20px] after:w-[20px]';
     const colorMap: Record<ToggleColor, string> = {
       default: 'peer-checked:bg-primary-500',
       info: 'peer-checked:bg-info',

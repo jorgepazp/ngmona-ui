@@ -1,9 +1,9 @@
 @if (labelTemplate(); as tpl) {
-  <div class="text-neutral-500 text-xs font-medium flex justify-between mb-0.5">
+  <div class="text-neutral-500 text-xs font-semibold flex justify-between mb-1">
     <ng-container [ngTemplateOutlet]="tpl"></ng-container>
   </div>
 } @else if (label()) {
-  <label [attr.for]="resolvedId()" class="relative block mb-0.5 text-sm font-medium text-neutral-500">{{ label() }}</label>
+  <label [attr.for]="resolvedId()" class="relative block mb-1 text-sm font-semibold text-neutral-500">{{ label() }}</label>
 }
 
 <div class="relative">
@@ -18,14 +18,14 @@
     (click)="toggleOpen()"
     (keydown)="onTriggerKeydown($event)"
     (blur)="onBlur()"
-    [class]="!value() || (multi() && selectedCount() === 0) ? 'disabled:!text-neutral-100 !text-neutral-300' : (value() && !multi() ? 'font-medium' : '')"
-    class="group relative overflow-x-hidden flex gap-1 max-w-full text-label-sm h-6 items-center text-left transition-all min-w-full appearance-none peer bg-surface-white cursor-pointer outline-transparent border-neutral-100 hover:border-neutral-300 !border border-solid focus:!border-white text-neutral-500 rounded w-full !px-2 py-1.5 !outline !outline-[1.5px] focus:!outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100"
+    [class]="!value() || (multi() && selectedCount() === 0) ? 'disabled:!text-neutral-100 !text-neutral-300' : (value() && !multi() ? 'font-semibold' : '')"
+    class="group relative overflow-x-hidden flex gap-2 max-w-full text-label-sm h-12 items-center text-left transition-all min-w-full appearance-none peer bg-surface-white cursor-pointer outline-transparent border-neutral-100 hover:border-neutral-300 !border border-solid focus:!border-white text-neutral-500 rounded w-full !px-4 py-3 !outline !outline-[1.5px] focus:!outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100"
   >
     @if (multi()) {
-      <div class="absolute flex gap-1 max-w-full w-full overflow-x-hidden text-ellipsis whitespace-nowrap">
+      <div class="absolute flex gap-2 max-w-full w-full overflow-x-hidden text-ellipsis whitespace-nowrap">
         @if (selectedCount() > 0) {
           @for (val of selectedValues(); track val) {
-            <div class="bg-neutral-500 flex items-center gap-0.5 whitespace-nowrap text-neutral-300 text-label-xs font-bold !px-1 py-0.5 rounded-full">
+            <div class="bg-neutral-500 flex items-center gap-1 whitespace-nowrap text-neutral-300 text-label-xs font-extrabold !px-2 py-1 rounded-full">
               {{ val }}
               <button type="button" class="leading-none" [attr.aria-label]="'Remove ' + val" (click)="$event.stopPropagation(); removeValue(val)">
                 <svg [lucideIcon]="closeIcon" [size]="14"></svg>
@@ -42,7 +42,7 @@
     <svg
       [lucideIcon]="chevronIcon"
       [size]="18"
-      class="pointer-events-none transition-all absolute right-2 text-neutral-100 group-hover:!text-neutral-500 peer-focus:text-neutral-500"
+      class="pointer-events-none transition-all absolute right-4 text-neutral-100 group-hover:!text-neutral-500 peer-focus:text-neutral-500"
       [class]="isOpen() ? '!text-neutral-500 rotate-180' : ''"
     ></svg>
   </button>
@@ -57,7 +57,7 @@
       (mouseenter)="mouseOver = true"
       (mouseleave)="mouseOver = false"
       [class]="(!caption() && !captionTemplate()) ? (showOnTop() ? 'bottom-full' : 'top-full') : (showOnTop() ? 'bottom-[calc(48px+4px)]' : 'top-[calc(48px+4px)]')"
-      class="pl-0 bg-surface-white absolute z-20 !mt-1 w-full border border-neutral-600 rounded !py-0.5 overflow-y-auto max-h-28 list-none"
+      class="pl-0 bg-surface-white absolute z-20 !mt-2 w-full border border-neutral-600 rounded !py-1 overflow-y-auto max-h-56 list-none"
     >
       @for (option of options(); track option; let i = $index) {
         <li
@@ -69,11 +69,11 @@
           (mousedown)="$event.preventDefault()"
           (click)="multi() ? toggleMultiOption(option) : selectSingleOption(option)"
           [class]="(i === activeIndex() ? 'bg-neutral-300 ' : '') + (isOptionDisabled(option) ? 'opacity-50 pointer-events-none ' : '')"
-          class="transition-opacity flex gap-2 items-center !px-2 !py-1 select-none cursor-pointer hover:bg-neutral-300 text-neutral-500 text-label-sm"
+          class="transition-opacity flex gap-4 items-center !px-4 !py-2 select-none cursor-pointer hover:bg-neutral-300 text-neutral-500 text-label-sm"
         >
           @if (multi()) {
             <span
-              class="inline-flex items-center justify-center w-3.5 h-3.5 rounded border-2 shrink-0"
+              class="inline-flex items-center justify-center w-7 h-7 rounded border-2 shrink-0"
               [class]="isOptionSelected(option) ? 'bg-primary-500 border-primary-500' : 'border-neutral-300'"
               aria-hidden="true"
             >
@@ -89,10 +89,10 @@
   }
 
   @if (captionTemplate(); as tpl) {
-    <div class="mt-0.5 text-xs text-neutral-300">
+    <div class="mt-1 text-xs text-neutral-300">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (caption()) {
-    <small class="mt-0.5 text-xs text-neutral-300">{{ caption() }}</small>
+    <small class="mt-1 text-xs text-neutral-300">{{ caption() }}</small>
   }
 </div>

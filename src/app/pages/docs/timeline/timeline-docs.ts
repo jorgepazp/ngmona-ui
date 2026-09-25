@@ -37,11 +37,11 @@ export class OrderTimeline {}`;
   protected readonly customHtml = `<ui-timeline>
   <ui-timeline-item>
     <ng-template uiTemplate="marker">
-      <span class="w-2 h-2 rounded-full bg-success-500"></span>
+      <span class="w-4 h-4 rounded-full bg-success-500"></span>
     </ng-template>
     <ng-template uiTemplate="title">Refund approved</ng-template>
     <ng-template uiTemplate="content">
-      <span class="text-success-600 font-medium">$14.990</span> credited back to the original method.
+      <span class="text-success-600 font-semibold">$14.990</span> credited back to the original method.
     </ng-template>
   </ui-timeline-item>
   <ui-timeline-item title="Case closed" content="No further action needed."></ui-timeline-item>

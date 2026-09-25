@@ -84,7 +84,7 @@ export class Drawer {
 
   protected readonly panelClass = computed(() => {
     const anchor = this.side() === 'right' ? 'right-0 sm:rounded-l-2xl' : 'left-0 sm:rounded-r-2xl';
-    return `fixed inset-y-0 ${anchor} z-10 flex flex-col w-full sm:w-[380px] max-w-full bg-surface-white shadow-hover px-4 py-5 max-h-dvh overflow-y-auto ${this.classNames()}`;
+    return `fixed inset-y-0 ${anchor} z-10 flex flex-col w-full sm:w-[380px] max-w-full bg-surface-white shadow-hover px-8 py-10 max-h-dvh overflow-y-auto ${this.classNames()}`;
   });
 
   constructor() {

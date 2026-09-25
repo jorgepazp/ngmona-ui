@@ -1,10 +1,10 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Accordion</h1>
 
   <app-api-table [doc]="api" />
   <app-api-table [doc]="itemApi" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Single open (default)</h2>
     <ui-accordion>
       <ui-accordion-item value="shipping" heading="What are the shipping options?">
@@ -21,12 +21,12 @@
     <docs-code-tabs [html]="singleHtml" [ts]="singleTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Multiple open, custom header template</h2>
     <ui-accordion [multiple]="true">
       <ui-accordion-item value="a">
         <ng-template uiTemplate="header">
-          <span class="font-bold">Custom header markup</span>
+          <span class="font-extrabold">Custom header markup</span>
         </ng-template>
         Any content can go inside a header template, not just plain text.
       </ui-accordion-item>

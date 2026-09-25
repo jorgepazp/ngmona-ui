@@ -1,4 +1,4 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Tabs</h1>
 
   <app-api-table [doc]="api" />
@@ -6,28 +6,28 @@
   <h2 class="text-heading-md text-text-primary">Tab panel</h2>
   <app-api-table [doc]="tabPanelApi" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Horizontal (default), with icons and a disabled tab</h2>
     <ui-tabs>
       <ui-tab-panel value="account" label="Account" [icon]="userIcon">
-        <p class="text-paragraph-sm text-text-subdued !mt-3">Manage your account details here.</p>
+        <p class="text-paragraph-sm text-text-subdued !mt-6">Manage your account details here.</p>
       </ui-tab-panel>
       <ui-tab-panel value="settings" label="Settings" [icon]="settingsIcon">
-        <p class="text-paragraph-sm text-text-subdued !mt-3">Adjust your preferences here.</p>
+        <p class="text-paragraph-sm text-text-subdued !mt-6">Adjust your preferences here.</p>
       </ui-tab-panel>
       <ui-tab-panel value="billing" label="Billing" [disabled]="true">
-        <p class="text-paragraph-sm text-text-subdued !mt-3">This tab is disabled.</p>
+        <p class="text-paragraph-sm text-text-subdued !mt-6">This tab is disabled.</p>
       </ui-tab-panel>
     </ui-tabs>
     <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Vertical, custom label template</h2>
     <ui-tabs orientation="vertical">
       <ui-tab-panel value="overview">
         <ng-template uiTemplate="label">
-          <span class="font-bold">Overview</span>
+          <span class="font-extrabold">Overview</span>
         </ng-template>
         <p class="text-paragraph-sm text-text-subdued">Summary content goes here.</p>
       </ui-tab-panel>

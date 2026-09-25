@@ -57,7 +57,7 @@ export class Tabs {
 
   protected tabButtonClass(panel: TabPanel): string {
     const base =
-      'flex items-center gap-1 !px-3 !py-2 text-label-md cursor-pointer border-none bg-transparent transition-colors disabled:cursor-not-allowed disabled:text-text-disabled';
+      'flex items-center gap-2 !px-6 !py-4 text-label-md cursor-pointer border-none bg-transparent transition-colors disabled:cursor-not-allowed disabled:text-text-disabled';
     const state = this.isActive(panel.value())
       ? 'text-text-active border-b-2 !border-primary-500'
       : 'text-text-subdued hover:text-text-primary border-b-2 border-transparent';

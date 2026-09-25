@@ -18,7 +18,7 @@
       @if (optionTemplate(); as tpl) {
         <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: option, index: i, selected: isSelected(option) }"></ng-container>
       } @else {
-        <span class="flex gap-0.5 items-center select-none">
+        <span class="flex gap-1 items-center select-none">
           @if (isSelected(option)) {
             <svg class="text-icon-active" [lucideIcon]="checkIcon" [size]="16"></svg>
           }
@@ -30,7 +30,7 @@
 </div>
 
 @if (paginator()) {
-  <ui-paginator class="mt-2 block" [pageCount]="pageCount()" [page]="page()" (pageChange)="page.set($event)"></ui-paginator>
+  <ui-paginator class="mt-4 block" [pageCount]="pageCount()" [page]="page()" (pageChange)="page.set($event)"></ui-paginator>
 }
 
 @if (footerTemplate(); as tpl) {

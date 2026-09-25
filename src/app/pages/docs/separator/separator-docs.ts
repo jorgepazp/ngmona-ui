@@ -13,7 +13,7 @@ export default class SeparatorDocs {
   protected readonly api = separatorApi;
 
   protected readonly horizontalHtml = `<p>Section one content.</p>
-<ui-separator classNames="my-3"></ui-separator>
+<ui-separator classNames="my-6"></ui-separator>
 <p>Section two content.</p>`;
 
   protected readonly horizontalTs = `import { Component } from '@angular/core';
@@ -26,7 +26,7 @@ import { Separator } from './ui/separator/separator';
 })
 export class Sections {}`;
 
-  protected readonly verticalHtml = `<div class="flex items-center gap-3">
+  protected readonly verticalHtml = `<div class="flex items-center gap-6">
   <span>Profile</span>
   <ui-separator orientation="vertical"></ui-separator>
   <span>Settings</span>
@@ -45,7 +45,7 @@ import { Separator } from './ui/separator/separator';
 export class NavLinks {}`;
 
   protected readonly semanticHtml = `<p>An article's content ends here.</p>
-<ui-separator [decorative]="false" classNames="my-3"></ui-separator>
+<ui-separator [decorative]="false" classNames="my-6"></ui-separator>
 <p>Related articles begin below, meaningfully separated from the above.</p>`;
 
   protected readonly semanticTs = `import { Component } from '@angular/core';

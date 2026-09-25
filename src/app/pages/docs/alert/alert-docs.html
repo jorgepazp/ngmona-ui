@@ -1,11 +1,11 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Alert</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Types</h2>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-4">
       <ui-alert type="info" heading="Heads up">This is an informational message.</ui-alert>
       <ui-alert type="success" heading="Saved">Your changes were saved successfully.</ui-alert>
       <ui-alert type="warning" heading="Careful">Double-check that before continuing.</ui-alert>
@@ -16,7 +16,7 @@
     <docs-code-tabs [html]="typesHtml" [ts]="typesTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Dismissible</h2>
     @if (dismissibleShown()) {
       <ui-alert type="warning" [dismissible]="true" (dismissed)="dismissibleShown.set(false)">
@@ -30,7 +30,7 @@
     <docs-code-tabs [html]="dismissibleHtml" [ts]="dismissibleTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">With actions</h2>
     <ui-alert type="error" heading="Payment failed">
       Your card was declined. Try again or use a different payment method.

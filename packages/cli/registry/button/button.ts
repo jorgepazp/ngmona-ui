@@ -57,7 +57,7 @@ export class Button {
 
   protected readonly buttonClass = computed(() => {
     const variant = this.variant();
-    const base = `select-none flex font-medium justify-center relative items-center transition-colors cursor-pointer disabled:cursor-not-allowed rounded h-min whitespace-nowrap ${this.sizeClass()} !outline outline-transparent !outline-2 outline-offset-2  `;
+    const base = `select-none flex font-semibold justify-center relative items-center transition-colors cursor-pointer disabled:cursor-not-allowed rounded h-min whitespace-nowrap ${this.sizeClass()} !outline outline-transparent !outline-2 outline-offset-2  `;
 
     switch (variant) {
       case 'secondary':
@@ -80,14 +80,14 @@ export class Button {
     }
     switch (this.size()) {
       case 'xl':
-        return 'text-label-xl !py-2 !px-4';
+        return 'text-label-xl !py-4 !px-8';
       case 'md':
-        return 'text-label-md !py-1 !px-3';
+        return 'text-label-md !py-2 !px-6';
       case 'sm':
-        return 'text-label-xs !py-1 !px-2';
+        return 'text-label-xs !py-2 !px-4';
       case 'default':
       default:
-        return 'text-label-lg py-1.5 !px-3';
+        return 'text-label-lg py-3 !px-6';
     }
   }
 

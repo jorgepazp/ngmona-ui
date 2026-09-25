@@ -1,9 +1,9 @@
 <nav [attr.aria-label]="ariaLabel()" [class]="navClass()">
-  <ol class="flex flex-wrap items-center gap-1 text-label-md">
+  <ol class="flex flex-wrap items-center gap-2 text-label-md">
     @for (item of items(); track item; let last = $last, i = $index) {
-      <li class="flex items-center gap-1">
+      <li class="flex items-center gap-2">
         @if (last) {
-          <span class="flex items-center gap-1 text-text-primary" aria-current="page">
+          <span class="flex items-center gap-2 text-text-primary" aria-current="page">
             @if (item.icon; as ic) {
               <svg [lucideIcon]="ic" [size]="14"></svg>
             }

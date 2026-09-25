@@ -12,7 +12,7 @@
   @if (loading()) {
     <svg [lucideIcon]="loaderIcon" class="animate-spin block absolute" [size]="16"></svg>
   }
-  <div [class]="loading() ? 'invisible' : 'flex justify-center items-center gap-1'">
+  <div [class]="loading() ? 'invisible' : 'flex justify-center items-center gap-2'">
     @if (icon(); as ic) {
       @if (iconPos() === 'left') {
         <svg [lucideIcon]="ic" [size]="16"></svg>

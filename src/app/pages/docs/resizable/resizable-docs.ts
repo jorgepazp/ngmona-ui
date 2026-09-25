@@ -13,7 +13,7 @@ import { ResizablePaneDirective } from '../../../registry/resizable/resizable-pa
 export default class ResizableDocs {
   protected readonly api = resizableApi;
 
-  protected readonly horizontalHtml = `<ui-resizable direction="horizontal" classNames="h-64">
+  protected readonly horizontalHtml = `<ui-resizable direction="horizontal" classNames="h-128">
   <div uiResizablePane [defaultSize]="30" [minSize]="15">Sidebar</div>
   <div uiResizablePane [defaultSize]="70" [minSize]="30">Main content</div>
 </ui-resizable>`;
@@ -29,7 +29,7 @@ import { ResizablePaneDirective } from './ui/resizable/resizable-pane.directive'
 })
 export class SplitView {}`;
 
-  protected readonly verticalHtml = `<ui-resizable direction="vertical" classNames="h-96">
+  protected readonly verticalHtml = `<ui-resizable direction="vertical" classNames="h-192">
   <div uiResizablePane [minSize]="10">Header</div>
   <div uiResizablePane [minSize]="20">Body</div>
   <div uiResizablePane [minSize]="10">Footer</div>

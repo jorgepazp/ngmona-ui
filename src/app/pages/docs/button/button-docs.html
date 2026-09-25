@@ -1,11 +1,11 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Button</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Variants</h2>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-6">
       <ui-button variant="primary">Primary</ui-button>
       <ui-button variant="secondary">Secondary</ui-button>
       <ui-button variant="tertiary">Tertiary</ui-button>
@@ -14,9 +14,9 @@
     <docs-code-tabs [html]="variantsHtml" [ts]="variantsTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">States</h2>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-6">
       <ui-button [disabled]="true">Disabled</ui-button>
       <ui-button [loading]="true">Loading</ui-button>
       <ui-button [icon]="downloadIcon" iconPos="left">With icon</ui-button>
@@ -24,9 +24,9 @@
     <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Sizes</h2>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-6">
       <ui-button size="sm">Small</ui-button>
       <ui-button size="md">Medium</ui-button>
       <ui-button size="default">Default</ui-button>
@@ -35,9 +35,9 @@
     <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
 
-  <section class="flex flex-col gap-3 bg-neutral-500 p-4 rounded">
+  <section class="flex flex-col gap-6 bg-neutral-500 p-8 rounded">
     <h2 class="text-label-lg text-white">Inverse (on dark surface)</h2>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-6">
       <ui-button [inverse]="true">Primary</ui-button>
       <ui-button variant="secondary" [inverse]="true">Secondary</ui-button>
       <ui-button variant="tertiary" [inverse]="true">Tertiary</ui-button>

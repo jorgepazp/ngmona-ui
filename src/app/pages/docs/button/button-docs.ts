@@ -65,7 +65,7 @@ import { Button } from './ui/button/button';
 })
 export class ButtonSizes {}`;
 
-  protected readonly inverseHtml = `<div class="bg-neutral-500 p-4 rounded">
+  protected readonly inverseHtml = `<div class="bg-neutral-500 p-8 rounded">
   <ui-button [inverse]="true">Primary</ui-button>
   <ui-button variant="secondary" [inverse]="true">Secondary</ui-button>
   <ui-button variant="tertiary" [inverse]="true">Tertiary</ui-button>

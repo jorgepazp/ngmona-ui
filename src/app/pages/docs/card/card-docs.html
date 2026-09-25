@@ -1,11 +1,11 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Card</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Shadow</h2>
-    <div class="flex items-start gap-4">
+    <div class="flex items-start gap-8">
       <ui-card shadow="hover">
         <p class="text-paragraph-sm text-text-primary">Hover (default)</p>
         <p class="text-paragraph-sm text-text-subdued">Shadow appears on hover.</p>
@@ -22,7 +22,7 @@
     <docs-code-tabs [html]="shadowHtml" [ts]="shadowTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Custom classes</h2>
     <ui-card classNames="max-w-xs bg-surface-light">
       <p class="text-paragraph-sm text-text-primary">classNames lets you extend or override layout/spacing.</p>

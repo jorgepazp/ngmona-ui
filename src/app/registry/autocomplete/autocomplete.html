@@ -1,5 +1,5 @@
 @if (label()) {
-  <label [attr.for]="resolvedId()" class="relative block mb-0.5 text-sm font-medium text-neutral-500">{{ label() }}</label>
+  <label [attr.for]="resolvedId()" class="relative block mb-1 text-sm font-semibold text-neutral-500">{{ label() }}</label>
 }
 
 <div class="relative">
@@ -20,7 +20,7 @@
     (focus)="onFocus()"
     (blur)="onBlur()"
     (keydown)="onTriggerKeydown($event)"
-    class="w-full text-label-sm h-6 text-left transition-all appearance-none bg-surface-white cursor-text outline-transparent border-neutral-100 hover:border-neutral-300 !border border-solid text-neutral-500 rounded !px-2 !py-1.5 !outline !outline-[1.5px] focus:!outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 disabled:cursor-not-allowed"
+    class="w-full text-label-sm h-12 text-left transition-all appearance-none bg-surface-white cursor-text outline-transparent border-neutral-100 hover:border-neutral-300 !border border-solid text-neutral-500 rounded !px-4 !py-3 !outline !outline-[1.5px] focus:!outline-neutral-800 disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 disabled:cursor-not-allowed"
   />
 
   <ng-template #panel>
@@ -32,7 +32,7 @@
       (mousedown)="$event.preventDefault()"
       (mouseenter)="hoveringPanel = true"
       (mouseleave)="hoveringPanel = false"
-      class="pl-0 !m-0 bg-surface-white border border-border-neutral rounded shadow-card !py-0.5 overflow-y-auto max-h-52 list-none"
+      class="pl-0 !m-0 bg-surface-white border border-border-neutral rounded shadow-card !py-1 overflow-y-auto max-h-104 list-none"
     >
       @for (item of filteredSuggestions(); track item; let i = $index) {
         <li
@@ -41,17 +41,17 @@
           [attr.aria-selected]="i === activeIndex()"
           (click)="selectSuggestion(item)"
           [class]="i === activeIndex() ? 'bg-neutral-300 ' : ''"
-          class="flex items-center !px-2 !py-1 select-none cursor-pointer hover:bg-surface-hover text-neutral-500 text-label-sm"
+          class="flex items-center !px-4 !py-2 select-none cursor-pointer hover:bg-surface-hover text-neutral-500 text-label-sm"
         >
           <span class="truncate">{{ item }}</span>
         </li>
       } @empty {
-        <li class="!px-2 !py-1 text-label-sm text-neutral-100 select-none">No suggestions</li>
+        <li class="!px-4 !py-2 text-label-sm text-neutral-100 select-none">No suggestions</li>
       }
     </ul>
   </ng-template>
 
   @if (caption()) {
-    <small class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+    <small class="mt-1 text-xs text-neutral-300 block">{{ caption() }}</small>
   }
 </div>
