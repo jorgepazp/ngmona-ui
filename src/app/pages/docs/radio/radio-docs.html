@@ -1,9 +1,9 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Radio</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-2">
+  <section class="flex flex-col gap-4">
     <ui-radio name="group" value="a" [checked]="picked() === 'a'" (selected)="picked.set('a')" label="Option A"></ui-radio>
     <ui-radio name="group" value="b" [checked]="picked() === 'b'" (selected)="picked.set('b')" label="Option B"></ui-radio>
     <ui-radio name="group" value="c" [checked]="picked() === 'c'" (selected)="picked.set('c')" label="Disabled" [disabled]="true"></ui-radio>

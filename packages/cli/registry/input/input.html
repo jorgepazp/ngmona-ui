@@ -1,10 +1,10 @@
 <div [class]="classNames()">
   @if (labelTemplate(); as tpl) {
-    <div class="mb-0.5 text-text-primary text-xs font-medium flex justify-between">
+    <div class="mb-1 text-text-primary text-xs font-semibold flex justify-between">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (label()) {
-    <label [attr.for]="resolvedId()" class="mb-0.5 text-text-primary text-xs font-medium block">{{ label() }}</label>
+    <label [attr.for]="resolvedId()" class="mb-1 text-text-primary text-xs font-semibold block">{{ label() }}</label>
   }
 
   <div class="relative w-full group">
@@ -26,8 +26,8 @@
       [type]="resolvedType()"
       [value]="value()"
       [placeholder]="placeholder()"
-      class="custom-input transition-all !px-2 !py-1 text-label-md text-text-primary h-6 rounded ring-0 border-neutral-100 !border placeholder:text-neutral-300 placeholder:font-regular w-full disabled:placeholder:text-text-subdued disabled:group-hover:!border-border-neutral-medium !border-solid group-hover:border-neutral-300 font-medium outline outline-transparent focus:!border-transparent focus:outline-border-neutral disabled:bg-surface-disabled/80 disabled:border-surface-dark disabled:text-text-subdued"
-      [class]="(state() === 'success' ? '!border-success ' : state() === 'warning' ? '!border-warning ' : state() === 'error' ? '!border-danger ' : '') + (type() === 'password' && !showPassword() && value() ? 'text-xl tracking-widest ' : '') + (iconPos() === 'left' ? '!pl-5' : '')"
+      class="custom-input transition-all !px-4 !py-2 text-label-md text-text-primary h-12 rounded ring-0 border-neutral-100 !border placeholder:text-neutral-300 placeholder:font-normal w-full disabled:placeholder:text-text-subdued disabled:group-hover:!border-border-neutral-medium !border-solid group-hover:border-neutral-300 font-semibold outline outline-transparent focus:!border-transparent focus:outline-border-neutral disabled:bg-surface-disabled/80 disabled:border-surface-dark disabled:text-text-subdued"
+      [class]="(state() === 'success' ? '!border-success ' : state() === 'warning' ? '!border-warning ' : state() === 'error' ? '!border-danger ' : '') + (type() === 'password' && !showPassword() && value() ? 'text-xl tracking-widest ' : '') + (iconPos() === 'left' ? '!pl-10' : '')"
       (input)="onInputEvent($event)"
       (keypress)="avoidUnwantedChars($event)"
       (focus)="onFocus($event)"
@@ -37,7 +37,7 @@
     @if (hasFocus() && searchIn()) {
       <button
         type="button"
-        class="text-xl text-neutral cursor-pointer absolute right-2 top-1 bottom-1 flex justify-center items-center"
+        class="text-xl text-neutral cursor-pointer absolute right-4 top-2 bottom-2 flex justify-center items-center"
         aria-label="Clear"
         (click)="clearInput()"
       >
@@ -45,8 +45,8 @@
       </button>
     } @else if (icon(); as ic) {
       <span
-        class="pointer-events-none transition-all absolute top-1 bottom-1 flex justify-center items-center text-text-primary"
-        [class]="(state() === 'success' ? '!text-success ' : state() === 'warning' ? '!text-warning ' : state() === 'error' ? '!text-danger ' : '') + (iconPos() === 'left' && type() !== 'password' ? 'left-2' : 'right-2')"
+        class="pointer-events-none transition-all absolute top-2 bottom-2 flex justify-center items-center text-text-primary"
+        [class]="(state() === 'success' ? '!text-success ' : state() === 'warning' ? '!text-warning ' : state() === 'error' ? '!text-danger ' : '') + (iconPos() === 'left' && type() !== 'password' ? 'left-4' : 'right-4')"
       >
         <svg [lucideIcon]="ic" [size]="16"></svg>
       </span>
@@ -55,7 +55,7 @@
     @if (type() === 'password') {
       <button
         type="button"
-        class="cursor-pointer transition-all absolute right-2 top-1 bottom-1 flex justify-center items-center text-neutral-900"
+        class="cursor-pointer transition-all absolute right-4 top-2 bottom-2 flex justify-center items-center text-neutral-900"
         [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
         [attr.aria-pressed]="showPassword()"
         (click)="showPassword.set(!showPassword())"
@@ -72,14 +72,14 @@
         animate.leave="ui-anim-fade-leave"
         (mouseenter)="hoveringSuggestions = true"
         (mouseleave)="hoveringSuggestions = false"
-        class="absolute !p-0.5 flex flex-col bg-surface-white w-full top-full z-20 mt-0.5 max-h-32 rounded border-border-neutral border"
+        class="absolute !p-1 flex flex-col bg-surface-white w-full top-full z-20 mt-1 max-h-64 rounded border-border-neutral border"
       >
         <ul class="overflow-y-auto list-none px-0 mb-0">
           @for (item of suggestions(); track item) {
             <li
               role="option"
               [attr.aria-selected]="item === value()"
-              class="w-full !p-1 cursor-pointer select-none transition-colors hover:bg-surface-hover/60 text-text-primary text-label-md"
+              class="w-full !p-2 cursor-pointer select-none transition-colors hover:bg-surface-hover/60 text-text-primary text-label-md"
               (click)="selectSuggestion(item)"
             >
               {{ item }}
@@ -91,10 +91,10 @@
   </div>
 
   @if (captionTemplate(); as tpl) {
-    <div [id]="captionId()" class="mt-0.5 text-xs text-neutral-300">
+    <div [id]="captionId()" class="mt-1 text-xs text-neutral-300">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (caption()) {
-    <small [id]="captionId()" class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+    <small [id]="captionId()" class="mt-1 text-xs text-neutral-300 block">{{ caption() }}</small>
   }
 </div>

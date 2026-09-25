@@ -1,5 +1,5 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
-  <div class="flex flex-col gap-2">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
+  <div class="flex flex-col gap-4">
     <h1 class="text-heading-xl text-text-primary">Usage</h1>
     <p class="text-paragraph text-text-subdued">
       Once a component has been added to your project, use it the same way as any other
@@ -7,13 +7,13 @@
     </p>
   </div>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Importing a component</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Add the component class to your own component's <code>imports</code> array and reference
       its selector in the template.
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>import &#123; Component &#125; from '&#64;angular/core';
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>import &#123; Component &#125; from '&#64;angular/core';
 import &#123; Button &#125; from './ui/button/button';
 
 &#64;Component(&#123;
@@ -24,14 +24,14 @@ import &#123; Button &#125; from './ui/button/button';
 export class Toolbar &#123;&#125;</code></pre>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Inputs, outputs and two-way bindings</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Components expose configuration through Angular signal inputs. State that a component can
       also change itself, such as a checkbox's checked state, is exposed as a model and can be
       bound either way:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&lt;!-- two-way --&gt;
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&lt;!-- two-way --&gt;
 &lt;ui-checkbox [(checked)]="isChecked" /&gt;
 
 &lt;!-- one-way, with explicit change handling --&gt;
@@ -42,19 +42,19 @@ export class Toolbar &#123;&#125;</code></pre>
     </p>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Icons</h2>
     <p class="text-paragraph-sm text-text-subdued">
       Components that accept an icon expect a <code>LucideIcon</code> reference from
       <code>&#64;lucide/angular</code>, not a name string:
     </p>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>import &#123; LucideHeart &#125; from '&#64;lucide/angular';
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>import &#123; LucideHeart &#125; from '&#64;lucide/angular';
 
 protected readonly heartIcon = LucideHeart;</code></pre>
-    <pre class="bg-surface-medium border border-divider rounded p-3 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&lt;ui-button variant="icon" [icon]="heartIcon" ariaLabel="Like" /&gt;</code></pre>
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&lt;ui-button variant="icon" [icon]="heartIcon" ariaLabel="Like" /&gt;</code></pre>
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Editing a component</h2>
     <p class="text-paragraph-sm text-text-subdued">
       <code>ngmona-ui add</code> copies source files rather than installing a package, so

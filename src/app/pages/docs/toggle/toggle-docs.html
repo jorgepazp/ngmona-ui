@@ -1,18 +1,18 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Toggle</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Two-way binding</h2>
     <ui-toggle [(checked)]="on" ariaLabel="Enable notifications"></ui-toggle>
     <p class="text-paragraph-sm text-text-subdued">on = {{ on() }}</p>
     <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Colors</h2>
-    <div class="flex gap-3 items-center">
+    <div class="flex gap-6 items-center">
       <ui-toggle [checked]="true" color="default"></ui-toggle>
       <ui-toggle [checked]="true" color="info"></ui-toggle>
       <ui-toggle [checked]="true" color="success"></ui-toggle>
@@ -22,9 +22,9 @@
     <docs-code-tabs [html]="colorsHtml" [ts]="colorsTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Sizes &amp; states</h2>
-    <div class="flex gap-3 items-center">
+    <div class="flex gap-6 items-center">
       <ui-toggle [checked]="true" size="default"></ui-toggle>
       <ui-toggle [checked]="true" size="lg"></ui-toggle>
       <ui-toggle [disabled]="true"></ui-toggle>

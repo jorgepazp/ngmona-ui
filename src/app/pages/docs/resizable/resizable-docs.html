@@ -1,4 +1,4 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Resizable</h1>
 
   <app-api-table [doc]="api" />
@@ -8,9 +8,9 @@
     needs an explicit height from its container: set it via <code>classNames</code>.
   </p>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Horizontal, 2 panes</h2>
-    <ui-resizable direction="horizontal" classNames="h-64">
+    <ui-resizable direction="horizontal" classNames="h-128">
       <div uiResizablePane [defaultSize]="30" [minSize]="15" class="flex items-center justify-center bg-neutral-100 text-text-subdued text-label-md">
         Sidebar
       </div>
@@ -21,9 +21,9 @@
     <docs-code-tabs [html]="horizontalHtml" [ts]="horizontalTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Vertical, 3 panes</h2>
-    <ui-resizable direction="vertical" classNames="h-96">
+    <ui-resizable direction="vertical" classNames="h-192">
       <div uiResizablePane [minSize]="10" class="flex items-center justify-center bg-neutral-100 text-text-subdued text-label-md">
         Header
       </div>

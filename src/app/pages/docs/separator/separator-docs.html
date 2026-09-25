@@ -1,21 +1,21 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Separator</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Horizontal (decorative, default)</h2>
     <div class="text-text-primary">
       <p>Section one content.</p>
-      <ui-separator classNames="my-3"></ui-separator>
+      <ui-separator classNames="my-6"></ui-separator>
       <p>Section two content.</p>
     </div>
     <docs-code-tabs [html]="horizontalHtml" [ts]="horizontalTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Vertical</h2>
-    <div class="flex items-center h-6 gap-3 text-text-primary">
+    <div class="flex items-center h-12 gap-6 text-text-primary">
       <span>Profile</span>
       <ui-separator orientation="vertical"></ui-separator>
       <span>Settings</span>
@@ -25,11 +25,11 @@
     <docs-code-tabs [html]="verticalHtml" [ts]="verticalTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Semantic (non-decorative)</h2>
     <div class="text-text-primary">
       <p>An article's content ends here.</p>
-      <ui-separator [decorative]="false" classNames="my-3"></ui-separator>
+      <ui-separator [decorative]="false" classNames="my-6"></ui-separator>
       <p>Related articles begin below, meaningfully separated from the above.</p>
     </div>
     <docs-code-tabs [html]="semanticHtml" [ts]="semanticTs" />

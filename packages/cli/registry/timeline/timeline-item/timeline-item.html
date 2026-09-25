@@ -1,16 +1,16 @@
-<li class="ml-[18px] relative list-none" [class.pb-4]="!isLast()">
-  <span class="block absolute z-10 w-2 h-full -left-3 " [class.hidden]="!isLast()" aria-hidden="true"></span>
+<li class="ml-[18px] relative list-none" [class.pb-8]="!isLast()">
+  <span class="block absolute z-10 w-4 h-full -left-6 " [class.hidden]="!isLast()" aria-hidden="true"></span>
   <span class="block absolute -left-[18px] w-px bg-surface-light h-full" aria-hidden="true"></span>
-  <span class="absolute z-20 flex items-center justify-center mt-[3px] -left-3 ring-[6px] ring-surface-white rounded-full">
+  <span class="absolute z-20 flex items-center justify-center mt-[3px] -left-6 ring-[6px] ring-surface-white rounded-full">
     @if (markerTemplate(); as tpl) {
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     } @else if (activeMarker()) {
-      <span class="w-1.5 h-1.5 rounded-full bg-primary-500 " aria-hidden="true"></span>
+      <span class="w-3 h-3 rounded-full bg-primary-500 " aria-hidden="true"></span>
     } @else {
       <svg lucideCircle [size]="10" class="text-text-primary bg-surface-white rounded-full" aria-hidden="true"></svg>
     }
   </span>
-  <h3 class="text-label-sm text-text-primary text font-bold">
+  <h3 class="text-label-sm text-text-primary text font-extrabold">
     @if (titleTemplate(); as tpl) {
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     } @else {

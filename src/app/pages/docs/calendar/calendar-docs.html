@@ -1,9 +1,9 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Calendar</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Two-way binding</h2>
     <ui-calendar [(selected)]="selectedDate"></ui-calendar>
     <p class="text-paragraph-sm text-text-subdued">
@@ -12,19 +12,19 @@
     <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Deselectable, weekends disabled</h2>
     <ui-calendar [canDeselectDate]="true" [disabledWeekdays]="[0, 6]"></ui-calendar>
     <docs-code-tabs [html]="weekendsHtml" [ts]="weekendsTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Bounded to the next 3 months, past dates allowed</h2>
     <ui-calendar [minEnabledDate]="minDate" [maxEnabledDate]="maxDate" [canSelectPreviousDates]="true"></ui-calendar>
     <docs-code-tabs [html]="boundedHtml" [ts]="boundedTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Disabled</h2>
     <ui-calendar [disabled]="true"></ui-calendar>
     <docs-code-tabs [html]="disabledHtml" [ts]="disabledTs" />

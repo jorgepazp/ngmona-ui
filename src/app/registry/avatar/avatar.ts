@@ -54,7 +54,7 @@ export class Avatar {
   });
 
   protected readonly avatarClass = computed(() => {
-    const base = `relative inline-flex items-center justify-center shrink-0 select-none font-medium ${this.shapeClass()} ${this.sizeClass()}`;
+    const base = `relative inline-flex items-center justify-center shrink-0 select-none font-semibold ${this.shapeClass()} ${this.sizeClass()}`;
     return `${base} ${this.showImage() ? 'bg-neutral-100' : this.variantClass()} ${this.classNames()}`;
   });
 
@@ -87,20 +87,20 @@ export class Avatar {
 
   private sizeClass(): string {
     const map: Record<AvatarSize, string> = {
-      sm: 'w-3 h-3 text-caption',
-      md: 'w-4 h-4 text-label-xs',
-      lg: 'w-5 h-5 text-label-sm',
-      xl: 'w-6 h-6 text-label-md',
+      sm: 'w-6 h-6 text-caption',
+      md: 'w-8 h-8 text-label-xs',
+      lg: 'w-10 h-10 text-label-sm',
+      xl: 'w-12 h-12 text-label-md',
     };
     return map[this.size()];
   }
 
   private statusSizeClass(): string {
     const map: Record<AvatarSize, string> = {
-      sm: 'w-1 h-1 border',
-      md: 'w-1.5 h-1.5 border-2',
-      lg: 'w-1.5 h-1.5 border-2',
-      xl: 'w-2 h-2 border-2',
+      sm: 'w-2 h-2 border',
+      md: 'w-3 h-3 border-2',
+      lg: 'w-3 h-3 border-2',
+      xl: 'w-4 h-4 border-2',
     };
     return `absolute bottom-0 right-0 rounded-full border-surface-white ${map[this.size()]}`;
   }

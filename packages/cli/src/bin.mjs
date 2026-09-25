@@ -25,7 +25,8 @@ program
   .command('init')
   .description('Initialize a theme in the current project')
   .option('-y, --yes', 'skip prompts, use defaults', false)
-  .action((opts) => initCommand({ cwd: process.cwd(), packageRoot, yes: opts.yes }));
+  .option('--prefix <prefix>', 'Tailwind class prefix your project uses (e.g. "tw" for prefix(tw)); components are rewritten to use it')
+  .action((opts) => initCommand({ cwd: process.cwd(), packageRoot, yes: opts.yes, prefix: opts.prefix }));
 
 program
   .command('add')

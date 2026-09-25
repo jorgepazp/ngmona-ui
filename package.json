@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:cli": "npm test -w ngmona-ui",
+    "test:prefix-smoke": "node scripts/prefix-smoke.mjs",
     "api-docs": "node scripts/generate-api-docs.mjs",
     "theme:generate": "node scripts/generate-theme.mjs",
     "registry:build": "node packages/cli/scripts/build-registry.mjs",

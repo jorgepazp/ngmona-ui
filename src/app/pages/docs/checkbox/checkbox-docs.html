@@ -1,16 +1,16 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Checkbox</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Two-way binding</h2>
     <ui-checkbox [(checked)]="isChecked" label="Accept terms"></ui-checkbox>
     <p class="text-paragraph-sm text-text-subdued">checked = {{ isChecked() }}</p>
     <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">States</h2>
     <ui-checkbox label="Unchecked"></ui-checkbox>
     <ui-checkbox [checked]="true" label="Checked"></ui-checkbox>

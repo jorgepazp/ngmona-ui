@@ -1,4 +1,4 @@
-<div class="p-8 flex flex-col gap-10 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-20 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Tooltip</h1>
 
   <app-api-table [doc]="api" />
@@ -10,12 +10,12 @@
   </p>
   <app-api-table [doc]="directiveApi" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Positions (hover or focus the buttons)</h2>
-    <div class="flex items-center gap-8 py-12">
+    <div class="flex items-center gap-16 py-24">
       <button
         type="button"
-        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        class="rounded border border-solid border-border-neutral-medium px-6 py-3 text-label-md"
         uiTooltip="Tooltip above"
         position="above"
       >
@@ -23,7 +23,7 @@
       </button>
       <button
         type="button"
-        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        class="rounded border border-solid border-border-neutral-medium px-6 py-3 text-label-md"
         uiTooltip="Tooltip below"
         position="below"
       >
@@ -31,7 +31,7 @@
       </button>
       <button
         type="button"
-        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        class="rounded border border-solid border-border-neutral-medium px-6 py-3 text-label-md"
         uiTooltip="Tooltip to the left"
         position="left"
       >
@@ -39,7 +39,7 @@
       </button>
       <button
         type="button"
-        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        class="rounded border border-solid border-border-neutral-medium px-6 py-3 text-label-md"
         uiTooltip="Tooltip to the right"
         position="right"
       >
@@ -49,12 +49,12 @@
     <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">With a heading</h2>
-    <div class="py-6">
+    <div class="py-12">
       <button
         type="button"
-        class="rounded border border-solid border-border-neutral-medium px-3 py-1.5 text-label-md"
+        class="rounded border border-solid border-border-neutral-medium px-6 py-3 text-label-md"
         uiTooltip="Titles help scan longer tooltip content."
         heading="Did you know?"
         position="below"

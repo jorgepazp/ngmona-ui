@@ -42,7 +42,7 @@ export class Faq {}`;
   protected readonly multipleHtml = `<ui-accordion [multiple]="true">
   <ui-accordion-item value="a">
     <ng-template uiTemplate="header">
-      <span class="font-bold">Custom header markup</span>
+      <span class="font-extrabold">Custom header markup</span>
     </ng-template>
     Any content can go inside a header template, not just plain text.
   </ui-accordion-item>

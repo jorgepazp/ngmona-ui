@@ -8,6 +8,8 @@
 # esbuild bundle for the CLI (rebuilt via `npm run build` in packages/cli — see package.json
 # "prepack"). registry.json + registry/ in the same package ARE versioned; only dist/ isn't.
 /packages/cli/dist
+# Throwaway consumer projects the CLI's acceptance tests install components into.
+/packages/cli/.test-fixtures
 
 # Node
 /node_modules

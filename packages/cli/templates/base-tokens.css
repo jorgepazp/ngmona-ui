@@ -8,10 +8,10 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
-  /* Spacing primitive: original config generated an 8px grid (index * 8px) up to index 64.
-     Tailwind v4 multiplies every spacing utility by this single base value, so setting
-     it to 8px reproduces that whole scale (and beyond) without enumerating each step. */
-  --spacing: 8px;
+  /* Spacing primitive: Tailwind v4's own default (0.25rem = 4px at the default root size), so
+     `p-4` means the same thing here as in any other Tailwind project and ngmona can share one
+     theme with a host app. Every spacing utility is a multiple of this single value. */
+  --spacing: 0.25rem;
 
   /* Border-radius primitive: everything below derives from --radius-base via calc(), so
      dialing one value rescales every rounded-* utility in the app. Calibrated so the default
@@ -61,29 +61,25 @@
   --text-display-sm--font-weight: var(--font-weight-black);
   --text-display-sm--letter-spacing: var(--letter-spacing-base);
 
-  /* Heading's 700 weight is left as a literal on purpose: no existing --font-weight-* alias sits
-     at exactly 700 (medium:600, bold:800 bracket it), and inventing a usage-specific alias just
-     for this cluster would blur the naming convention (magnitude, not usage) for the rest of the
-     scale. */
   --text-heading-xl: 2rem;
   --text-heading-xl--line-height: 38px;
-  --text-heading-xl--font-weight: 700;
+  --text-heading-xl--font-weight: var(--font-weight-bold);
   --text-heading-xl--letter-spacing: var(--letter-spacing-base);
   --text-heading-lg: 1.5rem;
   --text-heading-lg--line-height: 30px;
-  --text-heading-lg--font-weight: 700;
+  --text-heading-lg--font-weight: var(--font-weight-bold);
   --text-heading-lg--letter-spacing: var(--letter-spacing-base);
   --text-heading-md: 1.25rem;
   --text-heading-md--line-height: 24px;
-  --text-heading-md--font-weight: 700;
+  --text-heading-md--font-weight: var(--font-weight-bold);
   --text-heading-md--letter-spacing: var(--letter-spacing-base);
   --text-heading-sm: 1.125rem;
   --text-heading-sm--line-height: 22px;
-  --text-heading-sm--font-weight: 700;
+  --text-heading-sm--font-weight: var(--font-weight-bold);
   --text-heading-sm--letter-spacing: var(--letter-spacing-base);
   --text-heading-xs: 1rem;
   --text-heading-xs--line-height: 20px;
-  --text-heading-xs--font-weight: 700;
+  --text-heading-xs--font-weight: var(--font-weight-bold);
   --text-heading-xs--letter-spacing: var(--letter-spacing-base);
 
   --text-paragraph-lg: 1.125rem;
@@ -102,44 +98,48 @@
 
   --text-link-lg: 1.125rem;
   --text-link-lg--line-height: 26px;
-  --text-link-lg--font-weight: var(--font-weight-normal);
+  --text-link-lg--font-weight: var(--font-weight-medium);
   --text-link-lg--letter-spacing: var(--letter-spacing-base);
   --text-link: 1rem;
   --text-link--line-height: 22px;
-  --text-link--font-weight: var(--font-weight-normal);
+  --text-link--font-weight: var(--font-weight-medium);
   --text-link--letter-spacing: var(--letter-spacing-base);
   --text-link-sm: 0.875rem;
   --text-link-sm--line-height: 20px;
-  --text-link-sm--font-weight: var(--font-weight-normal);
+  --text-link-sm--font-weight: var(--font-weight-medium);
   --text-link-sm--letter-spacing: var(--letter-spacing-base);
 
   --text-label-xl: 1.125rem;
   --text-label-xl--line-height: 24px;
-  --text-label-xl--font-weight: var(--font-weight-normal);
+  --text-label-xl--font-weight: var(--font-weight-medium);
   --text-label-xl--letter-spacing: var(--letter-spacing-base);
   --text-label-lg: 1rem;
   --text-label-lg--line-height: 24px;
-  --text-label-lg--font-weight: var(--font-weight-normal);
+  --text-label-lg--font-weight: var(--font-weight-medium);
   --text-label-lg--letter-spacing: var(--letter-spacing-base);
   --text-label-md: 0.875rem;
   --text-label-md--line-height: 24px;
-  --text-label-md--font-weight: var(--font-weight-normal);
+  --text-label-md--font-weight: var(--font-weight-medium);
   --text-label-md--letter-spacing: var(--letter-spacing-base);
   --text-label-sm: 0.875rem;
   --text-label-sm--line-height: 20px;
-  --text-label-sm--font-weight: var(--font-weight-normal);
+  --text-label-sm--font-weight: var(--font-weight-medium);
   --text-label-sm--letter-spacing: var(--letter-spacing-base);
   --text-label-xs: 0.75rem;
   --text-label-xs--line-height: 16px;
-  --text-label-xs--font-weight: var(--font-weight-normal);
+  --text-label-xs--font-weight: var(--font-weight-medium);
   --text-label-xs--letter-spacing: var(--letter-spacing-base);
 
+  /* Font weights: Tailwind v4's own names and values, so `font-medium` is 500 and `font-bold` 700
+     here as in any other Tailwind project. */
   --font-weight-thin: 100;
+  --font-weight-extralight: 200;
   --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-normal: 500;
-  --font-weight-medium: 600;
-  --font-weight-bold: 800;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
   --font-weight-black: 900;
 
   --font-sans: 'Figtree', sans-serif;

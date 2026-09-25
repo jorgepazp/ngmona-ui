@@ -1,15 +1,15 @@
-<div class="p-8 flex flex-col gap-8 max-w-3xl mx-auto">
+<div class="p-16 flex flex-col gap-16 max-w-3xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Textarea</h1>
 
   <app-api-table [doc]="api" />
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <ui-textarea label="Feedback" placeholder="Tell us what you think" [(value)]="text" [maxLength]="140"></ui-textarea>
     <p class="text-paragraph-sm text-text-subdued">length = {{ text().length }}</p>
     <docs-code-tabs [html]="bindingHtml" [ts]="bindingTs" />
   </section>
 
-  <section class="flex flex-col gap-3">
+  <section class="flex flex-col gap-6">
     <ui-textarea label="Disabled" [disabled]="true" placeholder="Can't type here"></ui-textarea>
     <docs-code-tabs [html]="disabledHtml" [ts]="disabledTs" />
   </section>

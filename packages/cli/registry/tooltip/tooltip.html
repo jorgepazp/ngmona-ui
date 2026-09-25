@@ -1,7 +1,7 @@
 <div
   role="tooltip"
   [attr.id]="tooltipId()"
-  class="fixed z-50 max-h-min rounded-lg bg-info-500 !p-2 text-sm font-400 leading-5 tracking-[0.25px] text-white opacity-0 transition-opacity motion-reduce:transition-none {{
+  class="fixed z-50 max-h-min rounded-lg bg-info-500 !p-4 text-sm font-400 leading-10 tracking-[0.25px] text-white opacity-0 transition-opacity motion-reduce:transition-none {{
     positionClass()
   }}"
   [class.opacity-100]="visible()"
@@ -10,11 +10,11 @@
   [style.top.px]="top()"
 >
   <span
-    class="absolute z-10 h-1.5 w-1.5 rotate-45 rounded-sm bg-info-500 {{ caretPositionClass() }}"
+    class="absolute z-10 h-3 w-3 rotate-45 rounded-sm bg-info-500 {{ caretPositionClass() }}"
     aria-hidden="true"
   ></span>
   @if (heading()) {
-    <span class="!mb-1 block text-paragraph-md font-500 text-white">{{ heading() }}</span>
+    <span class="!mb-2 block text-paragraph-md font-500 text-white">{{ heading() }}</span>
   }
   @if (template(); as tpl) {
     <ng-container [ngTemplateOutlet]="tpl"></ng-container>

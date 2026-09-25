@@ -1,10 +1,10 @@
 <div [class]="'flex flex-col ' + classNames()">
   @if (labelTemplate(); as tpl) {
-    <div class="mb-0.5 text-neutral-500 text-xs font-medium flex justify-between">
+    <div class="mb-1 text-neutral-500 text-xs font-semibold flex justify-between">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (label()) {
-    <label [attr.for]="resolvedId()" class="mb-0.5 text-neutral-500 text-xs font-medium block">{{ label() }}</label>
+    <label [attr.for]="resolvedId()" class="mb-1 text-neutral-500 text-xs font-semibold block">{{ label() }}</label>
   }
 
   <textarea
@@ -16,16 +16,16 @@
     [attr.aria-describedby]="caption() || captionTemplate() || maxLength() ? captionId() : null"
     (input)="onInput($event)"
     (blur)="markTouched()"
-    class="border ring-0 transition-all motion-reduce:transition-none resize-none w-full h-14 placeholder:text-neutral-300 placeholder:font-regular !rounded outline outline-transparent outline-[1.5px] focus:outline-neutral-800 appearance-none text-neutral-500 !px-2 !py-1 text-label-md font-medium border-solid focus:border-white disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 border-neutral-100 hover:border-neutral-300 disabled:placeholder:text-neutral-100"
+    class="border ring-0 transition-all motion-reduce:transition-none resize-none w-full h-28 placeholder:text-neutral-300 placeholder:font-normal !rounded outline outline-transparent outline-[1.5px] focus:outline-neutral-800 appearance-none text-neutral-500 !px-4 !py-2 text-label-md font-semibold border-solid focus:border-white disabled:bg-surface-disabled disabled:border-neutral-600 disabled:text-neutral-100 border-neutral-100 hover:border-neutral-300 disabled:placeholder:text-neutral-100"
   ></textarea>
 
   @if (captionTemplate(); as tpl) {
-    <div [id]="captionId()" class="mt-0.5 text-xs text-neutral-300">
+    <div [id]="captionId()" class="mt-1 text-xs text-neutral-300">
       <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: characterCount(), max: maxLength() }"></ng-container>
     </div>
   } @else if (caption()) {
-    <small [id]="captionId()" class="mt-0.5 text-xs text-neutral-300 block">{{ caption() }}</small>
+    <small [id]="captionId()" class="mt-1 text-xs text-neutral-300 block">{{ caption() }}</small>
   } @else if (maxLength()) {
-    <p [id]="captionId()" class="text-caption mt-0.5 text-text-primary">{{ characterCount() }} / {{ maxLength() }}</p>
+    <p [id]="captionId()" class="text-caption mt-1 text-text-primary">{{ characterCount() }} / {{ maxLength() }}</p>
   }
 </div>

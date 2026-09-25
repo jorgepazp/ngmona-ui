@@ -37,14 +37,14 @@ export class Tooltip {
   protected readonly positionClass = computed(() => {
     switch (this.position()) {
       case 'above':
-        return '-translate-x-1/2 -translate-y-[calc(100%+8px)] !mb-1.5';
+        return '-translate-x-1/2 -translate-y-[calc(100%+8px)] !mb-3';
       case 'below':
-        return '-translate-x-1/2 !mt-1.5';
+        return '-translate-x-1/2 !mt-3';
       case 'left':
         return 'translate-x-[calc(-100%-12px)] -translate-y-1/2';
       case 'right':
       default:
-        return '-translate-y-1/2 !ml-2';
+        return '-translate-y-1/2 !ml-4';
     }
   });
 

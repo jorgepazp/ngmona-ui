@@ -1,29 +1,29 @@
 <div [class]="'flex flex-col w-full ' + classNames()">
   @if (labelTemplate(); as tpl) {
-    <div class="mb-1 text-neutral-500 text-xs font-medium flex justify-between">
+    <div class="mb-2 text-neutral-500 text-xs font-semibold flex justify-between">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (label() || showValue()) {
-    <div class="mb-1 flex justify-between items-center gap-2">
+    <div class="mb-2 flex justify-between items-center gap-4">
       @if (label()) {
-        <label [attr.for]="resolvedId()" class="text-neutral-500 text-xs font-medium">{{ label() }}</label>
+        <label [attr.for]="resolvedId()" class="text-neutral-500 text-xs font-semibold">{{ label() }}</label>
       }
       @if (showValue()) {
-        <span class="text-neutral-300 text-xs font-medium">{{ displayValue() }}</span>
+        <span class="text-neutral-300 text-xs font-semibold">{{ displayValue() }}</span>
       }
     </div>
   }
 
-  <div class="relative flex items-center h-4 w-full">
-    <div class="absolute h-1 w-full rounded-full bg-surface-enabled pointer-events-none"></div>
-    <div class="absolute h-1 rounded-full   pointer-events-none" 
+  <div class="relative flex items-center h-8 w-full">
+    <div class="absolute h-2 w-full rounded-full bg-surface-enabled pointer-events-none"></div>
+    <div class="absolute h-2 rounded-full   pointer-events-none" 
     [class]="isDisabled() ? 'bg-surface-disabled' : 'bg-primary-500'"
     [style.width.%]="percent()"></div>
     <input
       [id]="resolvedId()"
       [name]="resolvedId()"
       type="range"
-      class="relative peer w-full m-0 cursor-pointer appearance-none bg-transparent disabled:cursor-not-allowed [&::-webkit-slider-runnable-track]:bg-transparent [&::-moz-range-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary-500  [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:shadow-card [&::-webkit-slider-thumb]:transition-transform [&:focus-visible::-webkit-slider-thumb]:outline [&:focus-visible::-webkit-slider-thumb]:outline-2 [&:focus-visible::-webkit-slider-thumb]:outline-neutral-800 [&:focus-visible::-webkit-slider-thumb]:outline-offset-2 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:bg-primary-500 [&::-moz-range-thumb]:shadow-card disabled:[&::-webkit-slider-thumb]:!bg-neutral-500 disabled:[&::-moz-range-thumb]:!bg-neutral-800"
+      class="relative peer w-full m-0 cursor-pointer appearance-none bg-transparent disabled:cursor-not-allowed [&::-webkit-slider-runnable-track]:bg-transparent [&::-moz-range-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-8 [&::-webkit-slider-thumb]:h-8 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary-500  [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:shadow-card [&::-webkit-slider-thumb]:transition-transform [&:focus-visible::-webkit-slider-thumb]:outline [&:focus-visible::-webkit-slider-thumb]:outline-2 [&:focus-visible::-webkit-slider-thumb]:outline-neutral-800 [&:focus-visible::-webkit-slider-thumb]:outline-offset-2 [&::-moz-range-thumb]:w-8 [&::-moz-range-thumb]:h-8 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:bg-primary-500 [&::-moz-range-thumb]:shadow-card disabled:[&::-webkit-slider-thumb]:!bg-neutral-500 disabled:[&::-moz-range-thumb]:!bg-neutral-800"
       [disabled]="isDisabled()"
       [attr.min]="min()"
       [attr.max]="max()"
@@ -38,10 +38,10 @@
   </div>
 
   @if (captionTemplate(); as tpl) {
-    <div [id]="captionId()" class="mt-1 text-xs text-neutral-300">
+    <div [id]="captionId()" class="mt-2 text-xs text-neutral-300">
       <ng-container [ngTemplateOutlet]="tpl"></ng-container>
     </div>
   } @else if (caption()) {
-    <small [id]="captionId()" class="mt-1 text-xs text-neutral-300 block">{{ caption() }}</small>
+    <small [id]="captionId()" class="mt-2 text-xs text-neutral-300 block">{{ caption() }}</small>
   }
 </div>

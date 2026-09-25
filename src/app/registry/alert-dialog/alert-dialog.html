@@ -12,7 +12,7 @@
     <p [id]="descriptionId" class="text-paragraph-sm text-text-subdued">{{ message() }}</p>
   }
   <ng-content></ng-content>
-  <div class="!mt-4 flex justify-end gap-2">
+  <div class="!mt-8 flex justify-end gap-4">
     <ui-button variant="secondary" [disabled]="loading()" (clicked)="cancel()">{{
       cancelLabel()
     }}</ui-button>

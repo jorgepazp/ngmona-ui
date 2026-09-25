@@ -1,11 +1,11 @@
-<nav class="bg-surface-lighter sticky top-0 z-10 flex items-center justify-start h-10 border-b border-solid border-divider">
-  <img src="ngmona-iso.svg" alt="ui-kit logo" class="w-8 h-auto mx-4" />
-   <div class="flex items-center w-full justify-between gap-2">
+<nav class="bg-surface-lighter sticky top-0 z-10 flex items-center justify-start h-20 border-b border-solid border-divider">
+  <img src="ngmona-iso.svg" alt="ui-kit logo" class="w-16 h-auto mx-8" />
+   <div class="flex items-center w-full justify-between gap-4">
       <a routerLink="/" class="flex flex-col leading-tight">
-        <span class="text-2xl font-medium text-text-primary">ngmona UI</span>
+        <span class="text-2xl font-semibold text-text-primary">ngmona UI</span>
         <span class="text-paragraph-sm text-text-subdued">component reference</span>
       </a>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-4">
 
       <ui-button
         variant="icon"
@@ -21,21 +21,21 @@
       </div>
     </div>
 </nav>
-<ui-sidebar title="ui-kit" breakpoint="md" navClassNames="flex flex-col gap-4 pb-4">
+<ui-sidebar title="ui-kit" breakpoint="md" navClassNames="flex flex-col gap-8 pb-8">
   <ng-template uiTemplate="header">
  
     <ui-search-input class="block" placeholder="Search components…" [(value)]="search"></ui-search-input>
   </ng-template>
 
   <ng-template uiTemplate="content">
-    <section class="mb-2">
-      <small class="px-2 text-text-subdued">GUIDES</small>
+    <section class="mb-4">
+      <small class="px-4 text-text-subdued">GUIDES</small>
       <ul class="list-none m-0 p-0 flex flex-col">
         <li>
           <a
             routerLink="/guides/installation"
-            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
-            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+            routerLinkActive="bg-surface-medium text-primary-500 font-semibold"
+            class="block px-4 py-2 text-label-md text-text-primary hover:bg-surface-light transition-colors"
           >
             Installation
           </a>
@@ -43,8 +43,8 @@
         <li>
           <a
             routerLink="/guides/usage"
-            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
-            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+            routerLinkActive="bg-surface-medium text-primary-500 font-semibold"
+            class="block px-4 py-2 text-label-md text-text-primary hover:bg-surface-light transition-colors"
           >
             Usage
           </a>
@@ -52,8 +52,8 @@
         <li>
           <a
             routerLink="/guides/theming"
-            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
-            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+            routerLinkActive="bg-surface-medium text-primary-500 font-semibold"
+            class="block px-4 py-2 text-label-md text-text-primary hover:bg-surface-light transition-colors"
           >
             Theming
           </a>
@@ -61,8 +61,8 @@
         <li>
           <a
             routerLink="/guides/theme-editor"
-            routerLinkActive="bg-surface-medium text-primary-500 font-medium"
-            class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+            routerLinkActive="bg-surface-medium text-primary-500 font-semibold"
+            class="block px-4 py-2 text-label-md text-text-primary hover:bg-surface-light transition-colors"
           >
             Theme editor
           </a>
@@ -71,20 +71,20 @@
     </section>
 
     <section>
-      <small class="px-2 text-text-subdued">COMPONENTS</small>
+      <small class="px-4 text-text-subdued">COMPONENTS</small>
       <ul class="list-none m-0 p-0 flex h-full max-h-full overflow-y-auto flex-col">
         @for (item of filteredNavItems(); track item.path) {
           <li>
             <a
               [routerLink]="['/components', item.path]"
-              routerLinkActive="bg-surface-medium text-primary-500 font-medium"
-              class="block px-2 py-1 text-label-md text-text-primary hover:bg-surface-light transition-colors"
+              routerLinkActive="bg-surface-medium text-primary-500 font-semibold"
+              class="block px-4 py-2 text-label-md text-text-primary hover:bg-surface-light transition-colors"
             >
               {{ item.label }}
             </a>
           </li> 
         } @empty {
-          <li class="px-2 py-1 text-label-sm text-text-subdued">No matches</li>
+          <li class="px-4 py-2 text-label-sm text-text-subdued">No matches</li>
         }
       </ul>
     </section>

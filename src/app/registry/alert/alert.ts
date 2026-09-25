@@ -87,7 +87,7 @@ export class Alert {
 
   protected readonly alertClass = computed(
     () =>
-      `relative flex gap-2 rounded-lg border border-solid !p-3 ${this.typeClass()} ${this.classNames()}`,
+      `relative flex gap-4 rounded-lg border border-solid !p-6 ${this.typeClass()} ${this.classNames()}`,
   );
 
   protected dismiss(): void {

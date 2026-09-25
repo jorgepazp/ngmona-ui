@@ -58,28 +58,28 @@ export class Notification {
   });
 
   private readonly positionClass = computed(() => {
-    // On mobile every position spans the full width (pinned left-2 + right-2); from `sm:` up it
+    // On mobile every position spans the full width (pinned left-4 + right-4); from `sm:` up it
     // collapses back to a single-edge corner anchor. Preserved from the original.
     switch (this.position()) {
       case 'top-left':
-        return 'top-2 left-2 right-2 sm:right-[unset]';
+        return 'top-4 left-4 right-4 sm:right-[unset]';
       case 'bottom-left':
-        return 'bottom-2 left-2 right-2 sm:right-[unset]';
+        return 'bottom-4 left-4 right-4 sm:right-[unset]';
       case 'bottom-right':
-        return 'bottom-2 left-2 right-2 sm:left-[unset]';
+        return 'bottom-4 left-4 right-4 sm:left-[unset]';
       case 'top-right':
-        return 'top-2 left-2 right-2 sm:left-[unset]';
+        return 'top-4 left-4 right-4 sm:left-[unset]';
       case 'bottom-center':
-        return 'bottom-2 left-1/2 -translate-x-1/2';
+        return 'bottom-4 left-1/2 -translate-x-1/2';
       case 'top-center':
       default:
-        return 'top-2 left-1/2 -translate-x-1/2';
+        return 'top-4 left-1/2 -translate-x-1/2';
     }
   });
 
   protected readonly notificationClass = computed(() => {
-    const base = `relative rounded-lg border border-solid px-1 py-1 shadow-notification ${
-      this.showCloseButton() ? 'pr-5' : ''
+    const base = `relative rounded-lg border border-solid px-2 py-2 shadow-notification ${
+      this.showCloseButton() ? 'pr-10' : ''
     } ${this.typeClass()} ${this.classNames()}`;
     return this.stacked() ? base : `fixed z-[10000] ${this.positionClass()} ${base}`;
   });

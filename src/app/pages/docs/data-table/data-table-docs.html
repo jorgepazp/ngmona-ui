@@ -1,9 +1,9 @@
-<div class="p-8 flex flex-col gap-4 max-w-4xl mx-auto">
+<div class="p-16 flex flex-col gap-8 max-w-4xl mx-auto">
   <h1 class="text-heading-xl text-text-primary">Data Table</h1>
 
   <app-api-table [doc]="api" />
 
-  <div class="flex items-center gap-2 flex-wrap">
+  <div class="flex items-center gap-4 flex-wrap">
     <ui-button size="sm" variant="secondary" (clicked)="toggleLoading()">Simulate loading</ui-button>
     <ui-button size="sm" variant="secondary" (clicked)="clearData()">Show empty state</ui-button>
     <ui-button size="sm" variant="secondary" (clicked)="resetData()">Reset data</ui-button>
@@ -21,7 +21,7 @@
     ariaLabel="Users"
   >
     <ng-template uiTemplate="cell-status" let-row>
-      <ui-badge class="inline-block px-1.5 py-0.5 rounded-full text-label-xs font-medium" [variant]="statusClass(row.status)">
+      <ui-badge class="inline-block px-3 py-1 rounded-full text-label-xs font-semibold" [variant]="statusClass(row.status)">
         {{ row.status }}
         
       </ui-badge>

@@ -26,21 +26,21 @@ export class Toaster {
 
   protected containerClass(position: NotificationPosition): string {
     const stackDirection = position.startsWith('bottom') ? 'flex-col-reverse' : 'flex-col';
-    const base = `fixed z-[10000] flex ${stackDirection} gap-2 max-w-[calc(100vw-1rem)]`;
+    const base = `fixed z-[10000] flex ${stackDirection} gap-4 max-w-[calc(100vw-1rem)]`;
     switch (position) {
       case 'top-left':
-        return `${base} top-2 left-2`;
+        return `${base} top-4 left-4`;
       case 'top-right':
-        return `${base} top-2 right-2`;
+        return `${base} top-4 right-4`;
       case 'bottom-left':
-        return `${base} bottom-2 left-2`;
+        return `${base} bottom-4 left-4`;
       case 'bottom-right':
-        return `${base} bottom-2 right-2`;
+        return `${base} bottom-4 right-4`;
       case 'bottom-center':
-        return `${base} bottom-2 left-1/2 -translate-x-1/2`;
+        return `${base} bottom-4 left-1/2 -translate-x-1/2`;
       case 'top-center':
       default:
-        return `${base} top-2 left-1/2 -translate-x-1/2`;
+        return `${base} top-4 left-1/2 -translate-x-1/2`;
     }
   }
 

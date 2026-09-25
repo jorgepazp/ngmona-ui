@@ -37,7 +37,7 @@ export class Badge {
   readonly classNames = input('');
 
   protected readonly badgeClass = computed(() => {
-    const base = `inline-flex items-center gap-0.5 font-medium w-fit whitespace-nowrap ${this.shapeClass()} ${this.sizeClass()} ${this.variantClass()}`;
+    const base = `inline-flex items-center gap-1 font-semibold w-fit whitespace-nowrap ${this.shapeClass()} ${this.sizeClass()} ${this.variantClass()}`;
     return `${base} ${this.classNames()}`;
   });
 
@@ -46,7 +46,7 @@ export class Badge {
   }
 
   private sizeClass(): string {
-    return this.size() === 'sm' ? 'text-caption px-1 py-0.5' : 'text-label-xs px-1.5 py-0.5';
+    return this.size() === 'sm' ? 'text-caption px-2 py-1' : 'text-label-xs px-3 py-1';
   }
 
   private variantClass(): string {

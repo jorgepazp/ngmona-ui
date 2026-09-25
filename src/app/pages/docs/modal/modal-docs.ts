@@ -20,7 +20,7 @@ export default class ModalDocs {
 
 <ui-modal [open]="basicOpen()" heading="Delete item" (closed)="basicOpen.set(false)">
   <p>This action can't be undone. Are you sure you want to delete this item?</p>
-  <div class="!mt-4 flex justify-end gap-2">
+  <div class="!mt-8 flex justify-end gap-4">
     <ui-button variant="secondary" (clicked)="basicOpen.set(false)">Cancel</ui-button>
     <ui-button (clicked)="basicOpen.set(false)">Delete</ui-button>
   </div>
@@ -45,13 +45,13 @@ export class DeleteItem {
 
 <ui-modal [open]="templatedOpen()" [showCloseButton]="false" (closed)="templatedOpen.set(false)">
   <ng-template uiTemplate="header">
-    <h2 class="text-heading-sm !mb-2">Custom header</h2>
+    <h2 class="text-heading-sm !mb-4">Custom header</h2>
   </ng-template>
   <ng-template uiTemplate="content">
     <p>Content, header and footer are all separate named templates.</p>
   </ng-template>
   <ng-template uiTemplate="footer">
-    <div class="!mt-4 flex justify-end">
+    <div class="!mt-8 flex justify-end">
       <ui-button (clicked)="templatedOpen.set(false)">Got it</ui-button>
     </div>
   </ng-template>

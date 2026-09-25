@@ -7,7 +7,7 @@
       [attr.aria-expanded]="expanded()"
       [attr.aria-controls]="panelId"
       [disabled]="disabled()"
-      class="text-label-md text-text-primary flex w-full py-3 cursor-pointer items-center justify-between gap-2 border-none bg-transparent  text-left disabled:cursor-not-allowed disabled:text-text-disabled"
+      class="text-label-md text-text-primary flex w-full py-6 cursor-pointer items-center justify-between gap-4 border-none bg-transparent  text-left disabled:cursor-not-allowed disabled:text-text-disabled"
       (click)="toggle()"
       (keydown)="onKeydown($event)"
     >
@@ -34,7 +34,7 @@
     [inert]="!expanded()"
   >
     <div class="overflow-hidden">
-      <div class="text-paragraph-sm text-text-subdued !pb-3">
+      <div class="text-paragraph-sm text-text-subdued !pb-6">
         <ng-content></ng-content>
       </div>
     </div>

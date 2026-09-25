@@ -49,7 +49,7 @@ export class AccountTabs {
   protected readonly verticalHtml = `<ui-tabs orientation="vertical">
   <ui-tab-panel value="overview">
     <ng-template uiTemplate="label">
-      <span class="font-bold">Overview</span>
+      <span class="font-extrabold">Overview</span>
     </ng-template>
     <p>Summary content goes here.</p>
   </ui-tab-panel>
