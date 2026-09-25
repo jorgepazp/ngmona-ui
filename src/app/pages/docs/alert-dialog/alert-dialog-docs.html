@@ -6,7 +6,7 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Basic</h2>
     <div>
-      <ui-button (clicked)="defaultOpen.set(true)">Leave page</ui-button>
+      <button uiButton (click)="defaultOpen.set(true)">Leave page</button>
     </div>
     <ui-alert-dialog
       [open]="defaultOpen()"
@@ -23,7 +23,7 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Danger variant, with loading confirm</h2>
     <div>
-      <ui-button variant="secondary" (clicked)="dangerOpen.set(true)">Delete account</ui-button>
+      <button uiButton variant="secondary" (click)="dangerOpen.set(true)">Delete account</button>
     </div>
     <ui-alert-dialog
       [open]="dangerOpen()"

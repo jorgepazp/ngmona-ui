@@ -15,7 +15,7 @@ export default class PopoverDocs {
   protected readonly api = popoverApi;
 
   protected readonly basicHtml = `<ui-popover [(open)]="open" [panelClass]="'w-128'">
-  <ui-button trigger>Toggle popover</ui-button>
+  <button uiButton trigger>Toggle popover</button>
   <div class="flex flex-col gap-2">
     <p class="font-semibold">Popover content</p>
     <p>Any content can go here; it's only rendered while the popover is open.</p>

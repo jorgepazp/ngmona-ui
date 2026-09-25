@@ -1,24 +1,68 @@
-import { Component } from '@angular/core';
-import { LucideHeart, LucideDownload } from '@lucide/angular';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  LucideArrowRight,
+  LucideChevronDown,
+  LucideChevronUp,
+  LucideDownload,
+  LucideDynamicIcon,
+  LucideHeart,
+  LucidePlus,
+  LucideTrash2,
+} from '@lucide/angular';
 import { ApiTable } from '../../../docs-ui/api-table/api-table';
 import { CodeTabs } from '../../../docs-ui/code-tabs/code-tabs';
 import { Button } from '../../../registry/button/button';
 import { buttonApi } from '../../../registry/button/button.api';
+import { TooltipDirective } from '../../../registry/tooltip/tooltip.directive';
 
 @Component({
   selector: 'docs-button',
-  imports: [Button, ApiTable, CodeTabs],
+  imports: [Button, ApiTable, CodeTabs, RouterLink, TooltipDirective, LucideDynamicIcon],
   templateUrl: './button-docs.html',
 })
 export default class ButtonDocs {
   protected readonly heartIcon = LucideHeart;
   protected readonly downloadIcon = LucideDownload;
+  protected readonly trashIcon = LucideTrash2;
+  protected readonly plusIcon = LucidePlus;
+  protected readonly arrowIcon = LucideArrowRight;
+  protected readonly chevronUpIcon = LucideChevronUp;
+  protected readonly chevronDownIcon = LucideChevronDown;
+  protected readonly expanded = signal(false);
   protected readonly api = buttonApi;
 
-  protected readonly variantsHtml = `<ui-button variant="primary">Primary</ui-button>
-<ui-button variant="secondary">Secondary</ui-button>
-<ui-button variant="tertiary">Tertiary</ui-button>
-<ui-button variant="icon" [icon]="heartIcon" ariaLabel="Like"></ui-button>`;
+  protected readonly colorsHtml = `<button uiButton color="danger">Delete</button>
+<button uiButton color="success">Approve</button>
+<button uiButton color="warning">Retry</button>
+<button uiButton color="info">Details</button>
+
+<button uiButton variant="secondary" color="danger">Delete</button>
+<button uiButton variant="tertiary" color="danger">Delete</button>
+<button uiButton variant="icon" color="danger" [icon]="trashIcon" aria-label="Delete"></button>`;
+
+  protected readonly pillHtml = `<button uiButton shape="pill">Follow</button>
+<button uiButton shape="pill" variant="secondary" [icon]="plusIcon" iconPos="left">Add tag</button>`;
+
+  protected readonly linksHtml = `<a uiButton routerLink="/guides/installation">Get started</a>
+<a uiButton variant="secondary" routerLink="/components/badge" [icon]="arrowIcon">Badge docs</a>
+<a uiButton variant="tertiary" routerLink="/" [disabled]="true">Disabled link</a>`;
+
+  protected readonly labelsHtml = `<!-- The tooltip text becomes the accessible name -->
+<button uiButton variant="icon" [icon]="trashIcon" uiTooltip="Delete" position="above"></button>
+
+<!-- No tooltip: name it explicitly -->
+<button uiButton variant="icon" [icon]="heartIcon" aria-label="Add to favorites"></button>`;
+
+  protected readonly customHtml = `<button uiButton variant="secondary" [style.min-width.px]="180" type="submit">
+  <svg [lucideIcon]="expanded() ? chevronUpIcon : chevronDownIcon" [size]="16" aria-hidden="true"></svg>
+  {{ expanded() ? 'Collapse' : 'Expand' }}
+</button>`;
+
+  protected readonly variantsHtml = `<button uiButton variant="primary">Primary</button>
+<button uiButton variant="secondary">Secondary</button>
+<button uiButton variant="tertiary">Tertiary</button>
+<button uiButton variant="icon" [icon]="heartIcon" aria-label="Like"></button>`;
 
   protected readonly variantsTs = `import { Component } from '@angular/core';
 import { LucideHeart } from '@lucide/angular';
@@ -33,9 +77,9 @@ export class ButtonVariants {
   heartIcon = LucideHeart;
 }`;
 
-  protected readonly statesHtml = `<ui-button [disabled]="true">Disabled</ui-button>
-<ui-button [loading]="true">Loading</ui-button>
-<ui-button [icon]="downloadIcon" iconPos="left">With icon</ui-button>`;
+  protected readonly statesHtml = `<button uiButton [disabled]="true">Disabled</button>
+<button uiButton [loading]="true">Loading</button>
+<button uiButton [icon]="downloadIcon" iconPos="left">With icon</button>`;
 
   protected readonly statesTs = `import { Component } from '@angular/core';
 import { LucideDownload } from '@lucide/angular';
@@ -50,10 +94,10 @@ export class ButtonStates {
   downloadIcon = LucideDownload;
 }`;
 
-  protected readonly sizesHtml = `<ui-button size="sm">Small</ui-button>
-<ui-button size="md">Medium</ui-button>
-<ui-button size="default">Default</ui-button>
-<ui-button size="xl">Extra large</ui-button>`;
+  protected readonly sizesHtml = `<button uiButton size="sm">Small</button>
+<button uiButton size="md">Medium</button>
+<button uiButton size="default">Default</button>
+<button uiButton size="xl">Extra large</button>`;
 
   protected readonly sizesTs = `import { Component } from '@angular/core';
 import { Button } from './ui/button/button';
@@ -66,9 +110,9 @@ import { Button } from './ui/button/button';
 export class ButtonSizes {}`;
 
   protected readonly inverseHtml = `<div class="bg-neutral-500 p-8 rounded">
-  <ui-button [inverse]="true">Primary</ui-button>
-  <ui-button variant="secondary" [inverse]="true">Secondary</ui-button>
-  <ui-button variant="tertiary" [inverse]="true">Tertiary</ui-button>
+  <button uiButton [inverse]="true">Primary</button>
+  <button uiButton variant="secondary" [inverse]="true">Secondary</button>
+  <button uiButton variant="tertiary" [inverse]="true">Tertiary</button>
 </div>`;
 
   protected readonly inverseTs = `import { Component } from '@angular/core';

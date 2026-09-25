@@ -12,6 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { Tooltip, TooltipPosition } from './tooltip';
+import { UI_LABEL_SOURCE, UiLabelSource } from '../shared/label-source';
 
 let nextTooltipId = 0;
 
@@ -34,8 +35,10 @@ let nextTooltipId = 0;
     '(touchend)': 'onTouchEnd()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
   },
+  // Lets an icon-only `uiButton` on the same element use the tooltip text as its accessible name.
+  providers: [{ provide: UI_LABEL_SOURCE, useExisting: TooltipDirective }],
 })
-export class TooltipDirective implements OnDestroy {
+export class TooltipDirective implements OnDestroy, UiLabelSource {
   /** Plain-text tooltip content; ignored when `template` is provided. */
   readonly uiTooltip = input('');
   /** Optional bold heading shown above the body content. */
@@ -71,7 +74,11 @@ export class TooltipDirective implements OnDestroy {
 
   protected readonly tooltipId = `ui-tooltip-${nextTooltipId++}`;
   private readonly visible = signal(false);
-  protected readonly ariaDescribedBy = computed(() => (this.visible() ? this.tooltipId : null));
+  /** The tooltip's text, for hosts that use it as their accessible name. */
+  readonly label = computed(() => this.uiTooltip() || this.heading());
+  /** Set by the host when it uses `label` as its name; the tooltip then skips aria-describedby, which would repeat it. */
+  readonly usedAsLabel = signal(false);
+  protected readonly ariaDescribedBy = computed(() => (this.visible() && !this.usedAsLabel() ? this.tooltipId : null));
 
   constructor() {
     effect(() => {

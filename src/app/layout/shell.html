@@ -7,17 +7,17 @@
       </a>
       <div class="flex items-center gap-4">
 
-      <ui-button
+      <button uiButton
         variant="icon"
         [icon]="theme.theme() === 'dark' ? sunIcon : moonIcon"
-        [ariaLabel]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-        (clicked)="theme.toggle()"
-      ></ui-button>
-      <ui-button
+        [aria-label]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        (click)="theme.toggle()"
+      ></button>
+      <button uiButton
         variant="icon"
         [icon]="gitIcon"
-        [ariaLabel]="'View source code on GitHub'"
-      ></ui-button>
+        [aria-label]="'View source code on GitHub'"
+      ></button>
       </div>
     </div>
 </nav>

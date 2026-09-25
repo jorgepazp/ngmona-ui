@@ -611,7 +611,7 @@
       "name": "button",
       "type": "component",
       "category": "action",
-      "description": "Button with `primary`, `secondary`, `tertiary` and `icon`-only variants, plus loading and inverse states. Colors are driven by the `--color-primary-*` theme tokens; override those CSS variables to restyle every button at once.",
+      "description": "Button styling and behavior applied directly to a native `<button>` or `<a>`: `<button uiButton>Save</button>`, `<a uiButton routerLink=\"/settings\">Settings</a>`. Because the host is the real element, everything native works as usual: `type`, `[style]`, `class`, `routerLink`, `(click)`, `aria-*`, forms. Put any content inside, including your own icons; `icon` is a shortcut for a Lucide icon next to the label. `variant` sets the style (`primary`, `secondary` outline, `tertiary` text-only, `icon` round icon-only), `color` the severity (`danger`, `success`, `warning`, `info`), and `shape=\"pill\"` fully rounds a text button. Icon-only buttons need an accessible name: set `aria-label`, or add `uiTooltip` to the same element and its text is used. In development, an icon-only button with neither logs a warning.",
       "files": [
         {
           "path": "button.html",
@@ -620,15 +620,21 @@
         {
           "path": "button.ts",
           "type": "component"
+        },
+        {
+          "path": "legacy-button.ts",
+          "type": "component"
         }
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "shared"
+      ],
       "npmDependencies": [
         "@lucide/angular"
       ],
       "api": {
         "name": "Button",
-        "description": "Button with `primary`, `secondary`, `tertiary` and `icon`-only variants, plus loading and inverse states. Colors are driven by the `--color-primary-*` theme tokens; override those CSS variables to restyle every button at once.",
+        "description": "Button styling and behavior applied directly to a native `<button>` or `<a>`: `<button uiButton>Save</button>`, `<a uiButton routerLink=\"/settings\">Settings</a>`. Because the host is the real element, everything native works as usual: `type`, `[style]`, `class`, `routerLink`, `(click)`, `aria-*`, forms. Put any content inside, including your own icons; `icon` is a shortcut for a Lucide icon next to the label. `variant` sets the style (`primary`, `secondary` outline, `tertiary` text-only, `icon` round icon-only), `color` the severity (`danger`, `success`, `warning`, `info`), and `shape=\"pill\"` fully rounds a text button. Icon-only buttons need an accessible name: set `aria-label`, or add `uiTooltip` to the same element and its text is used. In development, an icon-only button with neither logs a warning.",
         "props": [
           {
             "name": "variant",
@@ -636,63 +642,23 @@
             "required": false,
             "type": "ButtonVariant",
             "defaultValue": "'primary'",
-            "description": "Visual style. `'icon'` renders a round icon-only button — pair it with `icon` and `ariaLabel`."
+            "description": "Visual style. `'icon'` renders a round icon-only button — give it an `aria-label` or a `uiTooltip`."
           },
           {
-            "name": "attrType",
+            "name": "color",
             "kind": "input",
             "required": false,
-            "type": "'button' | 'submit' | 'reset'",
-            "defaultValue": "'button'",
-            "description": "Native `type` attribute of the underlying `<button>`."
+            "type": "ButtonColor",
+            "defaultValue": "'primary'",
+            "description": "Color role: the brand `primary`, or a severity for destructive, confirming, cautionary or informational actions."
           },
           {
-            "name": "icon",
+            "name": "shape",
             "kind": "input",
             "required": false,
-            "type": "LucideIconInput | undefined",
-            "defaultValue": "undefined",
-            "description": "Icon shown next to the label (or alone, for `variant=\"icon\"`). Accepts a Lucide icon component or icon data."
-          },
-          {
-            "name": "iconPos",
-            "kind": "input",
-            "required": false,
-            "type": "'left' | 'right'",
-            "defaultValue": "'right'",
-            "description": "Side the `icon` renders on, relative to the projected label content. Ignored for `variant=\"icon\"`."
-          },
-          {
-            "name": "disabled",
-            "kind": "input",
-            "required": false,
-            "type": "boolean",
-            "defaultValue": "false",
-            "description": "Disables the button and applies the disabled visual style."
-          },
-          {
-            "name": "loading",
-            "kind": "input",
-            "required": false,
-            "type": "boolean",
-            "defaultValue": "false",
-            "description": "Shows a spinning loader in place of `icon` and disables the button while `true`."
-          },
-          {
-            "name": "classNames",
-            "kind": "input",
-            "required": false,
-            "type": "string",
-            "defaultValue": "''",
-            "description": "Extra utility classes appended after the computed variant/size classes, for one-off overrides."
-          },
-          {
-            "name": "ariaLabel",
-            "kind": "input",
-            "required": false,
-            "type": "string | undefined",
-            "defaultValue": "undefined",
-            "description": "Required for `variant=\"icon\"` buttons, since they have no visible text label."
+            "type": "ButtonShape",
+            "defaultValue": "'default'",
+            "description": "`'pill'` fully rounds a text button. Icon-only buttons are always round."
           },
           {
             "name": "size",
@@ -703,6 +669,38 @@
             "description": "Controls height/padding/text size; `'icon'`-variant buttons ignore this and stay a fixed round size."
           },
           {
+            "name": "icon",
+            "kind": "input",
+            "required": false,
+            "type": "LucideIconInput | undefined",
+            "defaultValue": "undefined",
+            "description": "Lucide icon shown next to the label (or alone, for `variant=\"icon\"`). You can also project your own icon markup."
+          },
+          {
+            "name": "iconPos",
+            "kind": "input",
+            "required": false,
+            "type": "'left' | 'right'",
+            "defaultValue": "'right'",
+            "description": "Side `icon` renders on, relative to the projected content. Ignored for `variant=\"icon\"`."
+          },
+          {
+            "name": "disabled",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Disables the button (on `<a>`: `aria-disabled`, not focusable, not clickable)."
+          },
+          {
+            "name": "loading",
+            "kind": "input",
+            "required": false,
+            "type": "boolean",
+            "defaultValue": "false",
+            "description": "Shows a spinning loader in place of the content and disables the button while `true`."
+          },
+          {
             "name": "inverse",
             "kind": "input",
             "required": false,
@@ -711,28 +709,20 @@
             "description": "Renders the button for use on a dark/colored background (white text/border instead of the tinted default)."
           },
           {
-            "name": "clicked",
-            "kind": "output",
+            "name": "type",
+            "kind": "input",
             "required": false,
-            "type": "MouseEvent",
-            "defaultValue": "",
-            "description": "Fires on a native click (not emitted while `disabled` or `loading`, since the `<button>` itself is disabled then)."
+            "type": "'button' | 'submit' | 'reset'",
+            "defaultValue": "'button'",
+            "description": "Native `type` of a `<button>`. Defaults to `'button'` (not the browser's `'submit'`); ignored on `<a>`."
           },
           {
-            "name": "focused",
-            "kind": "output",
+            "name": "aria-label",
+            "kind": "input",
             "required": false,
-            "type": "FocusEvent",
-            "defaultValue": "",
-            "description": "Fires when the button gains focus."
-          },
-          {
-            "name": "blurred",
-            "kind": "output",
-            "required": false,
-            "type": "FocusEvent",
-            "defaultValue": "",
-            "description": "Fires when the button loses focus."
+            "type": "string | undefined",
+            "defaultValue": "undefined",
+            "description": "Accessible name. For icon-only buttons without it, the text of a `uiTooltip` on the same element is used."
           }
         ]
       }
@@ -3069,6 +3059,10 @@
           "type": "component"
         },
         {
+          "path": "label-source.ts",
+          "type": "component"
+        },
+        {
           "path": "smooth-height.directive.ts",
           "type": "component"
         },
@@ -3337,7 +3331,7 @@
       "name": "spinner",
       "type": "component",
       "category": "feedback",
-      "description": "Indeterminate loading spinner (animated arc), for standalone use rather than `ui-button`'s built-in `loading` state. The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with `role=\"status\"` and `ariaLabel` so screen readers announce the loading state.",
+      "description": "Indeterminate loading spinner (animated arc), for standalone use rather than `uiButton`'s built-in `loading` state. The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with `role=\"status\"` and `ariaLabel` so screen readers announce the loading state.",
       "files": [
         {
           "path": "spinner.html",
@@ -3352,7 +3346,7 @@
       "npmDependencies": [],
       "api": {
         "name": "Spinner",
-        "description": "Indeterminate loading spinner (animated arc), for standalone use rather than `ui-button`'s built-in `loading` state. The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with `role=\"status\"` and `ariaLabel` so screen readers announce the loading state.",
+        "description": "Indeterminate loading spinner (animated arc), for standalone use rather than `uiButton`'s built-in `loading` state. The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with `role=\"status\"` and `ariaLabel` so screen readers announce the loading state.",
         "props": [
           {
             "name": "size",
@@ -3764,7 +3758,9 @@
           "type": "component"
         }
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "shared"
+      ],
       "npmDependencies": [],
       "api": {
         "name": "Tooltip",

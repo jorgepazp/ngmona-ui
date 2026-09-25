@@ -18,7 +18,7 @@ export default class ToastDocs {
 <ui-toaster />
 
 <!-- anywhere else -->
-<ui-button (clicked)="toast.success('Saved successfully')">Save</ui-button>`;
+<button uiButton (click)="toast.success('Saved successfully')">Save</button>`;
 
   protected readonly basicTs = `import { Component, inject } from '@angular/core';
 import { Button } from './ui/button/button';

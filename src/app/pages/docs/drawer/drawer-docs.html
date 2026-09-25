@@ -6,7 +6,7 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Slide from the right (default)</h2>
     <div>
-      <ui-button (clicked)="rightOpen.set(true)">Open drawer</ui-button>
+      <button uiButton (click)="rightOpen.set(true)">Open drawer</button>
     </div>
     <ui-drawer [(open)]="rightOpen">
       <ng-template uiTemplate="header">
@@ -18,7 +18,7 @@
       </p>
       <ng-template uiTemplate="footer">
         <div class="mt-8 pt-8 border-t border-divider">
-          <ui-button variant="secondary" (clicked)="rightOpen.set(false)">Close</ui-button>
+          <button uiButton variant="secondary" (click)="rightOpen.set(false)">Close</button>
         </div>
       </ng-template>
     </ui-drawer>
@@ -28,7 +28,7 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Slide from the left</h2>
     <div>
-      <ui-button variant="secondary" (clicked)="leftOpen.set(true)">Open left drawer</ui-button>
+      <button uiButton variant="secondary" (click)="leftOpen.set(true)">Open left drawer</button>
     </div>
     <ui-drawer [(open)]="leftOpen" side="left">
       <p class="text-paragraph-sm text-text-subdued">Left-anchored panel, no header/footer templates.</p>
@@ -39,7 +39,7 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">No backdrop, no close button</h2>
     <div>
-      <ui-button variant="tertiary" (clicked)="noBackdropOpen.set(true)">Open</ui-button>
+      <button uiButton variant="tertiary" (click)="noBackdropOpen.set(true)">Open</button>
     </div>
     <ui-drawer [(open)]="noBackdropOpen" [backdrop]="false" [showCloseButton]="false">
       <p class="text-paragraph-sm text-text-subdued">

@@ -62,13 +62,13 @@
 
     <div class="flex items-center justify-between">
       @if (!isFirstStep()) {
-        <ui-button variant="tertiary" size="sm" (clicked)="back()">{{ backLabel() }}</ui-button>
+        <button uiButton variant="tertiary" size="sm" (click)="back()">{{ backLabel() }}</button>
       } @else {
         <span></span>
       }
-      <ui-button variant="primary" [disabled]="!canAdvance()" (clicked)="next()">
+      <button uiButton variant="primary" [disabled]="!canAdvance()" (click)="next()">
         {{ isLastStep() ? finishLabel() : nextLabel() }}
-      </ui-button>
+      </button>
     </div>
   </div>
 }

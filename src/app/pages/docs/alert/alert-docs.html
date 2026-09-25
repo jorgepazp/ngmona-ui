@@ -23,8 +23,8 @@
         This alert can be dismissed with the close button.
       </ui-alert>
     } @else {
-      <ui-button size="sm" variant="secondary" (clicked)="dismissibleShown.set(true)"
-        >Reset dismissible example</ui-button
+      <button uiButton size="sm" variant="secondary" (click)="dismissibleShown.set(true)"
+        >Reset dismissible example</button
       >
     }
     <docs-code-tabs [html]="dismissibleHtml" [ts]="dismissibleTs" />
@@ -35,8 +35,8 @@
     <ui-alert type="error" heading="Payment failed">
       Your card was declined. Try again or use a different payment method.
       <ng-template uiTemplate="actions">
-        <ui-button size="sm">Retry</ui-button>
-        <ui-button size="sm" variant="secondary">Use another card</ui-button>
+        <button uiButton size="sm">Retry</button>
+        <button uiButton size="sm" variant="secondary">Use another card</button>
       </ng-template>
     </ui-alert>
     <docs-code-tabs [html]="actionsHtml" [ts]="actionsTs" />

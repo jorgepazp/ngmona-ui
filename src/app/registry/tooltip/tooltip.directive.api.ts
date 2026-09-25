@@ -62,11 +62,11 @@ export const tooltipDirectiveApi: ComponentApiDoc = {
       description: "Max width of the tooltip panel in pixels.",
     },
     {
-      name: "forceVisible",
+      name: "uiTooltipVisible",
       kind: "input",
       required: false,
       type: "boolean | undefined",
-      defaultValue: "undefined, { alias: 'uiTooltipVisible' }",
+      defaultValue: "undefined",
       description: "Overrides hover/focus/touch handling to show or hide the tooltip programmatically.",
     },
   ],

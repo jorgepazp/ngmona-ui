@@ -19,7 +19,7 @@ import &#123; Button &#125; from './ui/button/button';
 &#64;Component(&#123;
   selector: 'app-toolbar',
   imports: [Button],
-  template: `&lt;ui-button variant="primary"&gt;Save&lt;/ui-button&gt;`,
+  template: `&lt;button uiButton variant="primary"&gt;Save&lt;/button&gt;`,
 &#125;)
 export class Toolbar &#123;&#125;</code></pre>
   </section>
@@ -51,7 +51,7 @@ export class Toolbar &#123;&#125;</code></pre>
     <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>import &#123; LucideHeart &#125; from '&#64;lucide/angular';
 
 protected readonly heartIcon = LucideHeart;</code></pre>
-    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&lt;ui-button variant="icon" [icon]="heartIcon" ariaLabel="Like" /&gt;</code></pre>
+    <pre class="bg-surface-medium border border-divider rounded p-6 overflow-x-auto text-paragraph-sm font-mono text-text-primary"><code>&lt;button uiButton variant="icon" [icon]="heartIcon" aria-label="Like"&gt;&lt;/button&gt;</code></pre>
   </section>
 
   <section class="flex flex-col gap-6">

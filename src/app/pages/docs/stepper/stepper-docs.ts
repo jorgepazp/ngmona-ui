@@ -24,8 +24,8 @@ export default class StepperDocs {
   }
 
   protected readonly interactiveHtml = `<ui-stepper [labels]="labels" [currentStep]="current()"></ui-stepper>
-<ui-button variant="secondary" size="sm" [disabled]="current() === 0" (clicked)="back()">Back</ui-button>
-<ui-button size="sm" [disabled]="current() === labels.length - 1" (clicked)="forward()">Next</ui-button>`;
+<button uiButton variant="secondary" size="sm" [disabled]="current() === 0" (click)="back()">Back</button>
+<button uiButton size="sm" [disabled]="current() === labels.length - 1" (click)="forward()">Next</button>`;
 
   protected readonly interactiveTs = `import { Component, signal } from '@angular/core';
 import { Button } from './ui/button/button';

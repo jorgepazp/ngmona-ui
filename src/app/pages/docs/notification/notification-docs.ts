@@ -56,7 +56,7 @@ export default class NotificationDocs {
     setTimeout(() => this.advance(), 200);
   }
 
-  protected readonly basicHtml = `<ui-button size="sm" (clicked)="trigger('success')">Show notification</ui-button>
+  protected readonly basicHtml = `<button uiButton size="sm" (click)="trigger('success')">Show notification</button>
 
 <ui-notification
   [show]="show()"

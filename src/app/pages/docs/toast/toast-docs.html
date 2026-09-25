@@ -9,11 +9,11 @@
   </p>
 
   <section class="flex flex-wrap gap-6">
-    <ui-button (clicked)="toast.show('Here is a message')">Default</ui-button>
-    <ui-button (clicked)="toast.success('Saved successfully')">Success</ui-button>
-    <ui-button (clicked)="toast.error('Something went wrong')">Error</ui-button>
-    <ui-button (clicked)="toast.warning('Careful with that')">Warning</ui-button>
-    <ui-button (clicked)="toast.show('Bottom left', { position: 'bottom-left' })">Bottom left</ui-button>
+    <button uiButton (click)="toast.show('Here is a message')">Default</button>
+    <button uiButton (click)="toast.success('Saved successfully')">Success</button>
+    <button uiButton (click)="toast.error('Something went wrong')">Error</button>
+    <button uiButton (click)="toast.warning('Careful with that')">Warning</button>
+    <button uiButton (click)="toast.show('Bottom left', { position: 'bottom-left' })">Bottom left</button>
   </section>
   <docs-code-tabs [html]="basicHtml" [ts]="basicTs" />
 </div>

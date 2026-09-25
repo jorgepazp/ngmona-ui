@@ -102,6 +102,28 @@ function balanceDepth(s) {
   return d;
 }
 
+/** Splits a call's argument list on top-level commas (ignoring commas inside brackets and strings). */
+function splitTopLevelArgs(args) {
+  const parts = [];
+  let depth = 0;
+  let quote = null;
+  let start = 0;
+  for (let i = 0; i < args.length; i++) {
+    const ch = args[i];
+    if (quote) {
+      if (ch === quote && args[i - 1] !== '\\') quote = null;
+    } else if (ch === '"' || ch === "'" || ch === '`') quote = ch;
+    else if ('([{<'.includes(ch)) depth++;
+    else if (')]}>'.includes(ch) && args[i - 1] !== '=') depth--;
+    else if (ch === ',' && depth === 0) {
+      parts.push(args.slice(start, i).trim());
+      start = i + 1;
+    }
+  }
+  parts.push(args.slice(start).trim());
+  return parts.filter((p, i) => p !== '' || i === 0);
+}
+
 function inferType(defaultValue) {
   const v = defaultValue.trim();
   if (v === '' || v === 'undefined') return 'unknown';
@@ -180,11 +202,22 @@ export function parseComponentFile(filePath) {
       }
     }
 
+    // `input(default, { alias, transform })`: the options object isn't part of the default. An alias
+    // is the name templates actually use; `booleanAttribute` means the input is a boolean.
+    let publicName = name;
+    const [firstArg, options = ''] = splitTopLevelArgs(defaultValue);
+    if (options) {
+      defaultValue = firstArg;
+      const alias = options.match(/alias:\s*['"]([^'"]+)['"]/);
+      if (alias) publicName = alias[1];
+      if (!type && /transform:\s*booleanAttribute\b/.test(options)) type = 'boolean';
+    }
+
     if (!type) type = inferType(defaultValue);
 
     const kind = fn === 'model' ? 'model' : fn === 'output' ? 'output' : 'input';
     const propDescription = extractJsDocAbove(lines, idx);
-    props.push({ name, kind, required, type, defaultValue, description: propDescription });
+    props.push({ name: publicName, kind, required, type, defaultValue, description: propDescription });
   }
 
   return { className, description, props };

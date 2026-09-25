@@ -13,11 +13,11 @@
   }
   <ng-content></ng-content>
   <div class="!mt-8 flex justify-end gap-4">
-    <ui-button variant="secondary" [disabled]="loading()" (clicked)="cancel()">{{
+    <button uiButton variant="secondary" [disabled]="loading()" (click)="cancel()">{{
       cancelLabel()
-    }}</ui-button>
-    <ui-button [classNames]="confirmClass()" [loading]="loading()" (clicked)="confirm()">{{
+    }}</button>
+    <button uiButton [color]="variant() === 'danger' ? 'danger' : 'primary'" [loading]="loading()" (click)="confirm()">{{
       confirmLabel()
-    }}</ui-button>
+    }}</button>
   </div>
 </ui-modal>

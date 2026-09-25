@@ -36,7 +36,7 @@ export class AmountField {}`;
     <svg [lucideIcon]="searchIcon" [size]="16"></svg>
   </span>
   <input class="flex-1 min-w-0 border-none outline-none bg-transparent" placeholder="Search..." />
-  <ui-button suffix variant="primary" size="sm">Go</ui-button>
+  <button uiButton suffix variant="primary" size="sm">Go</button>
 </ui-input-group>`;
 
   protected readonly searchTs = `import { Component } from '@angular/core';

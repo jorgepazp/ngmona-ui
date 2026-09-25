@@ -16,13 +16,13 @@ export default class ModalDocs {
   protected readonly templatedOpen = signal(false);
   protected readonly api = modalApi;
 
-  protected readonly basicHtml = `<ui-button (clicked)="basicOpen.set(true)">Open modal</ui-button>
+  protected readonly basicHtml = `<button uiButton (click)="basicOpen.set(true)">Open modal</button>
 
 <ui-modal [open]="basicOpen()" heading="Delete item" (closed)="basicOpen.set(false)">
   <p>This action can't be undone. Are you sure you want to delete this item?</p>
   <div class="!mt-8 flex justify-end gap-4">
-    <ui-button variant="secondary" (clicked)="basicOpen.set(false)">Cancel</ui-button>
-    <ui-button (clicked)="basicOpen.set(false)">Delete</ui-button>
+    <button uiButton variant="secondary" (click)="basicOpen.set(false)">Cancel</button>
+    <button uiButton (click)="basicOpen.set(false)">Delete</button>
   </div>
 </ui-modal>`;
 
@@ -39,9 +39,9 @@ export class DeleteItem {
   basicOpen = signal(false);
 }`;
 
-  protected readonly templatedHtml = `<ui-button variant="secondary" (clicked)="templatedOpen.set(true)">
+  protected readonly templatedHtml = `<button uiButton variant="secondary" (click)="templatedOpen.set(true)">
   Open templated modal
-</ui-button>
+</button>
 
 <ui-modal [open]="templatedOpen()" [showCloseButton]="false" (closed)="templatedOpen.set(false)">
   <ng-template uiTemplate="header">
@@ -52,7 +52,7 @@ export class DeleteItem {
   </ng-template>
   <ng-template uiTemplate="footer">
     <div class="!mt-8 flex justify-end">
-      <ui-button (clicked)="templatedOpen.set(false)">Got it</ui-button>
+      <button uiButton (click)="templatedOpen.set(false)">Got it</button>
     </div>
   </ng-template>
 </ui-modal>`;

@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
 /**
- * Indeterminate loading spinner (animated arc), for standalone use rather than `ui-button`'s
+ * Indeterminate loading spinner (animated arc), for standalone use rather than `uiButton`'s
  * built-in `loading` state.
  *
  * The stroke uses `currentColor`, controlled via a text color class in `classNames`. Renders with

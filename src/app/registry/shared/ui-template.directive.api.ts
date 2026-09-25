@@ -6,11 +6,11 @@ export const uiTemplateDirectiveApi: ComponentApiDoc = {
   description: "Named content-projection slot, e.g. `<ng-template uiTemplate=\"label\">...</ng-template>`. Lets a component accept an optional custom template for a specific named region instead of (or in addition to) a plain string @Input.",
   props: [
     {
-      name: "name",
+      name: "uiTemplate",
       kind: "input",
       required: false,
       type: "string",
-      defaultValue: "'', { alias: 'uiTemplate' }",
+      defaultValue: "''",
       description: "The slot name a hosting component looks up via `contentChildren(UiTemplateDirective)` (e.g. `'label'`, `'header'`, `'cell-status'`).",
     },
   ],

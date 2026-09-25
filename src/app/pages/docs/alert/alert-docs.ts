@@ -35,9 +35,9 @@ export class AlertTypes {}`;
     This alert can be dismissed with the close button.
   </ui-alert>
 } @else {
-  <ui-button size="sm" variant="secondary" (clicked)="dismissibleShown.set(true)">
+  <button uiButton size="sm" variant="secondary" (click)="dismissibleShown.set(true)">
     Reset dismissible example
-  </ui-button>
+  </button>
 }`;
 
   protected readonly dismissibleTs = `import { Component, signal } from '@angular/core';
@@ -56,8 +56,8 @@ export class DismissibleAlert {
   protected readonly actionsHtml = `<ui-alert type="error" heading="Payment failed">
   Your card was declined. Try again or use a different payment method.
   <ng-template uiTemplate="actions">
-    <ui-button size="sm">Retry</ui-button>
-    <ui-button size="sm" variant="secondary">Use another card</ui-button>
+    <button uiButton size="sm">Retry</button>
+    <button uiButton size="sm" variant="secondary">Use another card</button>
   </ng-template>
 </ui-alert>`;
 

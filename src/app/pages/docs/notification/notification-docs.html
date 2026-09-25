@@ -10,11 +10,11 @@
       and plays them back one at a time, in the order they were triggered.
     </p>
     <div class="flex flex-wrap items-center gap-6">
-      <ui-button size="sm" (clicked)="trigger('info')">Info</ui-button>
-      <ui-button size="sm" (clicked)="trigger('success')">Success</ui-button>
-      <ui-button size="sm" (clicked)="trigger('warning')">Warning</ui-button>
-      <ui-button size="sm" (clicked)="trigger('error')">Error</ui-button>
-      <ui-button size="sm" (clicked)="trigger('neutral')">Basic</ui-button>
+      <button uiButton size="sm" (click)="trigger('info')">Info</button>
+      <button uiButton size="sm" (click)="trigger('success')">Success</button>
+      <button uiButton size="sm" (click)="trigger('warning')">Warning</button>
+      <button uiButton size="sm" (click)="trigger('error')">Error</button>
+      <button uiButton size="sm" (click)="trigger('neutral')">Basic</button>
     </div>
   </section>
 

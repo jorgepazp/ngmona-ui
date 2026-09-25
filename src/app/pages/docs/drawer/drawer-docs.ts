@@ -17,7 +17,7 @@ export default class DrawerDocs {
   protected readonly noBackdropOpen = signal(false);
   protected readonly api = drawerApi;
 
-  protected readonly rightHtml = `<ui-button (clicked)="rightOpen.set(true)">Open drawer</ui-button>
+  protected readonly rightHtml = `<button uiButton (click)="rightOpen.set(true)">Open drawer</button>
 
 <ui-drawer [(open)]="rightOpen">
   <ng-template uiTemplate="header">
@@ -25,7 +25,7 @@ export default class DrawerDocs {
   </ng-template>
   <p>Manage your notification and privacy settings here.</p>
   <ng-template uiTemplate="footer">
-    <ui-button variant="secondary" (clicked)="rightOpen.set(false)">Close</ui-button>
+    <button uiButton variant="secondary" (click)="rightOpen.set(false)">Close</button>
   </ng-template>
 </ui-drawer>`;
 
@@ -43,7 +43,7 @@ export class SettingsDrawer {
   rightOpen = signal(false);
 }`;
 
-  protected readonly leftHtml = `<ui-button variant="secondary" (clicked)="leftOpen.set(true)">Open left drawer</ui-button>
+  protected readonly leftHtml = `<button uiButton variant="secondary" (click)="leftOpen.set(true)">Open left drawer</button>
 
 <ui-drawer [(open)]="leftOpen" side="left">
   <p>Left-anchored panel, no header/footer templates.</p>
@@ -62,7 +62,7 @@ export class LeftDrawer {
   leftOpen = signal(false);
 }`;
 
-  protected readonly noBackdropHtml = `<ui-button variant="tertiary" (clicked)="noBackdropOpen.set(true)">Open</ui-button>
+  protected readonly noBackdropHtml = `<button uiButton variant="tertiary" (click)="noBackdropOpen.set(true)">Open</button>
 
 <ui-drawer [(open)]="noBackdropOpen" [backdrop]="false" [showCloseButton]="false">
   <p>Press Escape or click outside via your own trigger to close.</p>

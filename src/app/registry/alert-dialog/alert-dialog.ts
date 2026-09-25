@@ -49,11 +49,6 @@ export class AlertDialog {
 
   protected readonly descriptionId = `ui-alert-dialog-desc-${nextId++}`;
 
-  protected confirmClass(): string {
-    return this.variant() === 'danger'
-      ? '!bg-danger-500 hover:!bg-danger-600 active:!bg-danger-800 [&:not(:active)]:focus:!outline-danger-500'
-      : '';
-  }
 
   protected confirm(): void {
     this.confirmed.emit();

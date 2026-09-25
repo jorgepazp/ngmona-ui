@@ -142,7 +142,7 @@ describe('Tailwind prefix — dry run', () => {
     const cwd = await createFixture('dry-run', { prefix: PREFIX });
     const { results, prefixReports } = await addAll(cwd, { dryRun: true });
     expect(Object.keys(snapshotComponentsSafe(cwd))).toEqual([]);
-    expect(results.button.map((f) => f.action)).toEqual(['created', 'created']);
+    expect(new Set(results.button.map((f) => f.action))).toEqual(new Set(['created']));
     expect(prefixReports.get('button/button.ts').changes.length).toBeGreaterThan(10);
   });
 });

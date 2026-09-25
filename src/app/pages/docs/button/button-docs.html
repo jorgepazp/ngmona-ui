@@ -6,20 +6,95 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Variants</h2>
     <div class="flex items-center gap-6">
-      <ui-button variant="primary">Primary</ui-button>
-      <ui-button variant="secondary">Secondary</ui-button>
-      <ui-button variant="tertiary">Tertiary</ui-button>
-      <ui-button variant="icon" [icon]="heartIcon" ariaLabel="Like"></ui-button>
+      <button uiButton variant="primary">Primary</button>
+      <button uiButton variant="secondary">Secondary</button>
+      <button uiButton variant="tertiary">Tertiary</button>
+      <button uiButton variant="icon" [icon]="heartIcon" aria-label="Like"></button>
     </div>
     <docs-code-tabs [html]="variantsHtml" [ts]="variantsTs" />
   </section>
 
   <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Severity colors</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      <code>color</code> works with every variant. Severities use the semantic surface and text tokens, so they
+      keep their contrast in dark mode.
+    </p>
+    <div class="flex flex-wrap items-center gap-6">
+      <button uiButton color="danger">Delete</button>
+      <button uiButton color="success">Approve</button>
+      <button uiButton color="warning">Retry</button>
+      <button uiButton color="info">Details</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-6">
+      <button uiButton variant="secondary" color="danger">Delete</button>
+      <button uiButton variant="tertiary" color="danger">Delete</button>
+      <button uiButton variant="icon" color="danger" [icon]="trashIcon" aria-label="Delete"></button>
+    </div>
+    <docs-code-tabs [html]="colorsHtml" />
+  </section>
+
+  <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Pill shape</h2>
+    <div class="flex items-center gap-6">
+      <button uiButton shape="pill">Follow</button>
+      <button uiButton shape="pill" variant="secondary" [icon]="plusIcon" iconPos="left">Add tag</button>
+    </div>
+    <docs-code-tabs [html]="pillHtml" />
+  </section>
+
+  <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Links</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      Put <code>uiButton</code> on an <code>&lt;a&gt;</code> for navigation. <code>routerLink</code>, <code>href</code> and
+      <code>target</code> work as usual. A disabled link gets <code>aria-disabled</code>, leaves the tab order and ignores
+      clicks.
+    </p>
+    <div class="flex items-center gap-6">
+      <a uiButton routerLink="/guides/installation">Get started</a>
+      <a uiButton variant="secondary" routerLink="/components/badge" [icon]="arrowIcon">Badge docs</a>
+      <a uiButton variant="tertiary" routerLink="/" [disabled]="true">Disabled link</a>
+    </div>
+    <docs-code-tabs [html]="linksHtml" />
+  </section>
+
+  <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Icon-only buttons need a name</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      An icon has no text for screen readers to announce. Give icon-only buttons an <code>aria-label</code>, or add a
+      <code>uiTooltip</code> to the same element: its text becomes the button's accessible name. In development, an
+      icon-only button with neither logs a warning in the console.
+    </p>
+    <div class="flex items-center gap-6">
+      <button uiButton variant="icon" [icon]="trashIcon" uiTooltip="Delete" position="above"></button>
+      <button uiButton variant="icon" [icon]="heartIcon" aria-label="Add to favorites"></button>
+    </div>
+    <docs-code-tabs [html]="labelsHtml" />
+  </section>
+
+  <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Your own icons, styles and attributes</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      The button is the native element, so projected content, <code>[style]</code>, <code>class</code>,
+      <code>type</code> and any attribute apply to it directly. Use <code>[icon]</code> for a Lucide icon, or project
+      any icon markup, including one that changes at runtime.
+    </p>
+    <div class="flex items-center gap-6">
+      <button uiButton variant="secondary" [style.min-width.px]="180" type="submit">
+        <svg [lucideIcon]="expanded() ? chevronUpIcon : chevronDownIcon" [size]="16" aria-hidden="true"></svg>
+        {{ expanded() ? 'Collapse' : 'Expand' }}
+      </button>
+      <button uiButton variant="tertiary" (click)="expanded.set(!expanded())">Toggle</button>
+    </div>
+    <docs-code-tabs [html]="customHtml" />
+  </section>
+
+  <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">States</h2>
     <div class="flex items-center gap-6">
-      <ui-button [disabled]="true">Disabled</ui-button>
-      <ui-button [loading]="true">Loading</ui-button>
-      <ui-button [icon]="downloadIcon" iconPos="left">With icon</ui-button>
+      <button uiButton [disabled]="true">Disabled</button>
+      <button uiButton [loading]="true">Loading</button>
+      <button uiButton [icon]="downloadIcon" iconPos="left">With icon</button>
     </div>
     <docs-code-tabs [html]="statesHtml" [ts]="statesTs" />
   </section>
@@ -27,10 +102,10 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Sizes</h2>
     <div class="flex items-center gap-6">
-      <ui-button size="sm">Small</ui-button>
-      <ui-button size="md">Medium</ui-button>
-      <ui-button size="default">Default</ui-button>
-      <ui-button size="xl">Extra large</ui-button>
+      <button uiButton size="sm">Small</button>
+      <button uiButton size="md">Medium</button>
+      <button uiButton size="default">Default</button>
+      <button uiButton size="xl">Extra large</button>
     </div>
     <docs-code-tabs [html]="sizesHtml" [ts]="sizesTs" />
   </section>
@@ -38,10 +113,22 @@
   <section class="flex flex-col gap-6 bg-neutral-500 p-8 rounded">
     <h2 class="text-label-lg text-white">Inverse (on dark surface)</h2>
     <div class="flex items-center gap-6">
-      <ui-button [inverse]="true">Primary</ui-button>
-      <ui-button variant="secondary" [inverse]="true">Secondary</ui-button>
-      <ui-button variant="tertiary" [inverse]="true">Tertiary</ui-button>
+      <button uiButton [inverse]="true">Primary</button>
+      <button uiButton variant="secondary" [inverse]="true">Secondary</button>
+      <button uiButton variant="tertiary" [inverse]="true">Tertiary</button>
     </div>
     <docs-code-tabs [html]="inverseHtml" [ts]="inverseTs" />
+  </section>
+
+  <section class="flex flex-col gap-6">
+    <h2 class="text-label-lg text-text-subdued">Migrating from &lt;ui-button&gt;</h2>
+    <p class="text-paragraph-sm text-text-subdued">
+      <code>&lt;ui-button&gt;</code> still works through the deprecated <code>LegacyButton</code> (import it from
+      <code>./ui/button/legacy-button</code> instead of <code>Button</code>). To move to the native element, replace the
+      tag with <code>&lt;button uiButton&gt;</code> and rename <code>(clicked)</code> → <code>(click)</code>,
+      <code>attrType</code> → <code>type</code>, <code>classNames</code> → <code>class</code>,
+      <code>ariaLabel</code> → <code>aria-label</code>, <code>(focused)</code>/<code>(blurred)</code> →
+      <code>(focus)</code>/<code>(blur)</code>.
+    </p>
   </section>
 </div>

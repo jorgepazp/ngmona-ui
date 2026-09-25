@@ -4,9 +4,9 @@
   <app-api-table [doc]="api" />
 
   <div class="flex items-center gap-4 flex-wrap">
-    <ui-button size="sm" variant="secondary" (clicked)="toggleLoading()">Simulate loading</ui-button>
-    <ui-button size="sm" variant="secondary" (clicked)="clearData()">Show empty state</ui-button>
-    <ui-button size="sm" variant="secondary" (clicked)="resetData()">Reset data</ui-button>
+    <button uiButton size="sm" variant="secondary" (click)="toggleLoading()">Simulate loading</button>
+    <button uiButton size="sm" variant="secondary" (click)="clearData()">Show empty state</button>
+    <button uiButton size="sm" variant="secondary" (click)="resetData()">Reset data</button>
     <span class="text-paragraph-sm text-text-subdued">selected = {{ selected().length }}</span>
   </div>
 

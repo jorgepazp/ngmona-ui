@@ -24,7 +24,7 @@ export default class AlertDialogDocs {
     }, 1200);
   }
 
-  protected readonly basicHtml = `<ui-button (clicked)="defaultOpen.set(true)">Leave page</ui-button>
+  protected readonly basicHtml = `<button uiButton (click)="defaultOpen.set(true)">Leave page</button>
 
 <ui-alert-dialog
   [open]="defaultOpen()"
@@ -49,7 +49,7 @@ export class LeavePage {
   defaultOpen = signal(false);
 }`;
 
-  protected readonly dangerHtml = `<ui-button variant="secondary" (clicked)="dangerOpen.set(true)">Delete account</ui-button>
+  protected readonly dangerHtml = `<button uiButton variant="secondary" (click)="dangerOpen.set(true)">Delete account</button>
 
 <ui-alert-dialog
   [open]="dangerOpen()"

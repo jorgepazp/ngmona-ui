@@ -1,28 +1,16 @@
-<button
-  #buttonEl
-  [attr.type]="attrType()"
-  [attr.aria-label]="ariaLabel()"
-  [attr.aria-busy]="loading() || null"
-  [class]="buttonClass() + ' ' + classNames()"
-  [disabled]="disabled() || loading()"
-  (click)="clicked.emit($event)"
-  (focus)="focused.emit($event)"
-  (blur)="blurred.emit($event)"
->
-  @if (loading()) {
-    <svg [lucideIcon]="loaderIcon" class="animate-spin block absolute" [size]="16"></svg>
+@if (loading()) {
+  <svg [lucideIcon]="loaderIcon" class="animate-spin block absolute" [size]="16" aria-hidden="true"></svg>
+}
+<span [class]="loading() ? 'invisible block' : 'flex justify-center items-center gap-2'">
+  @if (icon(); as ic) {
+    @if (iconPos() === 'left' || variant() === 'icon') {
+      <svg [lucideIcon]="ic" [size]="16" aria-hidden="true"></svg>
+    }
   }
-  <div [class]="loading() ? 'invisible' : 'flex justify-center items-center gap-2'">
-    @if (icon(); as ic) {
-      @if (iconPos() === 'left') {
-        <svg [lucideIcon]="ic" [size]="16"></svg>
-      }
+  <ng-content></ng-content>
+  @if (icon(); as ic) {
+    @if (iconPos() === 'right' && variant() !== 'icon') {
+      <svg [lucideIcon]="ic" [size]="16" aria-hidden="true"></svg>
     }
-    <ng-content></ng-content>
-    @if (icon(); as ic) {
-      @if (iconPos() === 'right') {
-        <svg [lucideIcon]="ic" [size]="16"></svg>
-      }
-    }
-  </div>
-</button>
+  }
+</span>
