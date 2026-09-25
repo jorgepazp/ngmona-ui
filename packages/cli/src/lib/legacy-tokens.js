@@ -12,12 +12,24 @@ import * as p from '@clack/prompts';
  * @returns {string[]} the fixes the tokens file needs (empty when it is up to date)
  */
 export function warnAboutLegacyTokens(cwd, config) {
+  const problems = [];
+
+  // Severity buttons fill with --color-surface-<severity>-medium, which older generated themes
+  // lack. The theme file is generated from the seeds in ngmona.json, so regenerating it is safe.
+  const themeFile = config.tailwind?.themeCss;
+  const themePath = themeFile && join(cwd, themeFile);
+  if (themePath && existsSync(themePath) && !readFileSync(themePath, 'utf8').includes('--color-surface-danger-medium')) {
+    problems.push(
+      `${themeFile} lacks the --color-surface-<severity>-medium tokens severity buttons use: run ` +
+        '`ngmona theme` and press Enter at each prompt to regenerate it with your current colors ' +
+        '(if you remap semantic tokens for dark mode, map each -medium token to the 300 step there)',
+    );
+  }
+
   const file = config.tailwind?.tokensCss;
   const path = file && join(cwd, file);
-  if (!path || !existsSync(path)) return [];
-  const css = readFileSync(path, 'utf8');
+  const css = path && existsSync(path) ? readFileSync(path, 'utf8') : '';
 
-  const problems = [];
   if (/--spacing:\s*8px\s*;/.test(css)) {
     problems.push('--spacing: 8px;  →  --spacing: 0.25rem;');
   }
@@ -31,8 +43,8 @@ export function warnAboutLegacyTokens(cwd, config) {
   if (problems.length === 0) return problems;
 
   p.log.warn(
-    `${file} still uses the old ngmona scales, but components now use Tailwind's standard ones — ` +
-      `they will render at the wrong size/weight until you update it:\n` +
+    `Your theme files are older than these components — they will render with the wrong size, weight ` +
+      `or colors until you update them:\n` +
       problems.map((line) => `  ${line}`).join('\n') +
       `\nIf your own templates use ngmona's spacing classes, double their numbers (py-1.5 → py-3) and rename ` +
       `font-medium → font-semibold, font-bold → font-extrabold, font-regular → font-normal.`,

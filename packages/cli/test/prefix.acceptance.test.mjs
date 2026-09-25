@@ -183,4 +183,12 @@ describe('tokens files written by an older init', () => {
     writeFileSync(tokensPath, current.replace('--spacing: 0.25rem;', '--spacing: 8px;').replace('--font-weight-medium: 500;', '--font-weight-medium: 600;'));
     expect(warnAboutLegacyTokens(cwd, config)).toHaveLength(2);
   });
+
+  it('are reported when the generated theme lacks the tokens severity buttons fill with', async () => {
+    const cwd = await createFixture('legacy-theme');
+    const config = JSON.parse(readFileSync(join(cwd, 'ngmona.json'), 'utf8'));
+    const themePath = join(cwd, config.tailwind.themeCss);
+    writeFileSync(themePath, readFileSync(themePath, 'utf8').replace(/^.*-medium: .*\n/gm, ''));
+    expect(warnAboutLegacyTokens(cwd, config)).toEqual([expect.stringContaining('ngmona theme')]);
+  });
 });

@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   LucideArrowRight,
+  LucideCheck,
   LucideChevronDown,
   LucideChevronUp,
   LucideDownload,
@@ -26,6 +27,7 @@ export default class ButtonDocs {
   protected readonly downloadIcon = LucideDownload;
   protected readonly trashIcon = LucideTrash2;
   protected readonly plusIcon = LucidePlus;
+  protected readonly checkIcon = LucideCheck;
   protected readonly arrowIcon = LucideArrowRight;
   protected readonly chevronUpIcon = LucideChevronUp;
   protected readonly chevronDownIcon = LucideChevronDown;
@@ -36,10 +38,13 @@ export default class ButtonDocs {
 <button uiButton color="success">Approve</button>
 <button uiButton color="warning">Retry</button>
 <button uiButton color="info">Details</button>
+<button uiButton color="surface">Cancel</button>
 
 <button uiButton variant="secondary" color="danger">Delete</button>
 <button uiButton variant="tertiary" color="danger">Delete</button>
-<button uiButton variant="icon" color="danger" [icon]="trashIcon" aria-label="Delete"></button>`;
+<button uiButton variant="icon" color="danger" [icon]="trashIcon" aria-label="Delete"></button>
+<button uiButton variant="icon" color="success" [icon]="checkIcon" aria-label="Approve"></button>
+<button uiButton variant="icon" color="surface" [icon]="plusIcon" aria-label="Add"></button>`;
 
   protected readonly pillHtml = `<button uiButton shape="pill">Follow</button>
 <button uiButton shape="pill" variant="secondary" [icon]="plusIcon" iconPos="left">Add tag</button>`;

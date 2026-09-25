@@ -122,12 +122,16 @@
   --color-surface-backdrop: color-mix(in oklab, var(--color-neutral-900) 50%, transparent);
   --color-surface-success: var(--color-success-700);
   --color-surface-success-light: var(--color-success-100);
+  --color-surface-success-medium: var(--color-success-400);
   --color-surface-info: var(--color-info-700);
   --color-surface-info-light: var(--color-info-100);
+  --color-surface-info-medium: var(--color-info-400);
   --color-surface-danger: var(--color-danger-700);
   --color-surface-danger-light: var(--color-danger-100);
+  --color-surface-danger-medium: var(--color-danger-400);
   --color-surface-warning: var(--color-warning-700);
   --color-surface-warning-light: var(--color-warning-100);
+  --color-surface-warning-medium: var(--color-warning-400);
   /* Semantic text scale */
   --color-text-primary: var(--color-neutral-600);
   --color-text-secondary: var(--color-neutral-800);

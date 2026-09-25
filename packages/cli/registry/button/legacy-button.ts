@@ -42,7 +42,7 @@ import { Button, type ButtonColor, type ButtonShape, type ButtonSize, type Butto
 export class LegacyButton {
   /** Visual style. `'icon'` renders a round icon-only button — pair it with `icon` and `ariaLabel`. */
   readonly variant = input<ButtonVariant>('primary');
-  /** Color role: `primary`, or a severity (`danger`, `success`, `warning`, `info`). */
+  /** Color role: `primary`, a severity (`danger`, `success`, `warning`, `info`), or a neutral `surface`. */
   readonly color = input<ButtonColor>('primary');
   /** `'pill'` fully rounds a text button. */
   readonly shape = input<ButtonShape>('default');

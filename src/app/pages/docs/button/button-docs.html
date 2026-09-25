@@ -17,19 +17,22 @@
   <section class="flex flex-col gap-6">
     <h2 class="text-label-lg text-text-subdued">Severity colors</h2>
     <p class="text-paragraph-sm text-text-subdued">
-      <code>color</code> works with every variant. Severities use the semantic surface and text tokens, so they
-      keep their contrast in dark mode.
+      <code>color</code> works with every variant: a severity, or <code>surface</code> for a neutral button. The colors
+      come from semantic tokens, so they adapt to dark mode on their own.
     </p>
     <div class="flex flex-wrap items-center gap-6">
       <button uiButton color="danger">Delete</button>
       <button uiButton color="success">Approve</button>
       <button uiButton color="warning">Retry</button>
       <button uiButton color="info">Details</button>
+      <button uiButton color="surface">Cancel</button>
     </div>
     <div class="flex flex-wrap items-center gap-6">
       <button uiButton variant="secondary" color="danger">Delete</button>
       <button uiButton variant="tertiary" color="danger">Delete</button>
       <button uiButton variant="icon" color="danger" [icon]="trashIcon" aria-label="Delete"></button>
+      <button uiButton variant="icon" color="success" [icon]="checkIcon" aria-label="Approve"></button>
+      <button uiButton variant="icon" color="surface" [icon]="plusIcon" aria-label="Add"></button>
     </div>
     <docs-code-tabs [html]="colorsHtml" />
   </section>

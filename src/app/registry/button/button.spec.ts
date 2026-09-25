@@ -37,17 +37,22 @@ describe('Button (uiButton)', () => {
       template: `<button uiButton color="danger">A</button>
         <button uiButton variant="secondary" color="warning">B</button>
         <button uiButton shape="pill">C</button>
-        <button uiButton>D</button>`,
+        <button uiButton>D</button>
+        <button uiButton variant="icon" color="danger" aria-label="Delete">E</button>
+        <button uiButton color="surface">F</button>`,
     })
     class Host {}
-    const [danger, warning, pill, plain]: HTMLButtonElement[] = [...render(Host).nativeElement.querySelectorAll('button')];
+    const [danger, warning, pill, plain, dangerIcon, surface]: HTMLButtonElement[] = [...render(Host).nativeElement.querySelectorAll('button')];
 
-    expect(danger.classList).toContain('bg-surface-danger');
-    expect(danger.classList).toContain('text-text-primary-inverse');
+    expect(danger.classList).toContain('bg-surface-danger-medium');
+    expect(danger.classList).toContain('text-neutral-900');
     expect(warning.classList).toContain('text-text-warning');
     expect(pill.classList).toContain('!rounded-full');
     expect(plain.classList).toContain('rounded');
     expect(plain.classList).not.toContain('!rounded-full');
+    expect(dangerIcon.classList).toContain('bg-surface-danger-light');
+    expect(dangerIcon.classList).not.toContain('bg-neutral-100');
+    expect(surface.classList).toContain('bg-surface-light');
   });
 
   it('disables a <button> natively, and an <a> with aria-disabled, no tab stop and no pointer input', () => {

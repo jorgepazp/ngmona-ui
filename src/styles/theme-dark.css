@@ -23,12 +23,16 @@
   --color-surface-backdrop: rgba(0, 0, 0, 0.6);
   --color-surface-success: var(--color-success-300);
   --color-surface-success-light: var(--color-success-900);
+  --color-surface-success-medium: var(--color-success-300);
   --color-surface-info: var(--color-info-300);
   --color-surface-info-light: var(--color-info-900);
+  --color-surface-info-medium: var(--color-info-300);
   --color-surface-danger: var(--color-danger-300);
   --color-surface-danger-light: var(--color-danger-900);
+  --color-surface-danger-medium: var(--color-danger-300);
   --color-surface-warning: var(--color-warning-300);
   --color-surface-warning-light: var(--color-warning-900);
+  --color-surface-warning-medium: var(--color-warning-300);
 
   --color-text-primary: var(--color-neutral-50);
   --color-text-secondary: #ffffff;

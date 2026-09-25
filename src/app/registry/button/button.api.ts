@@ -3,7 +3,7 @@ import type { ComponentApiDoc } from '../../docs-ui/api-table/api-table';
 
 export const buttonApi: ComponentApiDoc = {
   name: "Button",
-  description: "Button styling and behavior applied directly to a native `<button>` or `<a>`: `<button uiButton>Save</button>`, `<a uiButton routerLink=\"/settings\">Settings</a>`. Because the host is the real element, everything native works as usual: `type`, `[style]`, `class`, `routerLink`, `(click)`, `aria-*`, forms. Put any content inside, including your own icons; `icon` is a shortcut for a Lucide icon next to the label. `variant` sets the style (`primary`, `secondary` outline, `tertiary` text-only, `icon` round icon-only), `color` the severity (`danger`, `success`, `warning`, `info`), and `shape=\"pill\"` fully rounds a text button. Icon-only buttons need an accessible name: set `aria-label`, or add `uiTooltip` to the same element and its text is used. In development, an icon-only button with neither logs a warning.",
+  description: "Button styling and behavior applied directly to a native `<button>` or `<a>`: `<button uiButton>Save</button>`, `<a uiButton routerLink=\"/settings\">Settings</a>`. Because the host is the real element, everything native works as usual: `type`, `[style]`, `class`, `routerLink`, `(click)`, `aria-*`, forms. Put any content inside, including your own icons; `icon` is a shortcut for a Lucide icon next to the label. `variant` sets the style (`primary`, `secondary` outline, `tertiary` text-only, `icon` round icon-only), `color` the severity (`danger`, `success`, `warning`, `info`) or a neutral `surface`, and `shape=\"pill\"` fully rounds a text button. Icon-only buttons need an accessible name: set `aria-label`, or add `uiTooltip` to the same element and its text is used. In development, an icon-only button with neither logs a warning.",
   props: [
     {
       name: "variant",
@@ -19,7 +19,7 @@ export const buttonApi: ComponentApiDoc = {
       required: false,
       type: "ButtonColor",
       defaultValue: "'primary'",
-      description: "Color role: the brand `primary`, or a severity for destructive, confirming, cautionary or informational actions.",
+      description: "Color role: the brand `primary`, a severity (`danger`, `success`, `warning`, `info`), or a neutral `surface`.",
     },
     {
       name: "shape",

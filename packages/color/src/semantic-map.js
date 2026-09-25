@@ -33,12 +33,20 @@ export const SEMANTIC_MAP = {
   'color-surface-backdrop': { scale: 'neutral', step: 900, alpha: 0.5 },
   'color-surface-success': { scale: 'success', step: 700 },
   'color-surface-success-light': { scale: 'success', step: 100 },
+  // Filled severity controls (buttons): light enough for dark text (neutral-900) in both modes.
+  'color-surface-success-medium': { scale: 'success', step: 400 },
   'color-surface-info': { scale: 'info', step: 700 },
   'color-surface-info-light': { scale: 'info', step: 100 },
+  // Filled severity controls (buttons): light enough for dark text (neutral-900) in both modes.
+  'color-surface-info-medium': { scale: 'info', step: 400 },
   'color-surface-danger': { scale: 'danger', step: 700 },
   'color-surface-danger-light': { scale: 'danger', step: 100 },
+  // Filled severity controls (buttons): light enough for dark text (neutral-900) in both modes.
+  'color-surface-danger-medium': { scale: 'danger', step: 400 },
   'color-surface-warning': { scale: 'warning', step: 700 },
   'color-surface-warning-light': { scale: 'warning', step: 100 },
+  // Filled severity controls (buttons): light enough for dark text (neutral-900) in both modes.
+  'color-surface-warning-medium': { scale: 'warning', step: 400 },
 
   // Semantic text scale
   'color-text-primary': { scale: 'neutral', step: 600 },

@@ -19,7 +19,7 @@ export const legacyButtonApi: ComponentApiDoc = {
       required: false,
       type: "ButtonColor",
       defaultValue: "'primary'",
-      description: "Color role: `primary`, or a severity (`danger`, `success`, `warning`, `info`).",
+      description: "Color role: `primary`, a severity (`danger`, `success`, `warning`, `info`), or a neutral `surface`.",
     },
     {
       name: "shape",

@@ -13,7 +13,7 @@ import { LucideDynamicIcon, LucideLoaderCircle, type LucideIconInput } from '@lu
 import { UI_LABEL_SOURCE } from '../shared/label-source';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'icon';
-export type ButtonColor = 'primary' | 'danger' | 'success' | 'warning' | 'info';
+export type ButtonColor = 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'surface';
 export type ButtonShape = 'default' | 'pill';
 export type ButtonSize = 'default' | 'xl' | 'md' | 'sm';
 
@@ -26,7 +26,7 @@ export type ButtonSize = 'default' | 'xl' | 'md' | 'sm';
  * icons; `icon` is a shortcut for a Lucide icon next to the label.
  *
  * `variant` sets the style (`primary`, `secondary` outline, `tertiary` text-only, `icon` round
- * icon-only), `color` the severity (`danger`, `success`, `warning`, `info`), and `shape="pill"`
+ * icon-only), `color` the severity (`danger`, `success`, `warning`, `info`) or a neutral `surface`, and `shape="pill"`
  * fully rounds a text button.
  *
  * Icon-only buttons need an accessible name: set `aria-label`, or add `uiTooltip` to the same
@@ -49,7 +49,7 @@ export type ButtonSize = 'default' | 'xl' | 'md' | 'sm';
 export class Button {
   /** Visual style. `'icon'` renders a round icon-only button — give it an `aria-label` or a `uiTooltip`. */
   readonly variant = input<ButtonVariant>('primary');
-  /** Color role: the brand `primary`, or a severity for destructive, confirming, cautionary or informational actions. */
+  /** Color role: the brand `primary`, a severity (`danger`, `success`, `warning`, `info`), or a neutral `surface`. */
   readonly color = input<ButtonColor>('primary');
   /** `'pill'` fully rounds a text button. Icon-only buttons are always round. */
   readonly shape = input<ButtonShape>('default');
@@ -192,15 +192,20 @@ export class Button {
 }
 
 // Class lists are spelled out in full per color (never built from `${color}` fragments) so that
-// Tailwind's scanner, and the CLI's prefix rewriter, can see every class.
+// Tailwind's scanner, and the CLI's prefix rewriter, can see every class. Severities and `surface`
+// use semantic tokens only, so dark mode (which remaps those tokens) needs no extra classes.
 
-/** `variant="primary"`: filled. Severities use the semantic surface tokens, which keep contrast in dark mode. */
+/**
+ * `variant="primary"`: filled. Severities fill with `surface-<severity>-medium` (the 400 step in
+ * light mode, 300 in dark) and dark text, which reads well on both; `surface` is a neutral fill.
+ */
 const SOLID_CLASSES: Record<ButtonColor, string> = {
   primary: 'bg-primary-500 text-white hover:bg-primary-300 active:bg-primary-600 [&:not(:active)]:focus:!outline-primary-500',
-  danger: 'bg-surface-danger text-text-primary-inverse hover:bg-surface-danger/90 active:bg-surface-danger/80 [&:not(:active)]:focus:!outline-surface-danger',
-  success: 'bg-surface-success text-text-primary-inverse hover:bg-surface-success/90 active:bg-surface-success/80 [&:not(:active)]:focus:!outline-surface-success',
-  warning: 'bg-surface-warning text-text-primary-inverse hover:bg-surface-warning/90 active:bg-surface-warning/80 [&:not(:active)]:focus:!outline-surface-warning',
-  info: 'bg-surface-info text-text-primary-inverse hover:bg-surface-info/90 active:bg-surface-info/80 [&:not(:active)]:focus:!outline-surface-info',
+  danger: 'bg-surface-danger-medium text-neutral-900 hover:bg-surface-danger-medium/85 active:bg-surface-danger-medium/70 [&:not(:active)]:focus:!outline-surface-danger-medium',
+  success: 'bg-surface-success-medium text-neutral-900 hover:bg-surface-success-medium/85 active:bg-surface-success-medium/70 [&:not(:active)]:focus:!outline-surface-success-medium',
+  warning: 'bg-surface-warning-medium text-neutral-900 hover:bg-surface-warning-medium/85 active:bg-surface-warning-medium/70 [&:not(:active)]:focus:!outline-surface-warning-medium',
+  info: 'bg-surface-info-medium text-neutral-900 hover:bg-surface-info-medium/85 active:bg-surface-info-medium/70 [&:not(:active)]:focus:!outline-surface-info-medium',
+  surface: 'bg-surface-light text-text-secondary hover:bg-surface-medium active:bg-surface-medium/70 [&:not(:active)]:focus:!outline-border-focused',
 };
 
 /** `variant="secondary"`: outlined. */
@@ -210,6 +215,7 @@ const OUTLINE_CLASSES: Record<ButtonColor, string> = {
   success: '!border border-solid !border-text-success text-text-success bg-transparent hover:bg-surface-success-light active:bg-surface-success-light active:!outline-transparent [&:not(:active)]:focus:!outline-text-success',
   warning: '!border border-solid !border-text-warning text-text-warning bg-transparent hover:bg-surface-warning-light active:bg-surface-warning-light active:!outline-transparent [&:not(:active)]:focus:!outline-text-warning',
   info: '!border border-solid !border-text-info text-text-info bg-transparent hover:bg-surface-info-light active:bg-surface-info-light active:!outline-transparent [&:not(:active)]:focus:!outline-text-info',
+  surface: '!border border-solid !border-border-neutral-medium text-text-secondary bg-transparent hover:bg-surface-light active:bg-surface-medium active:!outline-transparent [&:not(:active)]:focus:!outline-border-focused',
 };
 
 /** `variant="tertiary"`: text only. */
@@ -219,13 +225,18 @@ const GHOST_CLASSES: Record<ButtonColor, string> = {
   success: 'text-text-success bg-transparent hover:bg-surface-success-light active:bg-surface-success-light active:!outline-transparent [&:not(:active)]:focus:!outline-text-success',
   warning: 'text-text-warning bg-transparent hover:bg-surface-warning-light active:bg-surface-warning-light active:!outline-transparent [&:not(:active)]:focus:!outline-text-warning',
   info: 'text-text-info bg-transparent hover:bg-surface-info-light active:bg-surface-info-light active:!outline-transparent [&:not(:active)]:focus:!outline-text-info',
+  surface: 'text-text-secondary bg-transparent hover:bg-surface-light active:bg-surface-medium active:!outline-transparent [&:not(:active)]:focus:!outline-border-focused',
 };
 
-/** `variant="icon"`: round, icon-only. */
+/**
+ * `variant="icon"`: round, icon-only. A severity sits on its own tint (`surface-<severity>-light`)
+ * and fills with the `-medium` step on hover, matching the solid button.
+ */
 const ICON_CLASSES: Record<ButtonColor, string> = {
   primary: 'bg-neutral-100 text-neutral-500 hover:bg-accent-100 hover:text-accent-500 [&:not(:active)]:focus:!outline-accent-500',
-  danger: 'bg-neutral-100 text-text-danger hover:bg-surface-danger-light [&:not(:active)]:focus:!outline-text-danger',
-  success: 'bg-neutral-100 text-text-success hover:bg-surface-success-light [&:not(:active)]:focus:!outline-text-success',
-  warning: 'bg-neutral-100 text-text-warning hover:bg-surface-warning-light [&:not(:active)]:focus:!outline-text-warning',
-  info: 'bg-neutral-100 text-text-info hover:bg-surface-info-light [&:not(:active)]:focus:!outline-text-info',
+  danger: 'bg-surface-danger-light text-text-danger hover:bg-surface-danger-medium hover:text-neutral-900 [&:not(:active)]:focus:!outline-text-danger',
+  success: 'bg-surface-success-light text-text-success hover:bg-surface-success-medium hover:text-neutral-900 [&:not(:active)]:focus:!outline-text-success',
+  warning: 'bg-surface-warning-light text-text-warning hover:bg-surface-warning-medium hover:text-neutral-900 [&:not(:active)]:focus:!outline-text-warning',
+  info: 'bg-surface-info-light text-text-info hover:bg-surface-info-medium hover:text-neutral-900 [&:not(:active)]:focus:!outline-text-info',
+  surface: 'bg-surface-light text-text-secondary hover:bg-surface-medium [&:not(:active)]:focus:!outline-border-focused',
 };
